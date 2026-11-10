@@ -40,6 +40,14 @@ class BusinessScenario:
     jobs: tuple[dict,...]
 
 
+def stage_id(job_id: str, stage_index: int) -> str:
+    """Stable public ID for a zero-based stage of an already known job."""
+    if (not isinstance(job_id,str) or not job_id or '::stage' in job_id or
+            not isinstance(stage_index,int) or isinstance(stage_index,bool) or stage_index < 0):
+        raise ValueError('invalid business job or stage index')
+    return f'{job_id}::stage{stage_index+1}'
+
+
 def compile_scenario(base: Scenario, config: dict) -> BusinessScenario:
     if not isinstance(config,dict):
         raise ValueError('business config must be an object')
@@ -88,10 +96,13 @@ def compile_scenario(base: Scenario, config: dict) -> BusinessScenario:
             raise ValueError('invalid workflow job or release/deadline')
         seen.add(jid);route=workflows[name];ids=[]
         for index,(pickup,dropoff) in enumerate(route):
-            sid=f'{jid}::stage{index+1}'
+            sid=stage_id(jid,index)
             ids.append(sid)
             samples.append(Sample(sid,pickup,dropoff,release if index==0 else max_ticks+1,due,
-                                  specimen_type=job.get('specimen_type')))
+                                  specimen_type=job.get('specimen_type'),
+                                  packaging=job.get('packaging'),
+                                  temperature_condition=job.get('temperature_condition'),
+                                  rule_profile=job.get('rule_profile')))
             metadata[sid]=(name,index,jid)
         for left,right in zip(ids,ids[1:]):next_stage[left]=right
         normalized.append({'id':jid,'workflow':name,'release_tick':release,'deadline_tick':due,'stages':ids})
