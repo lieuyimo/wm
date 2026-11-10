@@ -4,6 +4,8 @@
 
 仓库已有一个基于合成实验室场景的 CPU 原型，可运行样本任务、机器人调度、轻量预测和离线回放；完整毕业设计系统仍需结合实际需求扩展。[原型说明](docs/prototype.md)包含运行方式和限制，[毕设实施主线](docs/thesis-project-plan.md)记录后续工作。
 
+多阶段业务、世界模型调度和机器人路径恢复的统一运行入口及可视化回放见[系统演示与复现](docs/system-demo.md)，论文工程架构见[系统架构说明](docs/thesis-system-architecture.md)。
+
 准备在本地拉取、运行或开发模型，请从[本地开发与交接指南](docs/local-development.md)开始：包含 Windows / Linux 命令、数据与训练流程、接口说明、GPU 接入条件和常见问题。
 
 ## 当前资料
@@ -31,6 +33,7 @@
 - [官方 PIBT 运动协调接入与医院阻塞复现](docs/pibt-motion-results.md)
 - [官方 LaCAM3 完整联合路径恢复与 clinic 配对验收](docs/lacam3-recovery-results.md)
 - [多阶段业务状态预测与完整工作流评分](docs/workflow-prediction-results.md)
+- [系统集成、可视化与验收结果](docs/system-demo-results.md)
 - [本地 GPU 训练接入准备和分工](docs/local-gpu-readiness.md)
 - [本地开发与交接指南](docs/local-development.md)
 - [可替换的 PyTorch 训练、评估与仿真入口](docs/pytorch-training.md)

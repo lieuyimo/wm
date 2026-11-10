@@ -1,0 +1,130 @@
+{
+  "jobs": 1,
+  "jobs_completed": 1,
+  "completion_rate": 1.0,
+  "status": "completed",
+  "ticks": 16,
+  "mean_flow_completed": 16,
+  "restricted_mean_flow": 16,
+  "mean_stage_wait_per_job": 0,
+  "defined_deadlines": 0,
+  "late_jobs": null,
+  "resource": {
+    "peaks": {
+      "A": 1,
+      "B": 1,
+      "station:C": 1
+    },
+    "busy_slot_ticks": {
+      "A": 1,
+      "B": 3,
+      "station:C": 2
+    },
+    "violations": [],
+    "open_sessions_at_end": 0,
+    "capacity_wait_ticks": 0
+  },
+  "station_unavailable_wait_ticks": 0,
+  "blocked_station_target_attempts": 0,
+  "discrete_safety_violations": 0,
+  "duplicate_assignments": 0,
+  "lifecycle_violations": [],
+  "decision_count": 3,
+  "decision_wall_ms": [
+    16.66196999940439,
+    15.150858998822514,
+    14.756081000086851
+  ],
+  "decision_wall_mean_ms": 15.522969999437919,
+  "decision_wall_p95_ms": 16.510858899346204,
+  "solver_calls": 3,
+  "solver_fallbacks": 0,
+  "solver_truncations": 0,
+  "solver_status_counts": {
+    "OPTIMAL": 3,
+    "INFEASIBLE": 3
+  },
+  "model_fallbacks": 0,
+  "rollout_steps": 45,
+  "pets_forward_calls": 0,
+  "structured_service_calls": 0,
+  "job_outcomes": [
+    {
+      "job_id": "J1",
+      "completed": true,
+      "flow": 16,
+      "stage_wait_sum": 0,
+      "assigned_stages": 3,
+      "stages": [
+        {
+          "id": "J1::stage1",
+          "pickup": "A0",
+          "dropoff": "B0",
+          "release_tick": 0,
+          "deadline_tick": null,
+          "specimen_type": null,
+          "collected_at": null,
+          "packaging": null,
+          "temperature_condition": null,
+          "rule_profile": null,
+          "status": "completed",
+          "robot_id": "R1",
+          "assigned_tick": 0,
+          "picked_tick": 1,
+          "completed_tick": 6,
+          "predicted_completion_tick": null
+        },
+        {
+          "id": "J1::stage2",
+          "pickup": "B0",
+          "dropoff": "C",
+          "release_tick": 6,
+          "deadline_tick": null,
+          "specimen_type": null,
+          "collected_at": null,
+          "packaging": null,
+          "temperature_condition": null,
+          "rule_profile": null,
+          "status": "completed",
+          "robot_id": "R1",
+          "assigned_tick": 6,
+          "picked_tick": 7,
+          "completed_tick": 11,
+          "predicted_completion_tick": null
+        },
+        {
+          "id": "J1::stage3",
+          "pickup": "C",
+          "dropoff": "B1",
+          "release_tick": 11,
+          "deadline_tick": null,
+          "specimen_type": null,
+          "collected_at": null,
+          "packaging": null,
+          "temperature_condition": null,
+          "rule_profile": null,
+          "status": "completed",
+          "robot_id": "R1",
+          "assigned_tick": 11,
+          "picked_tick": 12,
+          "completed_tick": 16,
+          "predicted_completion_tick": null
+        }
+      ]
+    }
+  ],
+  "prediction_calls": 45,
+  "prediction_wall_ms": 21.733542009314988,
+  "motion_safety": {
+    "vertex_collisions": 0,
+    "edge_swaps": 0,
+    "invalid_edges": 0,
+    "longest_no_robot_move": 2
+  },
+  "pibt_calls": 0,
+  "lacam3_triggers": 0,
+  "lacam3_solver_calls": 0,
+  "lacam3_successes": 0,
+  "lacam3_cache_steps": 0,
+  "lacam3_fallback_statuses": []
+}
