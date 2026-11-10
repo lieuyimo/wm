@@ -142,6 +142,12 @@ def check_output_directory(output: Path) -> None:
             raise FileExistsError(f"refusing to overwrite existing output: {output / name}")
 
 
+def render_html(result: dict[str, Any]) -> str:
+    """Render the shared self-contained map, timeline and event playback."""
+    encoded = json.dumps(result, ensure_ascii=True).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+    return _HTML.replace("__TITLE__", html.escape(result["scenario"]["name"])).replace("__RESULT_JSON__", encoded)
+
+
 def write_run(result: dict[str, Any], output: str | Path) -> None:
     path = Path(output)
     check_output_directory(path)
@@ -154,6 +160,4 @@ def write_run(result: dict[str, Any], output: str | Path) -> None:
         writer = csv.DictWriter(handle, fieldnames=list(result["samples"][0]))
         writer.writeheader()
         writer.writerows(result["samples"])
-    encoded = json.dumps(result, ensure_ascii=True).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
-    page = _HTML.replace("__TITLE__", html.escape(result["scenario"]["name"])).replace("__RESULT_JSON__", encoded)
-    (path / "report.html").write_text(page, encoding="utf-8")
+    (path / "report.html").write_text(render_html(result), encoding="utf-8")

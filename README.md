@@ -4,6 +4,8 @@
 
 仓库已有一个基于合成实验室场景的 CPU 原型，可运行样本任务、机器人调度、轻量预测和离线回放；完整毕业设计系统仍需结合实际需求扩展。[原型说明](docs/prototype.md)包含运行方式和限制，[毕设实施主线](docs/thesis-project-plan.md)记录后续工作。
 
+多阶段业务、世界模型调度和机器人路径恢复的统一运行入口及可视化回放见[系统演示与复现](docs/system-demo.md)，论文工程架构见[系统架构说明](docs/thesis-system-architecture.md)。
+
 准备在本地拉取、运行或开发模型，请从[本地开发与交接指南](docs/local-development.md)开始：包含 Windows / Linux 命令、数据与训练流程、接口说明、GPU 接入条件和常见问题。
 
 ## 当前资料

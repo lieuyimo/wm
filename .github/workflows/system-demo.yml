@@ -1,0 +1,86 @@
+name: Integrated system demo CPU and browser
+
+on:
+  pull_request:
+    paths:
+      - 'business_transport/**'
+      - 'lab_transport/report.py'
+      - 'experiments/system_demo/**'
+      - 'tools/system_demo/**'
+      - 'tests/test_business_playback.js'
+      - 'examples/evidence/system-demo-20261110/**'
+      - '.github/workflows/system-demo.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integrated-demo:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install pinned CPU dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -c "import torch; assert torch.version.cuda is None; print('CPU PyTorch', torch.__version__)"
+      - name: Build official PIBT and LaCAM3 including native tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          timeout 450s bash tools/pibt_motion/prepare_upstream.sh "$RUNNER_TEMP/demo-pibt" 2>&1 | tee "$RUNNER_TEMP/demo-pibt.log"
+          timeout 450s bash tools/lacam3_recovery/prepare_upstream.sh "$RUNNER_TEMP/demo-lacam" 2>&1 | tee "$RUNNER_TEMP/demo-lacam.log"
+          python -m tools.pibt_motion.prepare_sources --output "$RUNNER_TEMP/demo-sources"
+          echo "WM_PIBT_LIBRARY=$RUNNER_TEMP/demo-pibt/bridge/libwm_pibt_bridge.so" >> "$GITHUB_ENV"
+          echo "WM_LACAM3_WORKER=$RUNNER_TEMP/demo-lacam/bridge/wm_lacam3_worker" >> "$GITHUB_ENV"
+          echo "WM_HOSPITAL_SOURCES=$RUNNER_TEMP/demo-sources" >> "$GITHUB_ENV"
+      - name: Verify frozen evidence and integration tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          for path in examples/evidence/pibt-motion-20261109 examples/evidence/lacam3-recovery-20261109 examples/evidence/workflow-prediction-20261110 examples/evidence/system-demo-20261110; do
+            (cd "$path" && sha256sum -c SHA256SUMS)
+          done
+          python -m unittest discover -s experiments/system_demo/tests -v 2>&1 | tee "$RUNNER_TEMP/demo-tests.log"
+      - name: Run and repeat the fixed CPU system demonstrations
+        shell: bash
+        run: |
+          set -euo pipefail
+          for suffix in first repeat; do
+            timeout 900s bash tools/system_demo/run_acceptance.sh "$WM_PIBT_LIBRARY" "$WM_LACAM3_WORKER" "$WM_HOSPITAL_SOURCES" "$RUNNER_TEMP/demo-$suffix" 2>&1 | tee "$RUNNER_TEMP/demo-$suffix.log"
+          done
+          python tools/system_demo/compare_runs.py "$RUNNER_TEMP/demo-first" "$RUNNER_TEMP/demo-repeat"
+      - name: Check real Chromium-rendered pages against exported observations
+        shell: bash
+        run: |
+          set -euo pipefail
+          CHROME_BIN="$(command -v google-chrome || command -v chromium)"
+          for policy in nearest workflow_rule workflow_pets workflow_structured; do
+            python tools/system_demo/check_browser.py "$RUNNER_TEMP/demo-first/comparison/$policy" --chrome "$CHROME_BIN"
+          done
+          python tools/system_demo/check_browser.py "$RUNNER_TEMP/demo-first/comparison/workflow_rule" --chrome "$CHROME_BIN" --focus end
+          python tools/system_demo/check_browser.py "$RUNNER_TEMP/demo-first/clinic" --chrome "$CHROME_BIN" --focus recovery
+      - name: Upload complete demonstrations and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integrated-system-demo-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/demo-pibt.log
+            ${{ runner.temp }}/demo-pibt/*.log
+            ${{ runner.temp }}/demo-lacam.log
+            ${{ runner.temp }}/demo-lacam/*.log
+            ${{ runner.temp }}/demo-tests.log
+            ${{ runner.temp }}/demo-first.log
+            ${{ runner.temp }}/demo-repeat.log
+            ${{ runner.temp }}/demo-first/
+            ${{ runner.temp }}/demo-repeat/
+          if-no-files-found: warn
+          retention-days: 14
