@@ -1,4 +1,5 @@
 name: PR33 reference-based event triggered horizon online validation CPU
+# Re-evaluate with explicit predeclared CP-SAT candidate cap in protocol.
 
 on:
   push:
