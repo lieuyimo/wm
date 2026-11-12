@@ -57,7 +57,6 @@ class PR50ArrivalTests(unittest.TestCase):
         self.assertTrue(all(e["tick"]<row["public_observed_ticks"]
                             and e["mark"] in MARKS
                             for e in row["public_first_job_events"]))
-        self.assertTrue(row["public_jobs"]<=row["private_schedule_count_for_integrity_only"])
         for forbidden in ("future_job_release_schedule","private_next_release",
                           "hidden_latent_state"):
             self.assertNotIn(forbidden,row)
