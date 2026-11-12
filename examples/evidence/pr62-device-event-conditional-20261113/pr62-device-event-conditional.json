@@ -1,0 +1,4688 @@
+{
+  "schema": "pr62-pr61-checkpoint-trusted-true-one-step-device-event-conditional-audit-v1",
+  "original_GPU_PR": "https://github.com/lieuyimo/wm/pull/61",
+  "frozen_source_validation_sha256": "c7a0a0081e0c901faea23b37816eb54b560efb9c8b66118387c3fbb0a9509712",
+  "frozen_validation_scenarios": 12,
+  "BLIND_TEST_read": false,
+  "BLIND_TEST_generated": false,
+  "new_training_performed": false,
+  "source_model_parameter_updates": 0,
+  "trusted_weights_only_with_PR61_sha": true,
+  "conditional_groups": [
+    "healthy_hold",
+    "fault_onset",
+    "continuing_down",
+    "recovery"
+  ],
+  "important_limit": "Grouping on TRUE next-step event is descriptive conditional error, not model-available future feature and not an online threshold. Overall Brier cannot establish rare failure/recovery forecast skill. No H20/autoregressive inference was run.",
+  "results": [
+    {
+      "arm": "map_off",
+      "seed": 1810,
+      "sha256_selected_checkpoint": "d0721eb2052210c553f6b483c8dcc5e3a7f89a437a46328ef1098924bb553fca",
+      "total_station_tick_labels": 7585,
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "next_device_available_positive": 7360,
+        "predicted_mean_next_available": 0.9726010358782489,
+        "empirical_next_available": 0.970336189848385,
+        "model_brier": 0.004247310530198688,
+        "trivial_previous_device_state_brier": 0.004218852999340804,
+        "model_minus_persistence_brier": 2.8457530857883655e-05
+      },
+      "conditioned_on_TRUE_transition_phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "next_device_available_positive": 7344,
+          "predicted_mean_next_available": 0.9989867961289836,
+          "empirical_next_available": 1.0,
+          "model_brier": 5.596138487150834e-05,
+          "trivial_previous_device_state_brier": 0.0,
+          "model_minus_persistence_brier": 5.596138487150834e-05
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "next_device_available_positive": 0,
+          "predicted_mean_next_available": 0.9976464956998825,
+          "empirical_next_available": 0.0,
+          "model_brier": 0.9953022413363262,
+          "trivial_previous_device_state_brier": 1.0,
+          "model_minus_persistence_brier": -0.0046977586636738344
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "next_device_available_positive": 0,
+          "predicted_mean_next_available": 0.10845372993409919,
+          "empirical_next_available": 0.0,
+          "model_brier": 0.01683354690046567,
+          "trivial_previous_device_state_brier": 0.0,
+          "model_minus_persistence_brier": 0.01683354690046567
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "next_device_available_positive": 16,
+          "predicted_mean_next_available": 0.12441580486483872,
+          "empirical_next_available": 1.0,
+          "model_brier": 0.7726139248426324,
+          "trivial_previous_device_state_brier": 1.0,
+          "model_minus_persistence_brier": -0.22738607515736764
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "healthy_hold": {
+            "n": 2855,
+            "available": true,
+            "next_device_available_positive": 2855,
+            "predicted_mean_next_available": 0.9996620153796234,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.6076152004431503e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.6076152004431503e-06
+          },
+          "fault_onset": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9970283210277557,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9940706058854349,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.005929394114565056
+          },
+          "continuing_down": {
+            "n": 42,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.1313700888838087,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.022165145724834516,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.022165145724834516
+          },
+          "recovery": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 4,
+            "predicted_mean_next_available": 0.14332309365272522,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7384983910520331,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.2615016089479669
+          }
+        },
+        "multi_fault": {
+          "healthy_hold": {
+            "n": 2317,
+            "available": true,
+            "next_device_available_positive": 2317,
+            "predicted_mean_next_available": 0.9992939727183915,
+            "empirical_next_available": 1.0,
+            "model_brier": 1.717290216016093e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 1.717290216016093e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9981328696012497,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9962703918828115,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0037296081171884765
+          },
+          "continuing_down": {
+            "n": 102,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.11315419210814963,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.018585209615770912,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.018585209615770912
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.14440334821119905,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7381499883180654,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.26185001168193456
+          }
+        },
+        "staggered_arrivals": {
+          "healthy_hold": {
+            "n": 2172,
+            "available": true,
+            "next_device_available_positive": 2172,
+            "predicted_mean_next_available": 0.9977715663323745,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.00016615610257550607,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00016615610257550607
+          },
+          "fault_onset": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9972919225692749,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9945975756942467,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.005402424305753328
+          },
+          "continuing_down": {
+            "n": 65,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.08627012658577699,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.010639750783779144,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.010639750783779144
+          },
+          "recovery": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 4,
+            "predicted_mean_next_available": 0.06553342938423157,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8756573316823658,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.12434266831763419
+          }
+        }
+      },
+      "by_validation_map": {
+        "0": {
+          "healthy_hold": {
+            "n": 3807,
+            "available": true,
+            "next_device_available_positive": 3807,
+            "predicted_mean_next_available": 0.9989857610548954,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.5571525501361454e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.5571525501361454e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9976900890469551,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9953893419221518,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.004610658077848218
+          },
+          "continuing_down": {
+            "n": 107,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.11588182255068671,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.019281530479101687,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.019281530479101687
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.09788299538195133,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8190995269756651,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.18090047302433487
+          }
+        },
+        "1": {
+          "healthy_hold": {
+            "n": 3537,
+            "available": true,
+            "next_device_available_positive": 3537,
+            "predicted_mean_next_available": 0.9989879102163609,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.638100449891834e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.638100449891834e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9976029023528099,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9952151407505005,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.004784859249499451
+          },
+          "continuing_down": {
+            "n": 102,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.10066151513042403,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.014265564126798492,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.014265564126798492
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.1509486143477261,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7261283227095997,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.2738716772904003
+          }
+        }
+      },
+      "by_true_validation_scenario": {
+        "PR59_VALIDATION_0_0": {
+          "healthy_hold": {
+            "n": 596,
+            "available": true,
+            "next_device_available_positive": 596,
+            "predicted_mean_next_available": 0.9995588558232225,
+            "empirical_next_available": 1.0,
+            "model_brier": 6.058601673734013e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 6.058601673734013e-06
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9992939233779907,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9985883453001776,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0014116546998224067
+          },
+          "continuing_down": {
+            "n": 7,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.10841307044029236,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.020019590808795434,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.020019590808795434
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.0733829215168953,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8586192101365643,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.14138078986343572
+          }
+        },
+        "PR59_VALIDATION_0_1": {
+          "healthy_hold": {
+            "n": 743,
+            "available": true,
+            "next_device_available_positive": 743,
+            "predicted_mean_next_available": 0.9994656355352132,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.164909057898572e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.164909057898572e-06
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.999010443687439,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9980218867544011,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0019781132455989336
+          },
+          "continuing_down": {
+            "n": 58,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.12076529943994407,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.021380663126865904,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.021380663126865904
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.16179309412837029,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7101406892985975,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.2898593107014025
+          }
+        },
+        "PR59_VALIDATION_0_2": {
+          "healthy_hold": {
+            "n": 565,
+            "available": true,
+            "next_device_available_positive": 565,
+            "predicted_mean_next_available": 0.9973327773862181,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.0002079763831276859,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0002079763831276859
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9947627186775208,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9895528664706923,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.010447133529307706
+          },
+          "continuing_down": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.13213751558214426,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.019027508018690305,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.019027508018690305
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.0428139790892601,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9162050786269353,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.08379492137306466
+          }
+        },
+        "PR59_VALIDATION_0_3": {
+          "healthy_hold": {
+            "n": 780,
+            "available": true,
+            "next_device_available_positive": 780,
+            "predicted_mean_next_available": 0.9997313659160565,
+            "empirical_next_available": 1.0,
+            "model_brier": 2.7273624092289266e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 2.7273624092289266e-06
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9992939233779907,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9985883453001776,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0014116546998224067
+          },
+          "continuing_down": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.1133606806397438,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.021557554327275505,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.021557554327275505
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.08128999918699265,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8440280655938359,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.15597193440616408
+          }
+        },
+        "PR59_VALIDATION_0_4": {
+          "healthy_hold": {
+            "n": 600,
+            "available": true,
+            "next_device_available_positive": 600,
+            "predicted_mean_next_available": 0.9994344694415728,
+            "empirical_next_available": 1.0,
+            "model_brier": 6.3374128848714404e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 6.3374128848714404e-06
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.99769327044487,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9953942691633362,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.004605730836663824
+          },
+          "continuing_down": {
+            "n": 11,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.1130454418334094,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.01675993441627626,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.01675993441627626
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.1155859250575304,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7871753601684511,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.21282463983154887
+          }
+        },
+        "PR59_VALIDATION_0_5": {
+          "healthy_hold": {
+            "n": 523,
+            "available": true,
+            "next_device_available_positive": 523,
+            "predicted_mean_next_available": 0.9978099058508645,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.00015425601659436902,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00015425601659436902
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9947627186775208,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9895528664706923,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.010447133529307706
+          },
+          "continuing_down": {
+            "n": 15,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.09523938149213791,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.011591225793155009,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.011591225793155009
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.03081902489066124,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9393117625138887,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.060688237486111296
+          }
+        },
+        "PR59_VALIDATION_1_0": {
+          "healthy_hold": {
+            "n": 466,
+            "available": true,
+            "next_device_available_positive": 466,
+            "predicted_mean_next_available": 0.9993620881962674,
+            "empirical_next_available": 1.0,
+            "model_brier": 9.749581938993182e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 9.749581938993182e-06
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9986065924167633,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9972152354763697,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.002784764523630301
+          },
+          "continuing_down": {
+            "n": 5,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.08089964091777802,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.007300980418051295,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.007300980418051295
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.14395380020141602,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7352550942075915,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.2647449057924085
+          }
+        },
+        "PR59_VALIDATION_1_1": {
+          "healthy_hold": {
+            "n": 618,
+            "available": true,
+            "next_device_available_positive": 618,
+            "predicted_mean_next_available": 0.9990056182188509,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.1816267923922755e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.1816267923922755e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.999821126461029,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.999642284917801,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.00035771508219895054
+          },
+          "continuing_down": {
+            "n": 35,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.0701952443591186,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.007661036549204567,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.007661036549204567
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.03791363164782524,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9256101801690765,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.07438981983092352
+          }
+        },
+        "PR59_VALIDATION_1_2": {
+          "healthy_hold": {
+            "n": 724,
+            "available": true,
+            "next_device_available_positive": 724,
+            "predicted_mean_next_available": 0.9995590713471998,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.026542613214465e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.026542613214465e-06
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9947627186775208,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9895528664706923,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.010447133529307706
+          },
+          "continuing_down": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.11758205853402615,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.014299261279541661,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.014299261279541661
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.23126505315303802,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.5909534185038015,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.40904658149619855
+          }
+        },
+        "PR59_VALIDATION_1_3": {
+          "healthy_hold": {
+            "n": 508,
+            "available": true,
+            "next_device_available_positive": 508,
+            "predicted_mean_next_available": 0.9988144740579635,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.434317708775697e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.434317708775697e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9972211718559265,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9944501761371392,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.005549823862860848
+          },
+          "continuing_down": {
+            "n": 28,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.10319079152707543,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.015526740670754118,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.015526740670754118
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.15628057345747948,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7200288095976215,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.2799711904023785
+          }
+        },
+        "PR59_VALIDATION_1_4": {
+          "healthy_hold": {
+            "n": 466,
+            "available": true,
+            "next_device_available_positive": 466,
+            "predicted_mean_next_available": 0.9966239700245755,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.00030696576839274117,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00030696576839274117
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.999821126461029,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.999642284917801,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.00035771508219895054
+          },
+          "continuing_down": {
+            "n": 7,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.09500483263816152,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.013908438668090991,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.013908438668090991
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.1505870819091797,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7215023054195626,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.2784976945804374
+          }
+        },
+        "PR59_VALIDATION_1_5": {
+          "healthy_hold": {
+            "n": 755,
+            "available": true,
+            "next_device_available_positive": 755,
+            "predicted_mean_next_available": 0.9997705202228976,
+            "empirical_next_available": 1.0,
+            "model_brier": 2.1804705543760088e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 2.1804705543760088e-06
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9947627186775208,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9895528664706923,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.010447133529307706
+          },
+          "continuing_down": {
+            "n": 23,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.14701906786016797,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.02439745674109179,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.02439745674109179
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.18735440075397491,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.6603928699739312,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.3396071300260688
+          }
+        }
+      }
+    },
+    {
+      "arm": "map_off",
+      "seed": 1811,
+      "sha256_selected_checkpoint": "5f536e04e1c091a5f59e228e5ef726ff41d74e454944f21d179a693f936c0449",
+      "total_station_tick_labels": 7585,
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "next_device_available_positive": 7360,
+        "predicted_mean_next_available": 0.9701958227974173,
+        "empirical_next_available": 0.970336189848385,
+        "model_brier": 0.004179730194820791,
+        "trivial_previous_device_state_brier": 0.004218852999340804,
+        "model_minus_persistence_brier": -3.912280452001305e-05
+      },
+      "conditioned_on_TRUE_transition_phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "next_device_available_positive": 7344,
+          "predicted_mean_next_available": 0.9978923235161632,
+          "empirical_next_available": 1.0,
+          "model_brier": 4.9810240654966345e-05,
+          "trivial_previous_device_state_brier": 0.0,
+          "model_minus_persistence_brier": 4.9810240654966345e-05
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "next_device_available_positive": 0,
+          "predicted_mean_next_available": 0.9902051389217377,
+          "empirical_next_available": 0.0,
+          "model_brier": 0.9807565047894471,
+          "trivial_previous_device_state_brier": 1.0,
+          "model_minus_persistence_brier": -0.019243495210552908
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "next_device_available_positive": 0,
+          "predicted_mean_next_available": 0.06317449113438753,
+          "empirical_next_available": 0.0,
+          "model_brier": 0.010155524358838453,
+          "trivial_previous_device_state_brier": 0.0,
+          "model_minus_persistence_brier": 0.010155524358838453
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "next_device_available_positive": 16,
+          "predicted_mean_next_available": 0.08545882161706686,
+          "empirical_next_available": 1.0,
+          "model_brier": 0.8451774032948262,
+          "trivial_previous_device_state_brier": 1.0,
+          "model_minus_persistence_brier": -0.15482259670517384
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "healthy_hold": {
+            "n": 2855,
+            "available": true,
+            "next_device_available_positive": 2855,
+            "predicted_mean_next_available": 0.9979304607611822,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.918971962273197e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.918971962273197e-05
+          },
+          "fault_onset": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9948396682739258,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9897069693639118,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.010293030636088218
+          },
+          "continuing_down": {
+            "n": 42,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.11527208214448321,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.027565549181063475,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.027565549181063475
+          },
+          "recovery": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 4,
+            "predicted_mean_next_available": 0.10121038369834423,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8095276166325127,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.19047238336748729
+          }
+        },
+        "multi_fault": {
+          "healthy_hold": {
+            "n": 2317,
+            "available": true,
+            "next_device_available_positive": 2317,
+            "predicted_mean_next_available": 0.9980725532314826,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.697051894614489e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.697051894614489e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9871408492326736,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9749173045868469,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.02508269541315311
+          },
+          "continuing_down": {
+            "n": 102,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.059076512303185086,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.007617827828657837,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.007617827828657837
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.09700747369788587,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8308522702943476,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.1691477297056524
+          }
+        },
+        "staggered_arrivals": {
+          "healthy_hold": {
+            "n": 2172,
+            "available": true,
+            "next_device_available_positive": 2172,
+            "predicted_mean_next_available": 0.9976499321326806,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.1178206928616654e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.1178206928616654e-05
+          },
+          "fault_onset": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9916991889476776,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9834844406201828,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.01651555937981719
+          },
+          "continuing_down": {
+            "n": 65,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.03594210680144338,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0028882013364534198,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0028882013364534198
+          },
+          "recovery": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 4,
+            "predicted_mean_next_available": 0.04660995537415147,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9094774559580974,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.09052254404190263
+          }
+        }
+      },
+      "by_validation_map": {
+        "0": {
+          "healthy_hold": {
+            "n": 3807,
+            "available": true,
+            "next_device_available_positive": 3807,
+            "predicted_mean_next_available": 0.9978554700659052,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.8323675734753225e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.8323675734753225e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9935324639081955,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9871765888725506,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.012823411127449447
+          },
+          "continuing_down": {
+            "n": 107,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.07126461690787887,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.013327065311903613,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.013327065311903613
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.0555286614689976,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8925256300213964,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.1074743699786036
+          }
+        },
+        "1": {
+          "healthy_hold": {
+            "n": 3537,
+            "available": true,
+            "next_device_available_positive": 3537,
+            "predicted_mean_next_available": 0.9979319902068988,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.064692503473772e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.064692503473772e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9868778139352798,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9743364207063436,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.02566357929365637
+          },
+          "continuing_down": {
+            "n": 102,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.054687790568077974,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.006828515711995602,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.006828515711995602
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.11538898176513612,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7978291765682561,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.20217082343174386
+          }
+        }
+      },
+      "by_true_validation_scenario": {
+        "PR59_VALIDATION_0_0": {
+          "healthy_hold": {
+            "n": 596,
+            "available": true,
+            "next_device_available_positive": 596,
+            "predicted_mean_next_available": 0.9975461515804265,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.00012307424129486707,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00012307424129486707
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9938377737998962,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9877135206315337,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.012286479368466274
+          },
+          "continuing_down": {
+            "n": 7,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.163234261130648,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.05567918432605499,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.05567918432605499
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.06836806982755661,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8679380533168324,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.13206194668316762
+          }
+        },
+        "PR59_VALIDATION_0_1": {
+          "healthy_hold": {
+            "n": 743,
+            "available": true,
+            "next_device_available_positive": 743,
+            "predicted_mean_next_available": 0.9983192624506687,
+            "empirical_next_available": 1.0,
+            "model_brier": 2.2012421044976135e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 2.2012421044976135e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9860408902168274,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9724681701263265,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.02753182987367353
+          },
+          "continuing_down": {
+            "n": 58,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.04354890737409607,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0030644319589050607,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0030644319589050607
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.04418266750872135,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9136025353732777,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.08639746462672226
+          }
+        },
+        "PR59_VALIDATION_0_2": {
+          "healthy_hold": {
+            "n": 565,
+            "available": true,
+            "next_device_available_positive": 565,
+            "predicted_mean_next_available": 0.997754939573001,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.5061385407008494e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.5061385407008494e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9958415627479553,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9917004180962898,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.008299581903710163
+          },
+          "continuing_down": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.06038674316368997,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.005880060459278141,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.005880060459278141
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.047875333577394485,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9065413804103578,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.09345861958964219
+          }
+        },
+        "PR59_VALIDATION_0_3": {
+          "healthy_hold": {
+            "n": 780,
+            "available": true,
+            "next_device_available_positive": 780,
+            "predicted_mean_next_available": 0.9979054096417549,
+            "empirical_next_available": 1.0,
+            "model_brier": 6.873094656248542e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 6.873094656248542e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9938377737998962,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9877135206315337,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.012286479368466274
+          },
+          "continuing_down": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.16367090540006757,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.058763162281782216,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.058763162281782216
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.06584060937166214,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8726537670991075,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.12734623290089253
+          }
+        },
+        "PR59_VALIDATION_0_4": {
+          "healthy_hold": {
+            "n": 600,
+            "available": true,
+            "next_device_available_positive": 600,
+            "predicted_mean_next_available": 0.9979326913754145,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.454360422318615e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.454360422318615e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.998409628868103,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9968242466360522,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0031757533639478197
+          },
+          "continuing_down": {
+            "n": 11,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.12005621160973202,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.024866280296206078,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.024866280296206078
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.05730695370584726,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8903491109050947,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.10965088909490528
+          }
+        },
+        "PR59_VALIDATION_0_5": {
+          "healthy_hold": {
+            "n": 523,
+            "available": true,
+            "next_device_available_positive": 523,
+            "predicted_mean_next_available": 0.9974946099303192,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.073570414232769e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.073570414232769e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9958415627479553,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9917004180962898,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.008299581903710163
+          },
+          "continuing_down": {
+            "n": 15,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.05625053582092126,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.004521985285870534,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.004521985285870534
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.059166036546230316,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8851685467881292,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.11483145321187083
+          }
+        },
+        "PR59_VALIDATION_1_0": {
+          "healthy_hold": {
+            "n": 466,
+            "available": true,
+            "next_device_available_positive": 466,
+            "predicted_mean_next_available": 0.997820185489409,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.688099988044332e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.688099988044332e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9969757497310638,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9939683523725993,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.006031647627400716
+          },
+          "continuing_down": {
+            "n": 5,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.08423382453620434,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.00973229073792233,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00973229073792233
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.24177489802241325,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.6067960701344219,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.39320392986557806
+          }
+        },
+        "PR59_VALIDATION_1_1": {
+          "healthy_hold": {
+            "n": 618,
+            "available": true,
+            "next_device_available_positive": 618,
+            "predicted_mean_next_available": 0.9978662959773178,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.089710811752752e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.089710811752752e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9875568151473999,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9752684631440758,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.02473153685592422
+          },
+          "continuing_down": {
+            "n": 35,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.024878787768206425,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0018976072920820926,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0018976072920820926
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.009328661486506462,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9814297009521169,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0185702990478831
+          }
+        },
+        "PR59_VALIDATION_1_2": {
+          "healthy_hold": {
+            "n": 724,
+            "available": true,
+            "next_device_available_positive": 724,
+            "predicted_mean_next_available": 0.9979726160922762,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.3124190465538154e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.3124190465538154e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9958415627479553,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9917004180962898,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.008299581903710163
+          },
+          "continuing_down": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.030848832800984383,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0009618035001957102,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0009618035001957102
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.16820476949214935,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.6918833054956084,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.3081166945043916
+          }
+        },
+        "PR59_VALIDATION_1_3": {
+          "healthy_hold": {
+            "n": 508,
+            "available": true,
+            "next_device_available_positive": 508,
+            "predicted_mean_next_available": 0.9981084105771357,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.16392816606342e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.16392816606342e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9671371281147003,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9364084492124096,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.06359155078759038
+          },
+          "continuing_down": {
+            "n": 28,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.06279214917282973,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.00989610171281169,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00989610171281169
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.044765375554561615,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9126613647645959,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.08733863523540408
+          }
+        },
+        "PR59_VALIDATION_1_4": {
+          "healthy_hold": {
+            "n": 466,
+            "available": true,
+            "next_device_available_positive": 466,
+            "predicted_mean_next_available": 0.9974099996263889,
+            "empirical_next_available": 1.0,
+            "model_brier": 7.272574380027077e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 7.272574380027077e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9875568151473999,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9752684631440758,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.02473153685592422
+          },
+          "continuing_down": {
+            "n": 7,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.01980391251189368,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0009209383834736933,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0009209383834736933
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.07006978988647461,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8647701956817855,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.13522980431821452
+          }
+        },
+        "PR59_VALIDATION_1_5": {
+          "healthy_hold": {
+            "n": 755,
+            "available": true,
+            "next_device_available_positive": 755,
+            "predicted_mean_next_available": 0.9982192921322702,
+            "empirical_next_available": 1.0,
+            "model_brier": 2.3897151649497693e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 2.3897151649497693e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9958415627479553,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9917004180962898,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.008299581903710163
+          },
+          "continuing_down": {
+            "n": 23,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.09852282816301221,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0127846201333583,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0127846201333583
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.10242808610200882,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.805635340618503,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.19436465938149705
+          }
+        }
+      }
+    },
+    {
+      "arm": "map_off",
+      "seed": 1812,
+      "sha256_selected_checkpoint": "d377bd0534c336799d91eb0e4918dc03d24f0e658e8816b1def7779fc282862a",
+      "total_station_tick_labels": 7585,
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "next_device_available_positive": 7360,
+        "predicted_mean_next_available": 0.9706520785937969,
+        "empirical_next_available": 0.970336189848385,
+        "model_brier": 0.004276081884459547,
+        "trivial_previous_device_state_brier": 0.004218852999340804,
+        "model_minus_persistence_brier": 5.722888511874337e-05
+      },
+      "conditioned_on_TRUE_transition_phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "next_device_available_positive": 7344,
+          "predicted_mean_next_available": 0.9984018234028795,
+          "empirical_next_available": 1.0,
+          "model_brier": 3.984207643119053e-05,
+          "trivial_previous_device_state_brier": 0.0,
+          "model_minus_persistence_brier": 3.984207643119053e-05
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "next_device_available_positive": 0,
+          "predicted_mean_next_available": 0.9976331628859043,
+          "empirical_next_available": 0.0,
+          "model_brier": 0.9952752866859316,
+          "trivial_previous_device_state_brier": 1.0,
+          "model_minus_persistence_brier": -0.004724713314068429
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "next_device_available_positive": 0,
+          "predicted_mean_next_available": 0.06308320768480523,
+          "empirical_next_available": 0.0,
+          "model_brier": 0.009665436317509258,
+          "trivial_previous_device_state_brier": 0.0,
+          "model_minus_persistence_brier": 0.009665436317509258
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "next_device_available_positive": 16,
+          "predicted_mean_next_available": 0.06165650318143889,
+          "empirical_next_available": 1.0,
+          "model_brier": 0.8873125066862896,
+          "trivial_previous_device_state_brier": 1.0,
+          "model_minus_persistence_brier": -0.11268749331371042
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "healthy_hold": {
+            "n": 2855,
+            "available": true,
+            "next_device_available_positive": 2855,
+            "predicted_mean_next_available": 0.9985915163352486,
+            "empirical_next_available": 1.0,
+            "model_brier": 2.4674838095918052e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 2.4674838095918052e-05
+          },
+          "fault_onset": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9966255724430084,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9932630995773852,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.006736900422614767
+          },
+          "continuing_down": {
+            "n": 42,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.07428693183742109,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.012210863011497795,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.012210863011497795
+          },
+          "recovery": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 4,
+            "predicted_mean_next_available": 0.09260405669920146,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8408698042119676,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.15913019578803245
+          }
+        },
+        "multi_fault": {
+          "healthy_hold": {
+            "n": 2317,
+            "available": true,
+            "next_device_available_positive": 2317,
+            "predicted_mean_next_available": 0.9984698292506271,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.922400894558024e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.922400894558024e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9982055649161339,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9964186205110379,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0035813794889620887
+          },
+          "continuing_down": {
+            "n": 102,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.05017250312455729,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.009929953345976539,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.009929953345976539
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.0425258451141417,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9201797031994277,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.07982029680057234
+          }
+        },
+        "staggered_arrivals": {
+          "healthy_hold": {
+            "n": 2172,
+            "available": true,
+            "next_device_available_positive": 2172,
+            "predicted_mean_next_available": 0.998079934419848,
+            "empirical_next_available": 1.0,
+            "model_brier": 6.043808371082309e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 6.043808371082309e-05
+          },
+          "fault_onset": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9974959492683411,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9950008061442652,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.004999193855734774
+          },
+          "continuing_down": {
+            "n": 65,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.07610375308073485,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.007605610809029552,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.007605610809029552
+          },
+          "recovery": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 4,
+            "predicted_mean_next_available": 0.0689702657982707,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8680208161343351,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.13197918386566487
+          }
+        }
+      },
+      "by_validation_map": {
+        "0": {
+          "healthy_hold": {
+            "n": 3807,
+            "available": true,
+            "next_device_available_positive": 3807,
+            "predicted_mean_next_available": 0.9984351277570571,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.042289623696622e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.042289623696622e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9976445287466049,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9952963533712715,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.004703646628728464
+          },
+          "continuing_down": {
+            "n": 107,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.05841359635379827,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.009219189303689646,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.009219189303689646
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.022965921205468476,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9547872631924698,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.04521273680753024
+          }
+        },
+        "1": {
+          "healthy_hold": {
+            "n": 3537,
+            "available": true,
+            "next_device_available_positive": 3537,
+            "predicted_mean_next_available": 0.9983659767315891,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.921691923566096e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.921691923566096e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9976217970252037,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9952542200005916,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.004745779999408395
+          },
+          "continuing_down": {
+            "n": 102,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.06798172153203803,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.010133558184947478,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.010133558184947478
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.10034708515740931,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8198377501801093,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.1801622498198907
+          }
+        }
+      },
+      "by_true_validation_scenario": {
+        "PR59_VALIDATION_0_0": {
+          "healthy_hold": {
+            "n": 596,
+            "available": true,
+            "next_device_available_positive": 596,
+            "predicted_mean_next_available": 0.9986376512370654,
+            "empirical_next_available": 1.0,
+            "model_brier": 2.1245927119381352e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 2.1245927119381352e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9973791837692261,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9947652362161676,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0052347637838323635
+          },
+          "continuing_down": {
+            "n": 7,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.11623042848493371,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.030664941125118934,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.030664941125118934
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.01292136125266552,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9743242390712908,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.025675760928709157
+          }
+        },
+        "PR59_VALIDATION_0_1": {
+          "healthy_hold": {
+            "n": 743,
+            "available": true,
+            "next_device_available_positive": 743,
+            "predicted_mean_next_available": 0.9987134475406375,
+            "empirical_next_available": 1.0,
+            "model_brier": 1.86534284927451e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 1.86534284927451e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9989320337772369,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9978652902168452,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0021347097831547757
+          },
+          "continuing_down": {
+            "n": 58,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.03690111617846736,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.005741089227918631,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.005741089227918631
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.017439709044992924,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9654403604779629,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.03455963952203711
+          }
+        },
+        "PR59_VALIDATION_0_2": {
+          "healthy_hold": {
+            "n": 565,
+            "available": true,
+            "next_device_available_positive": 565,
+            "predicted_mean_next_available": 0.9983253957950964,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.8048345567578946e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.8048345567578946e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9958719611167908,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9917609629386028,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.00823903706139717
+          },
+          "continuing_down": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.0993111995048821,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.014120140304850067,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.014120140304850067
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.040390897542238235,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9208496295197911,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0791503704802089
+          }
+        },
+        "PR59_VALIDATION_0_3": {
+          "healthy_hold": {
+            "n": 780,
+            "available": true,
+            "next_device_available_positive": 780,
+            "predicted_mean_next_available": 0.9988874845779859,
+            "empirical_next_available": 1.0,
+            "model_brier": 1.7325380017528785e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 1.7325380017528785e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9973791837692261,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9947652362161676,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0052347637838323635
+          },
+          "continuing_down": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.08040251699276268,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.014683599760305923,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.014683599760305923
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.013732274062931538,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9727240272250763,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.027275972774923662
+          }
+        },
+        "PR59_VALIDATION_0_4": {
+          "healthy_hold": {
+            "n": 600,
+            "available": true,
+            "next_device_available_positive": 600,
+            "predicted_mean_next_available": 0.9979798117280007,
+            "empirical_next_available": 1.0,
+            "model_brier": 7.917725334460002e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 7.917725334460002e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9983949363231659,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9967939241134705,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.003206075886529547
+          },
+          "continuing_down": {
+            "n": 11,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.05276196348396214,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.005104223452241185,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.005104223452241185
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.015068037435412407,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9700923309999682,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.029907669000031833
+          }
+        },
+        "PR59_VALIDATION_0_5": {
+          "healthy_hold": {
+            "n": 523,
+            "available": true,
+            "next_device_available_positive": 523,
+            "predicted_mean_next_available": 0.9977751932682088,
+            "empirical_next_available": 1.0,
+            "model_brier": 8.575608484656777e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 8.575608484656777e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9958719611167908,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9917609629386028,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.00823903706139717
+          },
+          "continuing_down": {
+            "n": 15,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.08521904945373535,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.010149274260251898,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.010149274260251898
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.05166734382510185,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8993348267677376,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.10066517323226243
+          }
+        },
+        "PR59_VALIDATION_1_0": {
+          "healthy_hold": {
+            "n": 466,
+            "available": true,
+            "next_device_available_positive": 466,
+            "predicted_mean_next_available": 0.998894972223069,
+            "empirical_next_available": 1.0,
+            "model_brier": 1.1741749032836729e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 1.1741749032836729e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9962117075920105,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9924472891917802,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.007552710808219842
+          },
+          "continuing_down": {
+            "n": 5,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.0544948160648346,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.005426588037640921,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.005426588037640921
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.11577199772000313,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7883428944336133,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.21165710556638673
+          }
+        },
+        "PR59_VALIDATION_1_1": {
+          "healthy_hold": {
+            "n": 618,
+            "available": true,
+            "next_device_available_positive": 618,
+            "predicted_mean_next_available": 0.9985847307254582,
+            "empirical_next_available": 1.0,
+            "model_brier": 2.357793178367655e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 2.357793178367655e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9991199374198914,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9982406493499276,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0017593506500723777
+          },
+          "continuing_down": {
+            "n": 35,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.06890760404723031,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.00548589852834214,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00548589852834214
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.05551747605204582,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8920472380430978,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.10795276195690218
+          }
+        },
+        "PR59_VALIDATION_1_2": {
+          "healthy_hold": {
+            "n": 724,
+            "available": true,
+            "next_device_available_positive": 724,
+            "predicted_mean_next_available": 0.9981636653618259,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.2313957659233767e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.2313957659233767e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9958719611167908,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9917609629386028,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.00823903706139717
+          },
+          "continuing_down": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.09662375040352345,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.009413198271965753,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.009413198271965753
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.32166409492492676,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.4601396001140188,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.5398603998859812
+          }
+        },
+        "PR59_VALIDATION_1_3": {
+          "healthy_hold": {
+            "n": 508,
+            "available": true,
+            "next_device_available_positive": 508,
+            "predicted_mean_next_available": 0.9983022810201946,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.7331740749484034e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.7331740749484034e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9992835819721222,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9985679785220558,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0014320214779441898
+          },
+          "continuing_down": {
+            "n": 28,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.07587410363235644,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.02130688099669531,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.02130688099669531
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.021823636256158352,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9568432268861665,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.04315677311383348
+          }
+        },
+        "PR59_VALIDATION_1_4": {
+          "healthy_hold": {
+            "n": 466,
+            "available": true,
+            "next_device_available_positive": 466,
+            "predicted_mean_next_available": 0.9974548911332061,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.00010805280763338755,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00010805280763338755
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9991199374198914,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9982406493499276,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0017593506500723777
+          },
+          "continuing_down": {
+            "n": 7,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.06602892439280238,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.005308288250338155,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.005308288250338155
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.1283053457736969,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7598515702067141,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.24014842979328588
+          }
+        },
+        "PR59_VALIDATION_1_5": {
+          "healthy_hold": {
+            "n": 755,
+            "available": true,
+            "next_device_available_positive": 755,
+            "predicted_mean_next_available": 0.998659612327222,
+            "empirical_next_available": 1.0,
+            "model_brier": 1.8059587340049075e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 1.8059587340049075e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9958719611167908,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9917609629386028,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.00823903706139717
+          },
+          "continuing_down": {
+            "n": 23,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.05550969566178063,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.006220872497250631,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.006220872497250631
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.022098496556282043,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9562913504374839,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.04370864956251608
+          }
+        }
+      }
+    },
+    {
+      "arm": "map_on",
+      "seed": 1810,
+      "sha256_selected_checkpoint": "d6634d97b5aa5c853677e229932095d4db3648f59935d1807fdf9f8790169590",
+      "total_station_tick_labels": 7585,
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "next_device_available_positive": 7360,
+        "predicted_mean_next_available": 0.9715107448061409,
+        "empirical_next_available": 0.970336189848385,
+        "model_brier": 0.004272517324991229,
+        "trivial_previous_device_state_brier": 0.004218852999340804,
+        "model_minus_persistence_brier": 5.366432565042517e-05
+      },
+      "conditioned_on_TRUE_transition_phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "next_device_available_positive": 7344,
+          "predicted_mean_next_available": 0.9987485447009794,
+          "empirical_next_available": 1.0,
+          "model_brier": 3.838788065842205e-05,
+          "trivial_previous_device_state_brier": 0.0,
+          "model_minus_persistence_brier": 3.838788065842205e-05
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "next_device_available_positive": 0,
+          "predicted_mean_next_available": 0.9926716908812523,
+          "empirical_next_available": 0.0,
+          "model_brier": 0.9854412948107254,
+          "trivial_previous_device_state_brier": 1.0,
+          "model_minus_persistence_brier": -0.014558705189274601
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "next_device_available_positive": 0,
+          "predicted_mean_next_available": 0.08181594567524902,
+          "empirical_next_available": 0.0,
+          "model_brier": 0.011945666636155147,
+          "trivial_previous_device_state_brier": 0.0,
+          "model_minus_persistence_brier": 0.011945666636155147
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "next_device_available_positive": 16,
+          "predicted_mean_next_available": 0.0698379606474191,
+          "empirical_next_available": 1.0,
+          "model_brier": 0.8663386419109369,
+          "trivial_previous_device_state_brier": 1.0,
+          "model_minus_persistence_brier": -0.1336613580890631
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "healthy_hold": {
+            "n": 2855,
+            "available": true,
+            "next_device_available_positive": 2855,
+            "predicted_mean_next_available": 0.9993353793792257,
+            "empirical_next_available": 1.0,
+            "model_brier": 6.940522602446331e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 6.940522602446331e-06
+          },
+          "fault_onset": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9891499280929565,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9784759298748487,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.02152407012515134
+          },
+          "continuing_down": {
+            "n": 42,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.09779623354829493,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.015147488874865691,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.015147488874865691
+          },
+          "recovery": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 4,
+            "predicted_mean_next_available": 0.060963790863752365,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8831968289666803,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.11680317103331972
+          }
+        },
+        "multi_fault": {
+          "healthy_hold": {
+            "n": 2317,
+            "available": true,
+            "next_device_available_positive": 2317,
+            "predicted_mean_next_available": 0.9989848983766295,
+            "empirical_next_available": 1.0,
+            "model_brier": 1.8190123167041884e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 1.8190123167041884e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9961915463209152,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9924079872548734,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.007592012745126553
+          },
+          "continuing_down": {
+            "n": 102,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.074073983064177,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.010990230876991353,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.010990230876991353
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.06674982467666268,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8719320454058669,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.12806795459413312
+          }
+        },
+        "staggered_arrivals": {
+          "healthy_hold": {
+            "n": 2172,
+            "available": true,
+            "next_device_available_positive": 2172,
+            "predicted_mean_next_available": 0.9977250435624553,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.00010127020632938824,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00010127020632938824
+          },
+          "fault_onset": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9891537427902222,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.978473274858306,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.02152672514169396
+          },
+          "continuing_down": {
+            "n": 65,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.08363914714696316,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.011376096073214591,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.011376096073214591
+          },
+          "recovery": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 4,
+            "predicted_mean_next_available": 0.08488840237259865,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8382936478653336,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.16170635213466644
+          }
+        }
+      },
+      "by_validation_map": {
+        "0": {
+          "healthy_hold": {
+            "n": 3807,
+            "available": true,
+            "next_device_available_positive": 3807,
+            "predicted_mean_next_available": 0.9987739951459635,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.0191089490046307e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.0191089490046307e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.99335727840662,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9868013722946949,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.01319862770530511
+          },
+          "continuing_down": {
+            "n": 107,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.08844960348628392,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.013793812608356664,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.013793812608356664
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.05205254768952727,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8989015795236329,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.10109842047636708
+          }
+        },
+        "1": {
+          "healthy_hold": {
+            "n": 3537,
+            "available": true,
+            "next_device_available_positive": 3537,
+            "predicted_mean_next_available": 0.9987211514739354,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.7210381076292135e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.7210381076292135e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9919861033558846,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9840812173267559,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.015918782673244092
+          },
+          "continuing_down": {
+            "n": 102,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.07485710855975163,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.010006925273159429,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.010006925273159429
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.08762337360531092,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.833775704298241,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.166224295701759
+          }
+        }
+      },
+      "by_true_validation_scenario": {
+        "PR59_VALIDATION_0_0": {
+          "healthy_hold": {
+            "n": 596,
+            "available": true,
+            "next_device_available_positive": 596,
+            "predicted_mean_next_available": 0.9993130524686519,
+            "empirical_next_available": 1.0,
+            "model_brier": 7.375195300970394e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 7.375195300970394e-06
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9967886209487915,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9935875548529935,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.006412445147006451
+          },
+          "continuing_down": {
+            "n": 7,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.12407556655151504,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.02688628933651243,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.02688628933651243
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.033081524074077606,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9349313390869086,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.06506866091309138
+          }
+        },
+        "PR59_VALIDATION_0_1": {
+          "healthy_hold": {
+            "n": 743,
+            "available": true,
+            "next_device_available_positive": 743,
+            "predicted_mean_next_available": 0.9993600492361898,
+            "empirical_next_available": 1.0,
+            "model_brier": 6.489754266678931e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 6.489754266678931e-06
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9973834156990051,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9947740929140743,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.005225907085925741
+          },
+          "continuing_down": {
+            "n": 58,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.05862781639885286,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.004151299742549511,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.004151299742549511
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.05404982715845108,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8948220428033944,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.10517795719660561
+          }
+        },
+        "PR59_VALIDATION_0_2": {
+          "healthy_hold": {
+            "n": 565,
+            "available": true,
+            "next_device_available_positive": 565,
+            "predicted_mean_next_available": 0.9971038533523019,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.00010969711299737679,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00010969711299737679
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9822148680686951,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9647460470552041,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.03525395294479594
+          },
+          "continuing_down": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.11120972968637943,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.013208008173347136,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.013208008173347136
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.09441030770540237,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.820092690790224,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.17990730920977605
+          }
+        },
+        "PR59_VALIDATION_0_3": {
+          "healthy_hold": {
+            "n": 780,
+            "available": true,
+            "next_device_available_positive": 780,
+            "predicted_mean_next_available": 0.9994565531993523,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.453033449803604e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.453033449803604e-06
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9967886209487915,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9935875548529935,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.006412445147006451
+          },
+          "continuing_down": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.11232302291318774,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.02093435352110616,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.02093435352110616
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.04364221543073654,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9146202121062297,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.08537978789377032
+          }
+        },
+        "PR59_VALIDATION_0_4": {
+          "healthy_hold": {
+            "n": 600,
+            "available": true,
+            "next_device_available_positive": 600,
+            "predicted_mean_next_available": 0.9989056843519211,
+            "empirical_next_available": 1.0,
+            "model_brier": 1.378256862823927e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 1.378256862823927e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9970422089099884,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9940977943565077,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.005902205643492309
+          },
+          "continuing_down": {
+            "n": 11,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.12467416426674886,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.03225713377181061,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.03225713377181061
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.04423532821238041,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9134915523878342,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0865084476121658
+          }
+        },
+        "PR59_VALIDATION_0_5": {
+          "healthy_hold": {
+            "n": 523,
+            "available": true,
+            "next_device_available_positive": 523,
+            "predicted_mean_next_available": 0.9979623411399229,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.9690626687910576e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.9690626687910576e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9822148680686951,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9647460470552041,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.03525395294479594
+          },
+          "continuing_down": {
+            "n": 15,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.13569916188716888,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.027932744908344135,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.027932744908344135
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.048716023564338684,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9049412038232438,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.09505879617675617
+          }
+        },
+        "PR59_VALIDATION_1_0": {
+          "healthy_hold": {
+            "n": 466,
+            "available": true,
+            "next_device_available_positive": 466,
+            "predicted_mean_next_available": 0.9988859905961246,
+            "empirical_next_available": 1.0,
+            "model_brier": 2.2050756635825975e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 2.2050756635825975e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9950178265571594,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9900770574070421,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.009922942592957895
+          },
+          "continuing_down": {
+            "n": 5,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.20884494110941887,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.07526905471869644,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.07526905471869644
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.11889626458287239,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7765319557937314,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.22346804420626865
+          }
+        },
+        "PR59_VALIDATION_1_1": {
+          "healthy_hold": {
+            "n": 618,
+            "available": true,
+            "next_device_available_positive": 618,
+            "predicted_mean_next_available": 0.9986335191526073,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.4449666331801356e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.4449666331801356e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9960926175117493,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.992200502661408,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.007799497338591976
+          },
+          "continuing_down": {
+            "n": 35,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.06170145060334887,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.005337918147896826,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.005337918147896826
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.06902960687875748,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8667058728683209,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.1332941271316791
+          }
+        },
+        "PR59_VALIDATION_1_2": {
+          "healthy_hold": {
+            "n": 724,
+            "available": true,
+            "next_device_available_positive": 724,
+            "predicted_mean_next_available": 0.999112751520141,
+            "empirical_next_available": 1.0,
+            "model_brier": 9.688215957565237e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 9.688215957565237e-06
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9815112948417664,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9633644219019608,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.03663557809803919
+          },
+          "continuing_down": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.08751773834228516,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0077491795260574425,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0077491795260574425
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.12559044361114502,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7645920723041542,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.23540792769584584
+          }
+        },
+        "PR59_VALIDATION_1_3": {
+          "healthy_hold": {
+            "n": 508,
+            "available": true,
+            "next_device_available_positive": 508,
+            "predicted_mean_next_available": 0.9986204935575095,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.6967390135147895e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.6967390135147895e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9953227341175079,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9906830043418697,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.009316995658130267
+          },
+          "continuing_down": {
+            "n": 28,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.06212472889040198,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.005323372117923132,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.005323372117923132
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.049817878752946854,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.902882630638508,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.09711736936149196
+          }
+        },
+        "PR59_VALIDATION_1_4": {
+          "healthy_hold": {
+            "n": 466,
+            "available": true,
+            "next_device_available_positive": 466,
+            "predicted_mean_next_available": 0.9970070777277067,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.00022633460891219504,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00022633460891219504
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9960926175117493,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.992200502661408,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.007799497338591976
+          },
+          "continuing_down": {
+            "n": 7,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.05026121823383229,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0039948386529458264,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0039948386529458264
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.12739767134189606,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7614348239795456,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.23856517602045435
+          }
+        },
+        "PR59_VALIDATION_1_5": {
+          "healthy_hold": {
+            "n": 755,
+            "available": true,
+            "next_device_available_positive": 755,
+            "predicted_mean_next_available": 0.9994413049805243,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.499259849644871e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.499259849644871e-06
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9815111756324768,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9633641878914467,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.03663581210855327
+          },
+          "continuing_down": {
+            "n": 23,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.08653294376057127,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.010848650483291002,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.010848650483291002
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.04154098033905029,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9186436923694288,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.08135630763057122
+          }
+        }
+      }
+    },
+    {
+      "arm": "map_on",
+      "seed": 1811,
+      "sha256_selected_checkpoint": "407f919ecaec1fe435be2ea73489aea7b13d3808c82c6ea982da0021c21c98f0",
+      "total_station_tick_labels": 7585,
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "next_device_available_positive": 7360,
+        "predicted_mean_next_available": 0.9701408283015815,
+        "empirical_next_available": 0.970336189848385,
+        "model_brier": 0.004168814555662269,
+        "trivial_previous_device_state_brier": 0.004218852999340804,
+        "model_minus_persistence_brier": -5.0038443678535396e-05
+      },
+      "conditioned_on_TRUE_transition_phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "next_device_available_positive": 7344,
+          "predicted_mean_next_available": 0.9985662805228971,
+          "empirical_next_available": 1.0,
+          "model_brier": 7.800499513353822e-05,
+          "trivial_previous_device_state_brier": 0.0,
+          "model_minus_persistence_brier": 7.800499513353822e-05
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "next_device_available_positive": 0,
+          "predicted_mean_next_available": 0.9961858168244362,
+          "empirical_next_available": 0.0,
+          "model_brier": 0.99238986142102,
+          "trivial_previous_device_state_brier": 1.0,
+          "model_minus_persistence_brier": -0.007610138578979964
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "next_device_available_positive": 0,
+          "predicted_mean_next_available": 0.03957779444481188,
+          "empirical_next_available": 0.0,
+          "model_brier": 0.0036235405274691324,
+          "trivial_previous_device_state_brier": 0.0,
+          "model_minus_persistence_brier": 0.0036235405274691324
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "next_device_available_positive": 16,
+          "predicted_mean_next_available": 0.052292899948952254,
+          "empirical_next_available": 1.0,
+          "model_brier": 0.9007519979662639,
+          "trivial_previous_device_state_brier": 1.0,
+          "model_minus_persistence_brier": -0.09924800203373607
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "healthy_hold": {
+            "n": 2855,
+            "available": true,
+            "next_device_available_positive": 2855,
+            "predicted_mean_next_available": 0.9988281485078214,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.046811970427471e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.046811970427471e-05
+          },
+          "fault_onset": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.997356116771698,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9947192849075215,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.005280715092478516
+          },
+          "continuing_down": {
+            "n": 42,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.06568011914662618,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.009265057774779964,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.009265057774779964
+          },
+          "recovery": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 4,
+            "predicted_mean_next_available": 0.08596609451342374,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8382573737987598,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.16174262620124025
+          }
+        },
+        "multi_fault": {
+          "healthy_hold": {
+            "n": 2317,
+            "available": true,
+            "next_device_available_positive": 2317,
+            "predicted_mean_next_available": 0.998833208568764,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.2312756465321735e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.2312756465321735e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9950745701789856,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9901782531662517,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.009821746833748257
+          },
+          "continuing_down": {
+            "n": 102,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.04464748070926825,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0031472425838289944,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0031472425838289944
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.05773560388479382,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8900686044315992,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.10993139556840081
+          }
+        },
+        "staggered_arrivals": {
+          "healthy_hold": {
+            "n": 2172,
+            "available": true,
+            "next_device_available_positive": 2172,
+            "predicted_mean_next_available": 0.9979373185619246,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.00015475301370849445,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00015475301370849445
+          },
+          "fault_onset": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9972380101680756,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9944836544440552,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.005516345555944824
+          },
+          "continuing_down": {
+            "n": 65,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.014756169268646492,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0007256738484574273,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0007256738484574273
+          },
+          "recovery": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 4,
+            "predicted_mean_next_available": 0.007734297512797639,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9846134092030974,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.015386590796902633
+          }
+        }
+      },
+      "by_validation_map": {
+        "0": {
+          "healthy_hold": {
+            "n": 3807,
+            "available": true,
+            "next_device_available_positive": 3807,
+            "predicted_mean_next_available": 0.9986339694469784,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.15986831483619e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.15986831483619e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9959861785173416,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.991994742953632,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.008005257046368008
+          },
+          "continuing_down": {
+            "n": 107,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.04911009817292792,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.005376713490909667,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.005376713490909667
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.05963041084760334,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8870133768891032,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.1129866231108968
+          }
+        },
+        "1": {
+          "healthy_hold": {
+            "n": 3537,
+            "available": true,
+            "next_device_available_positive": 3537,
+            "predicted_mean_next_available": 0.9984934245053745,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.00010642705612521655,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00010642705612521655
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9963854551315308,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9927849798884081,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.007215020111591919
+          },
+          "continuing_down": {
+            "n": 102,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.029578220926101923,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0017844277128795524,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0017844277128795524
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.044955389050301164,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9144906190434245,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.08550938095657545
+          }
+        }
+      },
+      "by_true_validation_scenario": {
+        "PR59_VALIDATION_0_0": {
+          "healthy_hold": {
+            "n": 596,
+            "available": true,
+            "next_device_available_positive": 596,
+            "predicted_mean_next_available": 0.998612613785987,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.8439656388244696e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.8439656388244696e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9976035952568054,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.995212933269304,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.004787066730695955
+          },
+          "continuing_down": {
+            "n": 7,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.09744745073840022,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.02061720602977505,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.02061720602977505
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.136321559548378,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.745940448500946,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.254059551499054
+          }
+        },
+        "PR59_VALIDATION_0_1": {
+          "healthy_hold": {
+            "n": 743,
+            "available": true,
+            "next_device_available_positive": 743,
+            "predicted_mean_next_available": 0.9991552601110887,
+            "empirical_next_available": 1.0,
+            "model_brier": 5.71973489675288e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 5.71973489675288e-06
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9955925345420837,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9912064883394045,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.008793511660595499
+          },
+          "continuing_down": {
+            "n": 58,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.05044917820888604,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0038526278930060085,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0038526278930060085
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.0720655806362629,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8624888926975858,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.13751110730241423
+          }
+        },
+        "PR59_VALIDATION_0_2": {
+          "healthy_hold": {
+            "n": 565,
+            "available": true,
+            "next_device_available_positive": 565,
+            "predicted_mean_next_available": 0.997880222312117,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.0001443876546514464,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0001443876546514464
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.997163712978363,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9943354704807952,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0056645295192048195
+          },
+          "continuing_down": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.0278429534046154,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0023587918486143366,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0023587918486143366
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.0011657382128760219,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9976698825198289,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.00233011748017109
+          }
+        },
+        "PR59_VALIDATION_0_3": {
+          "healthy_hold": {
+            "n": 780,
+            "available": true,
+            "next_device_available_positive": 780,
+            "predicted_mean_next_available": 0.9987312028805415,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.912685091951083e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.912685091951083e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9976035952568054,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.995212933269304,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.004787066730695955
+          },
+          "continuing_down": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.10089780075941235,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.019277387815812133,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.019277387815812133
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.12641595304012299,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7631490871027966,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.2368509128972034
+          }
+        },
+        "PR59_VALIDATION_0_4": {
+          "healthy_hold": {
+            "n": 600,
+            "available": true,
+            "next_device_available_positive": 600,
+            "predicted_mean_next_available": 0.9988044354319573,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.9436951356162096e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.9436951356162096e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9935848712921143,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9872240797250242,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.01277592027497576
+          },
+          "continuing_down": {
+            "n": 11,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.033474611372432926,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0014045801273681715,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0014045801273681715
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.028244896791875362,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9446256232241301,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.05537437677586987
+          }
+        },
+        "PR59_VALIDATION_0_5": {
+          "healthy_hold": {
+            "n": 523,
+            "available": true,
+            "next_device_available_positive": 523,
+            "predicted_mean_next_available": 0.9983914349776609,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.777485487791509e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.777485487791509e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.997163712978363,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9943354704807952,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0056645295192048195
+          },
+          "continuing_down": {
+            "n": 15,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.01656328365400744,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0012663776538732602,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0012663776538732602
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.012519081123173237,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9751185651458221,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.02488143485417793
+          }
+        },
+        "PR59_VALIDATION_1_0": {
+          "healthy_hold": {
+            "n": 466,
+            "available": true,
+            "next_device_available_positive": 466,
+            "predicted_mean_next_available": 0.9982630432675325,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.00018381423608922835,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00018381423608922835
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9963381886482239,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9926897913775612,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.007310208622438807
+          },
+          "continuing_down": {
+            "n": 5,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.033562298445031044,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0014272379979837087,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0014272379979837087
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.06928366189822555,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.870784570278484,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.129215429721516
+          }
+        },
+        "PR59_VALIDATION_1_1": {
+          "healthy_hold": {
+            "n": 618,
+            "available": true,
+            "next_device_available_positive": 618,
+            "predicted_mean_next_available": 0.9980003121022654,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.0001629331555063907,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0001629331555063907
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9973123073577881,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9946318384073152,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.005368161592684828
+          },
+          "continuing_down": {
+            "n": 35,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.010511993570253253,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.00017450551831068052,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00017450551831068052
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.005377460271120071,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9892739965367273,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.010726003463272682
+          }
+        },
+        "PR59_VALIDATION_1_2": {
+          "healthy_hold": {
+            "n": 724,
+            "available": true,
+            "next_device_available_positive": 724,
+            "predicted_mean_next_available": 0.9987054362646124,
+            "empirical_next_available": 1.0,
+            "model_brier": 6.367532652828537e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 6.367532652828537e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9971086382865906,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9942256365457389,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.005774363454261078
+          },
+          "continuing_down": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.05270176846534014,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.004448698508920429,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.004448698508920429
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.0024654907174408436,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9950750972095961,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.004924902790403918
+          }
+        },
+        "PR59_VALIDATION_1_3": {
+          "healthy_hold": {
+            "n": 508,
+            "available": true,
+            "next_device_available_positive": 508,
+            "predicted_mean_next_available": 0.9989191861603204,
+            "empirical_next_available": 1.0,
+            "model_brier": 1.5037970217687801e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 1.5037970217687801e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9947826862335205,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.989592653223017,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.010407346776982962
+          },
+          "continuing_down": {
+            "n": 28,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.03899851710385909,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.002677848370187161,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.002677848370187161
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.06134827621281147,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8823753315261967,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.11762466847380326
+          }
+        },
+        "PR59_VALIDATION_1_4": {
+          "healthy_hold": {
+            "n": 466,
+            "available": true,
+            "next_device_available_positive": 466,
+            "predicted_mean_next_available": 0.9974133410678913,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.0002877587589971752,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0002877587589971752
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9973123073577881,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9946318384073152,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.005368161592684828
+          },
+          "continuing_down": {
+            "n": 7,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.01714833506516048,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.00045644391597791413,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00045644391597791413
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.011874910444021225,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9763911926100111,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.02360880738998894
+          }
+        },
+        "PR59_VALIDATION_1_5": {
+          "healthy_hold": {
+            "n": 755,
+            "available": true,
+            "next_device_available_positive": 755,
+            "predicted_mean_next_available": 0.999216121948318,
+            "empirical_next_available": 1.0,
+            "model_brier": 2.9755846683621263e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 2.9755846683621263e-06
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9971086382865906,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9942256365457389,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.005774363454261078
+          },
+          "continuing_down": {
+            "n": 23,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.04601927691534081,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0031651342508762755,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0031651342508762755
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.07866137474775314,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8488648623817001,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.1511351376182999
+          }
+        }
+      }
+    },
+    {
+      "arm": "map_on",
+      "seed": 1812,
+      "sha256_selected_checkpoint": "3a4c93e5ea0f43d9dfe41e23c802c3814792e3085b06e635221f919a8dacd421",
+      "total_station_tick_labels": 7585,
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "next_device_available_positive": 7360,
+        "predicted_mean_next_available": 0.9713762924897171,
+        "empirical_next_available": 0.970336189848385,
+        "model_brier": 0.0041613241373163554,
+        "trivial_previous_device_state_brier": 0.004218852999340804,
+        "model_minus_persistence_brier": -5.752886202444862e-05
+      },
+      "conditioned_on_TRUE_transition_phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "next_device_available_positive": 7344,
+          "predicted_mean_next_available": 0.9988123950647892,
+          "empirical_next_available": 1.0,
+          "model_brier": 3.911911093402263e-05,
+          "trivial_previous_device_state_brier": 0.0,
+          "model_minus_persistence_brier": 3.911911093402263e-05
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "next_device_available_positive": 0,
+          "predicted_mean_next_available": 0.9970160499215126,
+          "empirical_next_available": 0.0,
+          "model_brier": 0.9940521396983328,
+          "trivial_previous_device_state_brier": 1.0,
+          "model_minus_persistence_brier": -0.005947860301667163
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "next_device_available_positive": 0,
+          "predicted_mean_next_available": 0.07277387217061514,
+          "empirical_next_available": 0.0,
+          "model_brier": 0.009411935008895029,
+          "trivial_previous_device_state_brier": 0.0,
+          "model_minus_persistence_brier": 0.009411935008895029
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "next_device_available_positive": 16,
+          "predicted_mean_next_available": 0.09055956851807423,
+          "empirical_next_available": 1.0,
+          "model_brier": 0.8377765111757929,
+          "trivial_previous_device_state_brier": 1.0,
+          "model_minus_persistence_brier": -0.16222348882420712
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "healthy_hold": {
+            "n": 2855,
+            "available": true,
+            "next_device_available_positive": 2855,
+            "predicted_mean_next_available": 0.9990356743857656,
+            "empirical_next_available": 1.0,
+            "model_brier": 2.8294454580069137e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 2.8294454580069137e-05
+          },
+          "fault_onset": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9945158660411835,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9890883719713859,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.010911628028614118
+          },
+          "continuing_down": {
+            "n": 42,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.08754988245311238,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.011441974173135402,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.011441974173135402
+          },
+          "recovery": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 4,
+            "predicted_mean_next_available": 0.09688128577545285,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8231832439913654,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.17681675600863456
+          }
+        },
+        "multi_fault": {
+          "healthy_hold": {
+            "n": 2317,
+            "available": true,
+            "next_device_available_positive": 2317,
+            "predicted_mean_next_available": 0.9987153496575552,
+            "empirical_next_available": 1.0,
+            "model_brier": 6.013920373197473e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 6.013920373197473e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9972074776887894,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9944261594778947,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0055738405221053
+          },
+          "continuing_down": {
+            "n": 102,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.0683910992252184,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.009498766702788293,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.009498766702788293
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.10158201871672645,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8237251039274807,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.17627489607251934
+          }
+        },
+        "staggered_arrivals": {
+          "healthy_hold": {
+            "n": 2172,
+            "available": true,
+            "next_device_available_positive": 2172,
+            "predicted_mean_next_available": 0.9986224280975581,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.092428537126121e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.092428537126121e-05
+          },
+          "fault_onset": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9991333782672882,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9982678678661561,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0017321321338439333
+          },
+          "continuing_down": {
+            "n": 65,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.07010387845623951,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.007963958429276448,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.007963958429276448
+          },
+          "recovery": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 4,
+            "predicted_mean_next_available": 0.06219295086339116,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8804725928568451,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.1195274071431549
+          }
+        }
+      },
+      "by_validation_map": {
+        "0": {
+          "healthy_hold": {
+            "n": 3807,
+            "available": true,
+            "next_device_available_positive": 3807,
+            "predicted_mean_next_available": 0.9988543820531468,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.790383115350166e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.790383115350166e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9960427135229111,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9921177754769372,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.007882224523062753
+          },
+          "continuing_down": {
+            "n": 107,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.07433482036255648,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.00912989271507253,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00912989271507253
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.05507289833622053,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8943405356434487,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.10565946435655127
+          }
+        },
+        "1": {
+          "healthy_hold": {
+            "n": 3537,
+            "available": true,
+            "next_device_available_positive": 3537,
+            "predicted_mean_next_available": 0.9987672029628166,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.042716016343833e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.042716016343833e-05
+          },
+          "fault_onset": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9979893863201141,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9959865039197284,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0040134960802715725
+          },
+          "continuing_down": {
+            "n": 102,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.07113640691044137,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.009707802905355887,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.009707802905355887
+          },
+          "recovery": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 8,
+            "predicted_mean_next_available": 0.12604623869992793,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7812124867081371,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.21878751329186286
+          }
+        }
+      },
+      "by_true_validation_scenario": {
+        "PR59_VALIDATION_0_0": {
+          "healthy_hold": {
+            "n": 596,
+            "available": true,
+            "next_device_available_positive": 596,
+            "predicted_mean_next_available": 0.9991442670158092,
+            "empirical_next_available": 1.0,
+            "model_brier": 7.020117859045429e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 7.020117859045429e-06
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9893618226051331,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9788368160285508,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.02116318397144923
+          },
+          "continuing_down": {
+            "n": 7,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.05132495532078402,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.003515096342005867,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.003515096342005867
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.024033570662140846,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9525104711944904,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.04748952880550961
+          }
+        },
+        "PR59_VALIDATION_0_1": {
+          "healthy_hold": {
+            "n": 743,
+            "available": true,
+            "next_device_available_positive": 743,
+            "predicted_mean_next_available": 0.9990901715983292,
+            "empirical_next_available": 1.0,
+            "model_brier": 1.4544002770586501e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 1.4544002770586501e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9966512024402618,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9933147840662517,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0066852159337482675
+          },
+          "continuing_down": {
+            "n": 58,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.06892942289564886,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.006859061229207863,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.006859061229207863
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.06243721581995487,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.880443937906551,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.11955606209344904
+          }
+        },
+        "PR59_VALIDATION_0_2": {
+          "healthy_hold": {
+            "n": 565,
+            "available": true,
+            "next_device_available_positive": 565,
+            "predicted_mean_next_available": 0.998800587021144,
+            "empirical_next_available": 1.0,
+            "model_brier": 1.5973232376911127e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 1.5973232376911127e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9997336268424988,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9994673246396566,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0005326753603434042
+          },
+          "continuing_down": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.11076047737151384,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.019858506517102657,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.019858506517102657
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.06537547707557678,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8735229988517057,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.1264770011482943
+          }
+        },
+        "PR59_VALIDATION_0_3": {
+          "healthy_hold": {
+            "n": 780,
+            "available": true,
+            "next_device_available_positive": 780,
+            "predicted_mean_next_available": 0.9992523602186105,
+            "empirical_next_available": 1.0,
+            "model_brier": 4.696435563986348e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 4.696435563986348e-06
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9893618226051331,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9788368160285508,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.02116318397144923
+          },
+          "continuing_down": {
+            "n": 8,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.09133938304148614,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.017031733230587,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.017031733230587
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.01950843632221222,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9613637064433134,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.03863629355668663
+          }
+        },
+        "PR59_VALIDATION_0_4": {
+          "healthy_hold": {
+            "n": 600,
+            "available": true,
+            "next_device_available_positive": 600,
+            "predicted_mean_next_available": 0.9978804775079091,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.00018140436299507456,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.00018140436299507456
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9984242022037506,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9968521771732899,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0031478228267101116
+          },
+          "continuing_down": {
+            "n": 11,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.04777513715353879,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.003940297915187907,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.003940297915187907
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.04933305294252932,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9054992558628783,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.09450074413712173
+          }
+        },
+        "PR59_VALIDATION_0_5": {
+          "healthy_hold": {
+            "n": 523,
+            "available": true,
+            "next_device_available_positive": 523,
+            "predicted_mean_next_available": 0.9987709229352597,
+            "empirical_next_available": 1.0,
+            "model_brier": 1.4873780246529819e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 1.4873780246529819e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9997336268424988,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9994673246396566,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0005326753603434042
+          },
+          "continuing_down": {
+            "n": 15,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.09695461144049962,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.014400139985071973,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.014400139985071973
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.10812516510486603,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7954407211192225,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.20455927888077752
+          }
+        },
+        "PR59_VALIDATION_1_0": {
+          "healthy_hold": {
+            "n": 466,
+            "available": true,
+            "next_device_available_positive": 466,
+            "predicted_mean_next_available": 0.9990521198690193,
+            "empirical_next_available": 1.0,
+            "model_brier": 1.3483411055230025e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 1.3483411055230025e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9960238933563232,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9920668800606087,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.007933119939391275
+          },
+          "continuing_down": {
+            "n": 5,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.022623747959733008,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0005690062861681368,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0005690062861681368
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.22699629329144955,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.6390743221150184,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.36092567788498164
+          }
+        },
+        "PR59_VALIDATION_1_1": {
+          "healthy_hold": {
+            "n": 618,
+            "available": true,
+            "next_device_available_positive": 618,
+            "predicted_mean_next_available": 0.998608262986427,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.122184900409501e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.122184900409501e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9985331296920776,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9970684110926555,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0029315889073444623
+          },
+          "continuing_down": {
+            "n": 35,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.055653863080910276,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0036454623630961,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0036454623630961
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.01980162225663662,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.9607888597307213,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.039211140269278744
+          }
+        },
+        "PR59_VALIDATION_1_2": {
+          "healthy_hold": {
+            "n": 724,
+            "available": true,
+            "next_device_available_positive": 724,
+            "predicted_mean_next_available": 0.9984211013626657,
+            "empirical_next_available": 1.0,
+            "model_brier": 9.689214272005559e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 9.689214272005559e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9996699094772339,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.999339927914221,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0006600720857790066
+          },
+          "continuing_down": {
+            "n": 4,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.11740288324654102,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.013941757245358108,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.013941757245358108
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.23389016091823578,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.5869242855378867,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.41307571446211333
+          }
+        },
+        "PR59_VALIDATION_1_3": {
+          "healthy_hold": {
+            "n": 508,
+            "available": true,
+            "next_device_available_positive": 508,
+            "predicted_mean_next_available": 0.9988442781403308,
+            "empirical_next_available": 1.0,
+            "model_brier": 2.6398530786727874e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 2.6398530786727874e-05
+          },
+          "fault_onset": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9977306127548218,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9954707966114285,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0045292033885715455
+          },
+          "continuing_down": {
+            "n": 28,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.08354786944775176,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.018745012281872947,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.018745012281872947
+          },
+          "recovery": {
+            "n": 2,
+            "available": true,
+            "next_device_available_positive": 2,
+            "predicted_mean_next_available": 0.06756151281297207,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8698828998254748,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.13011710017452516
+          }
+        },
+        "PR59_VALIDATION_1_4": {
+          "healthy_hold": {
+            "n": 466,
+            "available": true,
+            "next_device_available_positive": 466,
+            "predicted_mean_next_available": 0.9982585470819678,
+            "empirical_next_available": 1.0,
+            "model_brier": 6.667077635184281e-05,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 6.667077635184281e-05
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9985331296920776,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.9970684110926555,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0029315889073444623
+          },
+          "continuing_down": {
+            "n": 7,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.03835198589201484,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.0021708518973864175,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.0021708518973864175
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.055469539016485214,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.8921377917257309,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.10786220827426907
+          }
+        },
+        "PR59_VALIDATION_1_5": {
+          "healthy_hold": {
+            "n": 755,
+            "available": true,
+            "next_device_available_positive": 755,
+            "predicted_mean_next_available": 0.9993154289706654,
+            "empirical_next_available": 1.0,
+            "model_brier": 3.6868165733466375e-06,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 3.6868165733466375e-06
+          },
+          "fault_onset": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.9996699094772339,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.999339927914221,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.0006600720857790066
+          },
+          "continuing_down": {
+            "n": 23,
+            "available": true,
+            "next_device_available_positive": 0,
+            "predicted_mean_next_available": 0.09206494688987732,
+            "empirical_next_available": 0.0,
+            "model_brier": 0.011475493306587713,
+            "trivial_previous_device_state_brier": 0.0,
+            "model_minus_persistence_brier": 0.011475493306587713
+          },
+          "recovery": {
+            "n": 1,
+            "available": true,
+            "next_device_available_positive": 1,
+            "predicted_mean_next_available": 0.11009297519922256,
+            "empirical_next_available": 1.0,
+            "model_brier": 0.7919345127897716,
+            "trivial_previous_device_state_brier": 1.0,
+            "model_minus_persistence_brier": -0.20806548721022844
+          }
+        }
+      }
+    }
+  ]
+}
