@@ -114,11 +114,11 @@ def _read_source(path: Path, expected: str) -> dict:
 
 def _station_ages(history: list, visible: list, index: int, current: int) -> int:
     """Number of trailing visible snapshots in the same public state, capped at 4."""
-    if len(history) != len(visible) or len(history) < HISTORY_WINDOW:
-        raise AssertionError("public history dimension differs from model input")
-    age = 1
     row = history[index]
     vis = visible[index]
+    if len(row) != HISTORY_WINDOW or len(vis) != HISTORY_WINDOW:
+        raise AssertionError("public history dimension differs from model input")
+    age = 1
     if int(round(row[-1][DEVICE_AVAILABLE_INDEX])) != current:
         raise AssertionError("current history state differs from current graph")
     for k in range(HISTORY_WINDOW - 2, -1, -1):
