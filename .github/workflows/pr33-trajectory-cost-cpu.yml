@@ -1,0 +1,108 @@
+name: PR33 published PETS trajectory-cost transfer full online CPU
+on:
+  push:
+    branches: [research/pr33-pets-trajectory-cost-transfer-20261112]
+    paths: [.github/workflows/pr33-trajectory-cost-cpu.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  independent-reference-cost:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 24
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      NUMBA_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.10"}
+      - name: Recreate original CPU learning environment
+        run: |
+          set -euo pipefail
+          python -m pip install uv==0.13.5
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -c "import torch; assert torch.version.cuda is None; torch.set_num_threads(1)"
+      - name: Restore immutable V4 original and validation-chosen scratch
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr33"
+          for row in "13765135588:original.zip" "13911001730:posttrain.zip"; do
+            id="${row%%:*}"; destination="${row#*:}"
+            curl -fsSL --retry 3 \
+              -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/lieuyimo/wm/actions/artifacts/$id/zip" \
+              -o "$RUNNER_TEMP/pr33/$destination"
+          done
+          unzip -p "$RUNNER_TEMP/pr33/original.zip" v4-data.pt > "$RUNNER_TEMP/pr33/original.pt"
+          unzip -p "$RUNNER_TEMP/pr33/posttrain.zip" trained/scratch_v4-best.pt > "$RUNNER_TEMP/pr33/scratch.pt"
+          unzip -p "$RUNNER_TEMP/pr33/posttrain.zip" trained/validation-selection.json > "$RUNNER_TEMP/pr33/selection.json"
+          echo "60c8a6c3d832da3e6519072688ea099f64ae120ba19d3bd2ec705f7f1a11ac0c  $RUNNER_TEMP/pr33/original.pt" | sha256sum -c
+          python - <<'PY'
+          from pathlib import Path
+          import json,os,hashlib
+          p=Path(os.environ["RUNNER_TEMP"])/"pr33"
+          s=json.loads((p/"selection.json").read_text())
+          assert s["best_by_validation_brier"]=="scratch_v4"
+          assert s["arms"]["scratch_v4"]["files"]["best"]["sha256"]==hashlib.sha256((p/"scratch.pt").read_bytes()).hexdigest()
+          print("PR33_IMMUTABLE_TRAINING_MODELS_VERIFIED")
+          PY
+          echo "RHWM_V4_ORIGINAL=$RUNNER_TEMP/pr33/original.pt" >> "$GITHUB_ENV"
+          echo "RHWM_V4_SCRATCH=$RUNNER_TEMP/pr33/scratch.pt" >> "$GITHUB_ENV"
+      - name: Verify source-derived cost, old PR30 score invariance and actual legal policy
+        run: |
+          set -euo pipefail
+          python -m compileall -q experiments/world_model_integration/trajectory_cost
+          timeout 180s python -m unittest discover \
+            -s experiments/world_model_integration/trajectory_cost -p 'test_*.py' -v \
+            2>&1 | tee "$RUNNER_TEMP/pr33/tests.log"
+          timeout 100s python -m unittest discover \
+            -s experiments/world_model_integration/online_horizon -v \
+            2>&1 | tee "$RUNNER_TEMP/pr33/pr30-regression.log"
+      - name: One-shot independent 24 scenes 6 model-predictive policies
+        run: |
+          set -euo pipefail
+          timeout 750s python -m experiments.world_model_integration.trajectory_cost.pr33_evaluate \
+            --original "$RHWM_V4_ORIGINAL" \
+            --scratch "$RHWM_V4_SCRATCH" \
+            --selection "$RUNNER_TEMP/pr33/selection.json" \
+            --out "$RUNNER_TEMP/pr33/full-online.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr33/run.log"
+          python - <<'PY'
+          from pathlib import Path
+          import os,json
+          p=Path(os.environ["RUNNER_TEMP"])/"pr33"
+          r=json.loads((p/"full-online.json").read_text())
+          s=r["summary"]
+          assert s["independent_scene_groups"]==24 and s["gpu"]==0 and s["training"]==0
+          assert set(s["by_regime"])=={"light","medium","heavy","shift"}
+          for reg,z in s["by_regime"].items():
+            assert z["groups"]==6
+            assert set(z["arms"])==set((
+              "cp_sat","rule_progress_h20","rule_cost_h20",
+              "v4_progress_h20","v4_cost_h20","scratch_cost_h20"))
+            assert all(x["all_completed"]==6 and x["safety_violations"]==0 for x in z["arms"].values())
+          print("PR33_REFERENCE_COST_FULL_ONLINE_COMPLETE")
+          PY
+          (cd "$RUNNER_TEMP/pr33" && sha256sum full-online.json run.log tests.log pr30-regression.log selection.json > evidence_sha256.txt)
+      - name: Preserve original facts, scored decisions and checksums
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr33-model-trajectory-cost-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/pr33/full-online.json
+            ${{ runner.temp }}/pr33/run.log
+            ${{ runner.temp }}/pr33/tests.log
+            ${{ runner.temp }}/pr33/pr30-regression.log
+            ${{ runner.temp }}/pr33/selection.json
+            ${{ runner.temp }}/pr33/evidence_sha256.txt
+          retention-days: 90
+          if-no-files-found: warn
