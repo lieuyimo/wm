@@ -1,0 +1,113 @@
+name: PR36 strict post-candidate CPU budget full online rerun
+on:
+  push:
+    branches: [research/pr36-strict-budget-online-20261112]
+    paths: [.github/workflows/pr36-strict-budget-online-cpu.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  finite-budget-world-model-online:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 24
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      NUMBA_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.10"}
+      - name: Restore original pinned CPU dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install uv==0.13.5
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -c "import torch;assert torch.version.cuda is None;torch.set_num_threads(1)"
+      - name: Verify unchanged original V4 and PR31 validation-selected scratch
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr36"
+          for item in "13765135588:original.zip" "13911001730:trained.zip"; do
+            id="${item%%:*}";dest="${item#*:}"
+            curl -fsSL --retry 3 \
+              -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/lieuyimo/wm/actions/artifacts/$id/zip" \
+              -o "$RUNNER_TEMP/pr36/$dest"
+          done
+          unzip -p "$RUNNER_TEMP/pr36/original.zip" v4-data.pt > "$RUNNER_TEMP/pr36/original.pt"
+          unzip -p "$RUNNER_TEMP/pr36/trained.zip" trained/scratch_v4-best.pt > "$RUNNER_TEMP/pr36/scratch.pt"
+          unzip -p "$RUNNER_TEMP/pr36/trained.zip" trained/validation-selection.json > "$RUNNER_TEMP/pr36/selection.json"
+          echo "60c8a6c3d832da3e6519072688ea099f64ae120ba19d3bd2ec705f7f1a11ac0c  $RUNNER_TEMP/pr36/original.pt" | sha256sum -c
+          python - <<'PY'
+          import json,os,hashlib,pathlib
+          p=pathlib.Path(os.environ["RUNNER_TEMP"])/"pr36"
+          cfg=json.loads((p/"selection.json").read_text())
+          assert cfg["best_by_validation_brier"]=="scratch_v4"
+          assert hashlib.sha256((p/"scratch.pt").read_bytes()).hexdigest()==cfg["arms"]["scratch_v4"]["files"]["best"]["sha256"]
+          print("PR36_IMMUTABLE_WEIGHTS_SHA_CHECK_PASSED")
+          PY
+          echo "RHWM_V4_ORIGINAL=$RUNNER_TEMP/pr36/original.pt" >> "$GITHUB_ENV"
+          echo "RHWM_V4_SCRATCH=$RUNNER_TEMP/pr36/scratch.pt" >> "$GITHUB_ENV"
+      - name: Mandatory injected CPU-clock regression and original PR30 contracts
+        run: |
+          set -euo pipefail
+          python -m compileall -q experiments/world_model_integration/online_horizon experiments/world_model_integration/trajectory_cost
+          timeout 180s python -m unittest discover \
+            -s experiments/world_model_integration/online_horizon -p 'test_*.py' -v \
+            2>&1 | tee "$RUNNER_TEMP/pr36/decision-tests.log"
+          timeout 180s python -m unittest discover \
+            -s experiments/world_model_integration/trajectory_cost -p 'test_*.py' -v \
+            2>&1 | tee "$RUNNER_TEMP/pr36/system-tests.log"
+      - name: New 24-group strict-budget six-arm factual evaluation
+        run: |
+          set -euo pipefail
+          timeout 750s python -m experiments.world_model_integration.trajectory_cost.pr36_evaluate \
+            --original "$RHWM_V4_ORIGINAL" \
+            --scratch "$RHWM_V4_SCRATCH" \
+            --selection "$RUNNER_TEMP/pr36/selection.json" \
+            --out "$RUNNER_TEMP/pr36/results.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr36/run.log"
+          python - <<'PY'
+          import pathlib,os,json
+          p=pathlib.Path(os.environ["RUNNER_TEMP"])/"pr36"
+          r=json.loads((p/"results.json").read_text())
+          s=r["summary"]
+          assert s["groups"]==24 and s["gpu"]==0 and s["training"]==0
+          assert s["post_candidate_budget_violation_count"]==0
+          assert set(s["by_regime"])=={"light","medium","heavy","shift"}
+          for reg,z in s["by_regime"].items():
+            assert z["groups"]==6
+            for arm,v in z["arms"].items():
+              assert v["all_completed"]==6 and v["safety_violations"]==0
+          for g in r["groups"]:
+            for arm,trace in g["arms"].items():
+              for d in trace["decision_records"]:
+                if "selected_index" not in d:continue
+                if d["selected_index"]!=0:
+                  assert d["model_selection_cpu_seconds"] is not None
+                if d["model_selection_cpu_seconds"] is not None:
+                  assert 0<=d["model_selection_cpu_seconds"]<0.5
+          print("PR36_STRICT_BUDGET_REAL_ONLINE_PASSED")
+          PY
+          (cd "$RUNNER_TEMP/pr36" && sha256sum results.json run.log decision-tests.log system-tests.log selection.json > evidence_sha256.txt)
+      - name: Archive whole grouped facts and applied-scoring admission times
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr36-strict-online-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/pr36/results.json
+            ${{ runner.temp }}/pr36/run.log
+            ${{ runner.temp }}/pr36/decision-tests.log
+            ${{ runner.temp }}/pr36/system-tests.log
+            ${{ runner.temp }}/pr36/selection.json
+            ${{ runner.temp }}/pr36/evidence_sha256.txt
+          retention-days: 90
+          if-no-files-found: warn
