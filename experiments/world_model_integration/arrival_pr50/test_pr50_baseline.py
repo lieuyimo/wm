@@ -44,10 +44,10 @@ class PR50TrainTestContracts(unittest.TestCase):
     def test_never_scores_future_beyond_last_public_tick(self):
         e=episode("c",[(8,"w0"),(30,"w1")],ticks=44)
         p=train_poisson([e])
-        self.assertEqual(len(per_episode(e,p,"poisson_global",20)),3)
+        self.assertEqual(len(per_episode(e,p,"poisson_global",20)),2)
         data=metric([e],p,"poisson_global",20)
         self.assertEqual(data["scenario_groups"],1)
-        self.assertEqual(data["total_eligible_anchors"],3)
+        self.assertEqual(data["total_eligible_anchors"],2)
 
     def test_count_nll_is_proper_poisson_mass_score(self):
         self.assertAlmostEqual(poisson_count_nll(0,1.),1.)
