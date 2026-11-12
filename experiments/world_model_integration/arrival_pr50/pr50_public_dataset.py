@@ -100,7 +100,6 @@ def one(spec,protocol):
                   mechanism=spec["mechanism"],split=spec["split"],
                   shifted=spec["shift"],
                   factual_episode_status=result["summary"]["status"],
-                  private_schedule_count_for_integrity_only=private_label,
                   # Hash only to verify stable run provenance. Never use as input.
                   public_events_sha256=hashlib.sha256(json.dumps(
                       record["public_first_job_events"],sort_keys=True).encode()).hexdigest())
