@@ -1,0 +1,43 @@
+name: PR64 SHA-verified original shifted-time hazard evidence independent readonly review
+on:
+  push:
+    branches: [research/pr64-randomized-outage-hazard-cpu-review-20261113]
+    paths:
+      - .github/workflows/pr64-readonly-review.yml
+      - experiments/world_model_integration/outage_pr64/pr64_readonly_review.py
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  original-source-locked-ci-review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-shifted-outage-true-risk-set-audit-43264954353
+          path: ${{ runner.temp }}/pr64-original
+      - name: Verify immutable SOURCE audit SHA before reading and extract bootstrap CIs
+        run: |
+          set -euo pipefail
+          (cd "$RUNNER_TEMP/pr64-original" && sha256sum -c SHA256SUMS)
+          mkdir -p "$RUNNER_TEMP/pr64-review"
+          python experiments/world_model_integration/outage_pr64/pr64_readonly_review.py \
+            --quality "$RUNNER_TEMP/pr64-original/quality.json" \
+            --protocol experiments/world_model_integration/outage_pr64/protocol.json \
+            --out "$RUNNER_TEMP/pr64-review/original-ci-review.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr64-review/review.log"
+          git rev-parse HEAD > "$RUNNER_TEMP/pr64-review/reviewer_head.txt"
+          (cd "$RUNNER_TEMP/pr64-review" && sha256sum original-ci-review.json review.log reviewer_head.txt > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pr64-original-unmodified-source-ci-review-${{ github.run_id }}
+          path: ${{ runner.temp }}/pr64-review/
+          retention-days: 90
