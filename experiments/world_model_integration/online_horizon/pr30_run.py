@@ -128,11 +128,24 @@ class OnlineHorizonPolicy:
                     self.decisions.append({
                         "tick":obs.tick,"error":str(exc)[:200]})
                     break
-            # Fall back to the original legal proposal if the budget is
-            # exhausted or any candidate is invalid. Do not partially rank.
+                # A single H20/P3 rollout with CP-SAT continuation can consume
+                # the remaining budget. Pre-candidate checks alone allowed
+                # the final over-budget forecast to override the baseline.
+                # Rollouts cannot be preempted; reject late scores afterward.
+                if time.process_time()-start>=self.protocol["decision_cpu_budget_seconds"]:
+                    self.n_budget_exceeded+=1
+                    values=[]
+                    break
+            # Rank only after every candidate completed within budget.
+            # A final deadline check also covers scoring and loop overhead.
             if len(values)==len(plans):
-                best_index=self._choose_scored_index(values)
-                selected=plans[best_index]
+                if time.process_time()-start<self.protocol["decision_cpu_budget_seconds"]:
+                    best_index=self._choose_scored_index(values)
+                    selected=plans[best_index]
+                else:
+                    self.n_budget_exceeded+=1
+                    self.n_fallback+=1
+                    values=[]
             else:self.n_fallback+=1
         self.n_flip+=int(selected!=plans[0])
         elapsed=time.process_time()-start
