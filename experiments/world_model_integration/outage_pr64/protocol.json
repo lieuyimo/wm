@@ -203,7 +203,7 @@
   ],
   "cohort": [
     {
-      "id": "PR64_TRAIN_0",
+      "id": "PR64_TRAIN_0_0",
       "split": "train",
       "seed": 64000000,
       "regime": "congestion",
@@ -217,7 +217,7 @@
       "source_reference_case_id": "PR59_TRAIN_0_0"
     },
     {
-      "id": "PR64_TRAIN_1",
+      "id": "PR64_TRAIN_0_1",
       "split": "train",
       "seed": 64001009,
       "regime": "multi_fault",
@@ -231,7 +231,7 @@
       "source_reference_case_id": "PR59_TRAIN_0_1"
     },
     {
-      "id": "PR64_TRAIN_2",
+      "id": "PR64_TRAIN_0_2",
       "split": "train",
       "seed": 64002018,
       "regime": "staggered_arrivals",
@@ -245,7 +245,7 @@
       "source_reference_case_id": "PR59_TRAIN_0_2"
     },
     {
-      "id": "PR64_TRAIN_3",
+      "id": "PR64_TRAIN_0_3",
       "split": "train",
       "seed": 64003027,
       "regime": "congestion",
@@ -259,7 +259,7 @@
       "source_reference_case_id": "PR59_TRAIN_0_3"
     },
     {
-      "id": "PR64_TRAIN_4",
+      "id": "PR64_TRAIN_1_0",
       "split": "train",
       "seed": 64004036,
       "regime": "multi_fault",
@@ -273,7 +273,7 @@
       "source_reference_case_id": "PR59_TRAIN_1_0"
     },
     {
-      "id": "PR64_TRAIN_5",
+      "id": "PR64_TRAIN_1_1",
       "split": "train",
       "seed": 64005045,
       "regime": "staggered_arrivals",
@@ -287,7 +287,7 @@
       "source_reference_case_id": "PR59_TRAIN_1_1"
     },
     {
-      "id": "PR64_TRAIN_6",
+      "id": "PR64_TRAIN_1_2",
       "split": "train",
       "seed": 64006054,
       "regime": "congestion",
@@ -301,7 +301,7 @@
       "source_reference_case_id": "PR59_TRAIN_1_2"
     },
     {
-      "id": "PR64_TRAIN_7",
+      "id": "PR64_TRAIN_1_3",
       "split": "train",
       "seed": 64007063,
       "regime": "multi_fault",
@@ -315,7 +315,7 @@
       "source_reference_case_id": "PR59_TRAIN_1_3"
     },
     {
-      "id": "PR64_TRAIN_8",
+      "id": "PR64_TRAIN_2_0",
       "split": "train",
       "seed": 64008072,
       "regime": "staggered_arrivals",
@@ -329,7 +329,7 @@
       "source_reference_case_id": "PR59_TRAIN_2_0"
     },
     {
-      "id": "PR64_TRAIN_9",
+      "id": "PR64_TRAIN_2_1",
       "split": "train",
       "seed": 64009081,
       "regime": "congestion",
@@ -343,7 +343,7 @@
       "source_reference_case_id": "PR59_TRAIN_2_1"
     },
     {
-      "id": "PR64_TRAIN_10",
+      "id": "PR64_TRAIN_2_2",
       "split": "train",
       "seed": 64010090,
       "regime": "multi_fault",
@@ -357,7 +357,7 @@
       "source_reference_case_id": "PR59_TRAIN_2_2"
     },
     {
-      "id": "PR64_TRAIN_11",
+      "id": "PR64_TRAIN_2_3",
       "split": "train",
       "seed": 64011099,
       "regime": "staggered_arrivals",
@@ -371,7 +371,7 @@
       "source_reference_case_id": "PR59_TRAIN_2_3"
     },
     {
-      "id": "PR64_TRAIN_12",
+      "id": "PR64_TRAIN_3_0",
       "split": "train",
       "seed": 64012108,
       "regime": "congestion",
@@ -385,7 +385,7 @@
       "source_reference_case_id": "PR59_TRAIN_3_0"
     },
     {
-      "id": "PR64_TRAIN_13",
+      "id": "PR64_TRAIN_3_1",
       "split": "train",
       "seed": 64013117,
       "regime": "multi_fault",
@@ -399,7 +399,7 @@
       "source_reference_case_id": "PR59_TRAIN_3_1"
     },
     {
-      "id": "PR64_TRAIN_14",
+      "id": "PR64_TRAIN_3_2",
       "split": "train",
       "seed": 64014126,
       "regime": "staggered_arrivals",
@@ -413,7 +413,7 @@
       "source_reference_case_id": "PR59_TRAIN_3_2"
     },
     {
-      "id": "PR64_TRAIN_15",
+      "id": "PR64_TRAIN_3_3",
       "split": "train",
       "seed": 64015135,
       "regime": "congestion",
@@ -427,7 +427,7 @@
       "source_reference_case_id": "PR59_TRAIN_3_3"
     },
     {
-      "id": "PR64_TRAIN_16",
+      "id": "PR64_TRAIN_4_0",
       "split": "train",
       "seed": 64016144,
       "regime": "multi_fault",
@@ -441,7 +441,7 @@
       "source_reference_case_id": "PR59_TRAIN_4_0"
     },
     {
-      "id": "PR64_TRAIN_17",
+      "id": "PR64_TRAIN_4_1",
       "split": "train",
       "seed": 64017153,
       "regime": "staggered_arrivals",
@@ -455,7 +455,7 @@
       "source_reference_case_id": "PR59_TRAIN_4_1"
     },
     {
-      "id": "PR64_TRAIN_18",
+      "id": "PR64_TRAIN_4_2",
       "split": "train",
       "seed": 64018162,
       "regime": "congestion",
@@ -469,7 +469,7 @@
       "source_reference_case_id": "PR59_TRAIN_4_2"
     },
     {
-      "id": "PR64_TRAIN_19",
+      "id": "PR64_TRAIN_4_3",
       "split": "train",
       "seed": 64019171,
       "regime": "multi_fault",
@@ -483,7 +483,7 @@
       "source_reference_case_id": "PR59_TRAIN_4_3"
     },
     {
-      "id": "PR64_TRAIN_20",
+      "id": "PR64_TRAIN_5_0",
       "split": "train",
       "seed": 64020180,
       "regime": "staggered_arrivals",
@@ -497,7 +497,7 @@
       "source_reference_case_id": "PR59_TRAIN_5_0"
     },
     {
-      "id": "PR64_TRAIN_21",
+      "id": "PR64_TRAIN_5_1",
       "split": "train",
       "seed": 64021189,
       "regime": "congestion",
@@ -511,7 +511,7 @@
       "source_reference_case_id": "PR59_TRAIN_5_1"
     },
     {
-      "id": "PR64_TRAIN_22",
+      "id": "PR64_TRAIN_5_2",
       "split": "train",
       "seed": 64022198,
       "regime": "multi_fault",
@@ -525,7 +525,7 @@
       "source_reference_case_id": "PR59_TRAIN_5_2"
     },
     {
-      "id": "PR64_TRAIN_23",
+      "id": "PR64_TRAIN_5_3",
       "split": "train",
       "seed": 64023207,
       "regime": "staggered_arrivals",
@@ -539,7 +539,7 @@
       "source_reference_case_id": "PR59_TRAIN_5_3"
     },
     {
-      "id": "PR64_VALIDATION_0",
+      "id": "PR64_VALIDATION_0_0",
       "split": "validation",
       "seed": 64100000,
       "regime": "congestion",
@@ -553,7 +553,7 @@
       "source_reference_case_id": "PR59_VALIDATION_0_0"
     },
     {
-      "id": "PR64_VALIDATION_1",
+      "id": "PR64_VALIDATION_0_1",
       "split": "validation",
       "seed": 64101013,
       "regime": "multi_fault",
@@ -567,7 +567,7 @@
       "source_reference_case_id": "PR59_VALIDATION_0_1"
     },
     {
-      "id": "PR64_VALIDATION_2",
+      "id": "PR64_VALIDATION_0_2",
       "split": "validation",
       "seed": 64102026,
       "regime": "staggered_arrivals",
@@ -581,7 +581,7 @@
       "source_reference_case_id": "PR59_VALIDATION_0_2"
     },
     {
-      "id": "PR64_VALIDATION_3",
+      "id": "PR64_VALIDATION_0_3",
       "split": "validation",
       "seed": 64103039,
       "regime": "congestion",
@@ -595,7 +595,7 @@
       "source_reference_case_id": "PR59_VALIDATION_0_3"
     },
     {
-      "id": "PR64_VALIDATION_4",
+      "id": "PR64_VALIDATION_0_4",
       "split": "validation",
       "seed": 64104052,
       "regime": "multi_fault",
@@ -609,7 +609,7 @@
       "source_reference_case_id": "PR59_VALIDATION_0_4"
     },
     {
-      "id": "PR64_VALIDATION_5",
+      "id": "PR64_VALIDATION_0_5",
       "split": "validation",
       "seed": 64105065,
       "regime": "staggered_arrivals",
@@ -623,7 +623,7 @@
       "source_reference_case_id": "PR59_VALIDATION_0_5"
     },
     {
-      "id": "PR64_VALIDATION_6",
+      "id": "PR64_VALIDATION_1_0",
       "split": "validation",
       "seed": 64106078,
       "regime": "multi_fault",
@@ -637,7 +637,7 @@
       "source_reference_case_id": "PR59_VALIDATION_1_0"
     },
     {
-      "id": "PR64_VALIDATION_7",
+      "id": "PR64_VALIDATION_1_1",
       "split": "validation",
       "seed": 64107091,
       "regime": "staggered_arrivals",
@@ -651,7 +651,7 @@
       "source_reference_case_id": "PR59_VALIDATION_1_1"
     },
     {
-      "id": "PR64_VALIDATION_8",
+      "id": "PR64_VALIDATION_1_2",
       "split": "validation",
       "seed": 64108104,
       "regime": "congestion",
@@ -665,7 +665,7 @@
       "source_reference_case_id": "PR59_VALIDATION_1_2"
     },
     {
-      "id": "PR64_VALIDATION_9",
+      "id": "PR64_VALIDATION_1_3",
       "split": "validation",
       "seed": 64109117,
       "regime": "multi_fault",
@@ -679,7 +679,7 @@
       "source_reference_case_id": "PR59_VALIDATION_1_3"
     },
     {
-      "id": "PR64_VALIDATION_10",
+      "id": "PR64_VALIDATION_1_4",
       "split": "validation",
       "seed": 64110130,
       "regime": "staggered_arrivals",
@@ -693,7 +693,7 @@
       "source_reference_case_id": "PR59_VALIDATION_1_4"
     },
     {
-      "id": "PR64_VALIDATION_11",
+      "id": "PR64_VALIDATION_1_5",
       "split": "validation",
       "seed": 64111143,
       "regime": "congestion",
