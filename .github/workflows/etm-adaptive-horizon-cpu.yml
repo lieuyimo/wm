@@ -1,5 +1,5 @@
 name: ETM reference-based event triggered horizon online validation CPU
-# Re-evaluate with explicit predeclared CP-SAT candidate cap in protocol.
+# Check immutable ETM source schema and strict post-candidate budget before the online test.
 
 on:
   push:
