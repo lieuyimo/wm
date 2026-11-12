@@ -97,6 +97,7 @@ class OnlineHorizonPolicy:
         obs=self.observer.observe(raw)
         plans=_unique_plans(self.solver,obs,legal_candidates)
         selected=plans[0]
+        model_selection_cpu_seconds=None
         self.n_calls+=1
         if len(plans)>1:self.n_multi+=1
         values=[]
@@ -141,7 +142,16 @@ class OnlineHorizonPolicy:
             if len(values)==len(plans):
                 if time.process_time()-start<self.protocol["decision_cpu_budget_seconds"]:
                     best_index=self._choose_scored_index(values)
-                    selected=plans[best_index]
+                    # Record the actual admission decision instant; never
+                    # apply a post-deadline learned ranking.
+                    accepted_at=time.process_time()-start
+                    if accepted_at<self.protocol["decision_cpu_budget_seconds"]:
+                        selected=plans[best_index]
+                        model_selection_cpu_seconds=accepted_at
+                    else:
+                        self.n_budget_exceeded+=1
+                        self.n_fallback+=1
+                        values=[]
                 else:
                     self.n_budget_exceeded+=1
                     self.n_fallback+=1
@@ -155,6 +165,7 @@ class OnlineHorizonPolicy:
             "selected_index":plans.index(selected),
             "first_proposal":str(plans[0]),"selected":str(selected),
             "predicted_completed":values,
+            "model_selection_cpu_seconds":model_selection_cpu_seconds,
             "process_cpu_seconds":elapsed,
         })
         return selected
