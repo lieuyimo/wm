@@ -1,0 +1,450 @@
+{
+  "id": "RHWM_PR33_TRAJECTORY_COST_REFERENCE_TRANSFER_20261112_V1",
+  "origin": "Follow PR32 heldout training-model non-improvement; change only planning score and keep dynamics weights frozen",
+  "reference": {
+    "primary": "Chua et al. PETS, NeurIPS 2018",
+    "source": "https://proceedings.neurips.cc/paper_files/paper/2018/hash/3de568f8597b94bda53149c7d7f5958c-Abstract.html",
+    "implementation_reference": "existing lab_transport.decision_value.trace_score / PR27 _trace_cost",
+    "relationship": "PETS-style particle expected trajectory return, NOT a full reproduction of PETS ensemble training/CEM"
+  },
+  "scenario_groups": [
+    {
+      "id": "COST_LIGHT_1",
+      "seed": 4110001,
+      "regime": "light",
+      "job_count": 2,
+      "robot_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_LIGHT_2",
+      "seed": 4110633,
+      "regime": "light",
+      "job_count": 2,
+      "robot_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_LIGHT_3",
+      "seed": 4111267,
+      "regime": "light",
+      "job_count": 2,
+      "robot_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_LIGHT_4",
+      "seed": 4111903,
+      "regime": "light",
+      "job_count": 2,
+      "robot_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_LIGHT_5",
+      "seed": 4112541,
+      "regime": "light",
+      "job_count": 2,
+      "robot_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_LIGHT_6",
+      "seed": 4113181,
+      "regime": "light",
+      "job_count": 2,
+      "robot_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_MEDIUM_1",
+      "seed": 4210003,
+      "regime": "medium",
+      "job_count": 3,
+      "robot_count": 2,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_MEDIUM_2",
+      "seed": 4210635,
+      "regime": "medium",
+      "job_count": 3,
+      "robot_count": 2,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_MEDIUM_3",
+      "seed": 4211269,
+      "regime": "medium",
+      "job_count": 3,
+      "robot_count": 2,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_MEDIUM_4",
+      "seed": 4211905,
+      "regime": "medium",
+      "job_count": 3,
+      "robot_count": 2,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_MEDIUM_5",
+      "seed": 4212543,
+      "regime": "medium",
+      "job_count": 3,
+      "robot_count": 2,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_MEDIUM_6",
+      "seed": 4213183,
+      "regime": "medium",
+      "job_count": 3,
+      "robot_count": 2,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_HEAVY_1",
+      "seed": 4310009,
+      "regime": "heavy",
+      "job_count": 5,
+      "robot_count": 2,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_HEAVY_2",
+      "seed": 4310641,
+      "regime": "heavy",
+      "job_count": 5,
+      "robot_count": 2,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_HEAVY_3",
+      "seed": 4311275,
+      "regime": "heavy",
+      "job_count": 5,
+      "robot_count": 2,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_HEAVY_4",
+      "seed": 4311911,
+      "regime": "heavy",
+      "job_count": 5,
+      "robot_count": 2,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_HEAVY_5",
+      "seed": 4312549,
+      "regime": "heavy",
+      "job_count": 5,
+      "robot_count": 2,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_HEAVY_6",
+      "seed": 4313189,
+      "regime": "heavy",
+      "job_count": 5,
+      "robot_count": 2,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_SHIFT_1",
+      "seed": 4410013,
+      "regime": "shift",
+      "job_count": 5,
+      "robot_count": 2,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_SHIFT_2",
+      "seed": 4410645,
+      "regime": "shift",
+      "job_count": 5,
+      "robot_count": 2,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_SHIFT_3",
+      "seed": 4411279,
+      "regime": "shift",
+      "job_count": 5,
+      "robot_count": 2,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_SHIFT_4",
+      "seed": 4411915,
+      "regime": "shift",
+      "job_count": 5,
+      "robot_count": 2,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_SHIFT_5",
+      "seed": 4412553,
+      "regime": "shift",
+      "job_count": 5,
+      "robot_count": 2,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_SHIFT_6",
+      "seed": 4413193,
+      "regime": "shift",
+      "job_count": 5,
+      "robot_count": 2,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "arms": [
+    "cp_sat",
+    "rule_progress_h20",
+    "rule_cost_h20",
+    "v4_progress_h20",
+    "v4_cost_h20",
+    "scratch_cost_h20"
+  ],
+  "source_models": {
+    "original_sha256": "60c8a6c3d832da3e6519072688ea099f64ae120ba19d3bd2ec705f7f1a11ac0c",
+    "scratch_source": "PR31 frozen validation-selected scratch; verify against signed 13911001730 training artifact",
+    "no_training": true
+  },
+  "budget": {
+    "gpu": 0,
+    "train_steps": 0,
+    "total_cpu_seconds": 540,
+    "per_decision_cpu_seconds": 0.5,
+    "particles": 3,
+    "horizon": 20,
+    "candidate_limit": 4
+  },
+  "score_definition": {
+    "progress": "Original PR30 expected_completed_samples at terminal H20, maximize, first CP-SAT proposal on tie",
+    "trajectory": "Reuse existing PR27 _trace_cost: expected sum over H20 of 1 per unfinished known sample plus 4 additional per overdue unfinished sample; terminal Manhattan/graph distance as secondary lexicographic key; choose min, tie first CP-SAT",
+    "do_not_tune": "No coefficient search, no threshold selection, no replanning architecture changes"
+  },
+  "paired_protocol": "Same keyed simulator seeds, same CP-SAT candidate generation, same horizon and 0.5s limit; only cost scoring changes between model-matched arms",
+  "go_gate": "Must beat own progress policy and Rule-trajectory cost in independent scene-level makespan/late-jobs without safety or CPU failures; otherwise retain originals",
+  "disclaimers": [
+    "not real-world enterprise data",
+    "not exact PETS algorithm",
+    "endpoint uses original expected completed score only whereas trajectory uses existing time-summed business cost",
+    "do not use PR32 seeds as evaluation",
+    "online decisions must never use counterfactual future truth"
+  ]
+}
