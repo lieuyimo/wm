@@ -91,15 +91,20 @@ class OnlineHorizonPolicy:
         self.n_calls+=1
         if len(plans)>1:self.n_multi+=1
         values=[]
+        budget_hit=False
         if self.model is not None and len(plans)>1:
+            cap=self.protocol["decision_cpu_budget_seconds"]
             seed=1810+self.seed*17+obs.tick*101
             # The CP-SAT continuation algorithm is applied to the
             # current *predicted* public particle state only.
             continuation=lambda state:_unique_plans(
                 self.forecast_solver,state,candidates_for(state))[0]
             for plan in plans:
-                if time.process_time()-start>=self.protocol["decision_cpu_budget_seconds"]:
-                    self.n_budget_exceeded+=1
+                # Guard BOTH sides of each non-interruptible model rollout.
+                # The old implementation checked only here; the final
+                # candidate could overrun and still be used to reorder.
+                if time.process_time()-start>=cap:
+                    budget_hit=True
                     values=[]
                     break
                 try:
@@ -113,21 +118,43 @@ class OnlineHorizonPolicy:
                     values.append(value)
                     self.n_model_queries+=1
                     self.n_model_steps+=self.horizon*self.protocol["particles"]
+                    if time.process_time()-start>=cap:
+                        budget_hit=True
+                        values=[]
+                        break
                 except (RuntimeError,ValueError,AssertionError) as exc:
                     self.n_errors+=1
                     values=[]
                     self.decisions.append({
                         "tick":obs.tick,"error":str(exc)[:200]})
                     break
-            # Fall back to the original legal proposal if the budget is
-            # exhausted or any candidate is invalid. Do not partially rank.
-            if len(values)==len(plans):
+            # Even when all model calls individually passed, score
+            # construction has to finish before the budget to be accepted.
+            if len(values)==len(plans) and not budget_hit and time.process_time()-start<cap:
                 best=max(values)
                 best_index=next(i for i,v in enumerate(values) if best-v<=1e-9)
                 selected=plans[best_index]
-            else:self.n_fallback+=1
-        self.n_flip+=int(selected!=plans[0])
+            else:
+                if len(values)==len(plans) and not budget_hit:
+                    budget_hit=True
+                self.n_fallback+=1
+            # A final fail-closed check rejects even a previously selected
+            # non-baseline plan if post-scoring CPU has crossed the budget.
+            if selected!=plans[0] and time.process_time()-start>=cap:
+                selected=plans[0]
+                self.n_fallback+=1
+                budget_hit=True
+            if budget_hit:
+                self.n_budget_exceeded+=1
         elapsed=time.process_time()-start
+        # Record the actual observed time; CPU is not preempted mid-rollout.
+        # Recheck the action at record time, never apply model reranking after
+        # exhausting the declared decision-acceptance budget.
+        if self.model is not None and selected!=plans[0] and elapsed>=self.protocol["decision_cpu_budget_seconds"]:
+            selected=plans[0]
+            self.n_fallback+=1
+            self.n_budget_exceeded+=1
+        self.n_flip+=int(selected!=plans[0])
         self.cpu_decision_seconds+=elapsed
         self.decisions.append({
             "tick":obs.tick,"legal_plans":len(plans),
@@ -135,6 +162,8 @@ class OnlineHorizonPolicy:
             "first_proposal":str(plans[0]),"selected":str(selected),
             "predicted_completed":values,
             "process_cpu_seconds":elapsed,
+            "budget_exceeded":budget_hit or elapsed>=self.protocol["decision_cpu_budget_seconds"],
+            "decision_acceptance_within_budget":selected==plans[0] or elapsed<self.protocol["decision_cpu_budget_seconds"],
         })
         return selected
 
