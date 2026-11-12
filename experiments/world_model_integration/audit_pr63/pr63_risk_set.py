@@ -138,9 +138,9 @@ def extract_records(src: dict, split: str):
             raise AssertionError("scene split mismatch")
         scene_id = scene["id"]
         parts = scene_id.split("_")
-        if len(parts) < 3 or not parts[2].isdigit():
+        if len(parts) < 3 or not parts[-2].isdigit():
             raise AssertionError("unregistered scene id/map id")
-        map_id = parts[2]
+        map_id = parts[-2]
         family = case.get("map_family")
         regime = case.get("regime")
         rows = scene.get("raw_actual_public_world_transitions") or []
@@ -370,7 +370,10 @@ def evaluate_baselines(params, records):
 
 
 def _map_id(scene_id: str) -> str:
-    return scene_id.split("_")[2]
+    parts = scene_id.split("_")
+    if len(parts) < 2 or not parts[-2].isdigit():
+        raise AssertionError("unregistered scene id/map id")
+    return parts[-2]
 
 
 def evaluate_models(validation_path: Path, checkpoint_root: Path, manifest: Path,
@@ -497,7 +500,7 @@ def uncertainty(baselines, models):
         map_out[name] = {}
         for map_id in ("0", "1"):
             sub = {sid: val for sid, val in vals.items()
-                   if sid.split("_")[2] == map_id}
+                   if _map_id(sid) == map_id}
             map_out[name][map_id] = _bootstrap(sub, b=1000)
     return {"scene_bootstrap": scene_out, "paired_minus_constant": paired,
             "map_block": map_out, "independent_unit": "12 source scenes"}
