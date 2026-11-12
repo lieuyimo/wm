@@ -1,0 +1,99 @@
+name: PR33 existing PETS MPC cumulative cost vs progress real online CPU
+on:
+  push:
+    branches: [research/pr33-mpc-cumulative-cost-evaluation-20261112]
+    paths: [.github/workflows/pr33-existing-mpc-cost-cpu.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  frozen-source-backed-mpc:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.10"}
+      - name: Install original version-locked V4 CPU dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install uv==0.13.5
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -c "import torch; assert torch.version.cuda is None; torch.set_num_threads(1)"
+      - name: Restore immutable original and PR31 scratch checkpoint from archived data
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr33"
+          for row in "13765135588:original.zip" "13911001730:posttrain.zip"; do
+            id="${row%%:*}"; dest="${row#*:}"
+            curl -fsSL --retry 3 -H "Authorization: Bearer $GITHUB_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/lieuyimo/wm/actions/artifacts/$id/zip" \
+              -o "$RUNNER_TEMP/pr33/$dest"
+          done
+          unzip -p "$RUNNER_TEMP/pr33/original.zip" v4-data.pt > "$RUNNER_TEMP/pr33/original-v4.pt"
+          unzip -p "$RUNNER_TEMP/pr33/posttrain.zip" trained/scratch_v4-best.pt > "$RUNNER_TEMP/pr33/scratch-v4.pt"
+          unzip -p "$RUNNER_TEMP/pr33/posttrain.zip" trained/validation-selection.json > "$RUNNER_TEMP/pr33/selection.json"
+          echo "60c8a6c3d832da3e6519072688ea099f64ae120ba19d3bd2ec705f7f1a11ac0c  $RUNNER_TEMP/pr33/original-v4.pt" | sha256sum -c
+          python - <<'PY'
+          import pathlib,json,hashlib,os
+          p=pathlib.Path(os.environ["RUNNER_TEMP"])/"pr33"
+          choice=json.loads((p/"selection.json").read_text())
+          assert choice["best_by_validation_brier"]=="scratch_v4"
+          assert hashlib.sha256((p/"scratch-v4.pt").read_bytes()).hexdigest()==choice["arms"]["scratch_v4"]["files"]["best"]["sha256"]
+          print("PR33_CHECKPOINT_PROVENANCE_PASS")
+          PY
+          echo "RHWM_V4_ORIGINAL=$RUNNER_TEMP/pr33/original-v4.pt" >> "$GITHUB_ENV"
+          echo "RHWM_V4_SCRATCH=$RUNNER_TEMP/pr33/scratch-v4.pt" >> "$GITHUB_ENV"
+      - name: Run source code and real simulation unit tests
+        run: |
+          set -euo pipefail
+          python -m compileall -q experiments/world_model_integration/mpc_cost
+          timeout 160s python -m unittest discover \
+            -s experiments/world_model_integration/mpc_cost -v \
+            2>&1 | tee "$RUNNER_TEMP/pr33/tests.log"
+      - name: Execute 24 independent scenes by all seven live policy arms
+        run: |
+          set -euo pipefail
+          timeout 800s python -m experiments.world_model_integration.mpc_cost.pr33_run \
+            --original "$RHWM_V4_ORIGINAL" --scratch "$RHWM_V4_SCRATCH" \
+            --selection "$RUNNER_TEMP/pr33/selection.json" \
+            --out "$RUNNER_TEMP/pr33/online-results.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr33/run.log"
+          python - <<'PY'
+          import pathlib,json,os
+          p=pathlib.Path(os.environ["RUNNER_TEMP"])/"pr33"
+          data=json.loads((p/"online-results.json").read_text())
+          s=data["summary"]
+          assert s["independent_groups"]==24 and s["gpu"]==0 and s["new_training"]==0
+          assert set(s["by_regime"])=={"light","medium","heavy","shift"}
+          for regime,x in s["by_regime"].items():
+            assert x["groups"]==6
+            assert set(x["arms"])=={
+              "cp_sat","rule_progress","rule_cost","original_progress",
+              "original_cost","scratch_progress","scratch_cost"}
+            assert all(a["completed_groups"]==6 and a["safety_violations"]==0 for a in x["arms"].values())
+          print("PR33_SOURCE_BACKED_MPC_ONLINE_SUCCEEDED")
+          PY
+          (cd "$RUNNER_TEMP/pr33" && sha256sum online-results.json run.log tests.log selection.json > evidence_sha256.txt)
+      - name: Retain full reproducible source evidence and decision logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr33-mpc-trajectory-cost-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/pr33/online-results.json
+            ${{ runner.temp }}/pr33/run.log
+            ${{ runner.temp }}/pr33/tests.log
+            ${{ runner.temp }}/pr33/selection.json
+            ${{ runner.temp }}/pr33/evidence_sha256.txt
+          retention-days: 90
+          if-no-files-found: warn
