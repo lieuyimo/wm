@@ -1,0 +1,11 @@
+test_baseline_probability (experiments.world_model_integration.audit_pr63.test_pr63.Pr63Tests.test_baseline_probability) ... ok
+test_buckets_and_phases (experiments.world_model_integration.audit_pr63.test_pr63.Pr63Tests.test_buckets_and_phases) ... ok
+test_extract_minimal_source (experiments.world_model_integration.audit_pr63.test_pr63.Pr63Tests.test_extract_minimal_source) ... ok
+test_fit_and_evaluate (experiments.world_model_integration.audit_pr63.test_pr63.Pr63Tests.test_fit_and_evaluate) ... ok
+test_score_rows_and_bootstrap (experiments.world_model_integration.audit_pr63.test_pr63.Pr63Tests.test_score_rows_and_bootstrap) ... ok
+test_source_rejects_blind_and_test (experiments.world_model_integration.audit_pr63.test_pr63.Pr63Tests.test_source_rejects_blind_and_test) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.003s
+
+OK

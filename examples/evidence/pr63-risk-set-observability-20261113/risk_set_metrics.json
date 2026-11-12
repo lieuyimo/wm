@@ -1,0 +1,3611 @@
+{
+  "schema": "pr63-risk-set-observability-v1",
+  "baseline_params": {
+    "schema": "pr63-train-fitted-device-hazards-v1",
+    "fit_split": "train",
+    "alpha_age_buckets": 1.0,
+    "constant": {
+      "up": {
+        "n": 44180,
+        "events": 80,
+        "hazard": 0.0018107741059302852
+      },
+      "down": {
+        "n": 1050,
+        "events": 80,
+        "hazard": 0.0761904761904762
+      }
+    },
+    "age_h4": {
+      "up": {
+        "1": {
+          "n": 380,
+          "events": 0,
+          "hazard": 0.002617801047120419
+        },
+        "2": {
+          "n": 380,
+          "events": 0,
+          "hazard": 0.002617801047120419
+        },
+        "3": {
+          "n": 380,
+          "events": 0,
+          "hazard": 0.002617801047120419
+        },
+        "4": {
+          "n": 43040,
+          "events": 80,
+          "hazard": 0.0018818828121369825
+        }
+      },
+      "down": {
+        "1": {
+          "n": 80,
+          "events": 0,
+          "hazard": 0.012195121951219513
+        },
+        "2": {
+          "n": 80,
+          "events": 0,
+          "hazard": 0.012195121951219513
+        },
+        "3": {
+          "n": 80,
+          "events": 6,
+          "hazard": 0.08536585365853659
+        },
+        "4": {
+          "n": 810,
+          "events": 74,
+          "hazard": 0.09236453201970443
+        }
+      }
+    },
+    "age_exact": {
+      "up": {
+        "1": {
+          "n": 380,
+          "events": 0,
+          "hazard": 0.002617801047120419
+        },
+        "2": {
+          "n": 380,
+          "events": 0,
+          "hazard": 0.002617801047120419
+        },
+        "3": {
+          "n": 380,
+          "events": 0,
+          "hazard": 0.002617801047120419
+        },
+        "4": {
+          "n": 380,
+          "events": 0,
+          "hazard": 0.002617801047120419
+        },
+        "5": {
+          "n": 380,
+          "events": 0,
+          "hazard": 0.002617801047120419
+        },
+        "6": {
+          "n": 380,
+          "events": 0,
+          "hazard": 0.002617801047120419
+        },
+        "7": {
+          "n": 380,
+          "events": 60,
+          "hazard": 0.15968586387434555
+        },
+        "8-12": {
+          "n": 1600,
+          "events": 0,
+          "hazard": 0.0006242197253433209
+        },
+        "13": {
+          "n": 320,
+          "events": 20,
+          "hazard": 0.06521739130434782
+        },
+        "14-20": {
+          "n": 2100,
+          "events": 0,
+          "hazard": 0.0004757373929590866
+        },
+        "21+": {
+          "n": 37500,
+          "events": 0,
+          "hazard": 2.666524452029225e-05
+        }
+      },
+      "down": {
+        "1": {
+          "n": 80,
+          "events": 0,
+          "hazard": 0.012195121951219513
+        },
+        "2": {
+          "n": 80,
+          "events": 0,
+          "hazard": 0.012195121951219513
+        },
+        "3": {
+          "n": 80,
+          "events": 6,
+          "hazard": 0.08536585365853659
+        },
+        "4": {
+          "n": 74,
+          "events": 6,
+          "hazard": 0.09210526315789473
+        },
+        "5": {
+          "n": 68,
+          "events": 6,
+          "hazard": 0.1
+        },
+        "6": {
+          "n": 62,
+          "events": 2,
+          "hazard": 0.046875
+        },
+        "7": {
+          "n": 60,
+          "events": 2,
+          "hazard": 0.04838709677419355
+        },
+        "8-12": {
+          "n": 222,
+          "events": 32,
+          "hazard": 0.14732142857142858
+        },
+        "13": {
+          "n": 26,
+          "events": 0,
+          "hazard": 0.03571428571428571
+        },
+        "14-20": {
+          "n": 156,
+          "events": 7,
+          "hazard": 0.05063291139240506
+        },
+        "21+": {
+          "n": 142,
+          "events": 19,
+          "hazard": 0.1388888888888889
+        }
+      }
+    },
+    "abs_tick": {
+      "up": {
+        "0-5": {
+          "n": 1800,
+          "events": 0,
+          "hazard": 0.0005549389567147614
+        },
+        "6": {
+          "n": 300,
+          "events": 60,
+          "hazard": 0.20198675496688742
+        },
+        "7-11": {
+          "n": 1210,
+          "events": 0,
+          "hazard": 0.0008250825082508251
+        },
+        "12": {
+          "n": 252,
+          "events": 20,
+          "hazard": 0.08267716535433071
+        },
+        "13-20": {
+          "n": 2002,
+          "events": 0,
+          "hazard": 0.000499001996007984
+        },
+        "21+": {
+          "n": 38616,
+          "events": 0,
+          "hazard": 2.589466052100057e-05
+        }
+      },
+      "down": {
+        "7-11": {
+          "n": 290,
+          "events": 12,
+          "hazard": 0.04452054794520548
+        },
+        "12": {
+          "n": 48,
+          "events": 2,
+          "hazard": 0.06
+        },
+        "13-20": {
+          "n": 398,
+          "events": 31,
+          "hazard": 0.08
+        },
+        "21+": {
+          "n": 314,
+          "events": 35,
+          "hazard": 0.11392405063291139
+        }
+      }
+    },
+    "no_validation_labels_used": true,
+    "train_meta": {
+      "split": "train",
+      "scenes": 60,
+      "transitions": 9046,
+      "sources": {
+        "/data/wm-a100-pr60-gpu-20261112/source/pr59-train/data.json": "6c75e4bf5aba43ff72b1686fb3e640cbdec46e8910099b29a3f64d3c24fb90b0",
+        "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-congestion/data.json": "c69c7cc6eedee9a60cc8139c621c218d984ca59483c2690aebd22995ec8f6094",
+        "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-multi_fault/data.json": "ff905160a33991bbeb953a0ed9ae382d02e0611bdb0cb5edde6e746ea8f1f766",
+        "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-staggered_arrivals/data.json": "7ee5d838d87c574f132b11cfa371d5770427d9037e6640c4d10fd6869525d43b"
+      },
+      "source_sha256": {
+        "/data/wm-a100-pr60-gpu-20261112/source/pr59-train/data.json": "6c75e4bf5aba43ff72b1686fb3e640cbdec46e8910099b29a3f64d3c24fb90b0",
+        "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-congestion/data.json": "c69c7cc6eedee9a60cc8139c621c218d984ca59483c2690aebd22995ec8f6094",
+        "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-multi_fault/data.json": "ff905160a33991bbeb953a0ed9ae382d02e0611bdb0cb5edde6e746ea8f1f766",
+        "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-staggered_arrivals/data.json": "7ee5d838d87c574f132b11cfa371d5770427d9037e6640c4d10fd6869525d43b"
+      }
+    }
+  },
+  "baselines": {
+    "constant": {
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "brier": 0.004065156910292163,
+        "logloss": 0.02268817571626377,
+        "pred_mean": 0.9708392300227926,
+        "empirical_next_available": 0.970336189848385
+      },
+      "risk_set": {
+        "up": {
+          "n": 7360,
+          "available": true,
+          "brier": 0.002169319015445807,
+          "logloss": 0.015534564293002089,
+          "pred_mean": 0.9981892258940289,
+          "empirical_next_available": 0.9978260869565218
+        },
+        "down": {
+          "n": 225,
+          "available": true,
+          "brier": 0.06608012093726362,
+          "logloss": 0.2566907538282601,
+          "pred_mean": 0.076190476190476,
+          "empirical_next_available": 0.07111111111111111
+        }
+      },
+      "phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "brier": 3.2789028627073924e-06,
+          "logloss": 0.0018124155391707382,
+          "pred_mean": 0.9981892258940294,
+          "empirical_next_available": 1.0
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "brier": 0.9963817306910022,
+          "logloss": 6.314000842300201,
+          "pred_mean": 0.9981892258940697,
+          "empirical_next_available": 0.0
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "brier": 0.005804988662131507,
+          "logloss": 0.07924937165414073,
+          "pred_mean": 0.076190476190476,
+          "empirical_next_available": 0.0
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "brier": 0.8534240362811792,
+          "logloss": 2.574518808477687,
+          "pred_mean": 0.07619047619047617,
+          "empirical_next_available": 1.0
+        }
+      },
+      "by_map": {
+        "0": {
+          "n": 3930,
+          "available": true,
+          "brier": 0.003926733512932515,
+          "logloss": 0.02200704985517691,
+          "pred_mean": 0.971209618714546,
+          "empirical_next_available": 0.9707379134860051
+        },
+        "1": {
+          "n": 3655,
+          "available": true,
+          "brier": 0.004213995200749949,
+          "logloss": 0.02342054907715444,
+          "pred_mean": 0.9704409735090981,
+          "empirical_next_available": 0.9699042407660738
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "n": 2905,
+          "available": true,
+          "brier": 0.002634214753656324,
+          "logloss": 0.015165920336288065,
+          "pred_mean": 0.9835895899263604,
+          "empirical_next_available": 0.9841652323580035
+        },
+        "multi_fault": {
+          "n": 2435,
+          "available": true,
+          "brier": 0.0063236764670424545,
+          "logloss": 0.03424680078817519,
+          "pred_mean": 0.9565383583510151,
+          "empirical_next_available": 0.9548254620123203
+        },
+        "staggered_arrivals": {
+          "n": 2245,
+          "available": true,
+          "brier": 0.0034671131883943587,
+          "logloss": 0.019885013056440373,
+          "pred_mean": 0.9698516251236802,
+          "empirical_next_available": 0.9692650334075724
+        }
+      },
+      "per_scene": {
+        "PR59_VALIDATION_0_0": {
+          "n": 605,
+          "available": true,
+          "brier": 0.003127925477212091,
+          "logloss": 0.01739415688215278,
+          "pred_mean": 0.9859975068897213,
+          "empirical_next_available": 0.9867768595041322
+        },
+        "PR59_VALIDATION_0_1": {
+          "n": 805,
+          "available": true,
+          "brier": 0.005017064721956707,
+          "logloss": 0.029465997022483877,
+          "pred_mean": 0.9294688221894508,
+          "empirical_next_available": 0.9254658385093167
+        },
+        "PR59_VALIDATION_0_2": {
+          "n": 575,
+          "available": true,
+          "brier": 0.0033010404458899143,
+          "logloss": 0.018341790267203992,
+          "pred_mean": 0.9837579411160972,
+          "empirical_next_available": 0.9843478260869565
+        },
+        "PR59_VALIDATION_0_3": {
+          "n": 790,
+          "available": true,
+          "brier": 0.0024035483803825294,
+          "logloss": 0.013843289550080906,
+          "pred_mean": 0.987685442669595,
+          "empirical_next_available": 0.9886075949367089
+        },
+        "PR59_VALIDATION_0_4": {
+          "n": 615,
+          "available": true,
+          "brier": 0.006122656505602202,
+          "logloss": 0.03209143368008708,
+          "pred_mean": 0.9786998214287872,
+          "empirical_next_available": 0.9788617886178862
+        },
+        "PR59_VALIDATION_0_5": {
+          "n": 540,
+          "available": true,
+          "brier": 0.0035899915983358954,
+          "logloss": 0.02041695102328916,
+          "pred_mean": 0.9708707444213673,
+          "empirical_next_available": 0.9703703703703703
+        },
+        "PR59_VALIDATION_1_0": {
+          "n": 475,
+          "available": true,
+          "brier": 0.007852977781029436,
+          "logloss": 0.0400376248443787,
+          "pred_mean": 0.9846018758984345,
+          "empirical_next_available": 0.9852631578947368
+        },
+        "PR59_VALIDATION_1_1": {
+          "n": 655,
+          "available": true,
+          "brier": 0.0031374148581921803,
+          "logloss": 0.019514993071572766,
+          "pred_mean": 0.9475144854523423,
+          "empirical_next_available": 0.9450381679389313
+        },
+        "PR59_VALIDATION_1_2": {
+          "n": 730,
+          "available": true,
+          "brier": 0.002569040612730626,
+          "logloss": 0.014407816421580552,
+          "pred_mean": 0.9918741659645897,
+          "empirical_next_available": 0.9931506849315068
+        },
+        "PR59_VALIDATION_1_3": {
+          "n": 540,
+          "available": true,
+          "brier": 0.007155216479885623,
+          "logloss": 0.038734682966241274,
+          "pred_mean": 0.9469670731327557,
+          "empirical_next_available": 0.9444444444444444
+        },
+        "PR59_VALIDATION_1_4": {
+          "n": 475,
+          "available": true,
+          "brier": 0.00398309190808664,
+          "logloss": 0.021658633460232186,
+          "pred_mean": 0.9826608258990586,
+          "empirical_next_available": 0.9831578947368421
+        },
+        "PR59_VALIDATION_1_5": {
+          "n": 780,
+          "available": true,
+          "brier": 0.0025458924075161538,
+          "logloss": 0.015486703757560004,
+          "pred_mean": 0.9698200335954943,
+          "empirical_next_available": 0.9692307692307692
+        }
+      },
+      "reliability": [
+        {
+          "low": 0.05,
+          "high": 0.1,
+          "n": 225,
+          "pred_mean": 0.076190476190476,
+          "empirical": 0.07111111111111111
+        },
+        {
+          "low": 0.99,
+          "high": 1.0,
+          "n": 7360,
+          "pred_mean": 0.9981892258940289,
+          "empirical": 0.9978260869565218
+        }
+      ],
+      "event_ranking": {
+        "n_events": 32,
+        "reported": false,
+        "reason": "16 validation onset/recovery events; AP/AUC/lift not statistically reliable"
+      }
+    },
+    "age_h4": {
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "brier": 0.004041702350715362,
+        "logloss": 0.02241679300058642,
+        "pred_mean": 0.9708749074322858,
+        "empirical_next_available": 0.970336189848385
+      },
+      "risk_set": {
+        "up": {
+          "n": 7360,
+          "available": true,
+          "brier": 0.002169375008608116,
+          "logloss": 0.015544763026014003,
+          "pred_mean": 0.9980953197208414,
+          "empirical_next_available": 0.9978260869565218
+        },
+        "down": {
+          "n": 225,
+          "available": true,
+          "brier": 0.06528761007475604,
+          "logloss": 0.24720852905762702,
+          "pred_mean": 0.08046497657094807,
+          "empirical_next_available": 0.07111111111111111
+        }
+      },
+      "phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "brier": 3.6442878020646053e-06,
+          "logloss": 0.0019065544324225693,
+          "pred_mean": 0.9980952700531572,
+          "empirical_next_available": 1.0
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "brier": 0.9962397758586444,
+          "logloss": 6.275482507485096,
+          "pred_mean": 0.9981181171878629,
+          "empirical_next_available": 0.0
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "brier": 0.007158490450378964,
+          "logloss": 0.08340156239414587,
+          "pred_mean": 0.07958749231822589,
+          "empirical_next_available": 0.0
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "brier": 0.824599235168183,
+          "logloss": 2.386937031099341,
+          "pred_mean": 0.09192711462213142,
+          "empirical_next_available": 1.0
+        }
+      },
+      "by_map": {
+        "0": {
+          "n": 3930,
+          "available": true,
+          "brier": 0.003904061985714727,
+          "logloss": 0.02174784300554669,
+          "pred_mean": 0.9712518940425845,
+          "empirical_next_available": 0.9707379134860051
+        },
+        "1": {
+          "n": 3655,
+          "available": true,
+          "brier": 0.004189698693930783,
+          "logloss": 0.0231360743905964,
+          "pred_mean": 0.9704695565763404,
+          "empirical_next_available": 0.9699042407660738
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "n": 2905,
+          "available": true,
+          "brier": 0.0026081901259905295,
+          "logloss": 0.014947807398549466,
+          "pred_mean": 0.9835270669212446,
+          "empirical_next_available": 0.9841652323580035
+        },
+        "multi_fault": {
+          "n": 2435,
+          "available": true,
+          "brier": 0.006287034404589057,
+          "logloss": 0.03377501622877696,
+          "pred_mean": 0.9566259564124489,
+          "empirical_next_available": 0.9548254620123203
+        },
+        "staggered_arrivals": {
+          "n": 2245,
+          "available": true,
+          "brier": 0.003461287857015231,
+          "logloss": 0.01976206231607014,
+          "pred_mean": 0.9699580577297632,
+          "empirical_next_available": 0.9692650334075724
+        }
+      },
+      "per_scene": {
+        "PR59_VALIDATION_0_0": {
+          "n": 605,
+          "available": true,
+          "brier": 0.0030808625548327264,
+          "logloss": 0.01701628278909029,
+          "pred_mean": 0.9858427242819603,
+          "empirical_next_available": 0.9867768595041322
+        },
+        "PR59_VALIDATION_0_1": {
+          "n": 805,
+          "available": true,
+          "brier": 0.005095126698926119,
+          "logloss": 0.029809968665351835,
+          "pred_mean": 0.9301735899953031,
+          "empirical_next_available": 0.9254658385093167
+        },
+        "PR59_VALIDATION_0_2": {
+          "n": 575,
+          "available": true,
+          "brier": 0.0032562491590931108,
+          "logloss": 0.0179710786195566,
+          "pred_mean": 0.983627045373531,
+          "empirical_next_available": 0.9843478260869565
+        },
+        "PR59_VALIDATION_0_3": {
+          "n": 790,
+          "available": true,
+          "brier": 0.002371018588995012,
+          "logloss": 0.013592855947565768,
+          "pred_mean": 0.9875708180825087,
+          "empirical_next_available": 0.9886075949367089
+        },
+        "PR59_VALIDATION_0_4": {
+          "n": 615,
+          "available": true,
+          "brier": 0.006016429011614475,
+          "logloss": 0.031175247064411084,
+          "pred_mean": 0.978402790542148,
+          "empirical_next_available": 0.9788617886178862
+        },
+        "PR59_VALIDATION_0_5": {
+          "n": 540,
+          "available": true,
+          "brier": 0.0035776166141157154,
+          "logloss": 0.020245636665487714,
+          "pred_mean": 0.970946559059307,
+          "empirical_next_available": 0.9703703703703703
+        },
+        "PR59_VALIDATION_1_0": {
+          "n": 475,
+          "available": true,
+          "brier": 0.007710398735795468,
+          "logloss": 0.038790253828033534,
+          "pred_mean": 0.9840330553434206,
+          "empirical_next_available": 0.9852631578947368
+        },
+        "PR59_VALIDATION_1_1": {
+          "n": 655,
+          "available": true,
+          "brier": 0.003210493966418392,
+          "logloss": 0.019923419935492456,
+          "pred_mean": 0.94806053994698,
+          "empirical_next_available": 0.9450381679389313
+        },
+        "PR59_VALIDATION_1_2": {
+          "n": 730,
+          "available": true,
+          "brier": 0.0025188788152900494,
+          "logloss": 0.014034550250826646,
+          "pred_mean": 0.9916669501295615,
+          "empirical_next_available": 0.9931506849315068
+        },
+        "PR59_VALIDATION_1_3": {
+          "n": 540,
+          "available": true,
+          "brier": 0.0071200158164687445,
+          "logloss": 0.0382351707935925,
+          "pred_mean": 0.9471500860119776,
+          "empirical_next_available": 0.9444444444444444
+        },
+        "PR59_VALIDATION_1_4": {
+          "n": 475,
+          "available": true,
+          "brier": 0.003923076742935512,
+          "logloss": 0.021157843865730927,
+          "pred_mean": 0.9824831430655993,
+          "empirical_next_available": 0.9831578947368421
+        },
+        "PR59_VALIDATION_1_5": {
+          "n": 780,
+          "available": true,
+          "brier": 0.0025653644228991225,
+          "logloss": 0.015570450671416556,
+          "pred_mean": 0.9700172581227945,
+          "empirical_next_available": 0.9692307692307692
+        }
+      },
+      "reliability": [
+        {
+          "low": 0.01,
+          "high": 0.05,
+          "n": 32,
+          "pred_mean": 0.012195121951219518,
+          "empirical": 0.0
+        },
+        {
+          "low": 0.05,
+          "high": 0.1,
+          "n": 193,
+          "pred_mean": 0.09178433070478913,
+          "empirical": 0.08290155440414508
+        },
+        {
+          "low": 0.99,
+          "high": 1.0,
+          "n": 7360,
+          "pred_mean": 0.9980953197208414,
+          "empirical": 0.9978260869565218
+        }
+      ],
+      "event_ranking": {
+        "n_events": 32,
+        "reported": false,
+        "reason": "16 validation onset/recovery events; AP/AUC/lift not statistically reliable"
+      }
+    },
+    "age_exact": {
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "brier": 0.003761855094412193,
+        "logloss": 0.013873092193895296,
+        "pred_mean": 0.9705071264200756,
+        "empirical_next_available": 0.970336189848385
+      },
+      "risk_set": {
+        "up": {
+          "n": 7360,
+          "available": true,
+          "brier": 0.001883060938678548,
+          "logloss": 0.006776009137895752,
+          "pred_mean": 0.9975456593172869,
+          "empirical_next_available": 0.9978260869565218
+        },
+        "down": {
+          "n": 225,
+          "available": true,
+          "brier": 0.06521929947750645,
+          "logloss": 0.24602656460346642,
+          "pred_mean": 0.08604667253791458,
+          "empirical_next_available": 0.07111111111111111
+        }
+      },
+      "phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "brier": 0.00025742377970098255,
+          "logloss": 0.0023062023271277704,
+          "pred_mean": 0.997836758238962,
+          "empirical_next_available": 1.0
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "brier": 0.7480505169094158,
+          "logloss": 2.0584173352801947,
+          "pred_mean": 0.8639312542681536,
+          "empirical_next_available": 0.0
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "brier": 0.009500242454271812,
+          "logloss": 0.08938106805527392,
+          "pred_mean": 0.08418344299637631,
+          "empirical_next_available": 0.0
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "brier": 0.7930494818435088,
+          "logloss": 2.292208363264228,
+          "pred_mean": 0.11038510842425835,
+          "empirical_next_available": 1.0
+        }
+      },
+      "by_map": {
+        "0": {
+          "n": 3930,
+          "available": true,
+          "brier": 0.0036407599335789623,
+          "logloss": 0.013538401400488651,
+          "pred_mean": 0.9709376935730769,
+          "empirical_next_available": 0.9707379134860051
+        },
+        "1": {
+          "n": 3655,
+          "available": true,
+          "brier": 0.0038920613822566235,
+          "logloss": 0.014232964921141303,
+          "pred_mean": 0.970044163653321,
+          "empirical_next_available": 0.9699042407660738
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "n": 2905,
+          "available": true,
+          "brier": 0.002320641570195375,
+          "logloss": 0.008296143563374492,
+          "pred_mean": 0.9834457428763558,
+          "empirical_next_available": 0.9841652323580035
+        },
+        "multi_fault": {
+          "n": 2435,
+          "available": true,
+          "brier": 0.005995279267567452,
+          "logloss": 0.021942487338500526,
+          "pred_mean": 0.9559640355216821,
+          "empirical_next_available": 0.9548254620123203
+        },
+        "staggered_arrivals": {
+          "n": 2245,
+          "available": true,
+          "brier": 0.0032043216539733464,
+          "logloss": 0.012337260832888986,
+          "pred_mean": 0.9695386389060507,
+          "empirical_next_available": 0.9692650334075724
+        }
+      },
+      "per_scene": {
+        "PR59_VALIDATION_0_0": {
+          "n": 605,
+          "available": true,
+          "brier": 0.0026658255402734004,
+          "logloss": 0.00910718939267747,
+          "pred_mean": 0.9853234374163538,
+          "empirical_next_available": 0.9867768595041322
+        },
+        "PR59_VALIDATION_0_1": {
+          "n": 805,
+          "available": true,
+          "brier": 0.004846530864937951,
+          "logloss": 0.01983622979016574,
+          "pred_mean": 0.9306266237169392,
+          "empirical_next_available": 0.9254658385093167
+        },
+        "PR59_VALIDATION_0_2": {
+          "n": 575,
+          "available": true,
+          "brier": 0.002842657448938508,
+          "logloss": 0.009858079257003305,
+          "pred_mean": 0.9830762220661644,
+          "empirical_next_available": 0.9843478260869565
+        },
+        "PR59_VALIDATION_0_3": {
+          "n": 790,
+          "available": true,
+          "brier": 0.002069023020268629,
+          "logloss": 0.007182441363020844,
+          "pred_mean": 0.9876748033676952,
+          "empirical_next_available": 0.9886075949367089
+        },
+        "PR59_VALIDATION_0_4": {
+          "n": 615,
+          "available": true,
+          "brier": 0.005890839168679234,
+          "logloss": 0.020930586105533847,
+          "pred_mean": 0.977363539399853,
+          "empirical_next_available": 0.9788617886178862
+        },
+        "PR59_VALIDATION_0_5": {
+          "n": 540,
+          "available": true,
+          "brier": 0.0035221896906212705,
+          "logloss": 0.013913089325554705,
+          "pred_mean": 0.9701843054331831,
+          "empirical_next_available": 0.9703703703703703
+        },
+        "PR59_VALIDATION_1_0": {
+          "n": 475,
+          "available": true,
+          "brier": 0.007206797329450342,
+          "logloss": 0.02333549812054877,
+          "pred_mean": 0.9824166473973514,
+          "empirical_next_available": 0.9852631578947368
+        },
+        "PR59_VALIDATION_1_1": {
+          "n": 655,
+          "available": true,
+          "brier": 0.003121171431547777,
+          "logloss": 0.013754662147628485,
+          "pred_mean": 0.9485828177152433,
+          "empirical_next_available": 0.9450381679389313
+        },
+        "PR59_VALIDATION_1_2": {
+          "n": 730,
+          "available": true,
+          "brier": 0.0023030482465002905,
+          "logloss": 0.007805126994517109,
+          "pred_mean": 0.9916091547400733,
+          "empirical_next_available": 0.9931506849315068
+        },
+        "PR59_VALIDATION_1_3": {
+          "n": 540,
+          "available": true,
+          "brier": 0.006761023796342851,
+          "logloss": 0.02500948078889055,
+          "pred_mean": 0.9460953891825324,
+          "empirical_next_available": 0.9444444444444444
+        },
+        "PR59_VALIDATION_1_4": {
+          "n": 475,
+          "available": true,
+          "brier": 0.0033954197040649,
+          "logloss": 0.011592385378029653,
+          "pred_mean": 0.9813139918288007,
+          "empirical_next_available": 0.9831578947368421
+        },
+        "PR59_VALIDATION_1_5": {
+          "n": 780,
+          "available": true,
+          "brier": 0.0023242126969155604,
+          "logloss": 0.009254584725963064,
+          "pred_mean": 0.9700659305106696,
+          "empirical_next_available": 0.9692307692307692
+        }
+      },
+      "reliability": [
+        {
+          "low": 0.01,
+          "high": 0.05,
+          "n": 63,
+          "pred_mean": 0.02848491711135018,
+          "empirical": 0.031746031746031744
+        },
+        {
+          "low": 0.05,
+          "high": 0.1,
+          "n": 67,
+          "pred_mean": 0.06821220023927743,
+          "empirical": 0.05970149253731343
+        },
+        {
+          "low": 0.1,
+          "high": 0.25,
+          "n": 95,
+          "pred_mean": 0.13679720133667514,
+          "empirical": 0.10526315789473684
+        },
+        {
+          "low": 0.75,
+          "high": 0.9,
+          "n": 76,
+          "pred_mean": 0.8403141361256554,
+          "empirical": 0.8421052631578947
+        },
+        {
+          "low": 0.9,
+          "high": 0.99,
+          "n": 64,
+          "pred_mean": 0.9347826086956507,
+          "empirical": 0.9375
+        },
+        {
+          "low": 0.99,
+          "high": 1.0,
+          "n": 7220,
+          "pred_mean": 0.9997570763536174,
+          "empirical": 1.0
+        }
+      ],
+      "event_ranking": {
+        "n_events": 32,
+        "reported": false,
+        "reason": "16 validation onset/recovery events; AP/AUC/lift not statistically reliable"
+      }
+    },
+    "abs_tick": {
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "brier": 0.003705417774779802,
+        "logloss": 0.013440189821121877,
+        "pred_mean": 0.9705215083644018,
+        "empirical_next_available": 0.970336189848385
+      },
+      "risk_set": {
+        "up": {
+          "n": 7360,
+          "available": true,
+          "brier": 0.0018044802860286823,
+          "logloss": 0.006077154675262066,
+          "pred_mean": 0.997688179968015,
+          "empirical_next_available": 0.9978260869565218
+        },
+        "down": {
+          "n": 225,
+          "available": true,
+          "brier": 0.06588719518461499,
+          "logloss": 0.2542932505924377,
+          "pred_mean": 0.08186949501955564,
+          "empirical_next_available": 0.07111111111111111
+        }
+      },
+      "phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "brier": 0.00030952457820537256,
+          "logloss": 0.0021190050727572774,
+          "pred_mean": 0.9980582181761448,
+          "empirical_next_available": 1.0
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "brier": 0.6879891501768004,
+          "logloss": 1.8228678222249473,
+          "pred_mean": 0.8278406424362518,
+          "empirical_next_available": 0.0
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "brier": 0.007372358055564577,
+          "logloss": 0.08525850232133945,
+          "pred_mean": 0.0813116121008577,
+          "empirical_next_available": 0.0
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "brier": 0.8302372551828356,
+          "logloss": 2.462309649883667,
+          "pred_mean": 0.0891568406450494,
+          "empirical_next_available": 1.0
+        }
+      },
+      "by_map": {
+        "0": {
+          "n": 3930,
+          "available": true,
+          "brier": 0.003572497986289224,
+          "logloss": 0.012921760245562323,
+          "pred_mean": 0.9709783992209411,
+          "empirical_next_available": 0.9707379134860051
+        },
+        "1": {
+          "n": 3655,
+          "available": true,
+          "brier": 0.0038483383681513334,
+          "logloss": 0.013997625725900839,
+          "pred_mean": 0.9700302413145895,
+          "empirical_next_available": 0.9699042407660738
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "n": 2905,
+          "available": true,
+          "brier": 0.0023900005627682723,
+          "logloss": 0.008653222135947125,
+          "pred_mean": 0.9833164759728625,
+          "empirical_next_available": 0.9841652323580035
+        },
+        "multi_fault": {
+          "n": 2435,
+          "available": true,
+          "brier": 0.005802395837642225,
+          "logloss": 0.020685457156005484,
+          "pred_mean": 0.9564426516015032,
+          "empirical_next_available": 0.9548254620123203
+        },
+        "staggered_arrivals": {
+          "n": 2245,
+          "available": true,
+          "brier": 0.003133099475371183,
+          "logloss": 0.0117760094937319,
+          "pred_mean": 0.9692353771013886,
+          "empirical_next_available": 0.9692650334075724
+        }
+      },
+      "per_scene": {
+        "PR59_VALIDATION_0_0": {
+          "n": 605,
+          "available": true,
+          "brier": 0.0027995121288065905,
+          "logloss": 0.009605005056891646,
+          "pred_mean": 0.9851849604603345,
+          "empirical_next_available": 0.9867768595041322
+        },
+        "PR59_VALIDATION_0_1": {
+          "n": 805,
+          "available": true,
+          "brier": 0.004739678411368185,
+          "logloss": 0.019426692308211386,
+          "pred_mean": 0.9310419951496743,
+          "empirical_next_available": 0.9254658385093167
+        },
+        "PR59_VALIDATION_0_2": {
+          "n": 575,
+          "available": true,
+          "brier": 0.0029567035979286833,
+          "logloss": 0.010248928159905642,
+          "pred_mean": 0.9828142207309827,
+          "empirical_next_available": 0.9843478260869565
+        },
+        "PR59_VALIDATION_0_3": {
+          "n": 790,
+          "available": true,
+          "brier": 0.0021520312822451587,
+          "logloss": 0.007466710273470158,
+          "pred_mean": 0.9874843159092357,
+          "empirical_next_available": 0.9886075949367089
+        },
+        "PR59_VALIDATION_0_4": {
+          "n": 615,
+          "available": true,
+          "brier": 0.005594063851885693,
+          "logloss": 0.018510163821564524,
+          "pred_mean": 0.977949816490857,
+          "empirical_next_available": 0.9788617886178862
+        },
+        "PR59_VALIDATION_0_5": {
+          "n": 540,
+          "available": true,
+          "brier": 0.00313002328952536,
+          "logloss": 0.01140262377644666,
+          "pred_mean": 0.9699064409888914,
+          "empirical_next_available": 0.9703703703703703
+        },
+        "PR59_VALIDATION_1_0": {
+          "n": 475,
+          "available": true,
+          "brier": 0.007256764611367184,
+          "logloss": 0.02388005567354203,
+          "pred_mean": 0.9830163022959155,
+          "empirical_next_available": 0.9852631578947368
+        },
+        "PR59_VALIDATION_1_1": {
+          "n": 655,
+          "available": true,
+          "brier": 0.002976773169918431,
+          "logloss": 0.013097601636999781,
+          "pred_mean": 0.9481305330594001,
+          "empirical_next_available": 0.9450381679389313
+        },
+        "PR59_VALIDATION_1_2": {
+          "n": 730,
+          "available": true,
+          "brier": 0.0024042463527825537,
+          "logloss": 0.00862580242166962,
+          "pred_mean": 0.99141094394053,
+          "empirical_next_available": 0.9931506849315068
+        },
+        "PR59_VALIDATION_1_3": {
+          "n": 540,
+          "available": true,
+          "brier": 0.0063445931188846946,
+          "logloss": 0.022229303095497675,
+          "pred_mean": 0.9464392033735749,
+          "empirical_next_available": 0.9444444444444444
+        },
+        "PR59_VALIDATION_1_4": {
+          "n": 475,
+          "available": true,
+          "brier": 0.003565694212123462,
+          "logloss": 0.012226656231507881,
+          "pred_mean": 0.9811374050197298,
+          "empirical_next_available": 0.9831578947368421
+        },
+        "PR59_VALIDATION_1_5": {
+          "n": 780,
+          "available": true,
+          "brier": 0.0023000541620619565,
+          "logloss": 0.009142365848264961,
+          "pred_mean": 0.9700703371510467,
+          "empirical_next_available": 0.9692307692307692
+        }
+      },
+      "reliability": [
+        {
+          "low": 0.01,
+          "high": 0.05,
+          "n": 59,
+          "pred_mean": 0.04452054794520551,
+          "empirical": 0.03389830508474576
+        },
+        {
+          "low": 0.05,
+          "high": 0.1,
+          "n": 86,
+          "pred_mean": 0.0776744186046512,
+          "empirical": 0.08139534883720931
+        },
+        {
+          "low": 0.1,
+          "high": 0.25,
+          "n": 80,
+          "pred_mean": 0.11392405063291138,
+          "empirical": 0.0875
+        },
+        {
+          "low": 0.75,
+          "high": 0.9,
+          "n": 60,
+          "pred_mean": 0.7980132450331118,
+          "empirical": 0.8
+        },
+        {
+          "low": 0.9,
+          "high": 0.99,
+          "n": 50,
+          "pred_mean": 0.9173228346456688,
+          "empirical": 0.92
+        },
+        {
+          "low": 0.99,
+          "high": 1.0,
+          "n": 7250,
+          "pred_mean": 0.9998949059490084,
+          "empirical": 1.0
+        }
+      ],
+      "event_ranking": {
+        "n_events": 32,
+        "reported": false,
+        "reason": "16 validation onset/recovery events; AP/AUC/lift not statistically reliable"
+      }
+    }
+  },
+  "model_meta": {
+    "validation": "/data/wm-a100-pr60-gpu-20261112/source/pr59-validation/data.json",
+    "validation_sha256": "c7a0a0081e0c901faea23b37816eb54b560efb9c8b66118387c3fbb0a9509712",
+    "checkpoint_manifest": "/data/wm-a100-pr63-20261113/wm/examples/evidence/pr60-gpu-training-20261112/checkpoint_manifest.csv",
+    "checkpoint_manifest_sha256": "296ad9b045058ff11ab8a32a9d87dcd105a2ed3000699b5cdcd55b6dab486b8a",
+    "device": "cpu",
+    "new_training": false
+  },
+  "models": {
+    "model_map_off_1810": {
+      "arm": "map_off",
+      "seed": 1810,
+      "checkpoint_sha256": "d0721eb2052210c553f6b483c8dcc5e3a7f89a437a46328ef1098924bb553fca",
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "brier": 0.004247310404815969,
+        "logloss": 0.022898412763393435,
+        "pred_mean": 0.9726010363143804,
+        "empirical_next_available": 0.970336189848385
+      },
+      "risk_set": {
+        "up": {
+          "n": 7360,
+          "available": true,
+          "brier": 0.0022195401918965996,
+          "logloss": 0.01522334302047266,
+          "pred_mean": 0.9989838826105647,
+          "empirical_next_available": 0.9978260869565218
+        },
+        "down": {
+          "n": 225,
+          "available": true,
+          "brier": 0.07057792714742318,
+          "logloss": 0.27395847190963535,
+          "pred_mean": 0.10958881969253222,
+          "empirical_next_available": 0.07111111111111111
+        }
+      },
+      "phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "brier": 5.59613223008925e-05,
+          "logloss": 0.0010440749758697356,
+          "pred_mean": 0.9989867963075378,
+          "empirical_next_available": 1.0
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "brier": 0.9953022413363262,
+          "logloss": 6.523507375492978,
+          "pred_mean": 0.9976464956998825,
+          "empirical_next_available": 0.0
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "brier": 0.016833549864186396,
+          "logloss": 0.11816676783262278,
+          "pred_mean": 0.1084537362171845,
+          "empirical_next_available": 0.0
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "brier": 0.7726138554097038,
+          "logloss": 2.308987606415612,
+          "pred_mean": 0.12441584758926183,
+          "empirical_next_available": 1.0
+        }
+      },
+      "by_map": {
+        "0": {
+          "n": 3930,
+          "available": true,
+          "brier": 0.004272416401922028,
+          "logloss": 0.02282924696634375,
+          "pred_mean": 0.9731050212391232,
+          "empirical_next_available": 0.9707379134860051
+        },
+        "1": {
+          "n": 3655,
+          "available": true,
+          "brier": 0.00422031544759935,
+          "logloss": 0.022972782553382733,
+          "pred_mean": 0.9720591318672561,
+          "empirical_next_available": 0.9699042407660738
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "n": 2905,
+          "available": true,
+          "brier": 0.002709642372327021,
+          "logloss": 0.01387387855613838,
+          "pred_mean": 0.9859256464564811,
+          "empirical_next_available": 0.9841652323580035
+        },
+        "multi_fault": {
+          "n": 2435,
+          "available": true,
+          "brier": 0.0064931598485954275,
+          "logloss": 0.03399954327743429,
+          "pred_mean": 0.9593618699037747,
+          "empirical_next_available": 0.9548254620123203
+        },
+        "staggered_arrivals": {
+          "n": 2245,
+          "available": true,
+          "brier": 0.0038011109566099465,
+          "logloss": 0.022535392304769676,
+          "pred_mean": 0.9697187992306489,
+          "empirical_next_available": 0.9692650334075724
+        }
+      },
+      "per_scene": {
+        "PR59_VALIDATION_0_0": {
+          "n": 605,
+          "available": true,
+          "brier": 0.00330736471357569,
+          "logloss": 0.01814115093894215,
+          "pred_mean": 0.9877167708771534,
+          "empirical_next_available": 0.9867768595041322
+        },
+        "PR59_VALIDATION_0_1": {
+          "n": 805,
+          "available": true,
+          "brier": 0.005789120508455096,
+          "logloss": 0.03226467065337677,
+          "pred_mean": 0.934073243452155,
+          "empirical_next_available": 0.9254658385093167
+        },
+        "PR59_VALIDATION_0_2": {
+          "n": 575,
+          "available": true,
+          "brier": 0.0037834517300449487,
+          "logloss": 0.01933535956674756,
+          "pred_mean": 0.9836307773641918,
+          "empirical_next_available": 0.9843478260869565
+        },
+        "PR59_VALIDATION_0_3": {
+          "n": 790,
+          "available": true,
+          "brier": 0.0025534230139811396,
+          "logloss": 0.01390920572757328,
+          "pred_mean": 0.9895923218253669,
+          "empirical_next_available": 0.9886075949367089
+        },
+        "PR59_VALIDATION_0_4": {
+          "n": 615,
+          "available": true,
+          "brier": 0.006102928244256894,
+          "logloss": 0.031248834377712892,
+          "pred_mean": 0.9807003917581425,
+          "empirical_next_available": 0.9788617886178862
+        },
+        "PR59_VALIDATION_0_5": {
+          "n": 540,
+          "available": true,
+          "brier": 0.004043350004620345,
+          "logloss": 0.021196938825454245,
+          "pred_mean": 0.9709421369488592,
+          "empirical_next_available": 0.9703703703703703
+        },
+        "PR59_VALIDATION_1_0": {
+          "n": 475,
+          "available": true,
+          "brier": 0.007381028288040484,
+          "logloss": 0.03775836917443092,
+          "pred_mean": 0.9860891633912137,
+          "empirical_next_available": 0.9852631578947368
+        },
+        "PR59_VALIDATION_1_1": {
+          "n": 655,
+          "available": true,
+          "brier": 0.0033787040837743136,
+          "logloss": 0.023101955609690056,
+          "pred_mean": 0.9479084585914175,
+          "empirical_next_available": 0.9450381679389313
+        },
+        "PR59_VALIDATION_1_2": {
+          "n": 730,
+          "available": true,
+          "brier": 0.002247421965995465,
+          "logloss": 0.010326650633427898,
+          "pred_mean": 0.9936672931358422,
+          "empirical_next_available": 0.9931506849315068
+        },
+        "PR59_VALIDATION_1_3": {
+          "n": 540,
+          "available": true,
+          "brier": 0.007206135027752396,
+          "logloss": 0.03641216574895434,
+          "pred_mean": 0.9492483309159676,
+          "empirical_next_available": 0.9444444444444444
+        },
+        "PR59_VALIDATION_1_4": {
+          "n": 475,
+          "available": true,
+          "brier": 0.004129577211465942,
+          "logloss": 0.027149465438391484,
+          "pred_mean": 0.981562553597124,
+          "empirical_next_available": 0.9831578947368421
+        },
+        "PR59_VALIDATION_1_5": {
+          "n": 780,
+          "available": true,
+          "brier": 0.0028368374662498933,
+          "logloss": 0.013848068461970694,
+          "pred_mean": 0.9735773055694806,
+          "empirical_next_available": 0.9692307692307692
+        }
+      },
+      "reliability": [
+        {
+          "low": 0.01,
+          "high": 0.05,
+          "n": 52,
+          "pred_mean": 0.03699563336200439,
+          "empirical": 0.07692307692307693
+        },
+        {
+          "low": 0.05,
+          "high": 0.1,
+          "n": 78,
+          "pred_mean": 0.07065133205973186,
+          "empirical": 0.0641025641025641
+        },
+        {
+          "low": 0.1,
+          "high": 0.25,
+          "n": 91,
+          "pred_mean": 0.17683552148250434,
+          "empirical": 0.07692307692307693
+        },
+        {
+          "low": 0.25,
+          "high": 0.5,
+          "n": 4,
+          "pred_mean": 0.2827187851071358,
+          "empirical": 0.0
+        },
+        {
+          "low": 0.75,
+          "high": 0.9,
+          "n": 12,
+          "pred_mean": 0.8516082813342413,
+          "empirical": 1.0
+        },
+        {
+          "low": 0.9,
+          "high": 0.99,
+          "n": 161,
+          "pred_mean": 0.9774286735872304,
+          "empirical": 1.0
+        },
+        {
+          "low": 0.99,
+          "high": 1.0,
+          "n": 7187,
+          "pred_mean": 0.9997128231793796,
+          "empirical": 0.9977737581744817
+        }
+      ],
+      "event_ranking": {
+        "n_events": 32,
+        "reported": false,
+        "reason": "16 validation onset/recovery events; AP/AUC/lift not statistically reliable"
+      }
+    },
+    "model_map_off_1811": {
+      "arm": "map_off",
+      "seed": 1811,
+      "checkpoint_sha256": "5f536e04e1c091a5f59e228e5ef726ff41d74e454944f21d179a693f936c0449",
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "brier": 0.004179730274639476,
+        "logloss": 0.022347552127973246,
+        "pred_mean": 0.9701958158240704,
+        "empirical_next_available": 0.970336189848385
+      },
+      "risk_set": {
+        "up": {
+          "n": 7360,
+          "available": true,
+          "brier": 0.0021817813451791186,
+          "logloss": 0.014900363001604888,
+          "pred_mean": 0.9978756050538757,
+          "empirical_next_available": 0.9978260869565218
+        },
+        "down": {
+          "n": 225,
+          "available": true,
+          "brier": 0.06953485970054259,
+          "logloss": 0.2659533831060695,
+          "pred_mean": 0.0647591547957725,
+          "empirical_next_available": 0.07111111111111111
+        }
+      },
+      "phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "brier": 4.9810224012720794e-05,
+          "logloss": 0.0021339433687544655,
+          "pred_mean": 0.9978923162847173,
+          "empirical_next_available": 1.0
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "brier": 0.9807565259605557,
+          "logloss": 5.874686974479915,
+          "pred_mean": 0.9902051500976086,
+          "empirical_next_available": 0.0
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "brier": 0.01015552511993863,
+          "logloss": 0.06963903115403515,
+          "pred_mean": 0.06317449125804399,
+          "empirical_next_available": 0.0
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "brier": 0.8451774176596818,
+          "logloss": 2.8303096054795147,
+          "pred_mean": 0.08545882225735113,
+          "empirical_next_available": 1.0
+        }
+      },
+      "by_map": {
+        "0": {
+          "n": 3930,
+          "available": true,
+          "brier": 0.004245712995846708,
+          "logloss": 0.02316608490991697,
+          "pred_mean": 0.9707006463673766,
+          "empirical_next_available": 0.9707379134860051
+        },
+        "1": {
+          "n": 3655,
+          "available": true,
+          "brier": 0.004108783053204606,
+          "logloss": 0.021467433432203482,
+          "pred_mean": 0.9696530021345511,
+          "empirical_next_available": 0.9699042407660738
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "n": 2905,
+          "available": true,
+          "brier": 0.002934140412853729,
+          "logloss": 0.014538123503663201,
+          "pred_mean": 0.983930153576032,
+          "empirical_next_available": 0.9841652323580035
+        },
+        "multi_fault": {
+          "n": 2435,
+          "available": true,
+          "brier": 0.006286996392139311,
+          "logloss": 0.03562018918706204,
+          "pred_mean": 0.9557425389938378,
+          "empirical_next_available": 0.9548254620123203
+        },
+        "staggered_arrivals": {
+          "n": 2245,
+          "available": true,
+          "brier": 0.0035058975585483716,
+          "logloss": 0.018056914673514238,
+          "pred_mean": 0.968100260328377,
+          "empirical_next_available": 0.9692650334075724
+        }
+      },
+      "per_scene": {
+        "PR59_VALIDATION_0_0": {
+          "n": 605,
+          "available": true,
+          "brier": 0.0038326583668626514,
+          "logloss": 0.017672574129586175,
+          "pred_mean": 0.986350996823104,
+          "empirical_next_available": 0.9867768595041322
+        },
+        "PR59_VALIDATION_0_1": {
+          "n": 805,
+          "available": true,
+          "brier": 0.004926998731636457,
+          "logloss": 0.02825015910482502,
+          "pred_mean": 0.9271273218011425,
+          "empirical_next_available": 0.9254658385093167
+        },
+        "PR59_VALIDATION_0_2": {
+          "n": 575,
+          "available": true,
+          "brier": 0.003427377389509152,
+          "logloss": 0.017934225728456838,
+          "pred_mean": 0.9830580049526433,
+          "empirical_next_available": 0.9843478260869565
+        },
+        "PR59_VALIDATION_0_3": {
+          "n": 790,
+          "available": true,
+          "brier": 0.003017825477140056,
+          "logloss": 0.014080915252252394,
+          "pred_mean": 0.9882724887019472,
+          "empirical_next_available": 0.9886075949367089
+        },
+        "PR59_VALIDATION_0_4": {
+          "n": 615,
+          "available": true,
+          "brier": 0.006625369103791988,
+          "logloss": 0.04172178089964084,
+          "pred_mean": 0.9791734410252998,
+          "empirical_next_available": 0.9788617886178862
+        },
+        "PR59_VALIDATION_0_5": {
+          "n": 540,
+          "available": true,
+          "brier": 0.003650432700033017,
+          "logloss": 0.0194711669847565,
+          "pred_mean": 0.9696081628574541,
+          "empirical_next_available": 0.9703703703703703
+        },
+        "PR59_VALIDATION_1_0": {
+          "n": 475,
+          "available": true,
+          "brier": 0.006898308269068172,
+          "logloss": 0.03906728057712473,
+          "pred_mean": 0.9850165845767448,
+          "empirical_next_available": 0.9852631578947368
+        },
+        "PR59_VALIDATION_1_1": {
+          "n": 655,
+          "available": true,
+          "brier": 0.0031273113011040057,
+          "logloss": 0.01725098909395017,
+          "pred_mean": 0.9443496319916782,
+          "empirical_next_available": 0.9450381679389313
+        },
+        "PR59_VALIDATION_1_2": {
+          "n": 730,
+          "available": true,
+          "brier": 0.0023444011376571082,
+          "logloss": 0.012151641045245722,
+          "pred_mean": 0.9915337209781147,
+          "empirical_next_available": 0.9931506849315068
+        },
+        "PR59_VALIDATION_1_3": {
+          "n": 540,
+          "available": true,
+          "brier": 0.0073913033504674494,
+          "logloss": 0.036625794562404536,
+          "pred_mean": 0.9459648972140039,
+          "empirical_next_available": 0.9444444444444444
+        },
+        "PR59_VALIDATION_1_4": {
+          "n": 475,
+          "available": true,
+          "brier": 0.003958685178383953,
+          "logloss": 0.01770898025235985,
+          "pred_mean": 0.9810301361933939,
+          "empirical_next_available": 0.9831578947368421
+        },
+        "PR59_VALIDATION_1_5": {
+          "n": 780,
+          "available": true,
+          "brier": 0.002704390551228004,
+          "logloss": 0.014803487714657905,
+          "pred_mean": 0.9705382829126066,
+          "empirical_next_available": 0.9692307692307692
+        }
+      },
+      "reliability": [
+        {
+          "low": 0.001,
+          "high": 0.005,
+          "n": 13,
+          "pred_mean": 0.003990970659427918,
+          "empirical": 0.0
+        },
+        {
+          "low": 0.005,
+          "high": 0.01,
+          "n": 30,
+          "pred_mean": 0.007550263389324148,
+          "empirical": 0.03333333333333333
+        },
+        {
+          "low": 0.01,
+          "high": 0.05,
+          "n": 90,
+          "pred_mean": 0.030937596307032637,
+          "empirical": 0.05555555555555555
+        },
+        {
+          "low": 0.05,
+          "high": 0.1,
+          "n": 48,
+          "pred_mean": 0.06903951390025516,
+          "empirical": 0.14583333333333334
+        },
+        {
+          "low": 0.1,
+          "high": 0.25,
+          "n": 36,
+          "pred_mean": 0.13973641395568848,
+          "empirical": 0.05555555555555555
+        },
+        {
+          "low": 0.25,
+          "high": 0.5,
+          "n": 7,
+          "pred_mean": 0.3787289730140141,
+          "empirical": 0.14285714285714285
+        },
+        {
+          "low": 0.5,
+          "high": 0.75,
+          "n": 1,
+          "pred_mean": 0.5125252604484558,
+          "empirical": 0.0
+        },
+        {
+          "low": 0.75,
+          "high": 0.9,
+          "n": 5,
+          "pred_mean": 0.8577661752700806,
+          "empirical": 1.0
+        },
+        {
+          "low": 0.9,
+          "high": 0.99,
+          "n": 270,
+          "pred_mean": 0.975571424652029,
+          "empirical": 0.9851851851851852
+        },
+        {
+          "low": 0.99,
+          "high": 1.0,
+          "n": 7085,
+          "pred_mean": 0.9988244654430667,
+          "empirical": 0.9983062808750882
+        }
+      ],
+      "event_ranking": {
+        "n_events": 32,
+        "reported": false,
+        "reason": "16 validation onset/recovery events; AP/AUC/lift not statistically reliable"
+      }
+    },
+    "model_map_off_1812": {
+      "arm": "map_off",
+      "seed": 1812,
+      "checkpoint_sha256": "d377bd0534c336799d91eb0e4918dc03d24f0e658e8816b1def7779fc282862a",
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "brier": 0.004276082040100227,
+        "logloss": 0.02417808201290699,
+        "pred_mean": 0.9706520737639347,
+        "empirical_next_available": 0.970336189848385
+      },
+      "risk_set": {
+        "up": {
+          "n": 7360,
+          "available": true,
+          "brier": 0.0022033973797463743,
+          "logloss": 0.015610968723470148,
+          "pred_mean": 0.9984001474778937,
+          "empirical_next_available": 0.9978260869565218
+        },
+        "down": {
+          "n": 225,
+          "available": true,
+          "brier": 0.07207590026323328,
+          "logloss": 0.3044178767251634,
+          "pred_mean": 0.06298175138731797,
+          "empirical_next_available": 0.07111111111111111
+        }
+      },
+      "phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "brier": 3.9842065353813794e-05,
+          "logloss": 0.0016191880072584592,
+          "pred_mean": 0.9984018184682902,
+          "empirical_next_available": 1.0
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "brier": 0.9952752866859316,
+          "logloss": 6.437838317464502,
+          "pred_mean": 0.9976331628859043,
+          "empirical_next_available": 0.0
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "brier": 0.009665437489730635,
+          "logloss": 0.06982647028024892,
+          "pred_mean": 0.06308320911075367,
+          "empirical_next_available": 0.0
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "brier": 0.8873125702421106,
+          "logloss": 3.3687681234118596,
+          "pred_mean": 0.06165645987493917,
+          "empirical_next_available": 1.0
+        }
+      },
+      "by_map": {
+        "0": {
+          "n": 3930,
+          "available": true,
+          "brier": 0.0042597995941959154,
+          "logloss": 0.024079721600932105,
+          "pred_mean": 0.9708543648372189,
+          "empirical_next_available": 0.9707379134860051
+        },
+        "1": {
+          "n": 3655,
+          "available": true,
+          "brier": 0.004293589567433887,
+          "logloss": 0.02428384300307474,
+          "pred_mean": 0.9704345624320586,
+          "empirical_next_available": 0.9699042407660738
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "n": 2905,
+          "available": true,
+          "brier": 0.0027262771362907764,
+          "logloss": 0.015128358724792705,
+          "pred_mean": 0.9839778821636472,
+          "empirical_next_available": 0.9841652323580035
+        },
+        "multi_fault": {
+          "n": 2435,
+          "available": true,
+          "brier": 0.00675011256069212,
+          "logloss": 0.03852803342899055,
+          "pred_mean": 0.955604937365489,
+          "empirical_next_available": 0.9548254620123203
+        },
+        "staggered_arrivals": {
+          "n": 2245,
+          "available": true,
+          "brier": 0.003598094925590544,
+          "logloss": 0.020323879097009223,
+          "pred_mean": 0.9697292691889013,
+          "empirical_next_available": 0.9692650334075724
+        }
+      },
+      "per_scene": {
+        "PR59_VALIDATION_0_0": {
+          "n": 605,
+          "available": true,
+          "brier": 0.003630424245430962,
+          "logloss": 0.019951809531682678,
+          "pred_mean": 0.9867966181436969,
+          "empirical_next_available": 0.9867768595041322
+        },
+        "PR59_VALIDATION_0_1": {
+          "n": 805,
+          "available": true,
+          "brier": 0.005308638835761873,
+          "logloss": 0.03137227078367376,
+          "pred_mean": 0.9269777619042752,
+          "empirical_next_available": 0.9254658385093167
+        },
+        "PR59_VALIDATION_0_2": {
+          "n": 575,
+          "available": true,
+          "brier": 0.003560120345821192,
+          "logloss": 0.018288376309115235,
+          "pred_mean": 0.9841471316406261,
+          "empirical_next_available": 0.9843478260869565
+        },
+        "PR59_VALIDATION_0_3": {
+          "n": 790,
+          "available": true,
+          "brier": 0.002656293200954011,
+          "logloss": 0.01496463346458198,
+          "pred_mean": 0.988337429665925,
+          "empirical_next_available": 0.9886075949367089
+        },
+        "PR59_VALIDATION_0_4": {
+          "n": 615,
+          "available": true,
+          "brier": 0.006564919438758556,
+          "logloss": 0.03896776841317916,
+          "pred_mean": 0.977878364034724,
+          "empirical_next_available": 0.9788617886178862
+        },
+        "PR59_VALIDATION_0_5": {
+          "n": 540,
+          "available": true,
+          "brier": 0.0038670096138491363,
+          "logloss": 0.020379127324576203,
+          "pred_mean": 0.9706708101659185,
+          "empirical_next_available": 0.9703703703703703
+        },
+        "PR59_VALIDATION_1_0": {
+          "n": 475,
+          "available": true,
+          "brier": 0.007566705305798361,
+          "logloss": 0.03793598770661696,
+          "pred_mean": 0.98522420707894,
+          "empirical_next_available": 0.9852631578947368
+        },
+        "PR59_VALIDATION_1_1": {
+          "n": 655,
+          "available": true,
+          "brier": 0.003201321754402121,
+          "logloss": 0.020339966210660615,
+          "pred_mean": 0.9474683411248768,
+          "empirical_next_available": 0.9450381679389313
+        },
+        "PR59_VALIDATION_1_2": {
+          "n": 730,
+          "available": true,
+          "brier": 0.0020824513632968947,
+          "logloss": 0.011474202786949512,
+          "pred_mean": 0.9922938686935869,
+          "empirical_next_available": 0.9931506849315068
+        },
+        "PR59_VALIDATION_1_3": {
+          "n": 540,
+          "available": true,
+          "brier": 0.008391591384085689,
+          "logloss": 0.04921539200738038,
+          "pred_mean": 0.9468596887188377,
+          "empirical_next_available": 0.9444444444444444
+        },
+        "PR59_VALIDATION_1_4": {
+          "n": 475,
+          "available": true,
+          "brier": 0.003885479933666649,
+          "logloss": 0.02270291699324369,
+          "pred_mean": 0.981902332019649,
+          "empirical_next_available": 0.9831578947368421
+        },
+        "PR59_VALIDATION_1_5": {
+          "n": 780,
+          "available": true,
+          "brier": 0.0026984196006135533,
+          "logloss": 0.014972831868412535,
+          "pred_mean": 0.9695932052898197,
+          "empirical_next_available": 0.9692307692307692
+        }
+      },
+      "reliability": [
+        {
+          "low": 0.01,
+          "high": 0.05,
+          "n": 135,
+          "pred_mean": 0.026070503931906488,
+          "empirical": 0.08148148148148149
+        },
+        {
+          "low": 0.05,
+          "high": 0.1,
+          "n": 51,
+          "pred_mean": 0.07375930863268235,
+          "empirical": 0.0392156862745098
+        },
+        {
+          "low": 0.1,
+          "high": 0.25,
+          "n": 32,
+          "pred_mean": 0.12955969176255167,
+          "empirical": 0.0625
+        },
+        {
+          "low": 0.25,
+          "high": 0.5,
+          "n": 5,
+          "pred_mean": 0.31112544536590575,
+          "empirical": 0.2
+        },
+        {
+          "low": 0.5,
+          "high": 0.75,
+          "n": 2,
+          "pred_mean": 0.5940569639205933,
+          "empirical": 0.0
+        },
+        {
+          "low": 0.75,
+          "high": 0.9,
+          "n": 6,
+          "pred_mean": 0.8711630801359812,
+          "empirical": 1.0
+        },
+        {
+          "low": 0.9,
+          "high": 0.99,
+          "n": 232,
+          "pred_mean": 0.9774876537507978,
+          "empirical": 1.0
+        },
+        {
+          "low": 0.99,
+          "high": 1.0,
+          "n": 7122,
+          "pred_mean": 0.9991885665945376,
+          "empirical": 0.9977534400449312
+        }
+      ],
+      "event_ranking": {
+        "n_events": 32,
+        "reported": false,
+        "reason": "16 validation onset/recovery events; AP/AUC/lift not statistically reliable"
+      }
+    },
+    "model_map_on_1810": {
+      "arm": "map_on",
+      "seed": 1810,
+      "checkpoint_sha256": "d6634d97b5aa5c853677e229932095d4db3648f59935d1807fdf9f8790169590",
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "brier": 0.004272517118218851,
+        "logloss": 0.020955054687078836,
+        "pred_mean": 0.9715107400342331,
+        "empirical_next_available": 0.970336189848385
+      },
+      "risk_set": {
+        "up": {
+          "n": 7360,
+          "available": true,
+          "brier": 0.002180568139193016,
+          "logloss": 0.013043890437840931,
+          "pred_mean": 0.9987353296707506,
+          "empirical_next_available": 0.9978260869565218
+        },
+        "down": {
+          "n": 225,
+          "available": true,
+          "brier": 0.07270249260991007,
+          "logloss": 0.2797380274621571,
+          "pred_mean": 0.08096416347970566,
+          "empirical_next_available": 0.07111111111111111
+        }
+      },
+      "phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "brier": 3.838793865734024e-05,
+          "logloss": 0.0012721517297934178,
+          "pred_mean": 0.9987485402290078,
+          "empirical_next_available": 1.0
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "brier": 0.9854412801850683,
+          "logloss": 5.416271957431515,
+          "pred_mean": 0.9926716834306717,
+          "empirical_next_available": 0.0
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "brier": 0.01194565823990069,
+          "logloss": 0.08932133706658431,
+          "pred_mean": 0.08181593020370845,
+          "empirical_next_available": 0.0
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "brier": 0.8663386415681577,
+          "logloss": 2.767056045754329,
+          "pred_mean": 0.0698379606474191,
+          "empirical_next_available": 1.0
+        }
+      },
+      "by_map": {
+        "0": {
+          "n": 3930,
+          "available": true,
+          "brier": 0.004243383570011493,
+          "logloss": 0.02112111754335873,
+          "pred_mean": 0.9720508810530865,
+          "empirical_next_available": 0.9707379134860051
+        },
+        "1": {
+          "n": 3655,
+          "available": true,
+          "brier": 0.0043038426570575095,
+          "logloss": 0.020776497361448442,
+          "pred_mean": 0.9709299591302403,
+          "empirical_next_available": 0.9699042407660738
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "n": 2905,
+          "available": true,
+          "brier": 0.002789225410433112,
+          "logloss": 0.01296066201453342,
+          "pred_mean": 0.9849949749234724,
+          "empirical_next_available": 0.9841652323580035
+        },
+        "multi_fault": {
+          "n": 2435,
+          "available": true,
+          "brier": 0.006602821035993216,
+          "logloss": 0.03329644793458819,
+          "pred_mean": 0.9571692288105492,
+          "empirical_next_available": 0.9548254620123203
+        },
+        "staggered_arrivals": {
+          "n": 2245,
+          "available": true,
+          "brier": 0.0036643533638034275,
+          "logloss": 0.017913815558374353,
+          "pred_mean": 0.9696175896896585,
+          "empirical_next_available": 0.9692650334075724
+        }
+      },
+      "per_scene": {
+        "PR59_VALIDATION_0_0": {
+          "n": 605,
+          "available": true,
+          "brier": 0.0035059802096166926,
+          "logloss": 0.017435649892151527,
+          "pred_mean": 0.9875850858582446,
+          "empirical_next_available": 0.9867768595041322
+        },
+        "PR59_VALIDATION_0_1": {
+          "n": 805,
+          "available": true,
+          "brier": 0.004999738298789684,
+          "logloss": 0.027077320813782623,
+          "pred_mean": 0.9292270743791361,
+          "empirical_next_available": 0.9254658385093167
+        },
+        "PR59_VALIDATION_0_2": {
+          "n": 575,
+          "available": true,
+          "brier": 0.0033956202641616407,
+          "logloss": 0.015661773701523947,
+          "pred_mean": 0.9831825707269751,
+          "empirical_next_available": 0.9843478260869565
+        },
+        "PR59_VALIDATION_0_3": {
+          "n": 790,
+          "available": true,
+          "brier": 0.0026328302022499365,
+          "logloss": 0.013035182823694952,
+          "pred_mean": 0.9892596525293362,
+          "empirical_next_available": 0.9886075949367089
+        },
+        "PR59_VALIDATION_0_4": {
+          "n": 615,
+          "available": true,
+          "brier": 0.006793945069845868,
+          "logloss": 0.033997360213740724,
+          "pred_mean": 0.9801583423362514,
+          "empirical_next_available": 0.9788617886178862
+        },
+        "PR59_VALIDATION_0_5": {
+          "n": 540,
+          "available": true,
+          "brier": 0.004296104339214394,
+          "logloss": 0.019349054935197174,
+          "pred_mean": 0.9722235305855672,
+          "empirical_next_available": 0.9703703703703703
+        },
+        "PR59_VALIDATION_1_0": {
+          "n": 475,
+          "available": true,
+          "brier": 0.008252291791769176,
+          "logloss": 0.03755427799888289,
+          "pred_mean": 0.9868482617406469,
+          "empirical_next_available": 0.9852631578947368
+        },
+        "PR59_VALIDATION_1_1": {
+          "n": 655,
+          "available": true,
+          "brier": 0.0031557613742775117,
+          "logloss": 0.0173049836135728,
+          "pred_mean": 0.9471453243539534,
+          "empirical_next_available": 0.9450381679389313
+        },
+        "PR59_VALIDATION_1_2": {
+          "n": 730,
+          "available": true,
+          "brier": 0.0024191329043770733,
+          "logloss": 0.009695646461861747,
+          "pred_mean": 0.992896992192693,
+          "empirical_next_available": 0.9931506849315068
+        },
+        "PR59_VALIDATION_1_3": {
+          "n": 540,
+          "available": true,
+          "brier": 0.007324009394578176,
+          "logloss": 0.03802397941612392,
+          "pred_mean": 0.9465351341016315,
+          "empirical_next_available": 0.9444444444444444
+        },
+        "PR59_VALIDATION_1_4": {
+          "n": 475,
+          "available": true,
+          "brier": 0.003972782329512016,
+          "logloss": 0.01984787814374244,
+          "pred_mean": 0.9812223509836354,
+          "empirical_next_available": 0.9831578947368421
+        },
+        "PR59_VALIDATION_1_5": {
+          "n": 780,
+          "available": true,
+          "brier": 0.002738049885278691,
+          "logloss": 0.012469921307166603,
+          "pred_mean": 0.9712711479610358,
+          "empirical_next_available": 0.9692307692307692
+        }
+      },
+      "reliability": [
+        {
+          "low": 0.01,
+          "high": 0.05,
+          "n": 81,
+          "pred_mean": 0.03883276145077414,
+          "empirical": 0.08641975308641975
+        },
+        {
+          "low": 0.05,
+          "high": 0.1,
+          "n": 100,
+          "pred_mean": 0.06887394145131111,
+          "empirical": 0.05
+        },
+        {
+          "low": 0.1,
+          "high": 0.25,
+          "n": 37,
+          "pred_mean": 0.1477762231150189,
+          "empirical": 0.10810810810810811
+        },
+        {
+          "low": 0.25,
+          "high": 0.5,
+          "n": 6,
+          "pred_mean": 0.36089400947093964,
+          "empirical": 0.0
+        },
+        {
+          "low": 0.5,
+          "high": 0.75,
+          "n": 2,
+          "pred_mean": 0.6463420391082764,
+          "empirical": 0.5
+        },
+        {
+          "low": 0.75,
+          "high": 0.9,
+          "n": 1,
+          "pred_mean": 0.886243999004364,
+          "empirical": 1.0
+        },
+        {
+          "low": 0.9,
+          "high": 0.99,
+          "n": 256,
+          "pred_mean": 0.9768127964343876,
+          "empirical": 0.984375
+        },
+        {
+          "low": 0.99,
+          "high": 1.0,
+          "n": 7102,
+          "pred_mean": 0.9995775875894831,
+          "empirical": 0.9983103351168685
+        }
+      ],
+      "event_ranking": {
+        "n_events": 32,
+        "reported": false,
+        "reason": "16 validation onset/recovery events; AP/AUC/lift not statistically reliable"
+      }
+    },
+    "model_map_on_1811": {
+      "arm": "map_on",
+      "seed": 1811,
+      "checkpoint_sha256": "407f919ecaec1fe435be2ea73489aea7b13d3808c82c6ea982da0021c21c98f0",
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "brier": 0.004168814538586274,
+        "logloss": 0.02254475030674975,
+        "pred_mean": 0.9701408248687186,
+        "empirical_next_available": 0.970336189848385
+      },
+      "risk_set": {
+        "up": {
+          "n": 7360,
+          "available": true,
+          "brier": 0.002235204725266249,
+          "logloss": 0.013773292553380986,
+          "pred_mean": 0.9985611017793417,
+          "empirical_next_available": 0.9978260869565218
+        },
+        "down": {
+          "n": 225,
+          "available": true,
+          "brier": 0.06741933998763239,
+          "logloss": 0.3094688794836257,
+          "pred_mean": 0.04048198903677985,
+          "empirical_next_available": 0.07111111111111111
+        }
+      },
+      "phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "brier": 7.800500510191971e-05,
+          "logloss": 0.0014798209427667763,
+          "pred_mean": 0.9985662766758653,
+          "empirical_next_available": 1.0
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "brier": 0.9923898762806935,
+          "logloss": 5.656476761825179,
+          "pred_mean": 0.9961858242750168,
+          "empirical_next_available": 0.0
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "brier": 0.0036235415751825957,
+          "logloss": 0.0416055576850083,
+          "pred_mean": 0.03957780270083054,
+          "empirical_next_available": 0.0
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "brier": 0.9007519567502573,
+          "logloss": 3.8084335204780686,
+          "pred_mean": 0.05229292305011768,
+          "empirical_next_available": 1.0
+        }
+      },
+      "by_map": {
+        "0": {
+          "n": 3930,
+          "available": true,
+          "brier": 0.004021325595410963,
+          "logloss": 0.02151387981913537,
+          "pred_mean": 0.9708649424556554,
+          "empirical_next_available": 0.9707379134860051
+        },
+        "1": {
+          "n": 3655,
+          "available": true,
+          "brier": 0.00432740046107026,
+          "logloss": 0.023653182869356332,
+          "pred_mean": 0.969362225110398,
+          "empirical_next_available": 0.9699042407660738
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "n": 2905,
+          "available": true,
+          "brier": 0.0026976164031885298,
+          "logloss": 0.014720917809119613,
+          "pred_mean": 0.9840778721628307,
+          "empirical_next_available": 0.9841652323580035
+        },
+        "multi_fault": {
+          "n": 2435,
+          "available": true,
+          "brier": 0.006359015210450134,
+          "logloss": 0.032117906171423134,
+          "pred_mean": 0.9557589554083505,
+          "empirical_next_available": 0.9548254620123203
+        },
+        "staggered_arrivals": {
+          "n": 2245,
+          "available": true,
+          "brier": 0.003696962399317648,
+          "logloss": 0.02228532887028508,
+          "pred_mean": 0.9677055151790084,
+          "empirical_next_available": 0.9692650334075724
+        }
+      },
+      "per_scene": {
+        "PR59_VALIDATION_0_0": {
+          "n": 605,
+          "available": true,
+          "brier": 0.0031642048033400953,
+          "logloss": 0.015931480669101536,
+          "pred_mean": 0.9867589679923802,
+          "empirical_next_available": 0.9867768595041322
+        },
+        "PR59_VALIDATION_0_1": {
+          "n": 805,
+          "available": true,
+          "brier": 0.0048883142507244815,
+          "logloss": 0.025110269989736644,
+          "pred_mean": 0.9284891019534806,
+          "empirical_next_available": 0.9254658385093167
+        },
+        "PR59_VALIDATION_0_2": {
+          "n": 575,
+          "available": true,
+          "brier": 0.003639051530392699,
+          "logloss": 0.024516630111206434,
+          "pred_mean": 0.982649389567289,
+          "empirical_next_available": 0.9843478260869565
+        },
+        "PR59_VALIDATION_0_3": {
+          "n": 790,
+          "available": true,
+          "brier": 0.0024694936467393796,
+          "logloss": 0.012673051164040076,
+          "pred_mean": 0.9885335956022285,
+          "empirical_next_available": 0.9886075949367089
+        },
+        "PR59_VALIDATION_0_4": {
+          "n": 615,
+          "available": true,
+          "brier": 0.006346035933084325,
+          "logloss": 0.031272050179121165,
+          "pred_mean": 0.9783651090446648,
+          "empirical_next_available": 0.9788617886178862
+        },
+        "PR59_VALIDATION_0_5": {
+          "n": 540,
+          "available": true,
+          "brier": 0.00371890000437841,
+          "logloss": 0.021029909164744294,
+          "pred_mean": 0.9692904436173396,
+          "empirical_next_available": 0.9703703703703703
+        },
+        "PR59_VALIDATION_1_0": {
+          "n": 475,
+          "available": true,
+          "brier": 0.008041562343470879,
+          "logloss": 0.04326944153436793,
+          "pred_mean": 0.9841887016954685,
+          "empirical_next_available": 0.9852631578947368
+        },
+        "PR59_VALIDATION_1_1": {
+          "n": 655,
+          "available": true,
+          "brier": 0.0031919179343230736,
+          "logloss": 0.01956063856398816,
+          "pred_mean": 0.9437172516522829,
+          "empirical_next_available": 0.9450381679389313
+        },
+        "PR59_VALIDATION_1_2": {
+          "n": 730,
+          "available": true,
+          "brier": 0.0028125978877000836,
+          "logloss": 0.017856889444756868,
+          "pred_mean": 0.9921549551986311,
+          "empirical_next_available": 0.9931506849315068
+        },
+        "PR59_VALIDATION_1_3": {
+          "n": 540,
+          "available": true,
+          "brier": 0.007086212691883954,
+          "logloss": 0.03371858999387522,
+          "pred_mean": 0.9456576925536393,
+          "empirical_next_available": 0.9444444444444444
+        },
+        "PR59_VALIDATION_1_4": {
+          "n": 475,
+          "available": true,
+          "brier": 0.004438555172939718,
+          "logloss": 0.02476869850836257,
+          "pred_mean": 0.9808923014527873,
+          "empirical_next_available": 0.9831578947368421
+        },
+        "PR59_VALIDATION_1_5": {
+          "n": 780,
+          "available": true,
+          "brier": 0.0024591478285855796,
+          "logloss": 0.01292112912361788,
+          "pred_mean": 0.9699261348421435,
+          "empirical_next_available": 0.9692307692307692
+        }
+      },
+      "reliability": [
+        {
+          "low": 0.0,
+          "high": 0.001,
+          "n": 3,
+          "pred_mean": 0.0004434301711929341,
+          "empirical": 0.0
+        },
+        {
+          "low": 0.001,
+          "high": 0.005,
+          "n": 40,
+          "pred_mean": 0.0030958068935433404,
+          "empirical": 0.075
+        },
+        {
+          "low": 0.005,
+          "high": 0.01,
+          "n": 19,
+          "pred_mean": 0.00759947103889365,
+          "empirical": 0.05263157894736842
+        },
+        {
+          "low": 0.01,
+          "high": 0.05,
+          "n": 108,
+          "pred_mean": 0.027345722489472892,
+          "empirical": 0.05555555555555555
+        },
+        {
+          "low": 0.05,
+          "high": 0.1,
+          "n": 22,
+          "pred_mean": 0.07585618949749252,
+          "empirical": 0.09090909090909091
+        },
+        {
+          "low": 0.1,
+          "high": 0.25,
+          "n": 31,
+          "pred_mean": 0.1167587282196168,
+          "empirical": 0.12903225806451613
+        },
+        {
+          "low": 0.25,
+          "high": 0.5,
+          "n": 2,
+          "pred_mean": 0.29860012233257294,
+          "empirical": 0.0
+        },
+        {
+          "low": 0.5,
+          "high": 0.75,
+          "n": 3,
+          "pred_mean": 0.6968741218249003,
+          "empirical": 1.0
+        },
+        {
+          "low": 0.75,
+          "high": 0.9,
+          "n": 7,
+          "pred_mean": 0.8466936775616237,
+          "empirical": 1.0
+        },
+        {
+          "low": 0.9,
+          "high": 0.99,
+          "n": 108,
+          "pred_mean": 0.9776563782382894,
+          "empirical": 0.9907407407407407
+        },
+        {
+          "low": 0.99,
+          "high": 1.0,
+          "n": 7242,
+          "pred_mean": 0.9991446205658401,
+          "empirical": 0.9979287489643744
+        }
+      ],
+      "event_ranking": {
+        "n_events": 32,
+        "reported": false,
+        "reason": "16 validation onset/recovery events; AP/AUC/lift not statistically reliable"
+      }
+    },
+    "model_map_on_1812": {
+      "arm": "map_on",
+      "seed": 1812,
+      "checkpoint_sha256": "3a4c93e5ea0f43d9dfe41e23c802c3814792e3085b06e635221f919a8dacd421",
+      "overall": {
+        "n": 7585,
+        "available": true,
+        "brier": 0.004161324144299116,
+        "logloss": 0.02333122765228127,
+        "pred_mean": 0.9713762906200732,
+        "empirical_next_available": 0.970336189848385
+      },
+      "risk_set": {
+        "up": {
+          "n": 7360,
+          "available": true,
+          "brier": 0.0022000170045569185,
+          "logloss": 0.01549939297637303,
+          "pred_mean": 0.998808488095908,
+          "empirical_next_available": 0.9978260869565218
+        },
+        "down": {
+          "n": 225,
+          "available": true,
+          "brier": 0.06831785991542152,
+          "logloss": 0.27951924193977123,
+          "pred_mean": 0.07403863096609711,
+          "empirical_next_available": 0.07111111111111111
+        }
+      },
+      "phase": {
+        "healthy_hold": {
+          "n": 7344,
+          "available": true,
+          "brier": 3.911913376437849e-05,
+          "logloss": 0.001209209010258779,
+          "pred_mean": 0.99881239318997,
+          "empirical_next_available": 1.0
+        },
+        "fault_onset": {
+          "n": 16,
+          "available": true,
+          "brier": 0.9940521396983328,
+          "logloss": 6.574693833422775,
+          "pred_mean": 0.9970160499215126,
+          "empirical_next_available": 0.0
+        },
+        "continuing_down": {
+          "n": 209,
+          "available": true,
+          "brier": 0.009411936798285,
+          "logloss": 0.07867112616504914,
+          "pred_mean": 0.07277386879735587,
+          "empirical_next_available": 0.0
+        },
+        "recovery": {
+          "n": 16,
+          "available": true,
+          "brier": 0.8377764806330175,
+          "logloss": 2.9030977542470793,
+          "pred_mean": 0.09055958679527976,
+          "empirical_next_available": 1.0
+        }
+      },
+      "by_map": {
+        "0": {
+          "n": 3930,
+          "available": true,
+          "brier": 0.004125410844412906,
+          "logloss": 0.02278314064137125,
+          "pred_mean": 0.9717560757514393,
+          "empirical_next_available": 0.9707379134860051
+        },
+        "1": {
+          "n": 3655,
+          "available": true,
+          "brier": 0.004199939539251998,
+          "logloss": 0.02392055239999033,
+          "pred_mean": 0.9709679306840215,
+          "empirical_next_available": 0.9699042407660738
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "n": 2905,
+          "available": true,
+          "brier": 0.0026886161986786317,
+          "logloss": 0.014869060699200447,
+          "pred_mean": 0.9846091342586607,
+          "empirical_next_available": 0.9841652323580035
+        },
+        "multi_fault": {
+          "n": 2435,
+          "available": true,
+          "brier": 0.006428512113614605,
+          "logloss": 0.03475010527309997,
+          "pred_mean": 0.9567924700564565,
+          "empirical_next_available": 0.9548254620123203
+        },
+        "staggered_arrivals": {
+          "n": 2245,
+          "available": true,
+          "brier": 0.003607922753093886,
+          "logloss": 0.02189587263758484,
+          "pred_mean": 0.9700712537836856,
+          "empirical_next_available": 0.9692650334075724
+        }
+      },
+      "per_scene": {
+        "PR59_VALIDATION_0_0": {
+          "n": 605,
+          "available": true,
+          "brier": 0.003239895708648002,
+          "logloss": 0.015133955274605385,
+          "pred_mean": 0.9865498401224613,
+          "empirical_next_available": 0.9867768595041322
+        },
+        "PR59_VALIDATION_0_1": {
+          "n": 805,
+          "available": true,
+          "brier": 0.005162917796175084,
+          "logloss": 0.027844569124099598,
+          "pred_mean": 0.9297392283988573,
+          "empirical_next_available": 0.9254658385093167
+        },
+        "PR59_VALIDATION_0_2": {
+          "n": 575,
+          "available": true,
+          "brier": 0.0035493619521277152,
+          "logloss": 0.021950491424126833,
+          "pred_mean": 0.9848235227038031,
+          "empirical_next_available": 0.9843478260869565
+        },
+        "PR59_VALIDATION_0_3": {
+          "n": 790,
+          "available": true,
+          "brier": 0.0026330604067579862,
+          "logloss": 0.012505697109430348,
+          "pred_mean": 0.9888056032878312,
+          "empirical_next_available": 0.9886075949367089
+        },
+        "PR59_VALIDATION_0_4": {
+          "n": 615,
+          "available": true,
+          "brier": 0.006433965607098038,
+          "logloss": 0.0370465156527795,
+          "pred_mean": 0.9778037846732006,
+          "empirical_next_available": 0.9788617886178862
+        },
+        "PR59_VALIDATION_0_5": {
+          "n": 540,
+          "available": true,
+          "brier": 0.0037383133272447977,
+          "logloss": 0.023485520782906905,
+          "pred_mean": 0.9720728997072136,
+          "empirical_next_available": 0.9703703703703703
+        },
+        "PR59_VALIDATION_1_0": {
+          "n": 475,
+          "available": true,
+          "brier": 0.006887180547571622,
+          "logloss": 0.034639333403400016,
+          "pred_mean": 0.9855104146172342,
+          "empirical_next_available": 0.9852631578947368
+        },
+        "PR59_VALIDATION_1_1": {
+          "n": 655,
+          "available": true,
+          "brier": 0.003213348922283488,
+          "logloss": 0.020353664570045994,
+          "pred_mean": 0.9467269065640582,
+          "empirical_next_available": 0.9450381679389313
+        },
+        "PR59_VALIDATION_1_2": {
+          "n": 730,
+          "available": true,
+          "brier": 0.002345453533595395,
+          "logloss": 0.0152760412248916,
+          "pred_mean": 0.9925480122231457,
+          "empirical_next_available": 0.9931506849315068
+        },
+        "PR59_VALIDATION_1_3": {
+          "n": 540,
+          "available": true,
+          "brier": 0.007905515856053352,
+          "logloss": 0.04252655130004293,
+          "pred_mean": 0.9479311318688647,
+          "empirical_next_available": 0.9444444444444444
+        },
+        "PR59_VALIDATION_1_4": {
+          "n": 475,
+          "available": true,
+          "brier": 0.004074675194556761,
+          "logloss": 0.02214919997127388,
+          "pred_mean": 0.9821283148385976,
+          "empirical_next_available": 0.9831578947368421
+        },
+        "PR59_VALIDATION_1_5": {
+          "n": 780,
+          "available": true,
+          "brier": 0.002638454298161459,
+          "logloss": 0.01667636869156448,
+          "pred_mean": 0.971423597726971,
+          "empirical_next_available": 0.9692307692307692
+        }
+      },
+      "reliability": [
+        {
+          "low": 0.005,
+          "high": 0.01,
+          "n": 4,
+          "pred_mean": 0.007657051202841103,
+          "empirical": 0.25
+        },
+        {
+          "low": 0.01,
+          "high": 0.05,
+          "n": 102,
+          "pred_mean": 0.03508180732309234,
+          "empirical": 0.058823529411764705
+        },
+        {
+          "low": 0.05,
+          "high": 0.1,
+          "n": 73,
+          "pred_mean": 0.07698335988472586,
+          "empirical": 0.0547945205479452
+        },
+        {
+          "low": 0.1,
+          "high": 0.25,
+          "n": 39,
+          "pred_mean": 0.12378916373619667,
+          "empirical": 0.10256410256410256
+        },
+        {
+          "low": 0.25,
+          "high": 0.5,
+          "n": 6,
+          "pred_mean": 0.33349629243214923,
+          "empirical": 0.16666666666666666
+        },
+        {
+          "low": 0.5,
+          "high": 0.75,
+          "n": 1,
+          "pred_mean": 0.6011790037155151,
+          "empirical": 0.0
+        },
+        {
+          "low": 0.75,
+          "high": 0.9,
+          "n": 5,
+          "pred_mean": 0.824697208404541,
+          "empirical": 1.0
+        },
+        {
+          "low": 0.9,
+          "high": 0.99,
+          "n": 146,
+          "pred_mean": 0.9771656153136736,
+          "empirical": 0.9863013698630136
+        },
+        {
+          "low": 0.99,
+          "high": 1.0,
+          "n": 7209,
+          "pred_mean": 0.9993675692201504,
+          "empirical": 0.9980579830767097
+        }
+      ],
+      "event_ranking": {
+        "n_events": 32,
+        "reported": false,
+        "reason": "16 validation onset/recovery events; AP/AUC/lift not statistically reliable"
+      }
+    },
+    "model_map_off_mean": {
+      "arm": "map_off",
+      "seed": null,
+      "overall": {
+        "brier": 0.00423437423985189,
+        "logloss": 0.023141348968091224,
+        "n": 7585
+      },
+      "risk_set": {
+        "up": {
+          "brier": 0.002201572972274031,
+          "logloss": 0.015244891581849232,
+          "n": 7360
+        },
+        "down": {
+          "brier": 0.07072956237039968,
+          "logloss": 0.28144324391362274,
+          "n": 225
+        }
+      },
+      "phase": {
+        "healthy_hold": {
+          "brier": 4.853787055580903e-05,
+          "logloss": 0.0015990687839608868,
+          "n": 7344
+        },
+        "fault_onset": {
+          "brier": 0.9904446846609378,
+          "logloss": 6.278677555812465,
+          "n": 16
+        },
+        "continuing_down": {
+          "brier": 0.012218170824618554,
+          "logloss": 0.08587742308896895,
+          "n": 209
+        },
+        "recovery": {
+          "brier": 0.8350346144371654,
+          "logloss": 2.836021778435662,
+          "n": 16
+        }
+      },
+      "per_scene": {
+        "PR59_VALIDATION_0_0": {
+          "brier": 0.003590149108623101,
+          "logloss": 0.018588511533403667,
+          "n": 605
+        },
+        "PR59_VALIDATION_0_1": {
+          "brier": 0.005341586025284476,
+          "logloss": 0.030629033513958515,
+          "n": 805
+        },
+        "PR59_VALIDATION_0_2": {
+          "brier": 0.003590316488458431,
+          "logloss": 0.01851932053477321,
+          "n": 575
+        },
+        "PR59_VALIDATION_0_3": {
+          "brier": 0.002742513897358402,
+          "logloss": 0.014318251481469218,
+          "n": 790
+        },
+        "PR59_VALIDATION_0_4": {
+          "brier": 0.006431072262269146,
+          "logloss": 0.03731279456351096,
+          "n": 615
+        },
+        "PR59_VALIDATION_0_5": {
+          "brier": 0.003853597439500833,
+          "logloss": 0.020349077711595647,
+          "n": 540
+        },
+        "PR59_VALIDATION_1_0": {
+          "brier": 0.007282013954302339,
+          "logloss": 0.038253879152724206,
+          "n": 475
+        },
+        "PR59_VALIDATION_1_1": {
+          "brier": 0.003235779046426813,
+          "logloss": 0.020230970304766945,
+          "n": 655
+        },
+        "PR59_VALIDATION_1_2": {
+          "brier": 0.0022247581556498227,
+          "logloss": 0.011317498155207712,
+          "n": 730
+        },
+        "PR59_VALIDATION_1_3": {
+          "brier": 0.007663009920768511,
+          "logloss": 0.040751117439579744,
+          "n": 540
+        },
+        "PR59_VALIDATION_1_4": {
+          "brier": 0.003991247441172181,
+          "logloss": 0.02252045422799834,
+          "n": 475
+        },
+        "PR59_VALIDATION_1_5": {
+          "brier": 0.0027465492060304835,
+          "logloss": 0.014541462681680379,
+          "n": 780
+        }
+      }
+    },
+    "model_map_on_mean": {
+      "arm": "map_on",
+      "seed": null,
+      "overall": {
+        "brier": 0.004200885267034747,
+        "logloss": 0.02227701088203662,
+        "n": 7585
+      },
+      "risk_set": {
+        "up": {
+          "brier": 0.002205263289672061,
+          "logloss": 0.01410552532253165,
+          "n": 7360
+        },
+        "down": {
+          "brier": 0.06947989750432133,
+          "logloss": 0.2895753829618513,
+          "n": 225
+        }
+      },
+      "phase": {
+        "healthy_hold": {
+          "brier": 5.183735917454614e-05,
+          "logloss": 0.0013203938942729912,
+          "n": 7344
+        },
+        "fault_onset": {
+          "brier": 0.9906277653880315,
+          "logloss": 5.882480850893156,
+          "n": 16
+        },
+        "continuing_down": {
+          "brier": 0.008327045537789428,
+          "logloss": 0.06986600697221391,
+          "n": 209
+        },
+        "recovery": {
+          "brier": 0.8682890263171442,
+          "logloss": 3.159529106826492,
+          "n": 16
+        }
+      },
+      "per_scene": {
+        "PR59_VALIDATION_0_0": {
+          "brier": 0.00330336024053493,
+          "logloss": 0.016167028611952818,
+          "n": 605
+        },
+        "PR59_VALIDATION_0_1": {
+          "brier": 0.005016990115229749,
+          "logloss": 0.02667738664253962,
+          "n": 805
+        },
+        "PR59_VALIDATION_0_2": {
+          "brier": 0.003528011248894019,
+          "logloss": 0.020709631745619073,
+          "n": 575
+        },
+        "PR59_VALIDATION_0_3": {
+          "brier": 0.002578461418582434,
+          "logloss": 0.01273797703238846,
+          "n": 790
+        },
+        "PR59_VALIDATION_0_4": {
+          "brier": 0.00652464887000941,
+          "logloss": 0.03410530868188046,
+          "n": 615
+        },
+        "PR59_VALIDATION_0_5": {
+          "brier": 0.003917772556945867,
+          "logloss": 0.021288161627616126,
+          "n": 540
+        },
+        "PR59_VALIDATION_1_0": {
+          "brier": 0.007727011560937226,
+          "logloss": 0.03848768431221695,
+          "n": 475
+        },
+        "PR59_VALIDATION_1_1": {
+          "brier": 0.003187009410294691,
+          "logloss": 0.019073095582535653,
+          "n": 655
+        },
+        "PR59_VALIDATION_1_2": {
+          "brier": 0.0025257281085575172,
+          "logloss": 0.014276192377170073,
+          "n": 730
+        },
+        "PR59_VALIDATION_1_3": {
+          "brier": 0.007438579314171827,
+          "logloss": 0.038089706903347356,
+          "n": 540
+        },
+        "PR59_VALIDATION_1_4": {
+          "brier": 0.0041620042323361655,
+          "logloss": 0.02225525887445963,
+          "n": 475
+        },
+        "PR59_VALIDATION_1_5": {
+          "brier": 0.0026118840040085765,
+          "logloss": 0.014022473040782987,
+          "n": 780
+        }
+      }
+    }
+  },
+  "uncertainty": {
+    "scene_bootstrap": {
+      "constant": {
+        "n_scenes": 12,
+        "bootstrap": 2000,
+        "mean": 0.004233821764735001,
+        "ci95_low": 0.003255009987202648,
+        "ci95_high": 0.005332657565952981
+      },
+      "age_h4": {
+        "n_scenes": 12,
+        "bootstrap": 2000,
+        "mean": 0.004203794260615371,
+        "ci95_low": 0.003243279647342358,
+        "ci95_high": 0.00528198850848179
+      },
+      "age_exact": {
+        "n_scenes": 12,
+        "bootstrap": 2000,
+        "mean": 0.003912394911545059,
+        "ci95_low": 0.0029610899139699935,
+        "ci95_high": 0.004966498097115038
+      },
+      "abs_tick": {
+        "n_scenes": 12,
+        "bootstrap": 2000,
+        "mean": 0.0038516781824081627,
+        "ci95_low": 0.0029573370976915814,
+        "ci95_high": 0.004863978138254368
+      },
+      "model_map_off_mean": {
+        "n_scenes": 12,
+        "bootstrap": 2000,
+        "mean": 0.004391049412153711,
+        "ci95_low": 0.003431690970623401,
+        "ci95_high": 0.005411252670007447
+      },
+      "model_map_on_mean": {
+        "n_scenes": 12,
+        "bootstrap": 2000,
+        "mean": 0.004376788423375202,
+        "ci95_low": 0.003391951613275338,
+        "ci95_high": 0.005451907829250608
+      }
+    },
+    "paired_minus_constant": {
+      "constant": {
+        "n_scenes": 12,
+        "bootstrap": 2000,
+        "mean": 0.0,
+        "ci95_low": 0.0,
+        "ci95_high": 0.0
+      },
+      "age_h4": {
+        "n_scenes": 12,
+        "bootstrap": 2000,
+        "mean": -3.0027504119629286e-05,
+        "ci95_low": -6.501490590161135e-05,
+        "ci95_high": 6.131617206419513e-06
+      },
+      "age_exact": {
+        "n_scenes": 12,
+        "bootstrap": 2000,
+        "mean": -0.0003214268531899405,
+        "ci95_low": -0.0004284907909241286,
+        "ci95_high": -0.00022150096719332298
+      },
+      "abs_tick": {
+        "n_scenes": 12,
+        "bootstrap": 2000,
+        "mean": -0.00038214358232683724,
+        "ci95_low": -0.0004887667301643712,
+        "ci95_high": -0.00028482995934601296
+      },
+      "model_map_off_mean": {
+        "n_scenes": 12,
+        "bootstrap": 2000,
+        "mean": 0.00015722764741871165,
+        "ci95_low": -4.67674894466656e-05,
+        "ci95_high": 0.000310884831417456
+      },
+      "model_map_on_mean": {
+        "n_scenes": 12,
+        "bootstrap": 2000,
+        "mean": 0.00014296665864020118,
+        "ci95_low": 5.211159955882263e-05,
+        "ci95_high": 0.00022355127863388582
+      }
+    },
+    "map_block": {
+      "constant": {
+        "0": {
+          "n_scenes": 6,
+          "bootstrap": 1000,
+          "mean": 0.003927037854896557,
+          "ci95_low": 0.0029923299599025083,
+          "ci95_high": 0.004997852521757191
+        },
+        "1": {
+          "n_scenes": 6,
+          "bootstrap": 1000,
+          "mean": 0.004540605674573443,
+          "ci95_low": 0.002895586835331142,
+          "ci95_high": 0.006305776098208792
+        }
+      },
+      "age_h4": {
+        "0": {
+          "n_scenes": 6,
+          "bootstrap": 1000,
+          "mean": 0.0038995504379295263,
+          "ci95_low": 0.002956271343477384,
+          "ci95_high": 0.004948209451500387
+        },
+        "1": {
+          "n_scenes": 6,
+          "bootstrap": 1000,
+          "mean": 0.004508038083301215,
+          "ci95_low": 0.00289142379889022,
+          "ci95_high": 0.006230797122201509
+        }
+      },
+      "age_exact": {
+        "0": {
+          "n_scenes": 6,
+          "bootstrap": 1000,
+          "mean": 0.003639510955619832,
+          "ci95_low": 0.0026547744079384924,
+          "ci95_high": 0.004753186574746152
+        },
+        "1": {
+          "n_scenes": 6,
+          "bootstrap": 1000,
+          "mean": 0.004185278867470286,
+          "ci95_low": 0.002670699474091039,
+          "ci95_high": 0.005787746943286032
+        }
+      },
+      "abs_tick": {
+        "0": {
+          "n_scenes": 6,
+          "bootstrap": 1000,
+          "mean": 0.003562002093626612,
+          "ci95_low": 0.0026911675297799386,
+          "ci95_high": 0.004580831714619436
+        },
+        "1": {
+          "n_scenes": 6,
+          "bootstrap": 1000,
+          "mean": 0.004141354271189714,
+          "ci95_low": 0.0026758767670752516,
+          "ci95_high": 0.005722350647458446
+        }
+      },
+      "model_map_off_mean": {
+        "0": {
+          "n_scenes": 6,
+          "bootstrap": 1000,
+          "mean": 0.004258205870249064,
+          "ci95_low": 0.0033515399899870448,
+          "ci95_high": 0.005302572631501463
+        },
+        "1": {
+          "n_scenes": 6,
+          "bootstrap": 1000,
+          "mean": 0.004523892954058358,
+          "ci95_low": 0.0029096258194959267,
+          "ci95_high": 0.0063120904387476764
+        }
+      },
+      "model_map_on_mean": {
+        "0": {
+          "n_scenes": 6,
+          "bootstrap": 1000,
+          "mean": 0.004144874075032735,
+          "ci95_low": 0.0032015711873457694,
+          "ci95_high": 0.005274493203841002
+        },
+        "1": {
+          "n_scenes": 6,
+          "bootstrap": 1000,
+          "mean": 0.004608702771717667,
+          "ci95_low": 0.0029517322938690175,
+          "ci95_high": 0.006394459661354174
+        }
+      }
+    },
+    "independent_unit": "12 source scenes"
+  },
+  "validation_meta": {
+    "split": "validation",
+    "scenes": 12,
+    "transitions": 1517,
+    "sources": {
+      "/data/wm-a100-pr60-gpu-20261112/source/pr59-validation/data.json": "c7a0a0081e0c901faea23b37816eb54b560efb9c8b66118387c3fbb0a9509712"
+    }
+  },
+  "observability": {
+    "schema": "pr63-event-time-observability-v1",
+    "train": {
+      "risk_set": {
+        "up": {
+          "n": 44180,
+          "events": 80,
+          "hazard": 0.0018107741059302852
+        },
+        "down": {
+          "n": 1050,
+          "events": 80,
+          "hazard": 0.0761904761904762
+        }
+      },
+      "phase": {
+        "continuing_down": 970,
+        "fault_onset": 80,
+        "healthy_hold": 44100,
+        "recovery": 80
+      },
+      "onset_next_tick": {
+        "13": 20,
+        "7": 60
+      },
+      "recovery_next_tick": {
+        "10": 2,
+        "11": 6,
+        "12": 4,
+        "13": 2,
+        "15": 9,
+        "16": 8,
+        "17": 5,
+        "18": 2,
+        "19": 4,
+        "20": 2,
+        "21": 1,
+        "22": 2,
+        "23": 5,
+        "25": 8,
+        "29": 4,
+        "31": 8,
+        "37": 3,
+        "43": 5
+      },
+      "onset_current_tick": {
+        "12": 20,
+        "6": 60
+      },
+      "recovery_current_tick": {
+        "10": 6,
+        "11": 4,
+        "12": 2,
+        "14": 9,
+        "15": 8,
+        "16": 5,
+        "17": 2,
+        "18": 4,
+        "19": 2,
+        "20": 1,
+        "21": 2,
+        "22": 5,
+        "24": 8,
+        "28": 4,
+        "30": 8,
+        "36": 3,
+        "42": 5,
+        "9": 2
+      },
+      "onset_age_exact": {
+        "13": 20,
+        "7": 60
+      },
+      "recovery_age_exact": {
+        "10": 5,
+        "12": 11,
+        "16": 6,
+        "18": 1,
+        "22": 3,
+        "24": 9,
+        "3": 6,
+        "30": 2,
+        "36": 5,
+        "4": 6,
+        "5": 6,
+        "6": 2,
+        "7": 2,
+        "8": 10,
+        "9": 6
+      },
+      "onset_age_h4": {
+        "4": 80
+      },
+      "recovery_age_h4": {
+        "3": 6,
+        "4": 74
+      },
+      "by_map": {
+        "0": {
+          "healthy_hold": 6547,
+          "fault_onset": 13,
+          "continuing_down": 152,
+          "recovery": 13
+        },
+        "1": {
+          "healthy_hold": 6289,
+          "fault_onset": 14,
+          "continuing_down": 173,
+          "recovery": 14
+        },
+        "2": {
+          "healthy_hold": 9529,
+          "fault_onset": 13,
+          "continuing_down": 145,
+          "recovery": 13
+        },
+        "3": {
+          "healthy_hold": 8677,
+          "fault_onset": 13,
+          "continuing_down": 167,
+          "recovery": 13
+        },
+        "4": {
+          "healthy_hold": 6150,
+          "fault_onset": 14,
+          "continuing_down": 167,
+          "recovery": 14
+        },
+        "5": {
+          "healthy_hold": 6908,
+          "fault_onset": 13,
+          "continuing_down": 166,
+          "recovery": 13
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "healthy_hold": 17222,
+          "fault_onset": 20,
+          "continuing_down": 198,
+          "recovery": 20
+        },
+        "multi_fault": {
+          "healthy_hold": 13602,
+          "fault_onset": 40,
+          "continuing_down": 528,
+          "recovery": 40
+        },
+        "staggered_arrivals": {
+          "healthy_hold": 13276,
+          "fault_onset": 20,
+          "continuing_down": 244,
+          "recovery": 20
+        }
+      }
+    },
+    "validation": {
+      "risk_set": {
+        "up": {
+          "n": 7360,
+          "events": 16,
+          "hazard": 0.002173913043478261
+        },
+        "down": {
+          "n": 225,
+          "events": 16,
+          "hazard": 0.07111111111111111
+        }
+      },
+      "phase": {
+        "continuing_down": 209,
+        "fault_onset": 16,
+        "healthy_hold": 7344,
+        "recovery": 16
+      },
+      "onset_next_tick": {
+        "13": 4,
+        "7": 12
+      },
+      "recovery_next_tick": {
+        "11": 1,
+        "12": 1,
+        "13": 1,
+        "15": 2,
+        "16": 3,
+        "20": 1,
+        "23": 1,
+        "25": 2,
+        "31": 1,
+        "37": 1,
+        "43": 2
+      },
+      "onset_current_tick": {
+        "12": 4,
+        "6": 12
+      },
+      "recovery_current_tick": {
+        "10": 1,
+        "11": 1,
+        "12": 1,
+        "14": 2,
+        "15": 3,
+        "19": 1,
+        "22": 1,
+        "24": 2,
+        "30": 1,
+        "36": 1,
+        "42": 2
+      },
+      "onset_age_exact": {
+        "13": 4,
+        "7": 12
+      },
+      "recovery_age_exact": {
+        "12": 1,
+        "16": 1,
+        "18": 1,
+        "24": 2,
+        "3": 1,
+        "36": 2,
+        "4": 1,
+        "5": 1,
+        "6": 1,
+        "7": 1,
+        "8": 2,
+        "9": 2
+      },
+      "onset_age_h4": {
+        "4": 16
+      },
+      "recovery_age_h4": {
+        "3": 1,
+        "4": 15
+      },
+      "by_map": {
+        "0": {
+          "healthy_hold": 3807,
+          "fault_onset": 8,
+          "continuing_down": 107,
+          "recovery": 8
+        },
+        "1": {
+          "healthy_hold": 3537,
+          "fault_onset": 8,
+          "continuing_down": 102,
+          "recovery": 8
+        }
+      },
+      "by_regime": {
+        "congestion": {
+          "healthy_hold": 2855,
+          "fault_onset": 4,
+          "continuing_down": 42,
+          "recovery": 4
+        },
+        "multi_fault": {
+          "healthy_hold": 2317,
+          "fault_onset": 8,
+          "continuing_down": 102,
+          "recovery": 8
+        },
+        "staggered_arrivals": {
+          "healthy_hold": 2172,
+          "fault_onset": 4,
+          "continuing_down": 65,
+          "recovery": 4
+        }
+      }
+    },
+    "train_meta": {
+      "split": "train",
+      "scenes": 60,
+      "transitions": 9046,
+      "sources": {
+        "/data/wm-a100-pr60-gpu-20261112/source/pr59-train/data.json": "6c75e4bf5aba43ff72b1686fb3e640cbdec46e8910099b29a3f64d3c24fb90b0",
+        "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-congestion/data.json": "c69c7cc6eedee9a60cc8139c621c218d984ca59483c2690aebd22995ec8f6094",
+        "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-multi_fault/data.json": "ff905160a33991bbeb953a0ed9ae382d02e0611bdb0cb5edde6e746ea8f1f766",
+        "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-staggered_arrivals/data.json": "7ee5d838d87c574f132b11cfa371d5770427d9037e6640c4d10fd6869525d43b"
+      }
+    },
+    "validation_meta": {
+      "split": "validation",
+      "scenes": 12,
+      "transitions": 1517,
+      "sources": {
+        "/data/wm-a100-pr60-gpu-20261112/source/pr59-validation/data.json": "c7a0a0081e0c901faea23b37816eb54b560efb9c8b66118387c3fbb0a9509712"
+      }
+    },
+    "pr48_protocol": {
+      "schema": "PR48_INDEPENDENT_THREE_STRESS_REGIMES_20261112_V1",
+      "outage_start_tick": 7,
+      "secondary_outage_start_tick": 13,
+      "source": "/data/wm-a100-pr63-20261113/wm/experiments/world_model_integration/stress_pr48/pr48_protocol.json",
+      "sha256": "ec46ec82126eea88b71cfa6ebb6ff94cbb5e5df89381f203175676ee831523fa"
+    },
+    "model_input": {
+      "node_feature_dim": 16,
+      "history_window": 4,
+      "absolute_public_tick_in_input_json": true,
+      "absolute_public_tick_used_by_model": false,
+      "full_age_used_by_model": false,
+      "history_age_cap": 4,
+      "note": "pr51 node_features has no clock; pr54 history is t-3..t; PR48 outage starts are fixed at ticks 7/13"
+    },
+    "BLIND_TEST_read": false,
+    "BLIND_TEST_generated": false
+  },
+  "limitations": [
+    "12 independent validation scenes; 16 onset and 16 recovery events",
+    "station ticks are correlated; no tick-level independent inference",
+    "phase-conditioned metrics are descriptive, not calibration",
+    "absolute-tick and exact-age diagnostics are not model input features",
+    "no H20/autoregressive/online/decision claim"
+  ],
+  "BLIND_TEST_read": false,
+  "BLIND_TEST_generated": false,
+  "new_training_performed": false,
+  "source_model_parameter_updates": 0
+}

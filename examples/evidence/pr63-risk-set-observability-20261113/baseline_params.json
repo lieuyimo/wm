@@ -1,0 +1,253 @@
+{
+  "schema": "pr63-train-fitted-device-hazards-v1",
+  "fit_split": "train",
+  "alpha_age_buckets": 1.0,
+  "constant": {
+    "up": {
+      "n": 44180,
+      "events": 80,
+      "hazard": 0.0018107741059302852
+    },
+    "down": {
+      "n": 1050,
+      "events": 80,
+      "hazard": 0.0761904761904762
+    }
+  },
+  "age_h4": {
+    "up": {
+      "1": {
+        "n": 380,
+        "events": 0,
+        "hazard": 0.002617801047120419
+      },
+      "2": {
+        "n": 380,
+        "events": 0,
+        "hazard": 0.002617801047120419
+      },
+      "3": {
+        "n": 380,
+        "events": 0,
+        "hazard": 0.002617801047120419
+      },
+      "4": {
+        "n": 43040,
+        "events": 80,
+        "hazard": 0.0018818828121369825
+      }
+    },
+    "down": {
+      "1": {
+        "n": 80,
+        "events": 0,
+        "hazard": 0.012195121951219513
+      },
+      "2": {
+        "n": 80,
+        "events": 0,
+        "hazard": 0.012195121951219513
+      },
+      "3": {
+        "n": 80,
+        "events": 6,
+        "hazard": 0.08536585365853659
+      },
+      "4": {
+        "n": 810,
+        "events": 74,
+        "hazard": 0.09236453201970443
+      }
+    }
+  },
+  "age_exact": {
+    "up": {
+      "1": {
+        "n": 380,
+        "events": 0,
+        "hazard": 0.002617801047120419
+      },
+      "2": {
+        "n": 380,
+        "events": 0,
+        "hazard": 0.002617801047120419
+      },
+      "3": {
+        "n": 380,
+        "events": 0,
+        "hazard": 0.002617801047120419
+      },
+      "4": {
+        "n": 380,
+        "events": 0,
+        "hazard": 0.002617801047120419
+      },
+      "5": {
+        "n": 380,
+        "events": 0,
+        "hazard": 0.002617801047120419
+      },
+      "6": {
+        "n": 380,
+        "events": 0,
+        "hazard": 0.002617801047120419
+      },
+      "7": {
+        "n": 380,
+        "events": 60,
+        "hazard": 0.15968586387434555
+      },
+      "8-12": {
+        "n": 1600,
+        "events": 0,
+        "hazard": 0.0006242197253433209
+      },
+      "13": {
+        "n": 320,
+        "events": 20,
+        "hazard": 0.06521739130434782
+      },
+      "14-20": {
+        "n": 2100,
+        "events": 0,
+        "hazard": 0.0004757373929590866
+      },
+      "21+": {
+        "n": 37500,
+        "events": 0,
+        "hazard": 2.666524452029225e-05
+      }
+    },
+    "down": {
+      "1": {
+        "n": 80,
+        "events": 0,
+        "hazard": 0.012195121951219513
+      },
+      "2": {
+        "n": 80,
+        "events": 0,
+        "hazard": 0.012195121951219513
+      },
+      "3": {
+        "n": 80,
+        "events": 6,
+        "hazard": 0.08536585365853659
+      },
+      "4": {
+        "n": 74,
+        "events": 6,
+        "hazard": 0.09210526315789473
+      },
+      "5": {
+        "n": 68,
+        "events": 6,
+        "hazard": 0.1
+      },
+      "6": {
+        "n": 62,
+        "events": 2,
+        "hazard": 0.046875
+      },
+      "7": {
+        "n": 60,
+        "events": 2,
+        "hazard": 0.04838709677419355
+      },
+      "8-12": {
+        "n": 222,
+        "events": 32,
+        "hazard": 0.14732142857142858
+      },
+      "13": {
+        "n": 26,
+        "events": 0,
+        "hazard": 0.03571428571428571
+      },
+      "14-20": {
+        "n": 156,
+        "events": 7,
+        "hazard": 0.05063291139240506
+      },
+      "21+": {
+        "n": 142,
+        "events": 19,
+        "hazard": 0.1388888888888889
+      }
+    }
+  },
+  "abs_tick": {
+    "up": {
+      "0-5": {
+        "n": 1800,
+        "events": 0,
+        "hazard": 0.0005549389567147614
+      },
+      "6": {
+        "n": 300,
+        "events": 60,
+        "hazard": 0.20198675496688742
+      },
+      "7-11": {
+        "n": 1210,
+        "events": 0,
+        "hazard": 0.0008250825082508251
+      },
+      "12": {
+        "n": 252,
+        "events": 20,
+        "hazard": 0.08267716535433071
+      },
+      "13-20": {
+        "n": 2002,
+        "events": 0,
+        "hazard": 0.000499001996007984
+      },
+      "21+": {
+        "n": 38616,
+        "events": 0,
+        "hazard": 2.589466052100057e-05
+      }
+    },
+    "down": {
+      "7-11": {
+        "n": 290,
+        "events": 12,
+        "hazard": 0.04452054794520548
+      },
+      "12": {
+        "n": 48,
+        "events": 2,
+        "hazard": 0.06
+      },
+      "13-20": {
+        "n": 398,
+        "events": 31,
+        "hazard": 0.08
+      },
+      "21+": {
+        "n": 314,
+        "events": 35,
+        "hazard": 0.11392405063291139
+      }
+    }
+  },
+  "no_validation_labels_used": true,
+  "train_meta": {
+    "split": "train",
+    "scenes": 60,
+    "transitions": 9046,
+    "sources": {
+      "/data/wm-a100-pr60-gpu-20261112/source/pr59-train/data.json": "6c75e4bf5aba43ff72b1686fb3e640cbdec46e8910099b29a3f64d3c24fb90b0",
+      "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-congestion/data.json": "c69c7cc6eedee9a60cc8139c621c218d984ca59483c2690aebd22995ec8f6094",
+      "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-multi_fault/data.json": "ff905160a33991bbeb953a0ed9ae382d02e0611bdb0cb5edde6e746ea8f1f766",
+      "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-staggered_arrivals/data.json": "7ee5d838d87c574f132b11cfa371d5770427d9037e6640c4d10fd6869525d43b"
+    },
+    "source_sha256": {
+      "/data/wm-a100-pr60-gpu-20261112/source/pr59-train/data.json": "6c75e4bf5aba43ff72b1686fb3e640cbdec46e8910099b29a3f64d3c24fb90b0",
+      "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-congestion/data.json": "c69c7cc6eedee9a60cc8139c621c218d984ca59483c2690aebd22995ec8f6094",
+      "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-multi_fault/data.json": "ff905160a33991bbeb953a0ed9ae382d02e0611bdb0cb5edde6e746ea8f1f766",
+      "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-staggered_arrivals/data.json": "7ee5d838d87c574f132b11cfa371d5770427d9037e6640c4d10fd6869525d43b"
+    }
+  }
+}
