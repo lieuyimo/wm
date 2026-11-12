@@ -441,7 +441,7 @@
     "screen_particles": 1,
     "escalation_horizon": 20,
     "escalation_particles": 3,
-    "escalate_only_if": "At least 3 unfinished sample stages AND all screened candidates have identical predicted completed stage count (tolerance 1e-9)",
+    "escalate_only_if": "At least 3 currently unfinished distinct public job IDs (sample ID prefix before ::stage) AND all H5 screened CP-SAT candidates tie on predicted completed stages (tolerance 1e-9)",
     "screen_choice": "Highest expected completed stage count, tie CP-SAT first",
     "escalated_choice": "Highest expected completed stage count, tie CP-SAT first",
     "fallback_if_escalation_incomplete": "Use complete H5 screening outcome, do not trust partial H20 scores",
