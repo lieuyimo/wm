@@ -1,0 +1,74 @@
+name: PR62 independent read-only PR61 A100 paired scenario and device-phase audit preparation
+on:
+  push:
+    branches: [research/pr62-device-state-conditional-audit-20261112]
+    paths:
+      - .github/workflows/pr62-pr61-evidence-readonly.yml
+      - experiments/world_model_integration/audit_pr62/pr62_readonly.py
+      - experiments/world_model_integration/audit_pr62/pr62_device_events.py
+      - experiments/world_model_integration/audit_pr62/test_pr62.py
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify-original-GPU-evidence-without-checkpoints:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 14
+    env:
+      CUDA_VISIBLE_DEVICES: ''
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify original committed PR61 GPU-evidence SHA unchanged
+        run: |
+          set -euo pipefail
+          (cd examples/evidence/pr60-gpu-training-20261112 && sha256sum -c SHA256SUMS)
+      - name: Install original public-world PyG CPU dependencies for syntax and conditional event checks
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -m pip install 'torch-geometric==2.6.1'
+          python - <<'PY'
+          import torch
+          assert torch.version.cuda is None
+          print("PR62_AUDIT_CPU_ONLY_NO_GPU_MODEL_FORWARD")
+          PY
+      - name: Run original twelve-scene GPU evidence interpretation plus pure checkpoint event-metric math tests
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr62"
+          python -m compileall -q experiments/world_model_integration/audit_pr62
+          python -m unittest experiments.world_model_integration.audit_pr62.test_pr62 -v 2>&1 \
+            | tee "$RUNNER_TEMP/pr62/tests.log"
+          python -m experiments.world_model_integration.audit_pr62.pr62_readonly \
+            --per-scenario examples/evidence/pr60-gpu-training-20261112/per_scenario.csv \
+            --summary examples/evidence/pr60-gpu-training-20261112/summary.json \
+            --out "$RUNNER_TEMP/pr62/read-only-paired-scenes.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr62/audit.log"
+          python -m experiments.world_model_integration.audit_pr62.pr62_device_events --help \
+            > "$RUNNER_TEMP/pr62/checkpoint-agent-help.txt"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          r=json.loads((Path(os.environ['RUNNER_TEMP'])/"pr62/read-only-paired-scenes.json").read_text())
+          assert r["n_actual_independent_validation_scenes"]==12
+          assert r["public_state_next_tick_MSE"]["num_map_on_better"]==11
+          assert r["station_device_availability_Brier"]["num_map_on_better"]==7
+          assert r["CUDA_or_model_calls"]==r["new_episodes_generated"]==r["blind_test_files_read"]==0
+          print("PR62_PR61_ORIGINAL_SHA_VERIFIED_READONLY_QA",r["public_state_next_tick_MSE"])
+          PY
+          git rev-parse HEAD > "$RUNNER_TEMP/pr62/source_head.txt"
+          (cd "$RUNNER_TEMP/pr62" && sha256sum tests.log audit.log read-only-paired-scenes.json checkpoint-agent-help.txt source_head.txt > SHA256SUMS)
+      - name: Archive unmodified PR61 summary and actual independently computed audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr62-pr61-verified-readonly-analysis-${{ github.run_id }}
+          path: ${{ runner.temp }}/pr62/
+          retention-days: 90
+          if-no-files-found: error
