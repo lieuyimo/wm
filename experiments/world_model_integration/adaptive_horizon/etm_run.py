@@ -248,7 +248,7 @@ def summarize(groups):
 
 
 def validate_new_groups(cfg):
-    if (cfg["schema"]!="RHWM_ETM_ADAPTIVE_HORIZON_MPC_20261112_V1"
+    if (cfg["schema"]!="RHWM_EVENT_TRIGGERED_BUDGET_CORRECTED_V1"
             or cfg["arms"]!=list(ARMS) or len(cfg["groups"])!=24):
         raise ValueError("precommitted scenes or arms changed")
     previous=json.loads((PROTOCOL.parents[1]/"posttraining"/"pr32_online_protocol.json").read_text())
