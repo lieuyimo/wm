@@ -1,0 +1,70 @@
+name: PR33 immutable posttraining decision bottleneck audit
+
+on:
+  push:
+    branches: [research/pr33-posttraining-decision-bottleneck-20261112]
+    paths: [.github/workflows/pr33-posttraining-readonly-bottleneck.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  archive-only-causal-boundary:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unit tests (pure stdlib; no simulation or training)
+        run: |
+          set -euo pipefail
+          python -m unittest discover \
+            -s experiments/world_model_integration/decision_bottleneck \
+            -p 'test_*.py' -v
+      - name: Download and verify the complete original PR32 archive
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr33/source"
+          curl -fsSL --retry 3 \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/lieuyimo/wm/actions/artifacts/13911157726/zip" \
+            -o "$RUNNER_TEMP/pr33/frozen-pr32.zip"
+          unzip -q "$RUNNER_TEMP/pr33/frozen-pr32.zip" -d "$RUNNER_TEMP/pr33/source"
+          (cd "$RUNNER_TEMP/pr33/source" && sha256sum -c evidence_sha256.txt)
+          test -s "$RUNNER_TEMP/pr33/source/independent-online.json"
+      - name: Compare only matched initial execution prefixes and resource costs
+        run: |
+          set -euo pipefail
+          python -m experiments.world_model_integration.decision_bottleneck.pr33_readonly \
+            --input "$RUNNER_TEMP/pr33/source/independent-online.json" \
+            --out "$RUNNER_TEMP/pr33/decision-bottleneck.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr33/audit.log"
+          python - <<'PY'
+          import os,json,pathlib
+          p=pathlib.Path(os.environ["RUNNER_TEMP"])/"pr33/decision-bottleneck.json"
+          r=json.loads(p.read_text())
+          assert r["schema"]=="RHWM_PR33_PR32_ARCHIVE_ONLY_DECISION_BOTTLENECK_V1"
+          assert len(r["groups"])==24
+          assert set(r["by_regime"])=={"light","medium","heavy","shift"}
+          assert all(g["groups"]==6 for g in r["by_regime"].values())
+          assert not any(r["computational_changes"].values())
+          for g in r["by_regime"].values():
+            assert all(v["paired_groups"]==6 for v in g["model_comparisons"].values())
+          print("PR33_READONLY_DECISION_BOTTLENECK_COMPLETE")
+          PY
+          (cd "$RUNNER_TEMP/pr33" && sha256sum decision-bottleneck.json audit.log > SHA256SUMS)
+      - name: Archive exact source-linked decision diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr33-immutable-decision-bottleneck-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/pr33/decision-bottleneck.json
+            ${{ runner.temp }}/pr33/audit.log
+            ${{ runner.temp }}/pr33/SHA256SUMS
+          retention-days: 90
+          if-no-files-found: warn
