@@ -1,0 +1,98 @@
+name: ETM reference-based event triggered horizon online validation CPU
+# Check immutable ETM source schema and strict post-candidate budget before the online test.
+
+on:
+  push:
+    branches: [research/etm-adaptive-horizon-strict-budget-20261112]
+    paths: [.github/workflows/etm-adaptive-horizon-cpu.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  adaptive-frozen-v4-online:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 24
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Restore existing pinned CPU environment
+        run: |
+          set -euo pipefail
+          python -m pip install uv==0.13.5
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -c "import torch; assert torch.version.cuda is None; torch.set_num_threads(1)"
+      - name: Restore previously signed original V4 only
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/etm"
+          curl -fsSL --retry 3 \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/lieuyimo/wm/actions/artifacts/13765135588/zip" \
+            -o "$RUNNER_TEMP/etm/frozen-v4.zip"
+          unzip -p "$RUNNER_TEMP/etm/frozen-v4.zip" v4-data.pt > "$RUNNER_TEMP/etm/frozen-v4.pt"
+          echo "60c8a6c3d832da3e6519072688ea099f64ae120ba19d3bd2ec705f7f1a11ac0c  $RUNNER_TEMP/etm/frozen-v4.pt" | sha256sum -c
+          echo "RHWM_V4_CHECKPOINT=$RUNNER_TEMP/etm/frozen-v4.pt" >> "$GITHUB_ENV"
+          python -m pip freeze --all > "$RUNNER_TEMP/etm/pip-freeze.txt"
+          cp requirements-paper-reuse.lock "$RUNNER_TEMP/etm/requirements-paper-reuse.lock"
+          git rev-parse HEAD > "$RUNNER_TEMP/etm/git-commit.txt"
+      - name: Validate real state contracts and immutable scene splits
+        run: |
+          set -euo pipefail
+          python -m compileall -q experiments/world_model_integration/adaptive_horizon
+          timeout 160s python -m unittest discover \
+            -s experiments/world_model_integration/adaptive_horizon -p 'test_*.py' -v \
+            2>&1 | tee "$RUNNER_TEMP/etm/tests.log"
+      - name: Recheck inherited deterministic post-last-candidate budget gate
+        run: |
+          set -euo pipefail
+          python -m unittest experiments.world_model_integration.online_horizon.test_pr34_budget_gate -v \
+            2>&1 | tee "$RUNNER_TEMP/etm/strict-budget-regression.log"
+      - name: Compare 5 genuine online planners on all 24 new scenes
+        run: |
+          set -euo pipefail
+          timeout 730s python -m experiments.world_model_integration.adaptive_horizon.etm_run \
+            --checkpoint "$RHWM_V4_CHECKPOINT" \
+            --out "$RUNNER_TEMP/etm/online-results.json" \
+            2>&1 | tee "$RUNNER_TEMP/etm/run.log"
+          python - <<'PY'
+          from pathlib import Path
+          import json,os
+          r=json.loads((Path(os.environ['RUNNER_TEMP'])/'etm/online-results.json').read_text())
+          assert r['summary']['groups']==24
+          assert r['summary']['gpu']==0 and r['summary']['new_training']==0
+          for regime,info in r['summary']['by_regime'].items():
+            assert info['groups']==6
+            assert set(info['arms'])=={'cp_sat','rule_h20','v4_h5','v4_h20','v4_adaptive'}
+            assert all(x['completed']==6 and x['safety_violations']==0 for x in info['arms'].values())
+          print('ETM_EVENT_TRIGGERED_FROZEN_MPC_COMPLETE')
+          PY
+          (cd "$RUNNER_TEMP/etm" && sha256sum online-results.json run.log tests.log strict-budget-regression.log pip-freeze.txt requirements-paper-reuse.lock git-commit.txt > evidence_sha256.txt)
+      - name: Preserve full trace, CPU, safety and source provenance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: etm-adaptive-horizon-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/etm/online-results.json
+            ${{ runner.temp }}/etm/run.log
+            ${{ runner.temp }}/etm/tests.log
+            ${{ runner.temp }}/etm/strict-budget-regression.log
+            ${{ runner.temp }}/etm/pip-freeze.txt
+            ${{ runner.temp }}/etm/requirements-paper-reuse.lock
+            ${{ runner.temp }}/etm/git-commit.txt
+            ${{ runner.temp }}/etm/evidence_sha256.txt
+          retention-days: 90
+          if-no-files-found: warn
