@@ -1,0 +1,447 @@
+{
+  "schema": "RHWM_PR35_STRICT_POST_CANDIDATE_H20_BUDGET_20261112_V1",
+  "reason": "PR33 verified PR30/PR32 original policy could accept non-first options after 0.5s CPU limit because it did not recheck after last rollout",
+  "reference_method": "Existing BusinessCPSAT online action generation + existing RHWM/PETS style horizon20 particle3 predictive continuation; only repair fail-closed decision-acceptance gate, no new learned method",
+  "groups": [
+    {
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "id": "SAFE_LIGHT_1",
+      "regime": "light",
+      "seed": 5100121,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "id": "SAFE_LIGHT_2",
+      "regime": "light",
+      "seed": 5100799,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "id": "SAFE_LIGHT_3",
+      "regime": "light",
+      "seed": 5101479,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "id": "SAFE_LIGHT_4",
+      "regime": "light",
+      "seed": 5102161,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "id": "SAFE_LIGHT_5",
+      "regime": "light",
+      "seed": 5102845,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "id": "SAFE_LIGHT_6",
+      "regime": "light",
+      "seed": 5103531,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "id": "SAFE_MEDIUM_1",
+      "regime": "medium",
+      "seed": 5130612,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "id": "SAFE_MEDIUM_2",
+      "regime": "medium",
+      "seed": 5131290,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "id": "SAFE_MEDIUM_3",
+      "regime": "medium",
+      "seed": 5131970,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "id": "SAFE_MEDIUM_4",
+      "regime": "medium",
+      "seed": 5132652,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "id": "SAFE_MEDIUM_5",
+      "regime": "medium",
+      "seed": 5133336,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "id": "SAFE_MEDIUM_6",
+      "regime": "medium",
+      "seed": 5134022,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "id": "SAFE_HEAVY_1",
+      "regime": "heavy",
+      "seed": 5161103,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "id": "SAFE_HEAVY_2",
+      "regime": "heavy",
+      "seed": 5161781,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "id": "SAFE_HEAVY_3",
+      "regime": "heavy",
+      "seed": 5162461,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "id": "SAFE_HEAVY_4",
+      "regime": "heavy",
+      "seed": 5163143,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "id": "SAFE_HEAVY_5",
+      "regime": "heavy",
+      "seed": 5163827,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "id": "SAFE_HEAVY_6",
+      "regime": "heavy",
+      "seed": 5164513,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "id": "SAFE_SHIFT_1",
+      "regime": "shift",
+      "seed": 5191594,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "id": "SAFE_SHIFT_2",
+      "regime": "shift",
+      "seed": 5192272,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "id": "SAFE_SHIFT_3",
+      "regime": "shift",
+      "seed": 5192952,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "id": "SAFE_SHIFT_4",
+      "regime": "shift",
+      "seed": 5193634,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "id": "SAFE_SHIFT_5",
+      "regime": "shift",
+      "seed": 5194318,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "id": "SAFE_SHIFT_6",
+      "regime": "shift",
+      "seed": 5195004,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "group_unit": "independent synthetic scene seed",
+  "max_ticks": 240,
+  "arms": [
+    "cp_sat",
+    "rule_h20",
+    "original_v4_h20",
+    "scratch_v4_h20"
+  ],
+  "original_v4_sha256": "60c8a6c3d832da3e6519072688ea099f64ae120ba19d3bd2ec705f7f1a11ac0c",
+  "pr31_saved_artifact_id": 13911001730,
+  "pr31_validation_selected": "scratch_v4",
+  "horizon": 20,
+  "particles": 3,
+  "candidate_limit": 4,
+  "decision_cpu_budget_seconds": 0.5,
+  "finite_budget_contract": "Online model reranking may be accepted only when total process CPU elapsed at check AFTER model, candidate scoring and before action return is <0.5s. If exceeded choose current legal CP-SAT first proposal and count fallback. A nonpreemptible rollout may itself exceed 0.5s; no real-time latency guarantee claimed.",
+  "invariants": [
+    "No model accepted non-first action after its measured decision elapsed >=0.5",
+    "No invalid business, resource or motion actions",
+    "No new checkpoint training or model architecture changes",
+    "All new 24 scenes not used in PR21-PR34, including PR32"
+  ],
+  "metrics": [
+    "per-scene makespan",
+    "late jobs",
+    "completion",
+    "CPU including load",
+    "candidate flips",
+    "budget fallback count",
+    "total decisions over budget even if default action accepted",
+    "paired wins ties losses and outcome change by regime"
+  ],
+  "resource_budget": {
+    "gpu": 0,
+    "training": 0,
+    "cpu_process_seconds": 360
+  },
+  "test_policy": "Pre-register all four independent groups; do not retune, resample or change cost method after outcomes"
+}
