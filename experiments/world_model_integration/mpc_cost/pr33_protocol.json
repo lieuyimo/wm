@@ -1,0 +1,468 @@
+{
+  "protocol": "RHWM_PR33_SOURCE_BACKED_MPC_COST_20261112_V1",
+  "goal": "Test whether existing trajectory cumulative task lateness+unfinished cost and final route distance uses H20 probabilistic world-model outcomes more effectively than expected completion count",
+  "literature": [
+    {
+      "paper": "Chua et al., PETS, NeurIPS 2018",
+      "url": "https://proceedings.nips.cc/paper_files/paper/2018/hash/3de568f8597b94bda53149c7d7f5958c-Abstract.html",
+      "actual_transfer": "already-implemented trajectory sampling, expected cumulative rollout cost on first-step CP-SAT candidate actions"
+    },
+    {
+      "paper": "Reiter et al., Synthesis of MPC and RL, Annual Reviews in Control 2026",
+      "url": "https://doi.org/10.1016/j.arcontrol.2026.101045",
+      "actual_transfer": "finite-horizon receding-horizon cumulative cost ranking, closed-loop action selection"
+    },
+    {
+      "code": "lab_transport/decision_value.py::trace_score and experiments/world_model_integration/decision_value/pr27_evaluate.py::_trace_cost",
+      "actual_transfer": "Reuse original unfinished task penalties + 4 times overdue task ticks and terminal Manhattan/grid route distance; NO newly tuned cost"
+    }
+  ],
+  "previous_pr31_selection": "scratch_v4 (chosen by validation Brier, not PR32 test)",
+  "weights": {
+    "original_v4_sha256": "60c8a6c3d832da3e6519072688ea099f64ae120ba19d3bd2ec705f7f1a11ac0c",
+    "scratch_source_pr31_artifact": 13911001730,
+    "scratch_source_pr31_release_tag": "rhwm-pr31-repro-43143690680"
+  },
+  "groups": [
+    {
+      "id": "COST_LIGHT_1",
+      "regime": "light",
+      "seed": 4100037,
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_LIGHT_2",
+      "regime": "light",
+      "seed": 4100715,
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_LIGHT_3",
+      "regime": "light",
+      "seed": 4101395,
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_LIGHT_4",
+      "regime": "light",
+      "seed": 4102077,
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_LIGHT_5",
+      "regime": "light",
+      "seed": 4102761,
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_LIGHT_6",
+      "regime": "light",
+      "seed": 4103447,
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_MEDIUM_1",
+      "regime": "medium",
+      "seed": 4200041,
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_MEDIUM_2",
+      "regime": "medium",
+      "seed": 4200719,
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_MEDIUM_3",
+      "regime": "medium",
+      "seed": 4201399,
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_MEDIUM_4",
+      "regime": "medium",
+      "seed": 4202081,
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_MEDIUM_5",
+      "regime": "medium",
+      "seed": 4202765,
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_MEDIUM_6",
+      "regime": "medium",
+      "seed": 4203451,
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_HEAVY_1",
+      "regime": "heavy",
+      "seed": 4300043,
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_HEAVY_2",
+      "regime": "heavy",
+      "seed": 4300721,
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_HEAVY_3",
+      "regime": "heavy",
+      "seed": 4301401,
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_HEAVY_4",
+      "regime": "heavy",
+      "seed": 4302083,
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_HEAVY_5",
+      "regime": "heavy",
+      "seed": 4302767,
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_HEAVY_6",
+      "regime": "heavy",
+      "seed": 4303453,
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_SHIFT_1",
+      "regime": "shift",
+      "seed": 4400049,
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_SHIFT_2",
+      "regime": "shift",
+      "seed": 4400727,
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_SHIFT_3",
+      "regime": "shift",
+      "seed": 4401407,
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_SHIFT_4",
+      "regime": "shift",
+      "seed": 4402089,
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_SHIFT_5",
+      "regime": "shift",
+      "seed": 4402773,
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "COST_SHIFT_6",
+      "regime": "shift",
+      "seed": 4403459,
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "arms": [
+    "cp_sat",
+    "rule_progress",
+    "rule_cost",
+    "original_progress",
+    "original_cost",
+    "scratch_progress",
+    "scratch_cost"
+  ],
+  "evaluation": {
+    "gpu": 0,
+    "new_training": 0,
+    "score_budget_sec_per_online_decision": 0.5,
+    "candidate_limit": 4,
+    "particles": 3,
+    "horizon_ticks": 20,
+    "max_ticks": 240,
+    "whole_cpu_seconds": 480,
+    "same_initial_event_noise": "original simulator keyed job/phase/station service duration, same seed in all arms",
+    "state_features": "BusinessObserver public observable state only",
+    "continuation": "BusinessCPSAT first proposal on each predicted particle public state",
+    "progress_score": "maximize forecast.distributions[-1].expected_completed_samples, tie CP-SAT first",
+    "trajectory_score": "lexicographic minimize mean over particles of PR27 _trace_cost (cumulative unfinished+overdue penalty, terminal_distance), tie CP-SAT first",
+    "budget_gate": "fallback to original CP-SAT if any candidate exceeds total decision wall/CPU budget or any invalid prediction",
+    "metrics": [
+      "makespan",
+      "total_late_jobs",
+      "resource_wait_ticks",
+      "blocked_moves",
+      "candidate_changes",
+      "CPU includes model load and full episode",
+      "decision CPU budget misses",
+      "safety violations"
+    ]
+  },
+  "preregistration": "All seeds, fixed scoring, equal CP-SAT generation and simulator dynamics committed before evaluation; no using prior PR32 test for selecting weights",
+  "no_promotion_without": "independent paired completed makespan wins, without regressions and within CPU budget",
+  "out_of_scope": "No V4 retraining, no new stochastic events, no reweighting based on PR32 outcomes, no claims of PETS full CEM reproduction"
+}
