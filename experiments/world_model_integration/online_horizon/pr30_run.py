@@ -113,6 +113,17 @@ class OnlineHorizonPolicy:
                     values.append(value)
                     self.n_model_queries+=1
                     self.n_model_steps+=self.horizon*self.protocol["particles"]
+                    # Critical: include the LAST synchronous candidate's CPU
+                    # cost. The previous implementation only checked BEFORE
+                    # each call and could adopt a score after exceeding 0.5s.
+                    if time.process_time()-start>=self.protocol["decision_cpu_budget_seconds"]:
+                        self.n_budget_exceeded+=1
+                        values=[]
+                        self.decisions.append({
+                            "tick":obs.tick,
+                            "post_candidate_budget_exceeded":True,
+                            "candidate":str(plan)})
+                        break
                 except (RuntimeError,ValueError,AssertionError) as exc:
                     self.n_errors+=1
                     values=[]
@@ -121,11 +132,15 @@ class OnlineHorizonPolicy:
                     break
             # Fall back to the original legal proposal if the budget is
             # exhausted or any candidate is invalid. Do not partially rank.
-            if len(values)==len(plans):
+            if len(values)==len(plans) and time.process_time()-start<self.protocol["decision_cpu_budget_seconds"]:
                 best=max(values)
                 best_index=next(i for i,v in enumerate(values) if best-v<=1e-9)
                 selected=plans[best_index]
-            else:self.n_fallback+=1
+            else:
+                if len(values)==len(plans):
+                    # Covers CPU spent selecting the final completed score.
+                    self.n_budget_exceeded+=1
+                self.n_fallback+=1
         self.n_flip+=int(selected!=plans[0])
         elapsed=time.process_time()-start
         self.cpu_decision_seconds+=elapsed
