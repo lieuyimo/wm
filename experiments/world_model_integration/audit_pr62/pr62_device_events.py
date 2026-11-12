@@ -90,7 +90,7 @@ def score_group(records):
     n=len(records)
     if not n:
         return {"n":0,"available":False}
-    brier=sum((p-y)**2 for p,y in records)/n
+    brier=sum((p-y)**2 for p,y,x in records)/n
     persistence=sum((round(x)-y)**2 for p,y,x in records)/n
     return {
         "n":n,
