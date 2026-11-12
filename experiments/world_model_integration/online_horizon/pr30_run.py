@@ -83,6 +83,15 @@ class OnlineHorizonPolicy:
     def observe(self,raw):
         self.observer.observe(raw)
 
+    def _score_batch(self,batch,initial):
+        """Original PR30 default: only expected finished stage count at H."""
+        return float(batch.distributions[-1].expected_completed_samples)
+
+    def _choose_scored_index(self,values):
+        """Original PR30 ranking, including its first-plan tie preference."""
+        best=max(values)
+        return next(i for i,v in enumerate(values) if best-v<=1e-9)
+
     def __call__(self,raw,legal_candidates):
         start=time.process_time()
         obs=self.observer.observe(raw)
@@ -109,7 +118,7 @@ class OnlineHorizonPolicy:
                         horizon_ticks=self.horizon,
                         particles=self.protocol["particles"],
                         sampling_seed=seed)
-                    value=float(batch.distributions[-1].expected_completed_samples)
+                    value=self._score_batch(batch,obs)
                     values.append(value)
                     self.n_model_queries+=1
                     self.n_model_steps+=self.horizon*self.protocol["particles"]
@@ -122,8 +131,7 @@ class OnlineHorizonPolicy:
             # Fall back to the original legal proposal if the budget is
             # exhausted or any candidate is invalid. Do not partially rank.
             if len(values)==len(plans):
-                best=max(values)
-                best_index=next(i for i,v in enumerate(values) if best-v<=1e-9)
+                best_index=self._choose_scored_index(values)
                 selected=plans[best_index]
             else:self.n_fallback+=1
         self.n_flip+=int(selected!=plans[0])
@@ -158,10 +166,10 @@ def _facts(result,business):
     }
 
 
-def one(spec,protocol,arm,checkpoint):
+def one(spec,protocol,arm,checkpoint,*,policy_class=OnlineHorizonPolicy):
     business,geo=build_business(spec,max_ticks=protocol["max_ticks"])
     t0=time.process_time()
-    policy=OnlineHorizonPolicy(arm,geo,business.rules,protocol,checkpoint=checkpoint,seed=spec["seed"])
+    policy=policy_class(arm,geo,business.rules,protocol,checkpoint=checkpoint,seed=spec["seed"])
     init_elapsed=time.process_time()-t0
     begin=time.process_time()
     factual=BusinessSimulator(
