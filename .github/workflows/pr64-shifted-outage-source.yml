@@ -1,0 +1,158 @@
+name: PR64 prospectively shifted private outage times CPU true-world hazard review
+on:
+  push:
+    branches: [research/pr64-randomized-outage-hazard-cpu-review-20261113]
+    paths:
+      - .github/workflows/pr64-shifted-outage-source.yml
+      - experiments/world_model_integration/outage_pr64/protocol.json
+      - experiments/world_model_integration/outage_pr64/pr64_source.py
+      - experiments/world_model_integration/outage_pr64/pr64_gate.py
+      - experiments/world_model_integration/outage_pr64/test_pr64.py
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  genuinely-random-onset-business-public-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        split: [train, validation]
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      PYTHONHASHSEED: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Original CPU true BusinessSimulator and PyG dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -m pip install 'torch-geometric==2.6.1'
+          python - <<'PY'
+          import torch
+          assert torch.version.cuda is None
+          print("PR64_CPU_TRUE_BUSINESS_SOURCE_NO_GPU_NO_NEW_NEURAL_TRAINING")
+          PY
+      - name: Verify source split and original PR48 duration/motion invariants before future true labels
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr64"
+          python -m compileall -q experiments/world_model_integration/outage_pr64
+          python -m unittest experiments.world_model_integration.outage_pr64.test_pr64 -v \
+            2>&1 | tee "$RUNNER_TEMP/pr64/tests.log"
+      - name: Generate real original CP-SAT factual episodes with precommitted private event-time randomization
+        env:
+          PR64_SPLIT: ${{ matrix.split }}
+        run: |
+          set -euo pipefail
+          test "$PR64_SPLIT" != test
+          timeout 2400s python -m experiments.world_model_integration.outage_pr64.pr64_source \
+            --split "$PR64_SPLIT" --out "$RUNNER_TEMP/pr64/data.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr64/world.log"
+          python - <<'PY'
+          import os,json
+          from pathlib import Path
+          p=Path(os.environ["RUNNER_TEMP"])/"pr64/data.json"
+          obj=json.loads(p.read_text())
+          split=os.environ["PR64_SPLIT"]
+          assert obj["schema"]=="pr64-shifted-private-failure-event-original-business-public-source-v1"
+          assert obj["split"]==split and obj["BLIND_TEST_RUN"] is False
+          assert len(obj["scenes"])=={"train":24,"validation":12}[split]
+          for s in obj["scenes"]:
+              assert s["case"]["split"]==split
+              assert s["private_schedule_NOT_in_model_graph"]
+              assert s["raw_actual_public_world_transitions"][-1]["target"]["next_public_tick"]==s["observed_ticks"]
+          print("PR64_ACTUAL_REAL_WORLD_SOURCE_VERIFIED",obj["summary"])
+          PY
+          git rev-parse HEAD > "$RUNNER_TEMP/pr64/source_head.txt"
+          python -m pip freeze > "$RUNNER_TEMP/pr64/pip-freeze.txt"
+          sha256sum requirements-paper-reuse.lock > "$RUNNER_TEMP/pr64/dependencies.sha256"
+          (cd "$RUNNER_TEMP/pr64" && sha256sum data.json world.log tests.log source_head.txt pip-freeze.txt dependencies.sha256 > SHA256SUMS)
+      - name: Archive actual full source including challenging right-censored worlds
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr64-real-random-outage-${{ github.run_id }}-${{ matrix.split }}
+          path: ${{ runner.temp }}/pr64/
+          retention-days: 90
+          if-no-files-found: warn
+  original-shifted-source-admission:
+    needs: genuinely-random-onset-business-public-source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Restore original CPU business and public graph audit dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -m pip install 'torch-geometric==2.6.1'
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: pr64-real-random-outage-${{ github.run_id }}-*
+          path: ${{ runner.temp }}/pr64-new-truth
+      - name: Validate source SHA of train and dev validation and prove no BLIND_TEST generated
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr64-audit"
+          python - <<'PY'
+          import os,subprocess,hashlib,json
+          from pathlib import Path
+          src=Path(os.environ["RUNNER_TEMP"])/"pr64-new-truth"
+          files=sorted(src.glob("*/data.json"))
+          assert len(files)==2, "only TRAIN and explicit shifted-time DEV VALIDATION sources"
+          sha=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          proto=hashlib.sha256(Path("experiments/world_model_integration/outage_pr64/protocol.json").read_bytes()).hexdigest()
+          groups=set()
+          for f in files:
+              subprocess.run(["sha256sum","-c","SHA256SUMS"],cwd=f.parent,check=True)
+              assert (f.parent/"source_head.txt").read_text().strip()==sha
+              obj=json.loads(f.read_text())
+              assert obj["protocol_sha256"]==proto
+              assert obj["split"] in ("train","validation")
+              assert obj["BLIND_TEST_RUN"] is False
+              groups.add(obj["split"])
+          assert groups=={"train","validation"}
+          print("PR64_TRUE_WORLD_ORIGINAL_SOURCE_SHA_BLIND_SEAL_VERIFIED",sha,groups)
+          PY
+      - name: Independently evaluate TRAIN-only discrete-time hazards under shifted-time DEV validation
+        run: |
+          set -euo pipefail
+          python -m experiments.world_model_integration.outage_pr64.pr64_gate \
+            --train "$RUNNER_TEMP/pr64-new-truth/pr64-real-random-outage-${{ github.run_id }}-train/data.json" \
+            --validation "$RUNNER_TEMP/pr64-new-truth/pr64-real-random-outage-${{ github.run_id }}-validation/data.json" \
+            --out "$RUNNER_TEMP/pr64-audit/quality.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr64-audit/quality.log"
+          python - <<'PY'
+          import os,json
+          from pathlib import Path
+          q=json.loads((Path(os.environ["RUNNER_TEMP"])/"pr64-audit/quality.json").read_text())
+          assert q["schema"]=="pr64-private-randomized-onset-risk-set-prospective-data-quality-v1"
+          assert q["new_GPU_hours"]==0 and not q["new_NEURAL_training_performed"]
+          assert not q["original_pr59_unopened_TEST_generated"] and not q["original_pr59_unopened_TEST_read"]
+          assert q["source_counts"]["train"]["source_case_count"]==24
+          assert q["source_counts"]["validation"]["source_case_count"]==12
+          print("PR64_SCIENTIFIC_GATE_RECORDED",q["source_quality_verdict"],q["failures"])
+          PY
+          git rev-parse HEAD > "$RUNNER_TEMP/pr64-audit/source_head.txt"
+          (cd "$RUNNER_TEMP/pr64-audit" && sha256sum quality.json quality.log source_head.txt > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr64-shifted-outage-true-risk-set-audit-${{ github.run_id }}
+          path: ${{ runner.temp }}/pr64-audit/
+          retention-days: 90
+          if-no-files-found: warn
