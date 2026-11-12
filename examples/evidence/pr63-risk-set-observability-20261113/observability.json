@@ -1,0 +1,307 @@
+{
+  "schema": "pr63-event-time-observability-v1",
+  "train": {
+    "risk_set": {
+      "up": {
+        "n": 44180,
+        "events": 80,
+        "hazard": 0.0018107741059302852
+      },
+      "down": {
+        "n": 1050,
+        "events": 80,
+        "hazard": 0.0761904761904762
+      }
+    },
+    "phase": {
+      "continuing_down": 970,
+      "fault_onset": 80,
+      "healthy_hold": 44100,
+      "recovery": 80
+    },
+    "onset_next_tick": {
+      "13": 20,
+      "7": 60
+    },
+    "recovery_next_tick": {
+      "10": 2,
+      "11": 6,
+      "12": 4,
+      "13": 2,
+      "15": 9,
+      "16": 8,
+      "17": 5,
+      "18": 2,
+      "19": 4,
+      "20": 2,
+      "21": 1,
+      "22": 2,
+      "23": 5,
+      "25": 8,
+      "29": 4,
+      "31": 8,
+      "37": 3,
+      "43": 5
+    },
+    "onset_current_tick": {
+      "12": 20,
+      "6": 60
+    },
+    "recovery_current_tick": {
+      "10": 6,
+      "11": 4,
+      "12": 2,
+      "14": 9,
+      "15": 8,
+      "16": 5,
+      "17": 2,
+      "18": 4,
+      "19": 2,
+      "20": 1,
+      "21": 2,
+      "22": 5,
+      "24": 8,
+      "28": 4,
+      "30": 8,
+      "36": 3,
+      "42": 5,
+      "9": 2
+    },
+    "onset_age_exact": {
+      "13": 20,
+      "7": 60
+    },
+    "recovery_age_exact": {
+      "10": 5,
+      "12": 11,
+      "16": 6,
+      "18": 1,
+      "22": 3,
+      "24": 9,
+      "3": 6,
+      "30": 2,
+      "36": 5,
+      "4": 6,
+      "5": 6,
+      "6": 2,
+      "7": 2,
+      "8": 10,
+      "9": 6
+    },
+    "onset_age_h4": {
+      "4": 80
+    },
+    "recovery_age_h4": {
+      "3": 6,
+      "4": 74
+    },
+    "by_map": {
+      "0": {
+        "healthy_hold": 6547,
+        "fault_onset": 13,
+        "continuing_down": 152,
+        "recovery": 13
+      },
+      "1": {
+        "healthy_hold": 6289,
+        "fault_onset": 14,
+        "continuing_down": 173,
+        "recovery": 14
+      },
+      "2": {
+        "healthy_hold": 9529,
+        "fault_onset": 13,
+        "continuing_down": 145,
+        "recovery": 13
+      },
+      "3": {
+        "healthy_hold": 8677,
+        "fault_onset": 13,
+        "continuing_down": 167,
+        "recovery": 13
+      },
+      "4": {
+        "healthy_hold": 6150,
+        "fault_onset": 14,
+        "continuing_down": 167,
+        "recovery": 14
+      },
+      "5": {
+        "healthy_hold": 6908,
+        "fault_onset": 13,
+        "continuing_down": 166,
+        "recovery": 13
+      }
+    },
+    "by_regime": {
+      "congestion": {
+        "healthy_hold": 17222,
+        "fault_onset": 20,
+        "continuing_down": 198,
+        "recovery": 20
+      },
+      "multi_fault": {
+        "healthy_hold": 13602,
+        "fault_onset": 40,
+        "continuing_down": 528,
+        "recovery": 40
+      },
+      "staggered_arrivals": {
+        "healthy_hold": 13276,
+        "fault_onset": 20,
+        "continuing_down": 244,
+        "recovery": 20
+      }
+    }
+  },
+  "validation": {
+    "risk_set": {
+      "up": {
+        "n": 7360,
+        "events": 16,
+        "hazard": 0.002173913043478261
+      },
+      "down": {
+        "n": 225,
+        "events": 16,
+        "hazard": 0.07111111111111111
+      }
+    },
+    "phase": {
+      "continuing_down": 209,
+      "fault_onset": 16,
+      "healthy_hold": 7344,
+      "recovery": 16
+    },
+    "onset_next_tick": {
+      "13": 4,
+      "7": 12
+    },
+    "recovery_next_tick": {
+      "11": 1,
+      "12": 1,
+      "13": 1,
+      "15": 2,
+      "16": 3,
+      "20": 1,
+      "23": 1,
+      "25": 2,
+      "31": 1,
+      "37": 1,
+      "43": 2
+    },
+    "onset_current_tick": {
+      "12": 4,
+      "6": 12
+    },
+    "recovery_current_tick": {
+      "10": 1,
+      "11": 1,
+      "12": 1,
+      "14": 2,
+      "15": 3,
+      "19": 1,
+      "22": 1,
+      "24": 2,
+      "30": 1,
+      "36": 1,
+      "42": 2
+    },
+    "onset_age_exact": {
+      "13": 4,
+      "7": 12
+    },
+    "recovery_age_exact": {
+      "12": 1,
+      "16": 1,
+      "18": 1,
+      "24": 2,
+      "3": 1,
+      "36": 2,
+      "4": 1,
+      "5": 1,
+      "6": 1,
+      "7": 1,
+      "8": 2,
+      "9": 2
+    },
+    "onset_age_h4": {
+      "4": 16
+    },
+    "recovery_age_h4": {
+      "3": 1,
+      "4": 15
+    },
+    "by_map": {
+      "0": {
+        "healthy_hold": 3807,
+        "fault_onset": 8,
+        "continuing_down": 107,
+        "recovery": 8
+      },
+      "1": {
+        "healthy_hold": 3537,
+        "fault_onset": 8,
+        "continuing_down": 102,
+        "recovery": 8
+      }
+    },
+    "by_regime": {
+      "congestion": {
+        "healthy_hold": 2855,
+        "fault_onset": 4,
+        "continuing_down": 42,
+        "recovery": 4
+      },
+      "multi_fault": {
+        "healthy_hold": 2317,
+        "fault_onset": 8,
+        "continuing_down": 102,
+        "recovery": 8
+      },
+      "staggered_arrivals": {
+        "healthy_hold": 2172,
+        "fault_onset": 4,
+        "continuing_down": 65,
+        "recovery": 4
+      }
+    }
+  },
+  "train_meta": {
+    "split": "train",
+    "scenes": 60,
+    "transitions": 9046,
+    "sources": {
+      "/data/wm-a100-pr60-gpu-20261112/source/pr59-train/data.json": "6c75e4bf5aba43ff72b1686fb3e640cbdec46e8910099b29a3f64d3c24fb90b0",
+      "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-congestion/data.json": "c69c7cc6eedee9a60cc8139c621c218d984ca59483c2690aebd22995ec8f6094",
+      "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-multi_fault/data.json": "ff905160a33991bbeb953a0ed9ae382d02e0611bdb0cb5edde6e746ea8f1f766",
+      "/data/wm-a100-pr60-gpu-20261112/source/pr60/pr60-true-new-training-43237354137-staggered_arrivals/data.json": "7ee5d838d87c574f132b11cfa371d5770427d9037e6640c4d10fd6869525d43b"
+    }
+  },
+  "validation_meta": {
+    "split": "validation",
+    "scenes": 12,
+    "transitions": 1517,
+    "sources": {
+      "/data/wm-a100-pr60-gpu-20261112/source/pr59-validation/data.json": "c7a0a0081e0c901faea23b37816eb54b560efb9c8b66118387c3fbb0a9509712"
+    }
+  },
+  "pr48_protocol": {
+    "schema": "PR48_INDEPENDENT_THREE_STRESS_REGIMES_20261112_V1",
+    "outage_start_tick": 7,
+    "secondary_outage_start_tick": 13,
+    "source": "/data/wm-a100-pr63-20261113/wm/experiments/world_model_integration/stress_pr48/pr48_protocol.json",
+    "sha256": "ec46ec82126eea88b71cfa6ebb6ff94cbb5e5df89381f203175676ee831523fa"
+  },
+  "model_input": {
+    "node_feature_dim": 16,
+    "history_window": 4,
+    "absolute_public_tick_in_input_json": true,
+    "absolute_public_tick_used_by_model": false,
+    "full_age_used_by_model": false,
+    "history_age_cap": 4,
+    "note": "pr51 node_features has no clock; pr54 history is t-3..t; PR48 outage starts are fixed at ticks 7/13"
+  },
+  "BLIND_TEST_read": false,
+  "BLIND_TEST_generated": false
+}
