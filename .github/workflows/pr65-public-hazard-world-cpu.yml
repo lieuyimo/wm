@@ -1,0 +1,95 @@
+name: PR65 real public-history stochastic world CPU adapter SHA admission
+on:
+  push:
+    branches: [research/pr65-public-history-stochastic-world-cpu-adapter-20261113]
+    paths:
+      - .github/workflows/pr65-public-hazard-world-cpu.yml
+      - experiments/world_model_integration/stochastic_pr65/**
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  pr65-real-world-CPU-adapter:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      PYTHONHASHSEED: '0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Restore identical original CPU world-model dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -m pip install 'torch-geometric==2.6.1'
+          python - <<'PY'
+          import torch
+          assert torch.version.cuda is None
+          print("PR65_CPU_NO_CUDA",torch.__version__)
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-real-random-outage-43264954353-train
+          path: ${{ runner.temp }}/pr65-original-train
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-real-random-outage-43264954353-validation
+          path: ${{ runner.temp }}/pr65-original-dev
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-shifted-outage-true-risk-set-audit-43264954353
+          path: ${{ runner.temp }}/pr65-original-risk-audit
+      - name: Original immutable SOURCE/QA SHA verification and local unit tests
+        run: |
+          set -euo pipefail
+          (cd "$RUNNER_TEMP/pr65-original-train" && sha256sum -c SHA256SUMS)
+          (cd "$RUNNER_TEMP/pr65-original-dev" && sha256sum -c SHA256SUMS)
+          (cd "$RUNNER_TEMP/pr65-original-risk-audit" && sha256sum -c SHA256SUMS)
+          mkdir -p "$RUNNER_TEMP/pr65-review"
+          python -m compileall -q experiments/world_model_integration/stochastic_pr65
+          python -m unittest experiments.world_model_integration.stochastic_pr65.test_pr65 -v 2>&1 | tee "$RUNNER_TEMP/pr65-review/test.log"
+      - name: Actual PR61 graph and original PR64 public-risk inference wiring
+        run: |
+          set -euo pipefail
+          python -m experiments.world_model_integration.stochastic_pr65.pr65_cpu_admission \
+            --train "$RUNNER_TEMP/pr65-original-train/data.json" \
+            --dev "$RUNNER_TEMP/pr65-original-dev/data.json" \
+            --quality "$RUNNER_TEMP/pr65-original-risk-audit/quality.json" \
+            --out "$RUNNER_TEMP/pr65-review/admission.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr65-review/admission.log"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          f=Path(os.environ["RUNNER_TEMP"])/"pr65-review/admission.json"
+          q=json.loads(f.read_text())
+          assert q["final_decision"]=="PASS_CPU_INTERFACE_ONLY_BLOCKED_GPU_H20_UNTIL_REVIEW"
+          assert q["train_worlds"]==24 and q["dev_worlds"]==12
+          assert q["random_init_real_PyG_one_step_wiring_smoke_rows"]>=12
+          assert not q["gpu_used"] and not q["checkpoint_loaded"]
+          assert not q["BLIND_TEST_opened"] and not q["neural_trained_or_finetuned"]
+          print("PR65_ORIGINAL_SHA_LOCKED_CPU_PUBLIC_WORLD_ADAPTER_PASS")
+          PY
+          git rev-parse HEAD > "$RUNNER_TEMP/pr65-review/source_head.txt"
+          python -m pip freeze > "$RUNNER_TEMP/pr65-review/pip-freeze.txt"
+          (cd "$RUNNER_TEMP/pr65-review" && sha256sum admission.json admission.log test.log source_head.txt pip-freeze.txt > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr65-public-device-world-cpu-original-data-admission-${{ github.run_id }}
+          path: ${{ runner.temp }}/pr65-review/
+          retention-days: 90
+          if-no-files-found: warn
