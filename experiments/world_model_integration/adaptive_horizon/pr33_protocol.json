@@ -455,5 +455,6 @@
     "train": 0,
     "CPU_seconds": 480
   },
-  "frozen_groups_note": "New 24 seeds not in PR24-32 development/tests; no surprise arrivals, robot physics or random event mechanism change"
+  "frozen_groups_note": "New 24 seeds not in PR24-32 development/tests; no surprise arrivals, robot physics or random event mechanism change",
+  "candidate_limit": 4
 }
