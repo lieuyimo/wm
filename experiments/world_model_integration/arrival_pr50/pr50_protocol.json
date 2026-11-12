@@ -1,0 +1,1113 @@
+{
+  "protocol": "PR50_PUBLIC_HISTORY_MARKED_ARRIVAL_MODEL_20261112_V1",
+  "parent_pr49_source": "c85c0b02c7ef34d44a9347ffd113ae9fee6e3952",
+  "task": "Only genuinely publicly released first-workflow-stage jobs; no future job table, successor stages or hidden simulator schedule as input",
+  "context": "Same original 7x5 3-robot business map and public workflows, no artificial future signals. Synthetic arrivals are NOT real lab data.",
+  "cohort": [
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_1",
+      "seed": 20800011,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_2",
+      "seed": 20800582,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_3",
+      "seed": 20801153,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_4",
+      "seed": 20801724,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_5",
+      "seed": 20802295,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_6",
+      "seed": 20802866,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_7",
+      "seed": 20803437,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_8",
+      "seed": 20804008,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_9",
+      "seed": 20804579,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_10",
+      "seed": 20805150,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_11",
+      "seed": 20805721,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_12",
+      "seed": 20806292,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_13",
+      "seed": 20806863,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_14",
+      "seed": 20807434,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_15",
+      "seed": 20808005,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_16",
+      "seed": 20808576,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_17",
+      "seed": 20809147,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_18",
+      "seed": 20809718,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_19",
+      "seed": 20810289,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_20",
+      "seed": 20810860,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_21",
+      "seed": 20811431,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_22",
+      "seed": 20812002,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_23",
+      "seed": 20812573,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TRAIN_24",
+      "seed": 20813144,
+      "mechanism": "independent",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_VALIDATION_1",
+      "seed": 20860011,
+      "mechanism": "independent",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_VALIDATION_2",
+      "seed": 20860582,
+      "mechanism": "independent",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_VALIDATION_3",
+      "seed": 20861153,
+      "mechanism": "independent",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_VALIDATION_4",
+      "seed": 20861724,
+      "mechanism": "independent",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_VALIDATION_5",
+      "seed": 20862295,
+      "mechanism": "independent",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_VALIDATION_6",
+      "seed": 20862866,
+      "mechanism": "independent",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_VALIDATION_7",
+      "seed": 20863437,
+      "mechanism": "independent",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_VALIDATION_8",
+      "seed": 20864008,
+      "mechanism": "independent",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TEST_1",
+      "seed": 20920011,
+      "mechanism": "independent",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TEST_2",
+      "seed": 20920582,
+      "mechanism": "independent",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TEST_3",
+      "seed": 20921153,
+      "mechanism": "independent",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TEST_4",
+      "seed": 20921724,
+      "mechanism": "independent",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TEST_5",
+      "seed": 20922295,
+      "mechanism": "independent",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TEST_6",
+      "seed": 20922866,
+      "mechanism": "independent",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TEST_7",
+      "seed": 20923437,
+      "mechanism": "independent",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_TEST_8",
+      "seed": 20924008,
+      "mechanism": "independent",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_INDEPENDENT_SHIFT_TEST_1",
+      "seed": 20980011,
+      "mechanism": "independent",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_INDEPENDENT_SHIFT_TEST_2",
+      "seed": 20980582,
+      "mechanism": "independent",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_INDEPENDENT_SHIFT_TEST_3",
+      "seed": 20981153,
+      "mechanism": "independent",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_INDEPENDENT_SHIFT_TEST_4",
+      "seed": 20981724,
+      "mechanism": "independent",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_INDEPENDENT_SHIFT_TEST_5",
+      "seed": 20982295,
+      "mechanism": "independent",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_INDEPENDENT_SHIFT_TEST_6",
+      "seed": 20982866,
+      "mechanism": "independent",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_INDEPENDENT_SHIFT_TEST_7",
+      "seed": 20983437,
+      "mechanism": "independent",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_INDEPENDENT_SHIFT_TEST_8",
+      "seed": 20984008,
+      "mechanism": "independent",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_1",
+      "seed": 21300011,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_2",
+      "seed": 21300582,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_3",
+      "seed": 21301153,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_4",
+      "seed": 21301724,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_5",
+      "seed": 21302295,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_6",
+      "seed": 21302866,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_7",
+      "seed": 21303437,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_8",
+      "seed": 21304008,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_9",
+      "seed": 21304579,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_10",
+      "seed": 21305150,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_11",
+      "seed": 21305721,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_12",
+      "seed": 21306292,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_13",
+      "seed": 21306863,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_14",
+      "seed": 21307434,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_15",
+      "seed": 21308005,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_16",
+      "seed": 21308576,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_17",
+      "seed": 21309147,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_18",
+      "seed": 21309718,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_19",
+      "seed": 21310289,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_20",
+      "seed": 21310860,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_21",
+      "seed": 21311431,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_22",
+      "seed": 21312002,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_23",
+      "seed": 21312573,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TRAIN_24",
+      "seed": 21313144,
+      "mechanism": "periodic",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_VALIDATION_1",
+      "seed": 21360011,
+      "mechanism": "periodic",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_VALIDATION_2",
+      "seed": 21360582,
+      "mechanism": "periodic",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_VALIDATION_3",
+      "seed": 21361153,
+      "mechanism": "periodic",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_VALIDATION_4",
+      "seed": 21361724,
+      "mechanism": "periodic",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_VALIDATION_5",
+      "seed": 21362295,
+      "mechanism": "periodic",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_VALIDATION_6",
+      "seed": 21362866,
+      "mechanism": "periodic",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_VALIDATION_7",
+      "seed": 21363437,
+      "mechanism": "periodic",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_VALIDATION_8",
+      "seed": 21364008,
+      "mechanism": "periodic",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TEST_1",
+      "seed": 21420011,
+      "mechanism": "periodic",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TEST_2",
+      "seed": 21420582,
+      "mechanism": "periodic",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TEST_3",
+      "seed": 21421153,
+      "mechanism": "periodic",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TEST_4",
+      "seed": 21421724,
+      "mechanism": "periodic",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TEST_5",
+      "seed": 21422295,
+      "mechanism": "periodic",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TEST_6",
+      "seed": 21422866,
+      "mechanism": "periodic",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TEST_7",
+      "seed": 21423437,
+      "mechanism": "periodic",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_TEST_8",
+      "seed": 21424008,
+      "mechanism": "periodic",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_PERIODIC_SHIFT_TEST_1",
+      "seed": 21480011,
+      "mechanism": "periodic",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_PERIODIC_SHIFT_TEST_2",
+      "seed": 21480582,
+      "mechanism": "periodic",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_PERIODIC_SHIFT_TEST_3",
+      "seed": 21481153,
+      "mechanism": "periodic",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_PERIODIC_SHIFT_TEST_4",
+      "seed": 21481724,
+      "mechanism": "periodic",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_PERIODIC_SHIFT_TEST_5",
+      "seed": 21482295,
+      "mechanism": "periodic",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_PERIODIC_SHIFT_TEST_6",
+      "seed": 21482866,
+      "mechanism": "periodic",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_PERIODIC_SHIFT_TEST_7",
+      "seed": 21483437,
+      "mechanism": "periodic",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_PERIODIC_SHIFT_TEST_8",
+      "seed": 21484008,
+      "mechanism": "periodic",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_1",
+      "seed": 21800011,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_2",
+      "seed": 21800582,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_3",
+      "seed": 21801153,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_4",
+      "seed": 21801724,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_5",
+      "seed": 21802295,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_6",
+      "seed": 21802866,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_7",
+      "seed": 21803437,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_8",
+      "seed": 21804008,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_9",
+      "seed": 21804579,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_10",
+      "seed": 21805150,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_11",
+      "seed": 21805721,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_12",
+      "seed": 21806292,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_13",
+      "seed": 21806863,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_14",
+      "seed": 21807434,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_15",
+      "seed": 21808005,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_16",
+      "seed": 21808576,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_17",
+      "seed": 21809147,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_18",
+      "seed": 21809718,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_19",
+      "seed": 21810289,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_20",
+      "seed": 21810860,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_21",
+      "seed": 21811431,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_22",
+      "seed": 21812002,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_23",
+      "seed": 21812573,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TRAIN_24",
+      "seed": 21813144,
+      "mechanism": "bursty",
+      "split": "train",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_VALIDATION_1",
+      "seed": 21860011,
+      "mechanism": "bursty",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_VALIDATION_2",
+      "seed": 21860582,
+      "mechanism": "bursty",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_VALIDATION_3",
+      "seed": 21861153,
+      "mechanism": "bursty",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_VALIDATION_4",
+      "seed": 21861724,
+      "mechanism": "bursty",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_VALIDATION_5",
+      "seed": 21862295,
+      "mechanism": "bursty",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_VALIDATION_6",
+      "seed": 21862866,
+      "mechanism": "bursty",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_VALIDATION_7",
+      "seed": 21863437,
+      "mechanism": "bursty",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_VALIDATION_8",
+      "seed": 21864008,
+      "mechanism": "bursty",
+      "split": "validation",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TEST_1",
+      "seed": 21920011,
+      "mechanism": "bursty",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TEST_2",
+      "seed": 21920582,
+      "mechanism": "bursty",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TEST_3",
+      "seed": 21921153,
+      "mechanism": "bursty",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TEST_4",
+      "seed": 21921724,
+      "mechanism": "bursty",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TEST_5",
+      "seed": 21922295,
+      "mechanism": "bursty",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TEST_6",
+      "seed": 21922866,
+      "mechanism": "bursty",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TEST_7",
+      "seed": 21923437,
+      "mechanism": "bursty",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_TEST_8",
+      "seed": 21924008,
+      "mechanism": "bursty",
+      "split": "test",
+      "shift": false
+    },
+    {
+      "id": "PR50_BURSTY_SHIFT_TEST_1",
+      "seed": 21980011,
+      "mechanism": "bursty",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_BURSTY_SHIFT_TEST_2",
+      "seed": 21980582,
+      "mechanism": "bursty",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_BURSTY_SHIFT_TEST_3",
+      "seed": 21981153,
+      "mechanism": "bursty",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_BURSTY_SHIFT_TEST_4",
+      "seed": 21981724,
+      "mechanism": "bursty",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_BURSTY_SHIFT_TEST_5",
+      "seed": 21982295,
+      "mechanism": "bursty",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_BURSTY_SHIFT_TEST_6",
+      "seed": 21982866,
+      "mechanism": "bursty",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_BURSTY_SHIFT_TEST_7",
+      "seed": 21983437,
+      "mechanism": "bursty",
+      "split": "shift_test",
+      "shift": true
+    },
+    {
+      "id": "PR50_BURSTY_SHIFT_TEST_8",
+      "seed": 21984008,
+      "mechanism": "bursty",
+      "split": "shift_test",
+      "shift": true
+    }
+  ],
+  "mechanisms": {
+    "independent": {
+      "family": "discrete_binomial_bernoulli",
+      "base_probability": 0.22,
+      "shift_probability": 0.34,
+      "mark_probability_w0": 0.5
+    },
+    "periodic": {
+      "family": "jittered_interval",
+      "intervals": [
+        4,
+        5,
+        6
+      ],
+      "shift_intervals": [
+        3,
+        7,
+        9
+      ],
+      "first_tick_max": 4,
+      "mark_probability_w0": 0.5
+    },
+    "bursty": {
+      "family": "hidden_two_state_markov",
+      "base_probs": [
+        0.08,
+        0.42
+      ],
+      "shift_probs": [
+        0.03,
+        0.6
+      ],
+      "block_length": 8,
+      "base_switch_probability": 0.28,
+      "shift_switch_probability": 0.16,
+      "mark_probs_w0_by_latent_state": [
+        0.75,
+        0.25
+      ]
+    }
+  },
+  "tick_window": 75,
+  "max_business_ticks": 240,
+  "deadline_tick": 220,
+  "workflow_types": [
+    "w0",
+    "w1"
+  ],
+  "public_marker": "first stage_index==0 job_id visible for first time in BusinessObserver observation",
+  "exposure": "only actually observed ticks; if simulator ends early, not-yet-observed future ticks censored and excluded",
+  "episode_inputs": "past and current visible first-job arrivals, current public clock, known public station/task/robot state; never generator mechanism label or future releases",
+  "easytpp": {
+    "schema": "jsonl per event-sequence with time_since_start,time_since_last_event,type_event,dim_process=2",
+    "model_ids": [
+      "NHP",
+      "IntensityFree"
+    ],
+    "version": "0.2.4",
+    "training": "development train and validation only; shift_test and test never used for selection"
+  },
+  "baselines": {
+    "global_poisson": "train exposure weighted constant per-tick arrival intensity",
+    "history_smoothed": "(observed events over preceding window + prior global rate*4)/(observed ticks + 4)",
+    "history_windows": [
+      4,
+      8,
+      16
+    ],
+    "selection": "minimum validation H20 Poisson predictive NLL, tie -> simpler",
+    "evaluation": {
+      "horizons": [
+        5,
+        20
+      ],
+      "anchor_ticks": [
+        8,
+        16,
+        24,
+        32,
+        40
+      ],
+      "metrics": [
+        "count_mae",
+        "count_poisson_nll",
+        "mark_cross_entropy"
+      ]
+    }
+  },
+  "resources": {
+    "gpu_available_in_connected_ci": false,
+    "cpu_proxy_for_data": true,
+    "allow_training_when_model_worthwhile": true,
+    "assert_no_holdout_training": true,
+    "runner_timeout_minutes": 35
+  },
+  "inference_targets": "H5/H20 future count and marked events first, next stage external public arrival event transition only after proven independent prediction",
+  "no_overwrite": true
+}
