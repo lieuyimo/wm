@@ -1,0 +1,461 @@
+{
+  "schema": "RHWM_EVENT_TRIGGERED_BUDGET_CORRECTED_V1",
+  "predecessor": "Layered on already passed PR37 post-candidate CPU gate and deterministic clock regressions",
+  "source_methods": [
+    {
+      "paper": "Wang, Ren & Zheng 2023 Robust Nonlinear MPC With Variable Prediction Horizon: An Adaptive Event-Triggered Approach",
+      "doi": "10.1109/TAC.2022.3200967",
+      "transferred": "use public-state-dependent event triggering to vary horizon/compute",
+      "not_transferred": "not their robust controller, stability proofs or physical equations"
+    },
+    {
+      "paper": "Russell & Wefald 1991 Principles of Metareasoning",
+      "doi": "10.1016/0004-3702(91)90015-C",
+      "transferred": "whether extra computation changes external action",
+      "not_transferred": "does not approximate their optimal VOC formula"
+    },
+    {
+      "paper": "Chua et al 2018 PETS",
+      "url": "https://github.com/facebookresearch/mbrl-lib",
+      "transferred": "existing bounded particle future rollout",
+      "not_transferred": "does not reproduce CEM or retrain"
+    }
+  ],
+  "groups": [
+    {
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "id": "ETM_light_1",
+      "regime": "light",
+      "seed": 9100041,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "id": "ETM_light_2",
+      "regime": "light",
+      "seed": 9100761,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "id": "ETM_light_3",
+      "regime": "light",
+      "seed": 9101483,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "id": "ETM_light_4",
+      "regime": "light",
+      "seed": 9102207,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "id": "ETM_light_5",
+      "regime": "light",
+      "seed": 9102933,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 2,
+      "capacity": 2,
+      "service_add": 0,
+      "jitter": 1,
+      "deadline_slack": 60,
+      "id": "ETM_light_6",
+      "regime": "light",
+      "seed": 9103661,
+      "release_ticks": [
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "id": "ETM_medium_1",
+      "regime": "medium",
+      "seed": 9200047,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "id": "ETM_medium_2",
+      "regime": "medium",
+      "seed": 9200767,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "id": "ETM_medium_3",
+      "regime": "medium",
+      "seed": 9201489,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "id": "ETM_medium_4",
+      "regime": "medium",
+      "seed": 9202213,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "id": "ETM_medium_5",
+      "regime": "medium",
+      "seed": 9202939,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 3,
+      "capacity": 2,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 55,
+      "id": "ETM_medium_6",
+      "regime": "medium",
+      "seed": 9203667,
+      "release_ticks": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "id": "ETM_heavy_1",
+      "regime": "heavy",
+      "seed": 9300053,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "id": "ETM_heavy_2",
+      "regime": "heavy",
+      "seed": 9300773,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "id": "ETM_heavy_3",
+      "regime": "heavy",
+      "seed": 9301495,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "id": "ETM_heavy_4",
+      "regime": "heavy",
+      "seed": 9302219,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "id": "ETM_heavy_5",
+      "regime": "heavy",
+      "seed": 9302945,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 1,
+      "jitter": 2,
+      "deadline_slack": 48,
+      "id": "ETM_heavy_6",
+      "regime": "heavy",
+      "seed": 9303673,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "id": "ETM_shift_1",
+      "regime": "shift",
+      "seed": 9400061,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "id": "ETM_shift_2",
+      "regime": "shift",
+      "seed": 9400781,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "id": "ETM_shift_3",
+      "regime": "shift",
+      "seed": 9401503,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "id": "ETM_shift_4",
+      "regime": "shift",
+      "seed": 9402227,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "id": "ETM_shift_5",
+      "regime": "shift",
+      "seed": 9402953,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "robot_count": 2,
+      "job_count": 5,
+      "capacity": 1,
+      "service_add": 3,
+      "jitter": 4,
+      "deadline_slack": 48,
+      "id": "ETM_shift_6",
+      "regime": "shift",
+      "seed": 9403681,
+      "release_ticks": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "max_ticks": 240,
+  "arms": [
+    "cp_sat",
+    "rule_h20",
+    "v4_h5",
+    "v4_h20",
+    "v4_adaptive"
+  ],
+  "original_checkpoint_sha256": "60c8a6c3d832da3e6519072688ea099f64ae120ba19d3bd2ec705f7f1a11ac0c",
+  "same_runtime": "Existing PR30 OnlineHorizonPolicy and BusinessSimulator; CP-SAT candidates up to 4, same baseline / real service durations",
+  "adaptation": {
+    "max_cpu_per_decision_seconds": 0.5,
+    "screen_horizon": 5,
+    "screen_particles": 1,
+    "escalation_horizon": 20,
+    "escalation_particles": 3,
+    "escalate_only_if": "At least 3 currently unfinished distinct public job IDs (sample ID prefix before ::stage) AND all H5 screened CP-SAT candidates tie on predicted completed stages (tolerance 1e-9)",
+    "screen_choice": "Highest expected completed stage count, tie CP-SAT first",
+    "escalated_choice": "Highest expected completed stage count, tie CP-SAT first",
+    "fallback_if_escalation_incomplete": "Use complete H5 screening outcome, do not trust partial H20 scores",
+    "fallback_if_screen_incomplete": "Original CP-SAT first legal proposal",
+    "score_changes_prohibited": "No task lateness/transport risk weighting, no learned CPU trigger and no posthoc threshold tuning",
+    "time_budget_note": "CPU process_time checked between atomic model rollout calls; interrupting a single synchronous rollout mid-execution is not supported. All breaches are separately measured and reported."
+  },
+  "eval_go_rule": "Treat adaptive scheme as experimental until compared in untouched 24 scene groups against Rule-H20, fixed V4-H5 and fixed V4-H20. Require end-to-end KPI and lower CPU cost; no promotion just because of fewer calls",
+  "resource": {
+    "GPU": 0,
+    "train": 0,
+    "CPU_seconds": 480
+  },
+  "frozen_groups_note": "New 24 seeds not in PR24-32 development/tests; no surprise arrivals, robot physics or random event mechanism change",
+  "candidate_limit": 4,
+  "budget_fix": "All fixed H20/H5 predictors use PR37 post-last-candidate budget check; adaptive H5 screening and optional H20 each check after every synchronous rollout."
+}
