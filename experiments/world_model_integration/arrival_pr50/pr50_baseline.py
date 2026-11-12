@@ -152,13 +152,13 @@ def export_easytpp_jsonl(source,output):
 
 
 def write_easytpp_config(out,checkpoint):
-    """Reuse official EasyTPP Config/Runner pipeline, no bespoke NHP network."""
+    """Official EasyTPP; train config deliberately maps test to VALIDATION to protect heldout."""
     content=f"""data:
   pr50_public_arrivals:
     data_format: json
     train_dir: '{(out/"train.jsonl").as_posix()}'
     valid_dir: '{(out/"validation.jsonl").as_posix()}'
-    test_dir: '{(out/"test.jsonl").as_posix()}'
+    test_dir: '{(out/"validation.jsonl").as_posix()}'
     data_specs:
       num_event_types: 2
       pad_token_id: 2
