@@ -275,7 +275,7 @@ def evaluate(checkpoint,*,protocol=PROTOCOL):
     groups=[]
     baseline_config={
         "max_ticks":cfg["max_ticks"],
-        "candidate_limit":cfg["same_runtime"] and 4,
+        "candidate_limit":cfg["candidate_limit"],
         "particles":3,
         "decision_cpu_budget_seconds":cfg["adaptation"]["max_cpu_per_decision_seconds"],
     }
