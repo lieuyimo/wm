@@ -1,0 +1,92 @@
+name: PR34 reference-based event triggered horizon online validation CPU
+# Re-evaluate with explicit predeclared CP-SAT candidate cap in protocol.
+
+on:
+  push:
+    branches: [research/pr34-corrected-budget-adaptive-horizon-20261112]
+    paths: [.github/workflows/pr34-event-triggered-horizon-cpu.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  adaptive-frozen-v4-online:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 24
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Restore existing pinned CPU environment
+        run: |
+          set -euo pipefail
+          python -m pip install uv==0.13.5
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -c "import torch; assert torch.version.cuda is None; torch.set_num_threads(1)"
+      - name: Restore previously signed original V4 only
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr34"
+          curl -fsSL --retry 3 \
+            -H "Authorization: Bearer $GITHUB_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/lieuyimo/wm/actions/artifacts/13765135588/zip" \
+            -o "$RUNNER_TEMP/pr34/frozen-v4.zip"
+          unzip -p "$RUNNER_TEMP/pr34/frozen-v4.zip" v4-data.pt > "$RUNNER_TEMP/pr34/frozen-v4.pt"
+          echo "60c8a6c3d832da3e6519072688ea099f64ae120ba19d3bd2ec705f7f1a11ac0c  $RUNNER_TEMP/pr34/frozen-v4.pt" | sha256sum -c
+          echo "RHWM_V4_CHECKPOINT=$RUNNER_TEMP/pr34/frozen-v4.pt" >> "$GITHUB_ENV"
+          python -m pip freeze --all > "$RUNNER_TEMP/pr34/pip-freeze.txt"
+          cp requirements-paper-reuse.lock "$RUNNER_TEMP/pr34/requirements-paper-reuse.lock"
+          git rev-parse HEAD > "$RUNNER_TEMP/pr34/git-commit.txt"
+      - name: Validate real state contracts and immutable scene splits
+        run: |
+          set -euo pipefail
+          python -m compileall -q experiments/world_model_integration/adaptive_horizon
+          timeout 160s python -m unittest discover \
+            -s experiments/world_model_integration/adaptive_horizon -p 'test_*.py' -v \
+            2>&1 | tee "$RUNNER_TEMP/pr34/tests.log"
+      - name: Compare 5 genuine online planners on all 24 new scenes
+        run: |
+          set -euo pipefail
+          timeout 730s python -m experiments.world_model_integration.adaptive_horizon.pr34_run \
+            --checkpoint "$RHWM_V4_CHECKPOINT" \
+            --out "$RUNNER_TEMP/pr34/online-results.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr34/run.log"
+          python - <<'PY'
+          from pathlib import Path
+          import json,os
+          r=json.loads((Path(os.environ['RUNNER_TEMP'])/'pr34/online-results.json').read_text())
+          assert r['summary']['groups']==24
+          assert r['summary']['gpu']==0 and r['summary']['new_training']==0
+          for regime,info in r['summary']['by_regime'].items():
+            assert info['groups']==6
+            assert set(info['arms'])=={'cp_sat','rule_h20','v4_h5','v4_h20','v4_adaptive'}
+            assert all(x['completed']==6 and x['safety_violations']==0 for x in info['arms'].values())
+          print('PR34_EVENT_TRIGGERED_FROZEN_MPC_COMPLETE')
+          PY
+          (cd "$RUNNER_TEMP/pr34" && sha256sum online-results.json run.log tests.log pip-freeze.txt requirements-paper-reuse.lock git-commit.txt > evidence_sha256.txt)
+      - name: Preserve full trace, CPU, safety and source provenance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr34-adaptive-horizon-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/pr34/online-results.json
+            ${{ runner.temp }}/pr34/run.log
+            ${{ runner.temp }}/pr34/tests.log
+            ${{ runner.temp }}/pr34/pip-freeze.txt
+            ${{ runner.temp }}/pr34/requirements-paper-reuse.lock
+            ${{ runner.temp }}/pr34/git-commit.txt
+            ${{ runner.temp }}/pr34/evidence_sha256.txt
+          retention-days: 90
+          if-no-files-found: warn
