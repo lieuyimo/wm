@@ -1,0 +1,219 @@
+name: PR50 public marked arrivals source-only train validation test and EasyTPP NHP
+on:
+  push:
+    branches: [research/pr50-public-arrival-event-learning-20261112]
+    paths:
+      - .github/workflows/pr50-public-arrival-learning.yml
+      - experiments/world_model_integration/arrival_pr50/**
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  public-event-sequences:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        mechanism: [independent, periodic, bursty]
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Original reproducible CPU business simulator dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python - <<'PY'
+          import torch
+          assert torch.version.cuda is None
+          torch.set_num_threads(1)
+          print("PR50 CPU is public data collection only; final inference targeted to GPU")
+          PY
+      - name: Protocol and authentic BusinessObserver first-job arrival tests
+        run: |
+          set -euo pipefail
+          python -m compileall -q experiments/world_model_integration/arrival_pr50
+          python -m unittest \
+            experiments.world_model_integration.arrival_pr50.test_pr50_public \
+            experiments.world_model_integration.arrival_pr50.test_pr50_baseline -v \
+            2>&1 | tee "$RUNNER_TEMP/pr50-tests.log"
+      - name: Collect 48 genuine public episodes per independent process with immutable split
+        env:
+          PR50_MECHANISM: ${{ matrix.mechanism }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr50"
+          timeout 2400s python -m experiments.world_model_integration.arrival_pr50.pr50_public_dataset \
+            --mechanism "$PR50_MECHANISM" --output "$RUNNER_TEMP/pr50/$PR50_MECHANISM" \
+            2>&1 | tee "$RUNNER_TEMP/pr50/$PR50_MECHANISM-generation.log"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          m=os.environ["PR50_MECHANISM"]
+          root=Path(os.environ["RUNNER_TEMP"])/"pr50"/m
+          x=json.loads((root/"summary.json").read_text())
+          assert x["episodes"]==48 and x["train_episodes"]==24
+          assert x["validation_episodes"]==8 and x["test_episodes"]==8
+          assert x["shift_test_episodes"]==8 and x["public_only"]
+          assert x["hidden_future_schedule_never_exported"] and x["gpu"]==x["new_training"]==0
+          for s in ("train","validation","test","shift_test"):
+              d=json.loads((root/(s+".json")).read_text())
+              assert len(d["episodes"])==(24 if s=="train" else 8)
+              assert len({v["seed"] for v in d["episodes"]})==len(d["episodes"])
+              assert len((root/("easytpp_"+s+".jsonl")).read_text().splitlines())==len(d["episodes"])
+          print("PR50_TRUE_PUBLIC_ONLY_SPLITS_VALIDATED",m,json.dumps(x,ensure_ascii=False))
+          PY
+          cp "$RUNNER_TEMP/pr50-tests.log" "$RUNNER_TEMP/pr50/$PR50_MECHANISM/tests.log"
+          git rev-parse HEAD > "$RUNNER_TEMP/pr50/$PR50_MECHANISM/source_head.txt"
+          sha256sum requirements-paper-reuse.lock > "$RUNNER_TEMP/pr50/$PR50_MECHANISM/dependency-lock.sha256"
+          python -m pip freeze > "$RUNNER_TEMP/pr50/$PR50_MECHANISM/pip-freeze.txt"
+          (cd "$RUNNER_TEMP/pr50/$PR50_MECHANISM" && sha256sum \
+             train.json validation.json test.json shift_test.json \
+             easytpp_train.jsonl easytpp_validation.jsonl easytpp_test.jsonl easytpp_shift_test.jsonl \
+             summary.json tests.log source_head.txt dependency-lock.sha256 pip-freeze.txt > SHA256SUMS)
+      - name: Archive full public-only source data and reproducibility
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr50-public-events-${{ github.run_id }}-${{ matrix.mechanism }}
+          path: ${{ runner.temp }}/pr50/${{ matrix.mechanism }}/
+          retention-days: 90
+          if-no-files-found: warn
+  independent-baseline-and-neural-dataset:
+    needs: public-event-sequences
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: pr50-public-events-${{ github.run_id }}-*
+          path: ${{ runner.temp }}/pr50-source
+          merge-multiple: false
+      - name: Check source hashes from all three immutable process families
+        run: |
+          set -euo pipefail
+          for m in independent periodic bursty; do
+            F="$RUNNER_TEMP/pr50-source/pr50-public-events-${{ github.run_id }}-$m"
+            (cd "$F" && sha256sum -c SHA256SUMS)
+            grep -Fx "${GITHUB_SHA}" "$F/source_head.txt"
+            ln -s "$F" "$RUNNER_TEMP/pr50-source/$m"
+          done
+      - name: Train on TRAIN, select on VALIDATION, then independent TEST and shift TEST
+        run: |
+          set -euo pipefail
+          python -m experiments.world_model_integration.arrival_pr50.pr50_baseline \
+            --source "$RUNNER_TEMP/pr50-source" --out "$RUNNER_TEMP/pr50-evaluation" \
+            2>&1 | tee "$RUNNER_TEMP/pr50-eval.log"
+          python - <<'PY'
+          from pathlib import Path
+          import os,json
+          root=Path(os.environ["RUNNER_TEMP"])/"pr50-evaluation"
+          x=json.loads((root/"baseline_report.json").read_text())
+          s=json.loads((root/"train-validation-selection.json").read_text())
+          assert x["source_splits"]=={"train":72,"validation":24,"test":24,"shift_test":24}
+          assert s["locked_before_independent_test"] and not s["independent_test_scores_used_to_select"]
+          assert x["test_set_was_not_used_for_selection"]
+          assert x["selection_model"] in ("poisson_global","history_4","history_8","history_16")
+          for split,n in (("train",72),("validation",24),("test",24),("shift_test",24)):
+              p=root/"easytpp"/(split+".jsonl")
+              assert len(p.read_text().splitlines())==n
+          print("PR50_INDEPENDENT_VALIDATION_SELECTION_VERIFIED",x["selection_model"])
+          PY
+          git rev-parse HEAD > "$RUNNER_TEMP/pr50-evaluation/source_head.txt"
+          (cd "$RUNNER_TEMP/pr50-evaluation" && sha256sum \
+            baseline_report.json train-validation-selection.json \
+            easytpp/train.jsonl easytpp/validation.jsonl easytpp/test.jsonl \
+            easytpp/shift_test.jsonl easytpp/easytpp_config.yaml source_head.txt \
+            > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pr50-independent-baselines-and-easytpp-${{ github.run_id }}
+          path: ${{ runner.temp }}/pr50-evaluation/
+          retention-days: 90
+  easetpp-nhp-training-smoke:
+    needs: independent-baseline-and-neural-dataset
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - uses: actions/download-artifact@v4
+        with:
+          name: pr50-independent-baselines-and-easytpp-${{ github.run_id }}
+          path: ${{ runner.temp }}/pr50-neural/input
+      - name: Install original torch runtime plus pinned off-the-shelf EasyTPP 0.2.4
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          mkdir -p "$RUNNER_TEMP/pr50-neural/wheels"
+          python -m pip download --no-deps --only-binary=:all: easy-tpp==0.2.4 -d "$RUNNER_TEMP/pr50-neural/wheels"
+          echo "839e50d9688c940e6a02cbbfa5eb78932f9860865dd615a866c717cdf0684acb  $RUNNER_TEMP/pr50-neural/wheels/easy_tpp-0.2.4-py3-none-any.whl" | sha256sum -c
+          python -m pip install "$RUNNER_TEMP/pr50-neural/wheels/easy_tpp-0.2.4-py3-none-any.whl"
+      - name: Fit ORIGINAL EasyTPP NHP implementation on training + validation, never independent test
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr50-neural/train-checkpoints"
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from experiments.world_model_integration.arrival_pr50.pr50_baseline import write_easytpp_config
+          root=Path(os.environ["RUNNER_TEMP"])/"pr50-neural"
+          (root/"input/easytpp/easytpp_config.yaml").unlink()
+          write_easytpp_config(root/"input/easytpp",root/"train-checkpoints")
+          text=(root/"input/easytpp/easytpp_config.yaml").read_text()
+          assert f"test_dir: '{(root/'input/easytpp/validation.jsonl').as_posix()}'" in text
+          assert "shift_test" not in text
+          print("PR50_TRAIN_AND_VALIDATION_ONLY_CONFIRMED")
+          PY
+          timeout 1100s python - <<'PY' 2>&1 | tee "$RUNNER_TEMP/pr50-neural/nhp-train.log"
+          import os
+          from pathlib import Path
+          from easy_tpp.config_factory import Config
+          from easy_tpp.runner import Runner
+          yaml=Path(os.environ["RUNNER_TEMP"])/"pr50-neural/input/easytpp/easytpp_config.yaml"
+          config=Config.build_from_yaml_file(str(yaml),experiment_id="NHP_train")
+          runner=Runner.build_from_config(config)
+          runner.run()
+          print("PR50_REAL_OFF_THE_SHELF_EASYTPP_NHP_TRAINING_COMPLETED")
+          PY
+          git rev-parse HEAD > "$RUNNER_TEMP/pr50-neural/source_head.txt"
+          python -m pip freeze > "$RUNNER_TEMP/pr50-neural/pip-freeze.txt"
+          (cd "$RUNNER_TEMP/pr50-neural" && sha256sum \
+             input/easytpp/train.jsonl input/easytpp/validation.jsonl \
+             input/easytpp/easytpp_config.yaml nhp-train.log source_head.txt pip-freeze.txt > SHA256SUMS)
+      - name: Archive exact pretrained NHP model data and environment for future GPU handoff
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr50-official-easytpp-nhp-training-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/pr50-neural/train-checkpoints/
+            ${{ runner.temp }}/pr50-neural/nhp-train.log
+            ${{ runner.temp }}/pr50-neural/source_head.txt
+            ${{ runner.temp }}/pr50-neural/pip-freeze.txt
+            ${{ runner.temp }}/pr50-neural/SHA256SUMS
+            ${{ runner.temp }}/pr50-neural/input/easytpp/easytpp_config.yaml
+          retention-days: 90
+          if-no-files-found: warn
