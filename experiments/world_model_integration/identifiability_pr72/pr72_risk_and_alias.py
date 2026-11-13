@@ -112,7 +112,10 @@ def scene_phase_risks(scene, protocol, old, stress, *, witness=False):
                  "active_elapsed_zero": 0}
              for x in PHASE_TARGETS}
     collision = None
-    for t, action in enumerate(actions):
+    # BusinessSimulator on_observation does not include a final t+1 callback
+    # for every terminal action. Match PR70's exact observable risk boundary.
+    for t in range(min(len(actions), len(observations) - 1)):
+        action = actions[t]
         before, actual = observations[t:t + 2]
         actual_tasks = {s.id: s for s in actual.samples}
         queries = [q for q, reason in eligible_sessions(
