@@ -1,14 +1,15 @@
-"""Public action-conditioned graph *interface* shared by transport domains.
+"""Public relational state/action contract for laboratory sample transport.
 
-PR77 is a domain-neutral engineering interface, not a new learned algorithm,
-train predictor, simulation of railway physics, or an alternative to the
-already trained PR61 PyG RGCN/SAGEConv/GRU world backbone.
+The SAME laboratory workflow can use mobile robots and sample-carrier
+conveyor/track lines. This is a schema/interface expansion, NOT a learned
+conveyor dynamics model, a new planning algorithm or a change to PR61 weights.
 
-The old lab-only encoders, predictive heads, legal transition rules, and
-checkpoint metadata stay unchanged. Railway support means that railway
-graphs can be expressed and validated at this boundary. Until a railway
-encoder/head/legality adapter and factual railway data exist, inference and
-rollout for that domain MUST remain blocked.
+Existing PR61 GRU/RGCN/SAGEConv uses robot/task/station/resource with fixed
+16-dimensional nodes and grid-map 3d features. Conveyor entities can be
+expressed at this boundary but MUST NOT enter existing PR61 encoding until
+a separately audited feature/edge encoder, prediction head, legal transition
+and factual conveyor dataset are available. Track movement and admission
+are not simulated here.
 """
 from __future__ import annotations
 
@@ -17,37 +18,45 @@ import math
 from typing import Mapping, Protocol, Any
 
 
-SCHEMA_VERSION = "public-action-relational-world-interface-v1"
+SCHEMA_VERSION = "public-laboratory-multimodal-sample-world-interface-v2"
 
 # These are PUBLIC entity and graph relation vocabularies, not PyG tensor IDs.
 # A domain encoder is responsible for mapping these symbols to the concrete
 # input dimensions / relation IDs of its own trained model.
+# A single laboratory transport domain supports both AMR and conveyor
+# carriers. These are schema vocabularies, not trained PR61 tensor indices.
 DOMAIN_NODES = {
     "lab_sample_transport": frozenset({
         "robot", "task", "station", "resource",
-    }),
-    "rail_transit": frozenset({
-        "train", "station", "track_section", "switch", "signal",
-        "platform", "passenger_flow",
+        "sample_carrier", "conveyor_section", "track_junction",
+        "diverter", "buffer_slot", "transfer_port",
     }),
 }
 DOMAIN_ACTIONS = {
     "lab_sample_transport": frozenset({
         "assign_robot_task", "hold_assignment",
-    }),
-    "rail_transit": frozenset({
-        "hold_train", "route_train", "set_switch", "adjust_departure",
+        "route_carrier", "hold_carrier", "release_buffer",
+        "set_diverter", "transfer_to_robot", "transfer_to_conveyor",
     }),
 }
 DOMAIN_TOPOLOGY = {
     "lab_sample_transport": frozenset({
         "connected_to", "traversable_to", "resource_conflict",
-    }),
-    "rail_transit": frozenset({
-        "adjacent_section", "directed_to", "conflicts_with",
-        "station_has_platform", "switch_connects",
+        "feeds_into", "branches_to", "serves_station",
+        "buffered_by", "transfers_at",
     }),
 }
+
+# Already learned by the original lab-only PR61 backbone. Explicitly
+# exclude all new conveyor entities from that old checkpoint.
+ORIGINAL_PR61_NODE_KINDS = frozenset({
+    "robot", "task", "station", "resource",
+})
+CONVEYOR_NODE_KINDS = frozenset({
+    "sample_carrier", "conveyor_section", "track_junction",
+    "diverter", "buffer_slot", "transfer_port",
+})
+
 
 
 @dataclass(frozen=True)
@@ -227,23 +236,26 @@ LAB_READINESS = WorldModelReadiness(
     domain_prediction_heads=True, legal_transition=True,
     factual_prediction_validated=True,
     notes=(
-        "PR61 actual pretrained map-on/off exists; its existing lab public graph "
+        "PR61 actual pretrained map-on/off exists for the robot-only lab slice. "
         "and status heads were evaluated on developer scenes. PR72 found omitted "
         "effective service progress; PR76 did not establish reliable factual H20 "
         "benefit. Do not equate presence of trained weights with operational readiness."
     ),
 )
-RAIL_READINESS = WorldModelReadiness(
-    domain="rail_transit", public_graph_contract=True,
-    pretrained_graph_weights=False, domain_encoder=False,
-    domain_prediction_heads=False, legal_transition=False,
-    factual_prediction_validated=False,
+CONVEYOR_READINESS = WorldModelReadiness(
+    domain="lab_sample_transport.conveyor_extension",
+    public_graph_contract=True, pretrained_graph_weights=False,
+    domain_encoder=False, domain_prediction_heads=False,
+    legal_transition=False, factual_prediction_validated=False,
     notes=(
-        "Rail topology/public-time graph schema is valid, but no rail data, "
-        "train-state encoder/decoder, interlocking or block occupancy constraints, "
-        "trained rail forecast head or evaluated checkpoints are in this PR."
+        "Same sample/task workflow and public state-action graph can represent "
+        "pucks, conveyor sections, switches, buffers and robot-conveyor handoffs. "
+        "The original PR61 trained 16d entity encoder and 3d grid topology do "
+        "not encode these new nodes. No conveyor simulator/actuation, trained "
+        "checkpoint, sample handoff safety or factual conveyor evaluation yet."
     ),
 )
+
 
 
 class DomainWorldModelAdapter(Protocol):
