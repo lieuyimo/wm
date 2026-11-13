@@ -116,6 +116,19 @@ def score_state(predicted, actual):
     }
 
 
+def _sample_snapshot(observation, ids):
+    wanted = set(ids)
+    return {
+        s.id: {
+            "status": s.status,
+            "robot_id": getattr(s, "robot_id", None),
+            "workflow": getattr(s, "workflow", None),
+            "stage_index": getattr(s, "stage_index", None),
+        }
+        for s in observation.samples if s.id in wanted
+    }
+
+
 def run_one(observations, actions, geometry, rules, arm, model, horizon, seed):
     if len(actions) < horizon or len(observations) < horizon + 1:
         return {"arm": arm, "horizon": horizon, "legal_steps": 0,
@@ -134,10 +147,23 @@ def run_one(observations, actions, geometry, rules, arm, model, horizon, seed):
         action_ids = {a.sample_id for a in action}
         current_ids = {s.id for s in current.samples}
         if not action_ids.issubset(current_ids):
+            missing = sorted(action_ids - current_ids)
+            wanted = set(missing)
+            for sid in missing:
+                if "::stage2" in sid:
+                    wanted.add(sid.replace("::stage2", "::stage1"))
             return {
                 "arm": arm, "horizon": horizon, "legal_steps": legal_steps,
                 "full_horizon": False, "error": "action_references_missing_sample",
-                "missing_action_samples": sorted(action_ids - current_ids),
+                "missing_action_samples": missing,
+                "failure": {
+                    "step": step,
+                    "predicted_tick": current.tick,
+                    "actual_next_tick": observations[step + 1].tick,
+                    "action": sorted(action_ids),
+                    "predicted_samples": _sample_snapshot(current, wanted),
+                    "actual_next_samples": _sample_snapshot(observations[step + 1], wanted),
+                },
                 "steps": steps,
             }
         try:
@@ -154,7 +180,16 @@ def run_one(observations, actions, geometry, rules, arm, model, horizon, seed):
             return {
                 "arm": arm, "horizon": horizon, "legal_steps": legal_steps,
                 "full_horizon": False, "error": type(exc).__name__,
-                "error_message": str(exc), "steps": steps,
+                "error_message": str(exc),
+                "failure": {
+                    "step": step,
+                    "predicted_tick": current.tick,
+                    "actual_next_tick": observations[step + 1].tick,
+                    "action": sorted(action_ids),
+                    "predicted_samples": _sample_snapshot(current, action_ids),
+                    "actual_next_samples": _sample_snapshot(observations[step + 1], action_ids),
+                },
+                "steps": steps,
             }
         actual = observations[step + 1]
         steps.append(score_state(predicted, actual))
