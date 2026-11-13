@@ -55,9 +55,13 @@ def apply_current_public_stage1(predicted, actual_current, public_previous, rule
     # Mirror the ORIGINAL release_successors recomputation. Merely appending
     # a sample without rebuilding the station demand leaves inconsistent
     # waiting_pickups/approaching_pickups and resource observations.
+    # rebuild() returns plain StationV2 without the BusinessStationV2
+    # device_available field. Preserve the actual *current* device bits BEFORE
+    # that conversion; never infer a device event from station.available.
+    devices = {s.id: bool(getattr(s, "device_available", s.available))
+               for s in predicted.stations}
     rebuilt = attach_prediction(staged, rebuild(staged, staged.robots))
     staged = replace(staged, samples=rebuilt.samples, stations=rebuilt.stations)
-    devices = {s.id: bool(s.device_available) for s in staged.stations}
     staged = capacity_view(staged, (), rules, device_status=devices)[0]
     if any(s.id.endswith("::stage2") for s in arriving):
         raise AssertionError("factual successor stage2 leaked into prediction")
