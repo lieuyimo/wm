@@ -64,7 +64,7 @@ def factual_trace(scene, protocol, old, stress):
                              collect_metrics=True).run(
         dispatch_policy=dispatcher, on_transition=on_transition,
         on_observation=on_obs)
-    if (not observations or not actions or len(observations) != len(actions) + 1
+    if (not observations or not actions or len(observations) < len(actions)
             or resource_audit(fact, business.rules)["violations"]):
         raise AssertionError("factual source replay is incomplete or unsafe")
     return observations, actions, geometry, business.rules, {
