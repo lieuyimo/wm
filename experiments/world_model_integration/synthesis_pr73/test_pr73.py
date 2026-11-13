@@ -4,11 +4,45 @@ import unittest
 from experiments.business_constraints.tests.test_business import fixture
 from business_transport.simulation import BusinessSimulator
 from experiments.world_model_integration.synthesis_pr73.pr73_pilot import (
-    alter_jitter, aggregate, PHASES,
+    alter_jitter, aggregate, PHASES, balanced_scenes,
 )
 
 
 class PR73OriginalMechanismTests(unittest.TestCase):
+    def test_train_only_discrete_hazard_not_fitted_on_dev(self):
+        from experiments.world_model_integration.synthesis_pr73.pr73_hazard_probe import (
+            fit_train_only, compare,
+        )
+        rows = [
+            {"phase": p, "station": "A0", "active_elapsed": a,
+             "event": y, "rule_event": 0}
+            for p, a, y in (
+                ("to_pickup",1,0),("to_pickup",1,1),
+                ("to_pickup",2,1),("to_dropoff",1,0),
+                ("to_dropoff",1,1))
+        ]
+        fit = fit_train_only(rows)
+        before = repr(fit)
+        dev = [{**rows[0], "event": 1}]
+        out = compare(fit, dev)
+        self.assertFalse(out["dev_used_for_fit"])
+        self.assertEqual(out["train_risk_rows"], len(rows))
+        self.assertEqual(repr(fit), before)
+        self.assertIn("public_elapsed_hazard", out["method"])
+
+    def test_balance_predeclared_regime_selection(self):
+        scenes = [
+            {"id": f"{name}_{i}", "case": {"regime": name}}
+            for name in ("regime_a","regime_b") for i in range(4)
+        ]
+        cohort = balanced_scenes(scenes, 4)
+        self.assertEqual(
+            {reg: sum(x["case"]["regime"] == reg for x in cohort)
+             for reg in ("regime_a","regime_b")},
+            {"regime_a": 2, "regime_b": 2})
+        with self.assertRaisesRegex(ValueError, "balance"):
+            balanced_scenes(scenes, 3)
+
     def test_only_station_jitter_changes(self):
         base, cfg, world = fixture()
         altered = alter_jitter(world, 2)
