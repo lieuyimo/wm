@@ -61,6 +61,10 @@ class ExistingTrainPublicHazard:
             "station":query["station_id"],
             "phase":query["phase"],
             "active_elapsed":active_elapsed,
+            # PR73 diagnostic returns a separate original_rule slot; the
+            # survival adapter reads ONLY the TRAIN-fitted public hazard.
+            # A constant placeholder cannot affect the selected probability.
+            "rule_event":0,
         })["public_elapsed_hazard"]
 
 
