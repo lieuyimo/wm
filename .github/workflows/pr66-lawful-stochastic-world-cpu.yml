@@ -1,0 +1,97 @@
+name: PR66 original-world lawful exogenous device H5-H20 CPU gate
+on:
+  push:
+    branches: [research/pr66-rule-constrained-stochastic-world-recursion-20261113]
+    paths:
+      - .github/workflows/pr66-lawful-stochastic-world-cpu.yml
+      - experiments/world_model_integration/stochastic_pr66/**
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  actual-world-lawful-recursion:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Restore original immutable environment
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -m pip install 'torch-geometric==2.6.1'
+          python - <<'PY'
+          import torch
+          assert torch.version.cuda is None
+          print("PR66_CPU_ONLY",torch.__version__)
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-real-random-outage-43264954353-train
+          path: ${{ runner.temp }}/original-train
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-real-random-outage-43264954353-validation
+          path: ${{ runner.temp }}/original-dev
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-shifted-outage-true-risk-set-audit-43264954353
+          path: ${{ runner.temp }}/original-quality
+      - name: Verify original physical TRAIN/DEV source SHA and run unit legality
+        run: |
+          set -euo pipefail
+          (cd "$RUNNER_TEMP/original-train" && sha256sum -c SHA256SUMS)
+          (cd "$RUNNER_TEMP/original-dev" && sha256sum -c SHA256SUMS)
+          (cd "$RUNNER_TEMP/original-quality" && sha256sum -c SHA256SUMS)
+          mkdir -p "$RUNNER_TEMP/pr66"
+          python -m compileall -q experiments/world_model_integration/stochastic_pr66
+          python -m unittest experiments.world_model_integration.stochastic_pr66.test_pr66 -v \
+            2>&1 | tee "$RUNNER_TEMP/pr66/tests.log"
+      - name: Replay actual original CPU worlds, validate stochastic H5 and H20
+        run: |
+          set -euo pipefail
+          python -m experiments.world_model_integration.stochastic_pr66.pr66_cpu_admission \
+            --train "$RUNNER_TEMP/original-train/data.json" \
+            --validation "$RUNNER_TEMP/original-dev/data.json" \
+            --quality "$RUNNER_TEMP/original-quality/quality.json" \
+            --out "$RUNNER_TEMP/pr66/admission.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr66/admission.log"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          q=json.loads((Path(os.environ["RUNNER_TEMP"])/"pr66/admission.json").read_text())
+          assert q["scientific_verdict"]=="PASS_CPU_RULE_EXOGENOUS_BOUNDARY_ONLY_BLOCKED_GPU_LEARNED_H20"
+          assert q["original_worlds_replayed"]==2 and q["real_source_public_t0_t1_input_and_label_identical"]
+          assert len(q["traces"])==8
+          assert {r["H"] for r in q["traces"]}=={5,20}
+          assert all(r["all_steps_rule_and_device_boundary_legal"] for r in q["traces"])
+          assert not q["gpu_used"] and not q["original_BLIND_opened"]
+          assert not q["new_neural_training"] and not q["PR61_checkpoint_loaded"]
+          print("PR66_ORIGINAL_WORLD_LAWFUL_STOCHASTIC_H5_H20_CPU_PASS")
+          PY
+          git rev-parse HEAD > "$RUNNER_TEMP/pr66/source_head.txt"
+          python -m pip freeze > "$RUNNER_TEMP/pr66/pip-freeze.txt"
+          (cd "$RUNNER_TEMP/pr66" && sha256sum tests.log admission.json admission.log source_head.txt pip-freeze.txt > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr66-real-world-lawful-stochastic-h5-h20-${{ github.run_id }}
+          path: ${{ runner.temp }}/pr66/
+          retention-days: 90
+          if-no-files-found: warn
