@@ -82,8 +82,8 @@ Rule 完全匹配原真实模拟器生成的公开事件，印证这批 DEV 活�
 - `experiments/world_model_integration/identifiability_pr72/pr72_frozen_trained_arms.py`：原 PR70 已训练权重输出的场景/seed 配对统计，不加载模型。
 - `experiments/world_model_integration/identifiability_pr72/test_pr72.py`：验证 phase 对应、mask 约束、原 graph 无服务 effective mean/active progress。
 - `.github/workflows/pr72-phase-risk-input-information-cpu.yml`：自动下载和 SHA 核对原 PR64 全部 artifacts，执行 12 个真实 DEV 场景及 PR70 frozen-result 统计，归档日志、JSON、source HEAD、pip freeze 和 SHA256SUMS。
-- **GitHub CPU 成功 Run [#43410520487](https://github.com/lieuyimo/wm/actions/runs/43410520487)**：10/10 单元测试；原始 PR64 12/12 场景，751/508 活动服务风险集，受控 graph 相同/Rule 输出不同；真实 pretrained 存档 map_on/off 配对。归档 [Artifact #14028818004](https://github.com/lieuyimo/wm/actions/runs/43410520487/artifacts/14028818004)。
-- 后续补强“完整原 PR61 PyG 历史+地图批输入逐张量相等”的工作流采用最新 PR72 HEAD CI 结果为准，不改变 PR64 原数据。
+- **GitHub CPU 成功 Run [#43410871772](https://github.com/lieuyimo/wm/actions/runs/43410871772)**：10/10 单元测试；原始 PR64 12/12 场景，751/508 活动服务风险集，受控 graph 相同/Rule 输出不同；真实 pretrained 存档 map_on/off 配对。归档 [Artifact #14030205096](https://github.com/lieuyimo/wm/actions/runs/43410871772/artifacts/14030205096)。
+- 已在最新 PR72 Run #43410871772 **真实验证完整 PR61 PyG history / entity / relationship / public map tensors 相等**，而原合法规则下一状态不同；无原数据修改。
 
 ## 7. 研究裁决与下一阶段的具体研究门槛
 
