@@ -116,6 +116,9 @@ class RuleConstrainedStochasticDeviceTests(unittest.TestCase):
         up_b = next(s for s in up.stations if s.id == "B0")
         down_b = next(s for s in down.stations if s.id == "B0")
         self.assertEqual(up_b.resource_occupied, down_b.resource_occupied)
+        self.assertGreater(down_b.resource_occupied, 0)
+        self.assertTrue(down_b.service_session_active)
+        self.assertTrue(up_b.service_in_progress)
         self.assertFalse(down_b.device_available)
         self.assertFalse(down_b.available)
         self.assertFalse(down_b.service_in_progress)
@@ -129,6 +132,12 @@ class RuleConstrainedStochasticDeviceTests(unittest.TestCase):
         self.assertEqual({s.id: s.status for s in up_next.samples},
                          {s.id: s.status for s in down_next.samples})
         self.assertFalse(next(s.device_available for s in down_next.stations if s.id == "B0"))
+        up_r = next(r for r in up_next.robots if r.task_id == "J1::stage1")
+        down_r = next(r for r in down_next.robots if r.task_id == "J1::stage1")
+        self.assertIsNotNone(up_r.service_active_elapsed)
+        self.assertIsNotNone(down_r.service_active_elapsed)
+        self.assertGreater(up_r.service_active_elapsed, down_r.service_active_elapsed)
+        self.assertGreater(down_r.service_paused_elapsed, up_r.service_paused_elapsed)
 
     def test_h20_rollout_is_seeded_and_all_steps_rule_legal(self):
         row = self.rows[0]
