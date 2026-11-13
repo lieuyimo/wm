@@ -85,6 +85,8 @@ jobs:
           assert sum(p[x]["events"] for x in p)==508
           assert all(p[x]["rule_errors"]==0 for x in p)
           assert r["public_input_collision_witness"]["PR61_full_current_graph_equal"]
+          assert r["public_input_collision_witness"]["PR61_complete_history_map_relational_PyG_input_equal"]
+          assert r["public_input_collision_witness"]["PR61_prior_input_seeded_at_t_minus_one"]
           assert r["public_input_collision_witness"]["rule_next_status_A"] != r["public_input_collision_witness"]["rule_next_status_B"]
           assert not r["train_fit_or_new_network_inference"] and not r["BLIND_TEST_read"]
           print("PR72_PHASE_RISK_SOURCE_AND_PUBLIC_FEATURE_ALIAS_CPU_PASS")
