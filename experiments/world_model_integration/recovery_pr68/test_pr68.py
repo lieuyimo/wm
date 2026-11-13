@@ -63,7 +63,7 @@ class PR61CheckpointAdmissionTests(unittest.TestCase):
         # repo where unrelated PETS/PR9 weights legitimately exist.
         from experiments.world_model_integration.recovery_pr68 import pr68_checkpoint
         self.assertNotIn("torch.nn.init", Path(pr68_checkpoint.__file__).read_text())
-        self.assertNotIn("weights_only=False", Path(pr68_checkpoint.__file__).read_text())
+        self.assertIn("weights_only=True", Path(pr68_checkpoint.__file__).read_text())
 
 
 if __name__ == "__main__":
