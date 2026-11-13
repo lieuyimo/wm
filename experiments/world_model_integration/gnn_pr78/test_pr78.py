@@ -17,7 +17,8 @@ from business_transport.session_events import eligible_sessions
 from experiments.workflow_prediction.tests.test_workflow import case,factual
 from experiments.world_model_integration.gnn_pr78.pr78_model import (
     PublicServiceGraphHistory, PublicMapRelationalServiceWorld,
-    service_event_loss, admit_original_pr61_backbone, QUERY_WIDTH,
+    service_event_loss, admit_original_pr61_backbone,
+    PublicRelationalServiceRule, QUERY_WIDTH,
 )
 from experiments.world_model_integration.decision_learning_pr51.pr51_train import (
     node_features,
@@ -151,6 +152,37 @@ class OriginalPR61EventAlignment(unittest.TestCase):
         corrupt.service_event_mask=~corrupt.service_event_mask
         with self.assertRaisesRegex(AssertionError,"SAME public active risk"):
             service_event_loss(logits,corrupt)
+
+    def test_new_public_service_head_reuses_original_PR67_lawful_world_transition(self):
+        from business_transport.workflow_transition import check_business_transition
+        i,row,query=self._risk()
+        torch.manual_seed(7812)
+        net=PublicMapRelationalServiceWorld(hidden=48,map_enabled=True)
+        with self.assertRaisesRegex(PermissionError,"verified original"):
+            PublicRelationalServiceRule(self.geometry,self.rules,net)
+        world=PublicRelationalServiceRule._for_untrained_contract_test_only(
+            self.geometry,self.rules,net,seed=7812)
+        next_public=world.predict_next(row.observation,row.assignments)
+        check_business_transition(
+            row.observation,next_public,self.geometry,self.rules,row.assignments)
+        self.assertEqual(next_public.tick,row.observation.tick+1)
+        self.assertEqual(world.forward_calls,1)
+        self.assertEqual(world.service_query_calls,1)
+        self.assertTrue(world.last_neural_events)
+        self.assertEqual(world.last_neural_events[0].sample_id,query["sample_id"])
+        self.assertTrue(0<=world.last_neural_events[0].probability_complete<=1)
+        self.assertIn("UNTRAINED",world.weight_origin)
+        world.reset_seed(7812)
+        repeated=world.predict_next(row.observation,row.assignments)
+        self.assertEqual(next_public,repeated)
+
+    def test_verified_new_head_cannot_load_without_real_artifact_and_matching_SHA(self):
+        i,row,query=self._risk()
+        with self.assertRaises(FileNotFoundError):
+            PublicRelationalServiceRule.from_pretrained_output(
+                self.geometry,self.rules,Path("/nonexistent/pr61.tar.gz"),
+                Path("/nonexistent/manifest.csv"),
+                Path("/nonexistent/pr78-head.pt"),"0"*64)
 
     def test_pr61_checkpoint_cannot_be_fabricated_from_nonexistent_archive(self):
         model=PublicMapRelationalServiceWorld()
