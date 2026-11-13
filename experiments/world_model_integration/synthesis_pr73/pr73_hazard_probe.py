@@ -5,6 +5,7 @@ simple diagnostic baseline, NOT an original algorithm, new neural training or
 a learned world model. Thresholds/denominators never use DEV labels.
 """
 from collections import defaultdict
+import random
 
 PHASES = ("to_pickup", "to_dropoff")
 ALPHA = 1.0
@@ -50,6 +51,36 @@ def probabilities(control, row):
             "original_rule": float(row["rule_event"])}
 
 
+def _scene_paired(dev_rows, preds):
+    names = sorted({r["scene"] for r in dev_rows if "scene" in r})
+    if not names:
+        return {"available": False, "reason": "no scene identities in pure unit test"}
+    diffs = []
+    scores = []
+    for name in names:
+        indices = [i for i, r in enumerate(dev_rows) if r["scene"] == name]
+        if not indices:
+            raise AssertionError("empty DEV scene")
+        rule = sum((preds[i]["original_rule"] - dev_rows[i]["event"])**2
+                   for i in indices) / len(indices)
+        hazard = sum((preds[i]["public_elapsed_hazard"] - dev_rows[i]["event"])**2
+                     for i in indices) / len(indices)
+        scores.append({"scene": name, "n": len(indices), "rule_brier": rule,
+                       "public_elapsed_hazard_brier": hazard,
+                       "delta_hazard_minus_rule": hazard-rule})
+        diffs.append(hazard-rule)
+    rng = random.Random(73002)
+    bs = sorted(
+        sum(diffs[rng.randrange(len(diffs))] for _ in diffs) / len(diffs)
+        for _ in range(2000))
+    return {"available": True, "scenes": len(names),
+            "unit_of_resampling": "original developer scenario; not correlated active-service tick",
+            "mean_scene_delta_hazard_minus_rule": sum(diffs)/len(diffs),
+            "scene_bootstrap_95CI": [bs[49],bs[1949]],
+            "scenes_hazard_lower_brier": sum(v < 0 for v in diffs),
+            "per_scene": scores}
+
+
 def compare(control, dev_rows):
     if not dev_rows:
         raise ValueError("nonempty independent developer risk rows required")
@@ -81,6 +112,7 @@ def compare(control, dev_rows):
             }
             for k in methods
         },
+        "paired_scene_uncertainty": _scene_paired(dev_rows, preds),
         "train_risk_rows": sum(n for n, _ in control["phase"].values()),
         "n_train_public_age_station_buckets": len(control["joint"]),
     }
