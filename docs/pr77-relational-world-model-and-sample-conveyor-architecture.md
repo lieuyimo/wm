@@ -58,3 +58,13 @@
 - 新的 CPU 单元测试验证在**同一张实验室图**中含样本任务、AGV、载具、轨道段、分流器、缓存位、工位交接，以及两种候选行动；拒绝事实未来信息、未知区段或非法外部 rail 行动。继承 PR67/PR68 原有 GNN/权重硬门禁，旧模型保持不变。
 
 **决策**：GO（同一世界模型图语义可兼容两类样本运输设施）；NO-GO（只做接口不等于已做传送带仿真/预测、真实轨道兼容权重或调度收益）。未来必须由实际输送线/检测流程选择带段模型与合法离散事件参考，再判断采用统一图网络训练还是以原图主干迁移。
+
+## 5. 修订后的真实 CI 验证
+
+[最终 GitHub Actions #43470529697](https://github.com/lieuyimo/wm/actions/runs/43470529697) **SUCCESS，18/18 测试通过**；[原始日志、schema readiness 与环境 Artifact #14061255794](https://github.com/lieuyimo/wm/actions/runs/43470529697/artifacts/14061255794)。
+
+本轮不再测试铁路列车，而是测试**同一实验室样本世界**中机器人、样本、puck/载具、输送段、分流器、缓冲位、交接端口、分析工位同时存在并由公开实体/关系图表示；分别能表达机器人任务分配和载具分流，严格拒绝未观测的未来堵塞或事后事件输入、未知节点、错误外部行动与混合时钟。
+
+原 PR61 实际图骨架仍是 **52,953** 参数，原 PR67 业务合法转移与 PR68 原训练归档 SHA admission 单元测试全部通过。CI `contract.json` 明确 `conveyor_trained_inference_supported=false`、`conveyor_physical_legality_verified=false`、`actual_pr61_checkpoint_loaded=false`、`BLIND_TEST_read=false`。
+
+这是完成了**兼容接口**的实际验证，不是完成了传送带动态预测训练。下阶段仍需现实可复现的 conveyer carrier 区段和工位对接动力学仿真，以及 TRAIN/DEV 事件序列和专门的 GNN 实体编码。
