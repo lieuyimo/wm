@@ -13,7 +13,6 @@ import json
 from pathlib import Path
 
 EXPECTED_PR64_DEV_SHA = "31a36e0940db7afe015fe35689cb629102dea45e8d61123ed89250abc01d0b86"
-EXPECTED_PR70_SERVICE_SHA = "fc_unset_until_SHA_CHECK"
 MODEL_ARMS = ("map_off", "map_on")
 MODEL_SEEDS = (1810, 1811, 1812)
 
