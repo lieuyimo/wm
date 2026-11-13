@@ -72,7 +72,7 @@ jobs:
             --train "$RUNNER_TEMP/original-train/data.json" \
             --dev "$RUNNER_TEMP/original-dev/data.json" \
             --quality "$RUNNER_TEMP/original-quality/quality.json" \
-            --train-scenes 4 --dev-scenes 4 \
+            --train-scenes 8 --dev-scenes 4 \
             --output "$RUNNER_TEMP/pr73/pilot.json" \
             2>&1 | tee "$RUNNER_TEMP/pr73/pilot.log"
           python - <<'PY'
@@ -80,14 +80,16 @@ jobs:
           from pathlib import Path
           p=Path(os.environ["RUNNER_TEMP"])/"pr73/pilot.json"
           r=json.loads(p.read_text())
-          assert r["train_cases"]==4 and r["dev_cases"]==4
+          assert r["train_cases"]==8 and r["dev_cases"]==4
           assert not r["new_network_training_or_inference"] and not r["BLIND_TEST_read"]
           assert r["data_generator_modified"] is False
           for key in ("train","developer_validation"):
-            assert len(r["report"][key])==8
+            assert len(r["report"][key])==(16 if key=="train" else 8)
             assert all(s["used_original_keyed_service_jitter"] and s["private_jitter_draws_NOT_part_of_public_features"]
                        for s in r["report"][key])
             assert all(r["aggregates"][key][str(j)]["all_query_widths_original_48"] for j in (0,2))
+          assert r["all_phase_hazard_fit_from_TRAIN_only"]
+          assert r["train_only_discrete_hazard_dev_controls"]["2"]["train_risk_rows"]>0
           print("PR73_ORIGINAL_KEYED_JITTER_AND_PUBLIC_QUERY_CPU_PASS")
           PY
           git rev-parse HEAD > "$RUNNER_TEMP/pr73/source_head.txt"
