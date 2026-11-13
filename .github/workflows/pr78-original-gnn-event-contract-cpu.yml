@@ -1,0 +1,81 @@
+name: PR78 original PR61 RGCN SAGE public service information and event head CPU gate
+on:
+  push:
+    branches: [research/pr78-original-gnn-public-service-event-alignment-20261114]
+    paths:
+      - .github/workflows/pr78-original-gnn-event-contract-cpu.yml
+      - experiments/world_model_integration/gnn_pr78/**
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original-relational-gnn-event:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install original repository CPU dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -m pip install 'torch-geometric==2.6.1'
+          python - <<'PY'
+          import torch
+          assert torch.version.cuda is None
+          print("PR78_CPU_ORIGINAL_PR61_GRAPH_ONLY",torch.__version__)
+          PY
+      - name: Actual public service info, factual next-event target, and whole-GNN map gradient gates
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr78"
+          python -m compileall -q experiments/world_model_integration/gnn_pr78
+          python -m unittest \
+            experiments.world_model_integration.gnn_pr78.test_pr78 \
+            experiments.world_model_integration.identifiability_pr72.test_pr72 \
+            experiments.world_model_integration.sealed_pr59.test_pr59 \
+            experiments.world_model_integration.neural_pr67.test_pr67 -v \
+            2>&1 | tee "$RUNNER_TEMP/pr78/tests.log"
+          python - <<'PY' | tee "$RUNNER_TEMP/pr78/architecture.json"
+          import json
+          from experiments.world_model_integration.gnn_pr78.pr78_model import (
+              PublicMapRelationalServiceWorld, SOURCE_SCHEMA,
+          )
+          from business_transport.session_events import QUERY_WIDTH
+          a=PublicMapRelationalServiceWorld(hidden=48,map_enabled=True)
+          b=PublicMapRelationalServiceWorld(hidden=48,map_enabled=False)
+          assert a.graph_world.state_dict().keys()==b.graph_world.state_dict().keys()
+          assert a.original_pr61_parameters()==52953
+          assert a.original_pr61_parameters()==b.original_pr61_parameters()
+          print(json.dumps({
+              "schema":SOURCE_SCHEMA,
+              "actual_original_PR61_RGCN_SAGEConv_backbone_parameters":a.original_pr61_parameters(),
+              "conditional_public_service_query_width":QUERY_WIDTH,
+              "additional_event_head_parameters":a.service_head_parameters(),
+              "architecture_parameter_matched_map_on_off":(
+                  sum(p.numel() for p in a.parameters())==sum(p.numel() for p in b.parameters())),
+              "true_new_GNN_training_completed":False,
+              "original_PR61_checkpoint_loaded":False,
+              "real_business_public_service_input_and_gradient_gate":True,
+              "no_BLIND":True,"no_GPU":True
+          },sort_keys=True))
+          PY
+          git rev-parse HEAD > "$RUNNER_TEMP/pr78/source_head.txt"
+          python -m pip freeze > "$RUNNER_TEMP/pr78/pip-freeze.txt"
+          (cd "$RUNNER_TEMP/pr78" && sha256sum tests.log architecture.json source_head.txt pip-freeze.txt > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr78-original-gnn-public-event-cpu-${{ github.run_id }}
+          path: ${{ runner.temp }}/pr78/
+          retention-days: 90
+          if-no-files-found: warn
