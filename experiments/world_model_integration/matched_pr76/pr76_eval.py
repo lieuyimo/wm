@@ -111,7 +111,7 @@ def summarize_conditioned(runs,horizon,anchor):
             },
             "all_pairs_usable":len(fully_matched)==len(matched_by_key),
         }
-        if len(per_scene)==12:
+        if (len(per_scene)==12 and len(fully_matched)==len(matched_by_key)):
             rng=random.Random(76000+horizon+(0 if anchor=="initial_t0" else 31))
             paired={}
             for comp in ("rule","train_public_hazard"):
