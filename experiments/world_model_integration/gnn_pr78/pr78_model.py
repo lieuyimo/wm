@@ -17,6 +17,7 @@ from collections import Counter
 from pathlib import Path
 
 import torch
+from torch_geometric.data import Batch
 from torch import nn
 import torch.nn.functional as F
 
@@ -25,7 +26,7 @@ from business_transport.session_events import (
 )
 from business_transport.state_features import build_business_features
 from experiments.world_model_integration.neural_pr67.pr67_neural_world import (
-    PublicGraphHistory,
+    PublicGraphHistory, NeuralTaskServiceRule,
 )
 from experiments.world_model_integration.recovery_pr68.pr68_checkpoint import (
     ARCHIVE_SHA256, load_original_models,
@@ -202,3 +203,101 @@ def admit_original_pr61_backbone(
         "new_service_head_trained":False,
         "not_original_pr61_checkpoint":True,
     }
+
+class _CurrentPublicServiceBatchHistory:
+    """Preserve PR67's original temporal graph state and add PR78 query sidecar."""
+    def __init__(self,geometry,rules):
+        self.encoder=PublicServiceGraphHistory(geometry,rules)
+
+    def reset(self):
+        self.encoder.reset()
+
+    def encode(self,current,assignments):
+        data,keys=self.encoder.encode(current,assignments)
+        return Batch.from_data_list([data]),keys
+
+
+class _ConditionalEventAsOriginalTaskHead(nn.Module):
+    """Adapt new conditional event head to the ORIGINAL legal PR67 protocol.
+
+    The old PR61 absolute next-status output is still available for analysis.
+    For each *currently active service* task, only its corresponding phase
+    completion probability is replaced by PR78's conditional event probability.
+    PR67's existing public-eligible sampling, physical service intervention,
+    WorkflowDynamics and all original legality checks are then reused AS-IS.
+    """
+
+    def __init__(self,model):
+        super().__init__()
+        self.model=model
+
+    def forward(self,graph):
+        predicted_nodes,predicted_new_tasks,service_logits=self.model(graph)
+        if (not hasattr(graph,"service_risk_mask")
+            or not hasattr(graph,"service_phase")):
+            raise ValueError("PR78 original-world adapter missing public service queries")
+        probs=torch.sigmoid(service_logits)
+        output=predicted_nodes.clone()
+        if not torch.all((graph.service_phase[:,0]+graph.service_phase[:,1]
+                          == graph.service_risk_mask.float())):
+            raise AssertionError("PR78 task event phase or public eligibility mismatch")
+        pickup=graph.service_risk_mask.bool() & (graph.service_phase[:,0]>0.5)
+        delivery=graph.service_risk_mask.bool() & (graph.service_phase[:,1]>0.5)
+        output[pickup,2]=probs[pickup]
+        output[delivery,3]=probs[delivery]
+        return output,predicted_new_tasks
+
+
+class PublicRelationalServiceRule(NeuralTaskServiceRule):
+    """Original PR61 GNN + PR78 event head -> original PR67 lawful world step.
+
+    Untrained code-path testing is explicit; actual inference must load the
+    ORIGINAL PR61 six-weight archive plus the SHA-verified *newly trained*
+    conditional head. No old-checkpoint-only or random fallback.
+    """
+
+    def __init__(self,geometry,rules,network,*,seed=7810,_fixture=False):
+        if not _fixture:
+            raise PermissionError(
+                "PR78 conditional service head needs verified original+new "
+                "trained checkpoint; use from_pretrained_output")
+        super().__init__(geometry,rules,_ConditionalEventAsOriginalTaskHead(network),seed=seed)
+        self.history=_CurrentPublicServiceBatchHistory(geometry,rules)
+        self.weight_origin="UNTRAINED_PR78_INTERFACE_TEST_ONLY"
+
+    @classmethod
+    def _for_untrained_contract_test_only(cls,geometry,rules,network,*,seed=7810):
+        return cls(geometry,rules,network,seed=seed,_fixture=True)
+
+    @classmethod
+    def from_pretrained_output(cls,geometry,rules,archive,manifest,
+                               trained_head_file,expected_head_sha256,*,
+                               seed=7810,original_validation=None):
+        import hashlib
+        digest=hashlib.sha256(Path(trained_head_file).read_bytes()).hexdigest()
+        if not expected_head_sha256 or expected_head_sha256!=digest:
+            raise ValueError("PR78 newly trained public service head SHA mismatch")
+        checkpoint=torch.load(trained_head_file,map_location="cpu",weights_only=True)
+        if (checkpoint.get("schema")!=SOURCE_SCHEMA or
+            checkpoint.get("original_PR61_archive_sha256")!=ARCHIVE_SHA256 or
+            checkpoint.get("original_pretrained_backbone_unchanged") is not True or
+            checkpoint.get("online_verified") is not False or
+            checkpoint.get("BLIND_TEST_read") is not False):
+            raise ValueError("PR78 trained conditional service head provenance invalid")
+        arm=checkpoint["original_PR61_arm"]
+        original_seed=checkpoint["original_PR61_seed"]
+        model=PublicMapRelationalServiceWorld(
+            hidden=48,map_enabled=(arm=="map_on"))
+        admission=admit_original_pr61_backbone(
+            model,archive,manifest,arm=arm,seed=original_seed,
+            original_validation=original_validation)
+        stored=checkpoint["original_pretrained_graph_state"]
+        if any(not torch.equal(v,stored[k])
+               for k,v in model.graph_world.state_dict().items()):
+            raise ValueError("PR78 claimed original PR61 frozen weights do not match archive")
+        model.service_event_head.load_state_dict(
+            checkpoint["trained_new_public_service_head_state"],strict=True)
+        obj=cls(geometry,rules,model,seed=seed,_fixture=True)
+        obj.weight_origin=f"VERIFIED_PR61_{arm}_{original_seed}_PR78_{digest}"
+        obj.predictor.eval()
+        return obj
