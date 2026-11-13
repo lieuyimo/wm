@@ -67,10 +67,15 @@ def factual_trace(scene, protocol, old, stress):
     if (not observations or not actions or len(observations) < len(actions)
             or resource_audit(fact, business.rules)["violations"]):
         raise AssertionError("factual source replay is incomplete or unsafe")
+    first_completion = min(
+        (o.tick for o in observations
+         if any(s.status == "completed" for s in o.samples)),
+        default=None)
     return observations, actions, geometry, business.rules, {
         "scene": scene["id"], "regime": case["regime"],
         "starts": starts, "durations": durations,
         "ticks": fact["summary"]["ticks"],
+        "first_completed_observation_tick": first_completion,
         "status": fact["summary"]["status"],
     }
 
@@ -142,6 +147,9 @@ def run_one(observations, actions, geometry, rules, arm, model, horizon, seed):
         dynamic.weight_origin = "original_PR61_verified_best_pt"
     steps = []
     legal_steps = 0
+    service_queries = 0
+    sampled_complete = 0
+    forward_calls = 0
     for step in range(horizon):
         action = actions[step]
         action_ids = {a.sample_id for a in action}
@@ -156,6 +164,9 @@ def run_one(observations, actions, geometry, rules, arm, model, horizon, seed):
                 "arm": arm, "horizon": horizon, "legal_steps": legal_steps,
                 "full_horizon": False, "error": "action_references_missing_sample",
                 "missing_action_samples": missing,
+                "neural_forward_calls": forward_calls,
+                "neural_active_service_queries": service_queries,
+                "neural_sampled_complete": sampled_complete,
                 "failure": {
                     "step": step,
                     "predicted_tick": current.tick,
@@ -168,6 +179,11 @@ def run_one(observations, actions, geometry, rules, arm, model, horizon, seed):
             }
         try:
             core = dynamic.predict_next(current, action)
+            if arm != "rule":
+                forward_calls = dynamic.forward_calls
+                service_queries = dynamic.service_query_calls
+                sampled_complete += sum(
+                    1 for event in dynamic.last_neural_events if event.sampled_complete)
             next_devices = {
                 s.id: bool(next(x.device_available for x in observations[step + 1].stations
                                 if x.id == s.id))
@@ -181,6 +197,9 @@ def run_one(observations, actions, geometry, rules, arm, model, horizon, seed):
                 "arm": arm, "horizon": horizon, "legal_steps": legal_steps,
                 "full_horizon": False, "error": type(exc).__name__,
                 "error_message": str(exc),
+                "neural_forward_calls": forward_calls,
+                "neural_active_service_queries": service_queries,
+                "neural_sampled_complete": sampled_complete,
                 "failure": {
                     "step": step,
                     "predicted_tick": current.tick,
@@ -198,6 +217,9 @@ def run_one(observations, actions, geometry, rules, arm, model, horizon, seed):
     return {
         "arm": arm, "horizon": horizon, "legal_steps": legal_steps,
         "full_horizon": legal_steps == horizon, "error": None, "steps": steps,
+        "neural_forward_calls": forward_calls,
+        "neural_active_service_queries": service_queries,
+        "neural_sampled_complete": sampled_complete,
     }
 
 
