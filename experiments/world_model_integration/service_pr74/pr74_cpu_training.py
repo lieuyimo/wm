@@ -22,7 +22,8 @@ from pathlib import Path
 import torch
 from torch import nn
 
-from business_transport.state_features import build_business_features
+from business_transport.state_features import build_business_features, SCHEMA_VERSION
+from business_transport.session_events import QUERY_LABEL_VERSION
 from business_transport.session_events import eligible_sessions
 from business_transport.dynamics import WorkflowDynamics
 from experiments.world_model_integration.synthesis_pr73.pr73_pilot import (
@@ -36,7 +37,8 @@ from experiments.world_model_integration.recovery_pr68.pr68_checkpoint import sh
 from experiments.world_model_integration.stochastic_pr66.pr66_cpu_admission import verify
 from experiments.world_model_integration.stress_pr48.pr48_scenarios import PROTOCOL as PR48_PROTOCOL
 from lab_transport.business_session_learning import (
-    BusinessSessionEventModel, encode_session_batch, metrics,
+    BusinessSessionEventModel, encode_session_batch, metrics, load_session_model,
+    MODEL_VERSION,
 )
 from lab_transport.torch_structured_adapter import ProgressAwareRule
 
@@ -221,6 +223,9 @@ def train_and_score(dataset,train_sha,dev_sha,output_dir):
         "metadata":{
             "source":"PR73 same existing simulator hashed jitter=2 only",
             "architecture":"original lab_transport.business_session_learning.BusinessSessionEventModel 48d",
+            "model_version": MODEL_VERSION,
+            "schema_version": SCHEMA_VERSION,
+            "label_version": QUERY_LABEL_VERSION,
             "train_source_sha256":train_sha,"dev_source_sha256":dev_sha,
             "train_scenes":24,"developer_validation_scenes":12,
             "seed":SEED,"epochs":EPOCHS,"batch":BATCH_SIZE,"lr":LR,
@@ -234,6 +239,10 @@ def train_and_score(dataset,train_sha,dev_sha,output_dir):
     }
     ckpt=output_dir/"existing_deepsets_public_service_cpu_best.pt"
     torch.save(checkpoint,ckpt)
+    admitted, admitted_meta = load_session_model(ckpt,experimental=True)
+    if (admitted_meta["online_verified"] or
+        admitted.target[0].in_features != 48):
+        raise AssertionError("original SessionRuleDynamics offline experimental v2 load mismatch")
     report={
         "schema":"pr74-existing-DeepSets-v2-CPU-development-smoke-v1",
         "old_PR61_checkpoint_loaded":False,
