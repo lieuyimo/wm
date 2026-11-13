@@ -1,0 +1,48 @@
+{
+  "schema": "pr68-cpu-evaluation-environment-v1",
+  "python": "3.11.15 (main, Jun 11 2026, 04:03:40) [Clang 22.1.3 ]",
+  "platform": "Linux-6.8.0-107-generic-x86_64-with-glibc2.39",
+  "cuda_visible_devices": "",
+  "torch": "2.5.1",
+  "torch_cuda_available": false,
+  "torch_geometric": "2.6.1",
+  "numpy": "1.26.4",
+  "ortools": "9.14.6206",
+  "pandas": "2.3.3",
+  "protobuf": "6.31.1",
+  "absl_py": "2.5.1",
+  "hydra_core": "1.3.2",
+  "omegaconf": "2.3.0",
+  "mbrl_source_commit": "3f93cccfc8d635f74e335a2f07aab6e9a48fc021",
+  "mbrl_source_path": "/data/wm-pr68-cpu-20261113/mbrl",
+  "pydeps_path": "/data/wm-pr68-cpu-20261113/pydeps",
+  "source_head": "a9e958c16e5376f8f0ac39524af89f533184534e",
+  "archive": {
+    "path": "/data/wm-a100-pr60-gpu-20261112/pr60-gpu-checkpoints-20261112.tar.gz",
+    "sha256": "919a0b625659e492811a74bc5cdf76a60ccbf639acb32c33a420b7db30a74e14",
+    "bytes": 6661520
+  },
+  "pr59_validation": {
+    "path": "/data/wm-pr68-cpu-input/pr59-validation/data.json",
+    "sha256": "c7a0a0081e0c901faea23b37816eb54b560efb9c8b66118387c3fbb0a9509712",
+    "bytes": 38112535
+  },
+  "pr64_train": {
+    "path": "/data/wm-pr68-cpu-input/pr64-train/data.json",
+    "sha256": "4c1157777117f82f7deb44f98e1d8255e95611dfcb41c6dfff9e14dd23aee183",
+    "bytes": 82552038
+  },
+  "pr64_dev": {
+    "path": "/data/wm-pr68-cpu-input/pr64-dev/data.json",
+    "sha256": "31a36e0940db7afe015fe35689cb629102dea45e8d61123ed89250abc01d0b86",
+    "bytes": 38012002
+  },
+  "pr64_quality": {
+    "path": "/data/wm-pr68-cpu-input/pr64-quality/quality.json",
+    "sha256": "f2e69dc6e29b6b4eb37be4fd9b89f73789b298cd259422be02dbacf4a18af877",
+    "bytes": 52615
+  },
+  "device_policy": "CUDA_VISIBLE_DEVICES=''; model map_location='cpu'; no GPU training",
+  "environment_deviation": "hydra-core 1.3.2 / omegaconf 2.3.0 used only because the source-lock hydra-core 1.0.3 fails dataclass initialization on Python 3.11.15; PR68 evaluation does not use PETS/hydra training or any hydra runtime. numpy 1.26.4, ortools 9.14.6206, pandas 2.3.3 match the PR64 source freeze.",
+  "pip_freeze_sha256": "e0e383a7bfef892404dcb36b9668875796ca1fe95c11cd20622f2ba0658c4e36"
+}
