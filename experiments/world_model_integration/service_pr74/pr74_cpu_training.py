@@ -12,6 +12,7 @@ is offline experimental and must never be promoted into live dispatch.
 from __future__ import annotations
 
 import argparse
+import copy
 from collections import defaultdict
 import hashlib
 import json
@@ -28,7 +29,7 @@ from experiments.world_model_integration.synthesis_pr73.pr73_pilot import (
     EXPECTED_TRAIN, EXPECTED_DEV, original_factual_episode, PHASES,
 )
 from experiments.world_model_integration.synthesis_pr73.pr73_hazard_probe import (
-    evaluate_train_dev,
+    evaluate_train_dev, fit_train_only, probabilities as hazard_probabilities,
 )
 from experiments.world_model_integration.outage_pr64.pr64_source import read_protocol
 from experiments.world_model_integration.recovery_pr68.pr68_checkpoint import sha256_file
@@ -132,12 +133,29 @@ def scene_macro(devrows, predictions, metadata, comparator):
         rule=[(metadata[i]["rule_event"]-metadata[i]["event"])**2 for i in ids]
         scores[scene]={"n":len(ids),"brier":sum(vals)/len(ids),
                        "rule_brier":sum(rule)/len(rule)}
-    return {
+    answer={
         "n_scenes":len(scores),
         "scene_macro_model_brier":sum(v["brier"] for v in scores.values())/len(scores),
         "scene_macro_rule_brier":sum(v["rule_brier"] for v in scores.values())/len(scores),
         "per_scene":scores,
     }
+    if comparator is not None:
+        answer["scene_macro_train_hazard_brier"]=(
+            sum(v["train_hazard_brier"] for v in scores.values())/len(scores))
+        rng=random.Random(740001)
+        def delta(target, seed_offset=0):
+            diffs=[v["brier"]-v[target] for v in scores.values()]
+            boots=sorted(
+                sum(diffs[rng.randrange(len(diffs))] for _ in diffs)/len(diffs)
+                for _ in range(2000)
+            )
+            return {"mean":sum(diffs)/len(diffs),
+                    "CI95":[boots[49],boots[1949]],
+                    "scenes_neural_better":sum(x<0 for x in diffs)}
+        answer["paired_neural_minus_rule"]=delta("rule_brier")
+        answer["paired_neural_minus_train_hazard"]=delta("train_hazard_brier")
+        answer["bootstrap_independence_unit"]="original DEV scene, not service-row"
+    return answer
 
 
 def train_and_score(dataset,train_sha,dev_sha,output_dir):
@@ -186,7 +204,7 @@ def train_and_score(dataset,train_sha,dev_sha,output_dir):
         if best is None or val<best["brier"]:
             best={"epoch":epoch,"brier":val,
                   "weights":{k:v.detach().clone() for k,v in model.state_dict().items()},
-                  "optimizer":optimizer.state_dict(),
+                  "optimizer":copy.deepcopy(optimizer.state_dict()),
                   "torch_rng":torch.get_rng_state()}
     model.load_state_dict(best["weights"])
     model.eval()
@@ -198,7 +216,7 @@ def train_and_score(dataset,train_sha,dev_sha,output_dir):
         ids=[i for i,r in enumerate(dev_meta) if r["phase"]==phase]
         per_phase[phase]=metrics([dev[i] for i in ids],[probs[i] for i in ids])
     hazard=evaluate_train_dev(train_meta,dev_meta)
-    paired=scene_macro(dev,probs,dev_meta,hazard)
+    paired=scene_macro(dev,probs,dev_meta,fit_train_only(train_meta))
     checkpoint={
         "metadata":{
             "source":"PR73 same existing simulator hashed jitter=2 only",
@@ -247,6 +265,7 @@ def train_and_score(dataset,train_sha,dev_sha,output_dir):
         "per_phase":{k:{"n":v["count"],"brier":v["brier"]} for k,v in per_phase.items()},
         "baseline":{k:v["brier"] for k,v in hazard["method"].items()},
         "best_epoch":best["epoch"],
+        "scene_paired":paired,
         "train_scenes":24,"dev_scenes":12,
         "checkpoint_sha256":report["saved_checkpoint_sha256"],
         "new_model_architecture":False,"BLIND":False,
