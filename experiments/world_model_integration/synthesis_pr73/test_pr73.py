@@ -33,15 +33,15 @@ class PR73OriginalMechanismTests(unittest.TestCase):
     def test_balance_predeclared_regime_selection(self):
         scenes = [
             {"id": f"{name}_{i}", "case": {"regime": name}}
-            for name in ("regime_a","regime_b") for i in range(4)
+            for name in ("regime_a","regime_b","regime_c") for i in range(4)
         ]
-        cohort = balanced_scenes(scenes, 4)
+        cohort = balanced_scenes(scenes, 6)
         self.assertEqual(
             {reg: sum(x["case"]["regime"] == reg for x in cohort)
-             for reg in ("regime_a","regime_b")},
-            {"regime_a": 2, "regime_b": 2})
+             for reg in ("regime_a","regime_b","regime_c")},
+            {"regime_a": 2, "regime_b": 2, "regime_c": 2})
         with self.assertRaisesRegex(ValueError, "balance"):
-            balanced_scenes(scenes, 3)
+            balanced_scenes(scenes, 4)
 
     def test_only_station_jitter_changes(self):
         base, cfg, world = fixture()
