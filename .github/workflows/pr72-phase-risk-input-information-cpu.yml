@@ -89,6 +89,22 @@ jobs:
           assert not r["train_fit_or_new_network_inference"] and not r["BLIND_TEST_read"]
           print("PR72_PHASE_RISK_SOURCE_AND_PUBLIC_FEATURE_ALIAS_CPU_PASS")
           PY
+          python -m experiments.world_model_integration.identifiability_pr72.pr72_frozen_trained_arms \
+            --frozen-pr70-service examples/evidence/pr70-lifecycle-event-timing-20261113/service_timing.json \
+            --output "$RUNNER_TEMP/pr72/frozen_pretrained_arm_pairing.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr72/frozen_pretrained_arm_pairing.log"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path(os.environ["RUNNER_TEMP"])/"pr72/frozen_pretrained_arm_pairing.json"
+          data=json.loads(p.read_text())
+          assert data["n_independent_scenes"]==12
+          assert data["n_active_service_risks"]==751
+          assert data["n_true_events"]==508
+          assert data["rule_scene_brier_all_zero"]
+          assert not data["new_PR61_checkpoint_inference_performed"]
+          print("PR72_FROZEN_ACTUAL_TRAINED_MODEL_PAIRED_SCENE_REANALYSIS_PASS")
+          PY
           git rev-parse HEAD > "$RUNNER_TEMP/pr72/source_head.txt"
           python -m pip freeze > "$RUNNER_TEMP/pr72/pip-freeze.txt"
           (cd "$RUNNER_TEMP/pr72" && sha256sum *.json *.log *.txt > SHA256SUMS)
