@@ -1,7 +1,7 @@
 # PR69：事实动作/设备条件下的多步预测评估
 
 日期：2026-11-13  
-PR69 head：`1f9a9e6`  
+PR69 head：`54313da`  
 来源：PR68 已验证的原始 PR61 `best.pt`、PR59 validation、PR64 developer validation。**CPU inference only；无训练/微调/参数更新；无 BLIND/TEST。**
 
 ## 1. 评估设计
@@ -25,6 +25,16 @@ PR69 head：`1f9a9e6`
 - 三臂在 H5 的终态/逐步指标完全相同；没有看到神经模型相对 rule 的增量。
 - 0.9583 的 status accuracy 来自 2 个场景中的新阶段/新样本未出现在 rule/neural 的递推状态中；三臂同样缺失（每臂 51 个缺失 sample-step），不是神经模型独有的错误。
 - Stepwise status accuracy：step 0–1 = 1.0，step 2 = 0.9583，step 3–4 = 0.9167；robot position 始终 1.0，completed count 误差 0。
+
+### 3.0 H5 三臂完全一致的原因
+
+不是模型和 rule 行为等价，而是 **H5 窗口没有发生任何样本完成**：
+
+- 12 个事实场景的**首次 sample 完成观测 tick 都是 9 或 11**；H5 从 t=0 开始，到 tick 5 结束，所有场景 completed count 都是 0。
+- 每个神经 arm 的 36 个 H5 run 都确实调用了任务头：每个 arm 93 次 active-service 查询、39 次 sampled-complete；但这些内部服务阈值变化在 tick≤5 内没有转化为任何 `completed` 状态。
+- 机器人位置/phase 由 rule transition 决定；设备状态由事实边界给定；样本仍处于 waiting/assigned/in_transit；因此 status/robot/completed 指标在结构上不可区分。
+- 51 个缺失 sample-step 是事实场景中的新实体，rule 和神经递推同样没有生成；不是模型差异。
+- 所以 H5 结果只能说明“当前 H5 窗口对任务头不敏感”，不能说明模型等价于 rule，也不能作为神经模型无增益的最终证据。后续应从 t>5 的起点（并给历史）或记录 service-completion 概率/事件来评估。
 
 ### H20：递推覆盖受限
 
@@ -76,6 +86,7 @@ PR69 head：`1f9a9e6`
 
 - `evaluation.json`：216 个 run（12 场景 × 3 seeds × 2 horizons × 3 arms）及逐步指标、失败状态快照。
 - `failure_causes.json`：H20 停止原因统计与两个代表性快照。
+- `h5_equality_cause.json`：首次完成 tick、H5 服务查询/采样完成计数及“无可观测完成”的解释。
 - `environment.json`：PR69 head、archive/PR59/PR64 SHA、CPU policy；引用 PR68 已验证环境。
 - `command.txt`、`source_head.txt`、`SHA256SUMS`。
 

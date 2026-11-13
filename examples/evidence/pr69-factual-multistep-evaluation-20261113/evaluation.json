@@ -32,6 +32,7 @@
         4
       ],
       "ticks": 115,
+      "first_completed_observation_tick": 11,
       "status": "completed"
     },
     {
@@ -46,6 +47,7 @@
         16
       ],
       "ticks": 158,
+      "first_completed_observation_tick": 11,
       "status": "completed"
     },
     {
@@ -58,6 +60,7 @@
         5
       ],
       "ticks": 105,
+      "first_completed_observation_tick": 11,
       "status": "completed"
     },
     {
@@ -70,6 +73,7 @@
         12
       ],
       "ticks": 157,
+      "first_completed_observation_tick": 11,
       "status": "completed"
     },
     {
@@ -84,6 +88,7 @@
         7
       ],
       "ticks": 124,
+      "first_completed_observation_tick": 9,
       "status": "completed"
     },
     {
@@ -96,6 +101,7 @@
         12
       ],
       "ticks": 115,
+      "first_completed_observation_tick": 11,
       "status": "completed"
     },
     {
@@ -110,6 +116,7 @@
         7
       ],
       "ticks": 96,
+      "first_completed_observation_tick": 9,
       "status": "completed"
     },
     {
@@ -122,6 +129,7 @@
         24
       ],
       "ticks": 131,
+      "first_completed_observation_tick": 9,
       "status": "completed"
     },
     {
@@ -134,6 +142,7 @@
         9
       ],
       "ticks": 148,
+      "first_completed_observation_tick": 11,
       "status": "completed"
     },
     {
@@ -148,6 +157,7 @@
         24
       ],
       "ticks": 125,
+      "first_completed_observation_tick": 11,
       "status": "completed"
     },
     {
@@ -160,6 +170,7 @@
         20
       ],
       "ticks": 96,
+      "first_completed_observation_tick": 9,
       "status": "completed"
     },
     {
@@ -172,6 +183,7 @@
         24
       ],
       "ticks": 160,
+      "first_completed_observation_tick": 9,
       "status": "completed"
     }
   ],
@@ -259,6 +271,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_0",
       "seed": 1810
     },
@@ -345,6 +360,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_0",
       "seed": 1810
     },
@@ -431,6 +449,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_0",
       "seed": 1810
     },
@@ -517,6 +538,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_0",
       "seed": 1811
     },
@@ -603,6 +627,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_0",
       "seed": 1811
     },
@@ -689,6 +716,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_0",
       "seed": 1811
     },
@@ -775,6 +805,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_0",
       "seed": 1812
     },
@@ -861,6 +894,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_0",
       "seed": 1812
     },
@@ -947,6 +983,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_0",
       "seed": 1812
     },
@@ -1258,6 +1297,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_0",
       "seed": 1810
     },
@@ -1270,6 +1312,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -1479,6 +1524,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -1987,6 +2035,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_0",
       "seed": 1811
     },
@@ -1999,6 +2050,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -2208,6 +2262,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -2716,6 +2773,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_0",
       "seed": 1812
     },
@@ -2728,6 +2788,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -2937,6 +3000,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -3220,6 +3286,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_1",
       "seed": 1810
     },
@@ -3306,6 +3375,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_1",
       "seed": 1810
     },
@@ -3392,6 +3464,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_1",
       "seed": 1810
     },
@@ -3478,6 +3553,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_1",
       "seed": 1811
     },
@@ -3564,6 +3642,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_1",
       "seed": 1811
     },
@@ -3650,6 +3731,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_1",
       "seed": 1811
     },
@@ -3736,6 +3820,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_1",
       "seed": 1812
     },
@@ -3822,6 +3909,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_1",
       "seed": 1812
     },
@@ -3908,6 +3998,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_1",
       "seed": 1812
     },
@@ -4219,6 +4312,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_1",
       "seed": 1810
     },
@@ -4231,6 +4327,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -4440,6 +4539,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -4948,6 +5050,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_1",
       "seed": 1811
     },
@@ -4960,6 +5065,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -5169,6 +5277,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -5677,6 +5788,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_1",
       "seed": 1812
     },
@@ -5689,6 +5803,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -5898,6 +6015,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -6181,6 +6301,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1810
     },
@@ -6267,6 +6390,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1810
     },
@@ -6353,6 +6479,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1810
     },
@@ -6439,6 +6568,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1811
     },
@@ -6525,6 +6657,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1811
     },
@@ -6611,6 +6746,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1811
     },
@@ -6697,6 +6835,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1812
     },
@@ -6783,6 +6924,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1812
     },
@@ -6869,6 +7013,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1812
     },
@@ -7180,6 +7327,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1810
     },
@@ -7491,6 +7641,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 10,
+      "neural_sampled_complete": 7,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1810
     },
@@ -7503,6 +7656,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 17,
+      "neural_active_service_queries": 9,
+      "neural_sampled_complete": 5,
       "failure": {
         "step": 17,
         "predicted_tick": 17,
@@ -8101,6 +8257,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1811
     },
@@ -8113,6 +8272,9 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -8322,6 +8484,9 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -8830,6 +8995,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1812
     },
@@ -9141,6 +9309,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 11,
+      "neural_sampled_complete": 6,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1812
     },
@@ -9452,6 +9623,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 10,
+      "neural_sampled_complete": 7,
       "scene": "PR64_VALIDATION_0_2",
       "seed": 1812
     },
@@ -9538,6 +9712,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1810
     },
@@ -9624,6 +9801,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1810
     },
@@ -9710,6 +9890,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1810
     },
@@ -9796,6 +9979,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1811
     },
@@ -9882,6 +10068,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1811
     },
@@ -9968,6 +10157,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1811
     },
@@ -10054,6 +10246,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1812
     },
@@ -10140,6 +10335,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1812
     },
@@ -10226,6 +10424,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1812
     },
@@ -10537,6 +10738,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1810
     },
@@ -10549,6 +10753,9 @@
       "missing_action_samples": [
         "J6::stage2"
       ],
+      "neural_forward_calls": 12,
+      "neural_active_service_queries": 6,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 12,
         "predicted_tick": 12,
@@ -10773,6 +10980,9 @@
       "missing_action_samples": [
         "J6::stage2"
       ],
+      "neural_forward_calls": 12,
+      "neural_active_service_queries": 6,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 12,
         "predicted_tick": 12,
@@ -11296,6 +11506,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1811
     },
@@ -11308,6 +11521,9 @@
       "missing_action_samples": [
         "J7::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -11517,6 +11733,9 @@
       "missing_action_samples": [
         "J7::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -12025,6 +12244,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1812
     },
@@ -12336,6 +12558,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 8,
+      "neural_sampled_complete": 6,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1812
     },
@@ -12647,6 +12872,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 8,
+      "neural_sampled_complete": 6,
       "scene": "PR64_VALIDATION_0_3",
       "seed": 1812
     },
@@ -12733,6 +12961,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1810
     },
@@ -12819,6 +13050,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1810
     },
@@ -12905,6 +13139,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1810
     },
@@ -12991,6 +13228,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1811
     },
@@ -13077,6 +13317,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1811
     },
@@ -13163,6 +13406,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1811
     },
@@ -13249,6 +13495,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1812
     },
@@ -13335,6 +13584,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1812
     },
@@ -13421,6 +13673,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1812
     },
@@ -13732,6 +13987,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1810
     },
@@ -14043,6 +14301,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 12,
+      "neural_sampled_complete": 8,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1810
     },
@@ -14354,6 +14615,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 11,
+      "neural_sampled_complete": 8,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1810
     },
@@ -14665,6 +14929,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1811
     },
@@ -14677,6 +14944,9 @@
       "missing_action_samples": [
         "J4::stage2"
       ],
+      "neural_forward_calls": 9,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 9,
         "predicted_tick": 9,
@@ -14856,6 +15126,9 @@
       "missing_action_samples": [
         "J4::stage2"
       ],
+      "neural_forward_calls": 9,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 9,
         "predicted_tick": 9,
@@ -15334,6 +15607,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_4",
       "seed": 1812
     },
@@ -15344,6 +15620,9 @@
       "full_horizon": false,
       "error": "ValueError",
       "error_message": "assignment must select a distinct idle robot and currently waiting sample",
+      "neural_forward_calls": 17,
+      "neural_active_service_queries": 12,
+      "neural_sampled_complete": 7,
       "failure": {
         "step": 17,
         "predicted_tick": 17,
@@ -15635,6 +15914,9 @@
       "full_horizon": false,
       "error": "ValueError",
       "error_message": "assignment must select a distinct idle robot and currently waiting sample",
+      "neural_forward_calls": 17,
+      "neural_active_service_queries": 12,
+      "neural_sampled_complete": 7,
       "failure": {
         "step": 17,
         "predicted_tick": 17,
@@ -16002,6 +16284,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1810
     },
@@ -16088,6 +16373,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1810
     },
@@ -16174,6 +16462,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1810
     },
@@ -16260,6 +16551,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1811
     },
@@ -16346,6 +16640,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1811
     },
@@ -16432,6 +16729,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1811
     },
@@ -16518,6 +16818,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1812
     },
@@ -16604,6 +16907,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1812
     },
@@ -16690,6 +16996,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1812
     },
@@ -17001,6 +17310,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1810
     },
@@ -17312,6 +17624,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 10,
+      "neural_sampled_complete": 7,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1810
     },
@@ -17324,6 +17639,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 17,
+      "neural_active_service_queries": 9,
+      "neural_sampled_complete": 5,
       "failure": {
         "step": 17,
         "predicted_tick": 17,
@@ -17922,6 +18240,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1811
     },
@@ -17934,6 +18255,9 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -18143,6 +18467,9 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -18651,6 +18978,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1812
     },
@@ -18663,6 +18993,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 17,
+      "neural_active_service_queries": 9,
+      "neural_sampled_complete": 5,
       "failure": {
         "step": 17,
         "predicted_tick": 17,
@@ -19261,6 +19594,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 10,
+      "neural_sampled_complete": 7,
       "scene": "PR64_VALIDATION_0_5",
       "seed": 1812
     },
@@ -19347,6 +19683,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1810
     },
@@ -19433,6 +19772,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 4,
+      "neural_sampled_complete": 2,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1810
     },
@@ -19519,6 +19861,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 4,
+      "neural_sampled_complete": 2,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1810
     },
@@ -19605,6 +19950,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1811
     },
@@ -19691,6 +20039,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 4,
+      "neural_sampled_complete": 2,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1811
     },
@@ -19777,6 +20128,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 4,
+      "neural_sampled_complete": 2,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1811
     },
@@ -19863,6 +20217,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1812
     },
@@ -19949,6 +20306,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 4,
+      "neural_sampled_complete": 2,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1812
     },
@@ -20035,6 +20395,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 4,
+      "neural_sampled_complete": 2,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1812
     },
@@ -20346,6 +20709,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1810
     },
@@ -20657,6 +21023,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 13,
+      "neural_sampled_complete": 9,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1810
     },
@@ -20968,6 +21337,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 13,
+      "neural_sampled_complete": 9,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1810
     },
@@ -21279,6 +21651,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1811
     },
@@ -21291,6 +21666,9 @@
       "missing_action_samples": [
         "J7::stage2"
       ],
+      "neural_forward_calls": 9,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 9,
         "predicted_tick": 9,
@@ -21470,6 +21848,9 @@
       "missing_action_samples": [
         "J7::stage2"
       ],
+      "neural_forward_calls": 9,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 9,
         "predicted_tick": 9,
@@ -21948,6 +22329,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_0",
       "seed": 1812
     },
@@ -21960,6 +22344,9 @@
       "missing_action_samples": [
         "J9::stage2"
       ],
+      "neural_forward_calls": 15,
+      "neural_active_service_queries": 11,
+      "neural_sampled_complete": 7,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -22230,6 +22617,9 @@
       "missing_action_samples": [
         "J9::stage2"
       ],
+      "neural_forward_calls": 15,
+      "neural_active_service_queries": 11,
+      "neural_sampled_complete": 7,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -22574,6 +22964,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_1",
       "seed": 1810
     },
@@ -22660,6 +23053,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_1",
       "seed": 1810
     },
@@ -22746,6 +23142,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_1",
       "seed": 1810
     },
@@ -22832,6 +23231,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_1",
       "seed": 1811
     },
@@ -22918,6 +23320,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_1",
       "seed": 1811
     },
@@ -23004,6 +23409,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_1",
       "seed": 1811
     },
@@ -23090,6 +23498,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_1",
       "seed": 1812
     },
@@ -23176,6 +23587,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_1",
       "seed": 1812
     },
@@ -23262,6 +23676,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_1",
       "seed": 1812
     },
@@ -23274,6 +23691,9 @@
       "missing_action_samples": [
         "J7::stage1"
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -23531,6 +23951,9 @@
       "missing_action_samples": [
         "J7::stage1"
       ],
+      "neural_forward_calls": 15,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 5,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -23788,6 +24211,9 @@
       "missing_action_samples": [
         "J7::stage1"
       ],
+      "neural_forward_calls": 15,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 5,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -24045,6 +24471,9 @@
       "missing_action_samples": [
         "J7::stage1"
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -24302,6 +24731,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 9,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 9,
         "predicted_tick": 9,
@@ -24481,6 +24913,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 9,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 9,
         "predicted_tick": 9,
@@ -24660,6 +25095,9 @@
       "missing_action_samples": [
         "J7::stage1"
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -24917,6 +25355,9 @@
       "missing_action_samples": [
         "J7::stage1"
       ],
+      "neural_forward_calls": 15,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 5,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -25174,6 +25615,9 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "neural_forward_calls": 9,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 9,
         "predicted_tick": 9,
@@ -25427,6 +25871,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1810
     },
@@ -25513,6 +25960,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1810
     },
@@ -25599,6 +26049,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1810
     },
@@ -25685,6 +26138,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1811
     },
@@ -25771,6 +26227,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1811
     },
@@ -25857,6 +26316,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1811
     },
@@ -25943,6 +26405,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1812
     },
@@ -26029,6 +26494,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1812
     },
@@ -26115,6 +26583,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1812
     },
@@ -26426,6 +26897,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1810
     },
@@ -26737,6 +27211,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 12,
+      "neural_sampled_complete": 8,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1810
     },
@@ -27048,6 +27525,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 12,
+      "neural_sampled_complete": 8,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1810
     },
@@ -27359,6 +27839,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1811
     },
@@ -27371,6 +27854,9 @@
       "missing_action_samples": [
         "J4::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -27580,6 +28066,9 @@
       "missing_action_samples": [
         "J4::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -28088,6 +28577,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_2",
       "seed": 1812
     },
@@ -28098,6 +28590,9 @@
       "full_horizon": false,
       "error": "ValueError",
       "error_message": "assignment must select a distinct idle robot and currently waiting sample",
+      "neural_forward_calls": 19,
+      "neural_active_service_queries": 12,
+      "neural_sampled_complete": 7,
       "failure": {
         "step": 19,
         "predicted_tick": 19,
@@ -28419,6 +28914,9 @@
       "full_horizon": false,
       "error": "ValueError",
       "error_message": "assignment must select a distinct idle robot and currently waiting sample",
+      "neural_forward_calls": 19,
+      "neural_active_service_queries": 12,
+      "neural_sampled_complete": 7,
       "failure": {
         "step": 19,
         "predicted_tick": 19,
@@ -28816,6 +29314,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1810
     },
@@ -28902,6 +29403,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1810
     },
@@ -28988,6 +29492,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1810
     },
@@ -29074,6 +29581,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1811
     },
@@ -29160,6 +29670,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1811
     },
@@ -29246,6 +29759,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1811
     },
@@ -29332,6 +29848,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1812
     },
@@ -29418,6 +29937,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1812
     },
@@ -29504,6 +30026,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1812
     },
@@ -29815,6 +30340,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1810
     },
@@ -29827,6 +30355,9 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "neural_forward_calls": 12,
+      "neural_active_service_queries": 8,
+      "neural_sampled_complete": 4,
       "failure": {
         "step": 12,
         "predicted_tick": 12,
@@ -30350,6 +30881,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 12,
+      "neural_sampled_complete": 9,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1810
     },
@@ -30661,6 +31195,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1811
     },
@@ -30673,6 +31210,9 @@
       "missing_action_samples": [
         "J4::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -30882,6 +31422,9 @@
       "missing_action_samples": [
         "J4::stage2"
       ],
+      "neural_forward_calls": 11,
+      "neural_active_service_queries": 7,
+      "neural_sampled_complete": 3,
       "failure": {
         "step": 11,
         "predicted_tick": 11,
@@ -31390,6 +31933,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_3",
       "seed": 1812
     },
@@ -31402,6 +31948,9 @@
       "missing_action_samples": [
         "J10::stage2"
       ],
+      "neural_forward_calls": 17,
+      "neural_active_service_queries": 11,
+      "neural_sampled_complete": 7,
       "failure": {
         "step": 17,
         "predicted_tick": 17,
@@ -31701,6 +32250,9 @@
       "missing_action_samples": [
         "J10::stage2"
       ],
+      "neural_forward_calls": 17,
+      "neural_active_service_queries": 11,
+      "neural_sampled_complete": 7,
       "failure": {
         "step": 17,
         "predicted_tick": 17,
@@ -32074,6 +32626,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_4",
       "seed": 1810
     },
@@ -32160,6 +32715,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_4",
       "seed": 1810
     },
@@ -32246,6 +32804,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_4",
       "seed": 1810
     },
@@ -32332,6 +32893,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_4",
       "seed": 1811
     },
@@ -32418,6 +32982,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_4",
       "seed": 1811
     },
@@ -32504,6 +33071,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_4",
       "seed": 1811
     },
@@ -32590,6 +33160,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_4",
       "seed": 1812
     },
@@ -32676,6 +33249,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_4",
       "seed": 1812
     },
@@ -32762,6 +33338,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 2,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_4",
       "seed": 1812
     },
@@ -32774,6 +33353,9 @@
       "missing_action_samples": [
         "J11::stage1"
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -33032,6 +33614,9 @@
         "J11::stage1",
         "J5::stage2"
       ],
+      "neural_forward_calls": 15,
+      "neural_active_service_queries": 9,
+      "neural_sampled_complete": 5,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -33309,6 +33894,9 @@
         "J11::stage1",
         "J5::stage2"
       ],
+      "neural_forward_calls": 15,
+      "neural_active_service_queries": 9,
+      "neural_sampled_complete": 5,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -33585,6 +34173,9 @@
       "missing_action_samples": [
         "J11::stage1"
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -33842,6 +34433,9 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "neural_forward_calls": 9,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 9,
         "predicted_tick": 9,
@@ -34021,6 +34615,9 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "neural_forward_calls": 9,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 9,
         "predicted_tick": 9,
@@ -34200,6 +34797,9 @@
       "missing_action_samples": [
         "J11::stage1"
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -34457,6 +35057,9 @@
       "missing_action_samples": [
         "J11::stage1"
       ],
+      "neural_forward_calls": 15,
+      "neural_active_service_queries": 9,
+      "neural_sampled_complete": 6,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -34714,6 +35317,9 @@
       "missing_action_samples": [
         "J11::stage1"
       ],
+      "neural_forward_calls": 15,
+      "neural_active_service_queries": 9,
+      "neural_sampled_complete": 6,
       "failure": {
         "step": 15,
         "predicted_tick": 15,
@@ -35045,6 +35651,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1810
     },
@@ -35131,6 +35740,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1810
     },
@@ -35217,6 +35829,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1810
     },
@@ -35303,6 +35918,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1811
     },
@@ -35389,6 +36007,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1811
     },
@@ -35475,6 +36096,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1811
     },
@@ -35561,6 +36185,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1812
     },
@@ -35647,6 +36274,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1812
     },
@@ -35733,6 +36363,9 @@
           "tick": 5
         }
       ],
+      "neural_forward_calls": 5,
+      "neural_active_service_queries": 3,
+      "neural_sampled_complete": 1,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1812
     },
@@ -36044,6 +36677,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1810
     },
@@ -36355,6 +36991,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 12,
+      "neural_sampled_complete": 8,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1810
     },
@@ -36666,6 +37305,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 12,
+      "neural_sampled_complete": 8,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1810
     },
@@ -36977,6 +37619,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1811
     },
@@ -36989,6 +37634,9 @@
       "missing_action_samples": [
         "J7::stage2"
       ],
+      "neural_forward_calls": 9,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 9,
         "predicted_tick": 9,
@@ -37168,6 +37816,9 @@
       "missing_action_samples": [
         "J7::stage2"
       ],
+      "neural_forward_calls": 9,
+      "neural_active_service_queries": 5,
+      "neural_sampled_complete": 2,
       "failure": {
         "step": 9,
         "predicted_tick": 9,
@@ -37646,6 +38297,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 0,
+      "neural_active_service_queries": 0,
+      "neural_sampled_complete": 0,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1812
     },
@@ -37957,6 +38611,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 12,
+      "neural_sampled_complete": 8,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1812
     },
@@ -38268,6 +38925,9 @@
           "tick": 20
         }
       ],
+      "neural_forward_calls": 20,
+      "neural_active_service_queries": 12,
+      "neural_sampled_complete": 8,
       "scene": "PR64_VALIDATION_1_5",
       "seed": 1812
     }
