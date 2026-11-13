@@ -90,6 +90,8 @@ jobs:
             assert all(r["aggregates"][key][str(j)]["all_query_widths_original_48"] for j in (0,2))
           assert r["all_phase_hazard_fit_from_TRAIN_only"]
           assert r["train_only_discrete_hazard_dev_controls"]["2"]["train_risk_rows"]>0
+          assert r["train_only_discrete_hazard_dev_controls"]["2"]["paired_scene_uncertainty"]["scenes"]==6
+          assert r["train_only_discrete_hazard_dev_controls"]["2"]["paired_scene_uncertainty"]["unit_of_resampling"].startswith("original developer scenario")
           train=r["event_risk_dataset"]["train"]
           dev=r["event_risk_dataset"]["developer_validation"]
           assert len(train)==r["aggregates"]["train"]["2"]["eligible"]
