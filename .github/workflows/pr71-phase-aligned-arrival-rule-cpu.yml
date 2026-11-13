@@ -1,0 +1,108 @@
+name: PR71 actual-public event-phase and arrival lifecycle CPU audit
+on:
+  push:
+    branches: [research/pr71-phase-aligned-service-arrival-audit-20261113]
+    paths:
+      - .github/workflows/pr71-phase-aligned-arrival-rule-cpu.yml
+      - experiments/world_model_integration/audit_pr71/**
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  phase-aligned-true-world-CPU:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install original pinned CPU environment
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -m pip install 'torch-geometric==2.6.1'
+          python - <<'PY'
+          import torch
+          assert torch.version.cuda is None
+          print("PR71_NO_GPU_NO_MODEL_TRAINING",torch.__version__)
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-real-random-outage-43264954353-train
+          path: ${{ runner.temp }}/original-train
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-real-random-outage-43264954353-validation
+          path: ${{ runner.temp }}/original-dev
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-shifted-outage-true-risk-set-audit-43264954353
+          path: ${{ runner.temp }}/original-quality
+      - name: Lock immutable source checksums and run phase semantics tests
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr71"
+          (cd "$RUNNER_TEMP/original-train" && sha256sum -c SHA256SUMS)
+          (cd "$RUNNER_TEMP/original-dev" && sha256sum -c SHA256SUMS)
+          (cd "$RUNNER_TEMP/original-quality" && sha256sum -c SHA256SUMS)
+          python -m compileall -q experiments/world_model_integration/audit_pr71
+          python -m unittest \
+            experiments.world_model_integration.audit_pr71.test_pr71 \
+            experiments.world_model_integration.lifecycle_pr70.test_pr70 \
+            experiments.world_model_integration.stochastic_pr66.test_pr66 -v \
+            2>&1 | tee "$RUNNER_TEMP/pr71/tests.log"
+      - name: Independently compare actual pickup and delivery timestamps without model weights
+        run: |
+          set -euo pipefail
+          python -m experiments.world_model_integration.audit_pr71.pr71_phase_audit \
+            --pr64-dev "$RUNNER_TEMP/original-dev/data.json" \
+            --pr70-service examples/evidence/pr70-lifecycle-event-timing-20261113/service_timing.json \
+            --output "$RUNNER_TEMP/pr71/phase_audit.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr71/phase_audit.log"
+      - name: Replay actual PR64 source with lawful Rule H20 and current public arrivals
+        run: |
+          set -euo pipefail
+          python -m experiments.world_model_integration.audit_pr71.pr71_arrival_replay \
+            --pr64-train "$RUNNER_TEMP/original-train/data.json" \
+            --pr64-dev "$RUNNER_TEMP/original-dev/data.json" \
+            --pr64-quality "$RUNNER_TEMP/original-quality/quality.json" \
+            --output "$RUNNER_TEMP/pr71/arrival_rule.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr71/arrival_rule.log"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"pr71"
+          p=json.loads((root/"phase_audit.json").read_text())
+          r=json.loads((root/"arrival_rule.json").read_text())
+          assert p["scenes"]==12 and not p["BLIND_TEST_read"]
+          assert p["pickup_events"]>0 and p["delivery_events"]>0
+          assert r["outcome"]["rule_factual_conditioned_H20_legal"]==12
+          assert r["outcome"]["rule_arrival_conditioned_legal_rollouts"]==72
+          assert not r["model_evaluated"] and not r["BLIND_TEST_read"]
+          print("PR71_ACTUAL_SOURCE_PHASE_AND_LAWFUL_ARRIVAL_H20_CPU_PASS")
+          PY
+          git rev-parse HEAD > "$RUNNER_TEMP/pr71/source_head.txt"
+          python -m pip freeze > "$RUNNER_TEMP/pr71/pip-freeze.txt"
+          (cd "$RUNNER_TEMP/pr71" && sha256sum *.json *.log *.txt > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr71-original-public-phase-arrival-rule-cpu-${{ github.run_id }}
+          path: ${{ runner.temp }}/pr71/
+          retention-days: 90
+          if-no-files-found: warn
