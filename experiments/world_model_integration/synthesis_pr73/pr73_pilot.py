@@ -136,6 +136,7 @@ def public_event_rows(observations, actions, geometry, rules):
                 "public_effective_mean": mean,
                 "event": y, "rule_event": rule_y,
                 "query_width": len(features),
+                "public_query_48": [float(v) for v in features],
                 "known_active_progress_mask": True,
                 "label_next_public_tick": next_state.tick,
                 "public_tick": state.tick,
@@ -198,6 +199,8 @@ def one(scene, protocol, old, stress, jitter):
         "used_original_keyed_service_jitter": True,
         "private_jitter_draws_NOT_part_of_public_features": True,
     })
+    for r in rows:
+        r["scene"] = scene["id"]
     return info, rows
 
 
@@ -258,6 +261,19 @@ def run(train, dev, quality, ntrain, ndev):
         "new_network_training_or_inference": False,
         "BLIND_TEST_read": False,
         "jitter_private_draw_exposed_to_input": False,
+        "event_risk_dataset": {
+            split: [
+                {"scene": r["scene"], "public_tick": r["public_tick"],
+                 "label_next_public_tick": r["label_next_public_tick"],
+                 "phase": r["phase"], "station_for_analysis_only": r["station"],
+                 "public_query_48": r["public_query_48"],
+                 "next_step_event_label": r["event"]}
+                for r in bundle[2]
+            ]
+            for split, bundle in (("train", train_rows),
+                                  ("developer_validation", dev_rows))
+        },
+        "event_risk_dataset_semantics": "factual public-only t action query; t+1 service event is LABEL ONLY; no private jitter draw, sample ID, RNG or future outage inputs",
         "original_query_encoder": "business_transport.session_events.encode_query 48d",
         "report": results,
         "train_only_discrete_hazard_dev_controls": {
@@ -299,6 +315,7 @@ def main():
     print("PR73_JITTER_PILOT_RESULTS", json.dumps({
         "train": result["aggregates"]["train"],
         "dev": result["aggregates"]["developer_validation"],
+        "train_fitted_dev_hazard_controls": result["train_only_discrete_hazard_dev_controls"],
         "BLIND": False, "model_training": False,
     }), flush=True)
 
