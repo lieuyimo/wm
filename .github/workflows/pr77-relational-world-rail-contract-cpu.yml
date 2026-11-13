@@ -6,6 +6,7 @@ on:
       - .github/workflows/pr77-relational-world-rail-contract-cpu.yml
       - world_model_core/**
       - business_transport/world_model/relational_gnn.py
+      - business_transport/world_model/__init__.py
       - experiments/world_model_integration/multidomain_pr77/**
   workflow_dispatch:
 permissions:
