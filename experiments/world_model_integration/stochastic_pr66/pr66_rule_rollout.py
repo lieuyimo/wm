@@ -82,7 +82,8 @@ def apply_next_device_boundary(next_rule_state, next_device: dict[str, bool], ru
     return result
 
 
-def lawful_rule_then_event(before, assignments, *, next_device, geometry, rules):
+def lawful_rule_then_event(before, assignments, *, next_device, geometry, rules,
+                          world_dynamics=None):
     """One legal business tick followed by *observed next-boundary* device events.
 
     check_business_transition intentionally forbids unknown future device
@@ -90,7 +91,8 @@ def lawful_rule_then_event(before, assignments, *, next_device, geometry, rules)
     boundary event; do not weaken or bypass the original checker itself.
     """
     actions = tuple(assignments)
-    base = WorkflowDynamics(ProgressAwareRule(geometry), rules)
+    base = (world_dynamics if world_dynamics is not None else
+            WorkflowDynamics(ProgressAwareRule(geometry), rules))
     core = base.predict_next(before, actions)
     check_business_transition(before, core, geometry, rules, actions)
     proposed = apply_next_device_boundary(core, next_device, rules)
@@ -156,11 +158,13 @@ class PublicHazardRuleRollout:
     history is advanced using the model's own sampled next device events.
     """
 
-    def __init__(self, geometry, rules, train_fitted_params, method="constant"):
+    def __init__(self, geometry, rules, train_fitted_params, method="constant",
+                 world_dynamics=None):
         self.geometry = geometry
         self.rules = rules
         self.adapter = PublicStationHazardAdapter(train_fitted_params, method)
         self.method = method
+        self.world_dynamics = world_dynamics
 
     def _probabilities(self, state, history):
         table = self.adapter.params
@@ -196,6 +200,10 @@ class PublicHazardRuleRollout:
         history = (initial_public_station_history(initial_public_input, state)
                    if initial_public_input is not None else None)
         rng = random.Random(seed)
+        if self.world_dynamics is not None:
+            if not callable(getattr(self.world_dynamics, "reset_seed", None)):
+                raise ValueError("recurrent neural dynamics must reset hidden/public history")
+            self.world_dynamics.reset_seed(seed)
         trace = []
         records = []
         for step in range(horizon):
@@ -214,7 +222,8 @@ class PublicHazardRuleRollout:
             # Use a reproducible station-ID order and common random numbers.
             next_devices = {sid: rng.random() < p for sid, p in probabilities.items()}
             nxt = lawful_rule_then_event(state, actions, next_device=next_devices,
-                                         geometry=self.geometry, rules=self.rules)
+                                         geometry=self.geometry, rules=self.rules,
+                                         world_dynamics=self.world_dynamics)
             before_device = {s.id: bool(s.device_available) for s in state.stations}
             records.append(StepRiskRecord(
                 tick=state.tick,
