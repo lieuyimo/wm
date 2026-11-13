@@ -90,6 +90,19 @@ jobs:
             assert all(r["aggregates"][key][str(j)]["all_query_widths_original_48"] for j in (0,2))
           assert r["all_phase_hazard_fit_from_TRAIN_only"]
           assert r["train_only_discrete_hazard_dev_controls"]["2"]["train_risk_rows"]>0
+          train=r["event_risk_dataset"]["train"]
+          dev=r["event_risk_dataset"]["developer_validation"]
+          assert len(train)==r["aggregates"]["train"]["2"]["eligible"]
+          assert len(dev)==r["aggregates"]["developer_validation"]["2"]["eligible"]
+          assert {x["scene"] for x in train}.isdisjoint({x["scene"] for x in dev})
+          for row in train+dev:
+              assert len(row["public_query_48"])==48
+              assert row["label_next_public_tick"]==row["public_tick"]+1
+              assert row["next_step_event_label"] in (0,1)
+              assert set(row)=={"scene","public_tick","label_next_public_tick",
+                                "phase","station_for_analysis_only","public_query_48",
+                                "next_step_event_label"}
+          print("PR73_REAL_PUBLIC_48D_TARGETED_TRAIN_DEV_DATASETS_VERIFIED",len(train),len(dev))
           print("PR73_ORIGINAL_KEYED_JITTER_AND_PUBLIC_QUERY_CPU_PASS")
           PY
           git rev-parse HEAD > "$RUNNER_TEMP/pr73/source_head.txt"
