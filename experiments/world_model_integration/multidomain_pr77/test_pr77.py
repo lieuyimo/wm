@@ -1,9 +1,7 @@
-"""PR77 original model-wiring and cross-domain public-contract tests.
+"""PR77 original model wiring and joint AGV + conveyor graph contract tests.
 
-Untrained PR61 network or controlled fake output is used ONLY for shape/legality
-tests; actual trained PR61 inference requires the original SHA-verified archive.
-Railway schema examples assert public-graph compatibility, NOT a rail simulator
-or a trained train-delay model.
+PR61 untrained fixtures are ONLY code path/legality tests; actual weights
+still require SHA admission. Conveyor schema DOES NOT imply a fitted predictor.
 """
 from __future__ import annotations
 
@@ -14,7 +12,8 @@ import unittest
 import torch
 
 from world_model_core.contracts import (
-    ActionConditionedWorldQuery, LAB_READINESS, RAIL_READINESS,
+    ActionConditionedWorldQuery, LAB_READINESS, CONVEYOR_READINESS,
+    ORIGINAL_PR61_NODE_KINDS, CONVEYOR_NODE_KINDS,
     PublicField, PublicAction, PublicWorldFrame,
     RelationalEdge, RelationalEntity, require_trained_forecasting,
 )
@@ -53,92 +52,131 @@ def lab_query():
     return ActionConditionedWorldQuery((frame,), action, 5, particles=3)
 
 
-def rail_query():
+def conveyor_query():
+    """One lab world with both robot handoff and conveyor carrier movement."""
     nodes = (
-        RelationalEntity("train:T1", "train", {
-            "speed_kmh": PublicField(40.0, 4),
-            "delay_seconds": PublicField(35, 4),
-            # A future PLANNED arrival is allowed if the timetable was
-            # published at t=4. It is not an observed actual future arrival.
-            "published_arrival_second": PublicField(620, 1),
+        RelationalEntity("robot:R1","robot",{
+            "busy":PublicField(False,4),
         }),
-        RelationalEntity("track:S1", "track_section", {
-            "occupied": PublicField(True, 4),
-            "block_capacity": PublicField(1, 1),
+        RelationalEntity("task:J1","task",{
+            "status":PublicField("in_transit",4),
+            "transport_mode":PublicField("conveyor",4),
         }),
-        RelationalEntity("track:S2", "track_section", {
-            "occupied": PublicField(False, 4),
+        RelationalEntity("carrier:P1","sample_carrier",{
+            "sample_id":PublicField("J1",4),
+            "carrier_status":PublicField("in_motion",4),
         }),
-        RelationalEntity("signal:SIG1", "signal", {
-            "aspect": PublicField("stop", 4),
+        RelationalEntity("segment:S1","conveyor_section",{
+            "occupied":PublicField(True,4),
+            "capacity":PublicField(1,1),
+            "belt_speed":PublicField(0.25,4),
         }),
-        RelationalEntity("station:ST1", "station", {
-            "delay_seconds": PublicField(10, 4),
+        RelationalEntity("segment:S2","conveyor_section",{
+            "occupied":PublicField(False,4),
+            "capacity":PublicField(1,1),
+        }),
+        RelationalEntity("diverter:D1","diverter",{
+            "branch":PublicField("to_analyzer",4),
+            "available":PublicField(True,4),
+        }),
+        RelationalEntity("buffer:B1","buffer_slot",{
+            "occupied":PublicField(False,4),
+        }),
+        RelationalEntity("port:X1","transfer_port",{
+            "robot_accessible":PublicField(True,4),
+            "carrier_present":PublicField(False,4),
+        }),
+        RelationalEntity("station:A1","station",{
+            "device_available":PublicField(True,4),
         }),
     )
-    frame = PublicWorldFrame(
-        "rail_transit", 4, 30.0, nodes,
-        relations=(RelationalEdge("train:T1", "track:S1", "occupies"),),
-        topology=(RelationalEdge("track:S1", "track:S2", "directed_to"),))
-    action = PublicAction("rail_transit", 4, "hold_train", "train:T1")
-    return ActionConditionedWorldQuery((frame,), action, 20, particles=3)
+    frame=PublicWorldFrame(
+        "lab_sample_transport",4,0.2,nodes,
+        relations=(
+            RelationalEdge("carrier:P1","task:J1","carries_sample"),
+            RelationalEdge("carrier:P1","segment:S1","occupies_section"),
+            RelationalEdge("robot:R1","port:X1","can_transfer_at"),
+        ),
+        topology=(
+            RelationalEdge("segment:S1","diverter:D1","feeds_into"),
+            RelationalEdge("diverter:D1","segment:S2","branches_to"),
+            RelationalEdge("segment:S2","buffer:B1","buffered_by"),
+            RelationalEdge("buffer:B1","station:A1","serves_station"),
+            RelationalEdge("buffer:B1","port:X1","transfers_at"),
+        ))
+    action=PublicAction("lab_sample_transport",4,"route_carrier",
+                        "carrier:P1",("segment:S2",))
+    return ActionConditionedWorldQuery((frame,),action,20,particles=3)
 
 
 class DomainContractTests(unittest.TestCase):
-    def test_lab_and_rail_both_accept_public_graphs_and_action_horizons(self):
-        a, b = lab_query(), rail_query()
-        self.assertEqual(a.history[-1].domain, "lab_sample_transport")
-        self.assertEqual(b.history[-1].domain, "rail_transit")
-        self.assertEqual(b.history[-1].tick_seconds, 30.)
-        self.assertEqual(b.action.action_kind, "hold_train")
-        self.assertEqual(a.horizon_ticks, 5)
+    def test_same_lab_domain_accepts_robot_and_conveyor_actions_and_graph(self):
+        robot=lab_query()
+        conveyor=conveyor_query()
+        self.assertEqual(robot.history[-1].domain,conveyor.history[-1].domain)
+        self.assertEqual(conveyor.action.action_kind,"route_carrier")
+        self.assertEqual(conveyor.history[-1].tick_seconds,0.2)
+        kinds={e.entity_kind for e in conveyor.history[-1].entities}
+        self.assertTrue({"robot","task","station","sample_carrier",
+                         "conveyor_section","buffer_slot","transfer_port"}<=kinds)
+        # A joint public state can ALSO be queried by a mobile robot action.
+        state=conveyor.history[-1]
+        robot_action=PublicAction(
+            "lab_sample_transport",4,"assign_robot_task","robot:R1",("task:J1",))
+        mixed=ActionConditionedWorldQuery((state,),robot_action,5,particles=2)
+        self.assertEqual(mixed.action.actor_id,"robot:R1")
 
-    def test_rail_data_schema_not_falsely_claimed_as_trained_rail_model(self):
-        self.assertTrue(RAIL_READINESS.public_graph_contract)
-        self.assertFalse(RAIL_READINESS.domain_encoder)
-        self.assertFalse(RAIL_READINESS.legal_transition)
-        self.assertFalse(RAIL_READINESS.supports_trained_one_step_forecasting)
-        with self.assertRaisesRegex(NotImplementedError, "not available"):
-            require_trained_forecasting(RAIL_READINESS)
+    def test_conveyor_graph_is_not_a_trained_pr61_model(self):
+        self.assertTrue(CONVEYOR_READINESS.public_graph_contract)
+        self.assertFalse(CONVEYOR_READINESS.domain_encoder)
+        self.assertFalse(CONVEYOR_READINESS.legal_transition)
+        self.assertFalse(CONVEYOR_READINESS.supports_trained_one_step_forecasting)
+        with self.assertRaisesRegex(NotImplementedError,"not available"):
+            require_trained_forecasting(CONVEYOR_READINESS)
         self.assertTrue(LAB_READINESS.supports_trained_one_step_forecasting)
         self.assertFalse(LAB_READINESS.supports_verified_decision_rollout)
+        self.assertTrue(CONVEYOR_NODE_KINDS.isdisjoint(ORIGINAL_PR61_NODE_KINDS))
 
-    def test_rail_future_private_event_cannot_be_encoded_as_current_public(self):
-        q=rail_query()
+    def test_future_public_schedule_allowed_but_future_actual_sample_position_forbidden(self):
+        q=conveyor_query()
         frame=q.history[-1]
         nodes=list(frame.entities)
-        original=nodes[0]
-        corrupted=replace(original,public_features={
-            **original.public_features,
-            "future_realized_arrival":PublicField(650,5),
+        carrier=nodes[2]
+        nodes[2]=replace(carrier,public_features={
+            **carrier.public_features,
+            "published_route_target":PublicField("station:A1",1),
         })
-        nodes[0]=corrupted
-        with self.assertRaisesRegex(ValueError, "future disclosure"):
+        updated=replace(frame,entities=tuple(nodes))
+        self.assertEqual(updated.entities[2].public_features["published_route_target"].known_at_tick,1)
+        nodes[2]=replace(nodes[2],public_features={
+            **nodes[2].public_features,
+            "future_actual_jam_at_tick_6":PublicField(True,6),
+        })
+        with self.assertRaisesRegex(ValueError,"future disclosure"):
             replace(frame,entities=tuple(nodes))
 
-    def test_rail_wrong_topology_actor_and_timetable_are_rejected(self):
-        q=rail_query()
-        world=q.history[-1]
-        with self.assertRaisesRegex(ValueError, "topology edge"):
-            replace(world,topology=(
-                RelationalEdge("track:S1","track:S2","robot_grid_step"),))
-        with self.assertRaisesRegex(ValueError, "unobserved entities"):
+    def test_conveyor_bad_segment_or_unregistered_rail_action_are_rejected(self):
+        q=conveyor_query()
+        frame=q.history[-1]
+        with self.assertRaisesRegex(ValueError,"topology edge"):
+            replace(frame,topology=(
+                RelationalEdge("segment:S1","segment:S2","train_signal_route"),))
+        with self.assertRaisesRegex(ValueError,"unobserved entities"):
             replace(q,action=PublicAction(
-                "rail_transit",4,"route_train","train:T1",("track:MISSING",)))
-        with self.assertRaisesRegex(ValueError, "not registered"):
-            PublicAction("rail_transit",4,"assign_robot_task","train:T1")
+                "lab_sample_transport",4,"route_carrier","carrier:P1",("segment:UNKNOWN",)))
+        with self.assertRaisesRegex(ValueError,"not registered"):
+            PublicAction("lab_sample_transport",4,"route_train","carrier:P1")
 
-    def test_clock_domain_history_and_public_action_prohibit_mixing(self):
-        a,b=lab_query(),rail_query()
-        with self.assertRaisesRegex(ValueError, "unrelated transport domains"):
-            ActionConditionedWorldQuery((a.history[-1],b.history[-1]),
-                                        b.action,5)
-        with self.assertRaisesRegex(ValueError, "current public domain"):
-            ActionConditionedWorldQuery(b.history,
-                                        PublicAction("rail_transit",5,"hold_train","train:T1"),
-                                        5)
-        with self.assertRaisesRegex(ValueError, "strictly chronological"):
-            ActionConditionedWorldQuery((b.history[-1],b.history[-1]),b.action,5)
+    def test_clock_history_and_action_time_must_match(self):
+        q=conveyor_query()
+        lab=lab_query()
+        with self.assertRaisesRegex(ValueError,"clock units"):
+            ActionConditionedWorldQuery((lab.history[-1],q.history[-1]),q.action,5)
+        with self.assertRaisesRegex(ValueError,"current public domain"):
+            ActionConditionedWorldQuery(
+                q.history,PublicAction("lab_sample_transport",5,"hold_carrier","carrier:P1"),5)
+        with self.assertRaisesRegex(ValueError,"strictly chronological"):
+            ActionConditionedWorldQuery((q.history[-1],q.history[-1]),q.action,5)
 
 
 class ExistingPR61WorldModelBridgeTests(unittest.TestCase):
