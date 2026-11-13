@@ -86,6 +86,9 @@ jobs:
           assert d["existing_model_class"]=="lab_transport.business_session_learning.BusinessSessionEventModel"
           assert not d["old_PR61_checkpoint_loaded"] and not d["new_architecture_invented"]
           assert d["offline_only"] and not d["BLIND_TEST_read"] and d["no_gpu"]
+          assert d["neural_scene_macro"]["n_scenes"]==12
+          assert d["neural_scene_macro"]["bootstrap_independence_unit"].startswith("original DEV scene")
+          assert len(d["neural_scene_macro"]["paired_neural_minus_rule"]["CI95"])==2
           assert (p/"existing_deepsets_public_service_cpu_best.pt").exists()
           print("PR74_ACTUAL_ORIGINAL_DEEPSETS_CPU_CHECKPOINT_AND_DEV_SCORES_PASS")
           PY
