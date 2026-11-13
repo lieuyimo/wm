@@ -73,6 +73,7 @@ def run_scene(scene, protocol, old, stress, models, seeds):
             model_rows = []
             rule_rows = []
             first_model_complete = None
+            first_model_sampled_tick = None
             for t in range(min(len(actions), len(observations) - 1)):
                 action = actions[t]
                 observation = observations[t]
@@ -82,6 +83,9 @@ def run_scene(scene, protocol, old, stress, models, seeds):
                 rule_map = {s.id: s for s in rule_next.samples}
                 dynamic.predict_next(observation, action)
                 events = {e.sample_id: e for e in dynamic.last_neural_events}
+                if first_model_sampled_tick is None and any(
+                        e.sampled_complete for e in dynamic.last_neural_events):
+                    first_model_sampled_tick = actual_next.tick
                 for query, reason in eligible_sessions(observation, action,
                                                        require_active=True):
                     if reason is not None:
@@ -108,6 +112,7 @@ def run_scene(scene, protocol, old, stress, models, seeds):
                 "neural_forward_calls": dynamic.forward_calls,
                 "neural_active_service_queries": dynamic.service_query_calls,
                 "first_model_completion_tick": first_model_complete,
+                "first_model_sampled_completion_tick": first_model_sampled_tick,
             }
     report["models"] = {f"{arm}_{seed}": v for (arm, seed), v in per_model.items()}
     # A clean rule-only pass for the per-scene rule baseline.
