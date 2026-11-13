@@ -15,9 +15,12 @@ import json
 import math
 from pathlib import Path
 
+import torch
+
 from business_transport.dynamics import WorkflowDynamics
 from business_transport.session_events import eligible_sessions
 from experiments.world_model_integration.lifecycle_pr70.pr70_lifecycle_eval import factual_trace
+from experiments.world_model_integration.neural_pr67.pr67_neural_world import PublicGraphHistory
 from experiments.world_model_integration.outage_pr64.pr64_source import read_protocol
 from experiments.world_model_integration.recovery_pr68.pr68_checkpoint import sha256_file
 from experiments.world_model_integration.stochastic_pr66.pr66_cpu_admission import verify
@@ -45,7 +48,8 @@ def validate_source(train_path, dev_path, quality_path):
     return train, dev
 
 
-def public_input_collision(before, action, query, rules, geometry):
+def public_input_collision(before, action, query, rules, geometry,
+                           previous_observation=None, previous_action=()):
     """A controlled *counterfactual* witness, not a real observed service pair.
 
     Only currently-public station effective duration is modified: PR61 graph
@@ -74,6 +78,22 @@ def public_input_collision(before, action, query, rules, geometry):
     graph_b, keys_b, features_b = graph_public_features(b, rules, action)
     if graph_a != graph_b or keys_a != keys_b or features_a != features_b:
         raise AssertionError("PR61 graph actually observes effective service duration")
+    history_a = PublicGraphHistory(geometry, rules)
+    history_b = PublicGraphHistory(geometry, rules)
+    if previous_observation is not None:
+        # Seed both exact PR61 PyG timelines using the SAME factual t-1
+        # public state/action. Then compare the complete current t inputs.
+        history_a.encode(previous_observation, previous_action)
+        history_b.encode(previous_observation, previous_action)
+    pyg_a, pyg_keys_a = history_a.encode(a, action)
+    pyg_b, pyg_keys_b = history_b.encode(b, action)
+    if pyg_keys_a != pyg_keys_b:
+        raise AssertionError("PR61 PyG node identities differed")
+    for field in ("x", "edge_index", "edge_type", "history",
+                  "history_mask", "map_x", "map_edge_index",
+                  "entity_to_map_index", "map_node_count"):
+        if not torch.equal(getattr(pyg_a, field), getattr(pyg_b, field)):
+            raise AssertionError("PR61 full original dual-graph PyG changed: " + field)
     rule = WorkflowDynamics(ProgressAwareRule(geometry), rules)
     xa = rule.predict_next(a, action)
     xb = rule.predict_next(b, action)
@@ -92,6 +112,8 @@ def public_input_collision(before, action, query, rules, geometry):
         "counterfactual_effective_duration_B": high,
         "PR61_full_current_graph_equal": True,
         "PR61_node_features_equal": True,
+        "PR61_complete_history_map_relational_PyG_input_equal": True,
+        "PR61_prior_input_seeded_at_t_minus_one": previous_observation is not None,
         "rule_next_status_A": aa,
         "rule_next_status_B": bb,
         "interpretation": (
@@ -149,7 +171,10 @@ def scene_phase_risks(scene, protocol, old, stress, *, witness=False):
                 mean is not None and abs(float(mean) - station.expected_service_ticks) > 1e-9
             )
             if collision is None and witness:
-                collision = public_input_collision(before, action, q, rules, geometry)
+                collision = public_input_collision(
+                    before, action, q, rules, geometry,
+                    observations[t - 1] if t else None,
+                    actions[t - 1] if t else ())
     return {
         "scene": scene["id"],
         "regime": scene["case"]["regime"],
