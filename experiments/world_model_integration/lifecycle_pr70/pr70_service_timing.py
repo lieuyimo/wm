@@ -73,7 +73,8 @@ def run_scene(scene, protocol, old, stress, models, seeds):
             model_rows = []
             rule_rows = []
             first_model_complete = None
-            for t, action in enumerate(actions):
+            for t in range(min(len(actions), len(observations) - 1)):
+                action = actions[t]
                 observation = observations[t]
                 actual_next = observations[t + 1]
                 actual_map = {s.id: s for s in actual_next.samples}
@@ -111,7 +112,8 @@ def run_scene(scene, protocol, old, stress, models, seeds):
     report["models"] = {f"{arm}_{seed}": v for (arm, seed), v in per_model.items()}
     # A clean rule-only pass for the per-scene rule baseline.
     rule_rows = []
-    for t, action in enumerate(actions):
+    for t in range(min(len(actions), len(observations) - 1)):
+        action = actions[t]
         observation = observations[t]
         actual_next = observations[t + 1]
         actual_map = {s.id: s for s in actual_next.samples}
