@@ -1,0 +1,40 @@
+# A) conditional factual-action H5/H20 with public stage1 arrival adapter
+CUDA_VISIBLE_DEVICES= PYTHONPATH=/data/wm-a100-pr70-lifecycle-20261113/wm:/data/wm-pr68-cpu-20261113:/data/wm-pr68-cpu-20261113/pydeps \
+/data/wm-a100-20261109/venv/bin/python -m experiments.world_model_integration.lifecycle_pr70.pr70_lifecycle_eval \
+  --archive /data/wm-a100-pr60-gpu-20261112/pr60-gpu-checkpoints-20261112.tar.gz \
+  --manifest examples/evidence/pr60-gpu-training-20261112/checkpoint_manifest.csv \
+  --original-validation /data/wm-pr68-cpu-input/pr59-validation/data.json \
+  --pr64-dev /data/wm-pr68-cpu-input/pr64-dev/data.json \
+  --pr64-quality /data/wm-pr68-cpu-input/pr64-quality/quality.json \
+  --output /data/wm-a100-pr70-lifecycle-20261113/evaluation_injected.json --max-scenes 12 --inject-stage1
+
+# A-control) Rule only, same adapter
+CUDA_VISIBLE_DEVICES= PYTHONPATH=/data/wm-a100-pr70-lifecycle-20261113/wm:/data/wm-pr68-cpu-20261113:/data/wm-pr68-cpu-20261113/pydeps \
+/data/wm-a100-20261109/venv/bin/python -m experiments.world_model_integration.lifecycle_pr70.pr70_lifecycle_eval \
+  --archive /data/wm-a100-pr60-gpu-20261112/pr60-gpu-checkpoints-20261112.tar.gz \
+  --manifest examples/evidence/pr60-gpu-training-20261112/checkpoint_manifest.csv \
+  --original-validation /data/wm-pr68-cpu-input/pr59-validation/data.json \
+  --pr64-dev /data/wm-pr68-cpu-input/pr64-dev/data.json \
+  --pr64-quality /data/wm-pr68-cpu-input/pr64-quality/quality.json \
+  --output /data/wm-a100-pr70-lifecycle-20261113/rule_injected.json --max-scenes 12 --arms rule --inject-stage1
+
+# B) factual active-session service timing audit
+CUDA_VISIBLE_DEVICES= PYTHONPATH=/data/wm-a100-pr70-lifecycle-20261113/wm:/data/wm-pr68-cpu-20261113:/data/wm-pr68-cpu-20261113/pydeps \
+/data/wm-a100-20261109/venv/bin/python -m experiments.world_model_integration.lifecycle_pr70.pr70_service_timing \
+  --archive /data/wm-a100-pr60-gpu-20261112/pr60-gpu-checkpoints-20261112.tar.gz \
+  --manifest examples/evidence/pr60-gpu-training-20261112/checkpoint_manifest.csv \
+  --original-validation /data/wm-pr68-cpu-input/pr59-validation/data.json \
+  --pr64-dev /data/wm-pr68-cpu-input/pr64-dev/data.json \
+  --pr64-quality /data/wm-pr68-cpu-input/pr64-quality/quality.json \
+  --output /data/wm-a100-pr70-lifecycle-20261113/service_timing.json --max-scenes 12
+
+# C) fully legal predicted-state rollout, common exogenous seeds
+CUDA_VISIBLE_DEVICES= PYTHONPATH=/data/wm-a100-pr70-lifecycle-20261113/wm:/data/wm-pr68-cpu-20261113:/data/wm-pr68-cpu-20261113/pydeps \
+/data/wm-a100-20261109/venv/bin/python -m experiments.world_model_integration.lifecycle_pr70.pr70_legal_rollout \
+  --archive /data/wm-a100-pr60-gpu-20261112/pr60-gpu-checkpoints-20261112.tar.gz \
+  --manifest examples/evidence/pr60-gpu-training-20261112/checkpoint_manifest.csv \
+  --original-validation /data/wm-pr68-cpu-input/pr59-validation/data.json \
+  --pr64-train /data/wm-pr68-cpu-input/pr64-train/data.json \
+  --pr64-dev /data/wm-pr68-cpu-input/pr64-dev/data.json \
+  --pr64-quality /data/wm-pr68-cpu-input/pr64-quality/quality.json \
+  --output /data/wm-a100-pr70-lifecycle-20261113/legal_rollout.json --max-scenes 12

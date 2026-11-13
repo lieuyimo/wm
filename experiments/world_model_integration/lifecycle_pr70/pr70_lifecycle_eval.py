@@ -384,10 +384,11 @@ def main():
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
-    print("PR69_MULTISTEP_REPORT", json.dumps({
+    print("PR70_LIFECYCLE_REPORT", json.dumps({
         "scenes": len(scenes), "runs": len(runs),
         "full_horizon": {arm: {h: report["aggregate"][arm][str(h)]["full_horizon_scenes"]
-                               for h in HORIZONS} for arm in ARMS},
+                               for h in HORIZONS if str(h) in report["aggregate"][arm]}
+                         for arm in report["aggregate"]},
         "BLIND": False, "GPU_training": False,
     }), flush=True)
 

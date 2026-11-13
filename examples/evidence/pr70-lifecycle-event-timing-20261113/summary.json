@@ -1,0 +1,51 @@
+{
+  "schema": "pr70-results-summary-v1",
+  "arrival": {
+    "rule_full_h20": 36,
+    "map_off_full_h20": 14,
+    "map_on_full_h20": 13,
+    "map_off_remaining_stage2": 20,
+    "map_on_remaining_stage2": 21,
+    "neural_illegal_assignment_each": 2,
+    "total_injected_stage1_records": 387
+  },
+  "service_timing": {
+    "n_active_sessions": 751,
+    "actual_events": 508,
+    "model_brier_range": [
+      0.021524616071577313,
+      0.03260352121661627
+    ],
+    "rule_brier": 0.0,
+    "model_minus_rule_brier_map_off": 0.028287365833533685,
+    "model_minus_rule_brier_map_on": 0.02835262259474912,
+    "first_model_sampled_completion_tick": {
+      "map_off_1810": 3,
+      "map_off_1811": 3,
+      "map_off_1812": 3,
+      "map_on_1810": 3,
+      "map_on_1811": 3,
+      "map_on_1812": 3
+    },
+    "actual_first_completion_ticks": [
+      9,
+      11
+    ]
+  },
+  "legal_rollout": {
+    "runs": 216,
+    "all_full_horizon": true,
+    "all_states_legal": true,
+    "h20_completed_mean": {
+      "rule": 3.5833333333333335,
+      "map_off": 3.5,
+      "map_on": 3.5
+    },
+    "h20_map_minus_rule_ci95": [
+      -0.3333333333333333,
+      0.16666666666666666
+    ]
+  },
+  "verdict": "GO for PR70 lifecycle/protocol correction; NO-GO for checkpoint promotion, retraining, BLIND or H20 predictive/scheduling claims",
+  "tests": "2/2 arrival adapter tests pass"
+}
