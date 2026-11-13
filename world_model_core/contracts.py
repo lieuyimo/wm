@@ -194,10 +194,12 @@ class WorldModelReadiness:
     domain_prediction_heads: bool
     legal_transition: bool
     factual_prediction_validated: bool
+    factual_multistep_validated: bool = False
+    decision_value_validated: bool = False
     notes: str = ""
 
     @property
-    def supports_trained_forecasting(self) -> bool:
+    def supports_trained_one_step_forecasting(self) -> bool:
         return all((
             self.public_graph_contract,
             self.pretrained_graph_weights,
@@ -206,6 +208,14 @@ class WorldModelReadiness:
             self.legal_transition,
             self.factual_prediction_validated,
         ))
+
+    @property
+    def supports_verified_decision_rollout(self) -> bool:
+        return (
+            self.supports_trained_one_step_forecasting
+            and self.factual_multistep_validated
+            and self.decision_value_validated
+        )
 
 
 # This is an honest evidence ledger for WHAT IS ALREADY PRESENT on PR76.
@@ -256,7 +266,7 @@ class DomainWorldModelAdapter(Protocol):
 
 
 def require_trained_forecasting(readiness: WorldModelReadiness) -> None:
-    if not readiness.supports_trained_forecasting:
+    if not readiness.supports_trained_one_step_forecasting:
         raise NotImplementedError(
             f"{readiness.domain}: trained/validated domain adapter not available; "
             "a graph schema alone is NOT a working world model"
