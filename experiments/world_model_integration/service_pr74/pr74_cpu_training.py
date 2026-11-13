@@ -133,8 +133,15 @@ def scene_macro(devrows, predictions, metadata, comparator):
     for scene,ids in sorted(by_scene.items()):
         vals=[(float(predictions[i])-float(devrows[i]["label"]))**2 for i in ids]
         rule=[(metadata[i]["rule_event"]-metadata[i]["event"])**2 for i in ids]
-        scores[scene]={"n":len(ids),"brier":sum(vals)/len(ids),
-                       "rule_brier":sum(rule)/len(rule)}
+        value={"n":len(ids),"brier":sum(vals)/len(ids),
+               "rule_brier":sum(rule)/len(rule)}
+        if comparator is not None:
+            hazard_scores=[
+                (hazard_probabilities(comparator,metadata[i])["public_elapsed_hazard"]
+                 - metadata[i]["event"])**2 for i in ids
+            ]
+            value["train_hazard_brier"]=sum(hazard_scores)/len(hazard_scores)
+        scores[scene]=value
     answer={
         "n_scenes":len(scores),
         "scene_macro_model_brier":sum(v["brier"] for v in scores.values())/len(scores),
