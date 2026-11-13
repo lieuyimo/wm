@@ -114,21 +114,26 @@ def initial_public_station_history(public_input, state):
     nodes = public_input["graph"]["nodes"]
     histories = public_input["history"]
     masks = public_input["history_visible_mask"]
-    current = {s.id: int(bool(s.device_available)) for s in state.stations}
+    # PR51 intentionally anonymizes known station names as station:0/1/...
+    # according to public sorted order. Do not mistake graph node IDs for
+    # actual BusinessStation IDs or read any private scenario mapping.
+    stations = sorted(state.stations, key=lambda s: s.id)
+    station_nodes = [(i, node) for i, node in enumerate(nodes)
+                     if node["kind"] == "station"]
+    if len(station_nodes) != len(stations):
+        raise ValueError("public graph and business observation station sets differ")
     out = {}
-    for i, node in enumerate(nodes):
-        if node["kind"] != "station":
-            continue
-        sid = node["id"]
-        if sid not in current or int(bool(node["device_available"])) != current[sid]:
-            raise ValueError("public graph device status differs from observed business station")
-        visible_age_h4(histories[i], masks[i], current[sid])
-        out[sid] = [
+    for ordinal, ((i, node), station) in enumerate(zip(station_nodes, stations)):
+        current = int(bool(station.device_available))
+        if (node["id"] != f"station:{ordinal}"
+            or tuple(node["pos"]) != tuple(station.position)
+            or int(bool(node["device_available"])) != current):
+            raise ValueError("anonymous public graph station differs from business observation")
+        visible_age_h4(histories[i], masks[i], current)
+        out[station.id] = [
             int(round(float(v[DEVICE_INDEX]))) if m else None
             for v, m in zip(histories[i], masks[i])
         ]
-    if set(out) != set(current):
-        raise ValueError("public graph and business observation station sets differ")
     return out
 
 
@@ -198,8 +203,13 @@ class PublicHazardRuleRollout:
             probabilities = self._probabilities(state, history)
             if step == 0 and initial_public_input is not None:
                 reference = self.adapter.station_probabilities(initial_public_input)
-                if any(abs(probabilities[r.station] - r.probability_next_available) > 1e-12
-                       for r in reference):
+                # PR65's graph IDs are anonymous station:ordinal IDs. Bridge
+                # them to public sorted business IDs, never to future labels.
+                ordered = sorted(state.stations, key=lambda s: s.id)
+                if (len(reference) != len(ordered) or
+                    any(r.station != f"station:{i}" or
+                        abs(probabilities[ordered[i].id] - r.probability_next_available) > 1e-12
+                        for i, r in enumerate(reference))):
                     raise AssertionError("first-step probability changed from PR65 public contract")
             # Use a reproducible station-ID order and common random numbers.
             next_devices = {sid: rng.random() < p for sid, p in probabilities.items()}
