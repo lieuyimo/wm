@@ -15,10 +15,11 @@ from __future__ import annotations
 
 import argparse
 import copy
-import hashlib
 import json
 from pathlib import Path
-import random
+import platform
+import subprocess
+import sys
 
 import torch
 from torch_geometric.loader import DataLoader
@@ -206,6 +207,7 @@ def train_one(arm,seed,original_pretrained,sources,device,output_dir):
         "trained_new_public_service_head_state":best["head"],
         "optimizer_state":best["optimizer"],
         "torch_rng_state":best["torch_rng"],
+        "cuda_rng_state_all":torch.cuda.get_rng_state_all() if torch.cuda.is_available() else [],
         "best_epoch":best["epoch"],"train_history":history,
         "train_input_sha":EXPECTED_TRAIN,"dev_input_sha":EXPECTED_DEV,
         "source":"existing original PR64 keyed J2 generator, PR73 active risk set",
@@ -246,6 +248,23 @@ def main():
         raise AssertionError("PR61 original six-arm trained checkpoint admission failed")
     data=full_original_public_j2_sources(args.train,args.dev,args.quality)
     args.output_dir.mkdir(parents=True,exist_ok=False)
+    (args.output_dir/"pip-freeze.txt").write_text(
+        subprocess.check_output([sys.executable,"-m","pip","freeze"],text=True))
+    (args.output_dir/"runtime_environment.json").write_text(
+        json.dumps({
+            "python":sys.version,
+            "platform":platform.platform(),
+            "torch":torch.__version__,
+            "torch_cuda_build":torch.version.cuda,
+            "cuda_available":torch.cuda.is_available(),
+            "cuda_device":torch.cuda.get_device_name() if torch.cuda.is_available() else None,
+            "original_PR61_archive_sha256":sha256_file(args.original_pr61_archive),
+            "original_PR61_manifest_sha256":sha256_file(args.original_pr61_manifest),
+            "original_train_source_sha256":sha256_file(args.train),
+            "original_dev_source_sha256":sha256_file(args.dev),
+            "original_quality_source_sha256":sha256_file(args.quality),
+            "model_dataset_schema":SOURCE_SCHEMA,
+        },indent=2,default=str)+"\n")
     results=[]
     for arm in ARMS:
         for seed in SEEDS:
