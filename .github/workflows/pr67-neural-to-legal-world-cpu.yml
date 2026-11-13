@@ -1,0 +1,100 @@
+name: PR67 real PR61 neural-conditional legal world CPU gate
+on:
+  push:
+    branches: [research/pr67-neural-conditioned-rule-world-recurrence-20261113]
+    paths:
+      - .github/workflows/pr67-neural-to-legal-world-cpu.yml
+      - experiments/world_model_integration/neural_pr67/**
+      - experiments/world_model_integration/stochastic_pr66/pr66_rule_rollout.py
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  PR67-legal-neural-h5-h20:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install original pinned CPU PyG world runtime
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -m pip install 'torch-geometric==2.6.1'
+          python - <<'PY'
+          import torch
+          assert torch.version.cuda is None
+          print("PR67_ONLY_CPU",torch.__version__)
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-real-random-outage-43264954353-train
+          path: ${{ runner.temp }}/original-train
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-real-random-outage-43264954353-validation
+          path: ${{ runner.temp }}/original-dev
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-shifted-outage-true-risk-set-audit-43264954353
+          path: ${{ runner.temp }}/original-quality
+      - name: Validate public-source SHA, original legal rules and deterministic controlled neural sensitivity
+        run: |
+          set -euo pipefail
+          (cd "$RUNNER_TEMP/original-train" && sha256sum -c SHA256SUMS)
+          (cd "$RUNNER_TEMP/original-dev" && sha256sum -c SHA256SUMS)
+          (cd "$RUNNER_TEMP/original-quality" && sha256sum -c SHA256SUMS)
+          mkdir -p "$RUNNER_TEMP/pr67"
+          python -m compileall -q experiments/world_model_integration/neural_pr67
+          python -m unittest \
+            experiments.world_model_integration.stochastic_pr66.test_pr66 \
+            experiments.world_model_integration.neural_pr67.test_pr67 -v \
+            2>&1 | tee "$RUNNER_TEMP/pr67/tests.log"
+      - name: Real original PR64 world PR61 map GRU RGCN forward at every legal H5/H20 step
+        run: |
+          set -euo pipefail
+          python -m experiments.world_model_integration.neural_pr67.pr67_cpu_admission \
+            --train "$RUNNER_TEMP/original-train/data.json" \
+            --validation "$RUNNER_TEMP/original-dev/data.json" \
+            --quality "$RUNNER_TEMP/original-quality/quality.json" \
+            --out "$RUNNER_TEMP/pr67/admission.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr67/admission.log"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          q=json.loads((Path(os.environ["RUNNER_TEMP"])/"pr67/admission.json").read_text())
+          assert q["verdict"]=="PASS_CPU_NEURAL_TO_LEGAL_WORLD_WIRING_ONLY_BLOCKED_PRETRAINED_H20"
+          assert len(q["trials"])==8
+          assert {r["H"] for r in q["trials"]}=={5,20}
+          assert all(r["actual_PR61_architecture_forward_calls_cumulative"]>=r["H"] for r in q["trials"])
+          assert q["untrained_random_weights_only"] and q["all_rule_business_states_legal"]
+          assert not q["gpu_used"] and not q["no_model_training"] is False
+          assert not q["original_BLIND_opened"] and not q["original_trained_PR61_checkpoint_used"]
+          print("PR67_REAL_PUBLIC_NEURAL_WORLD_FORWARD_AND_LEGAL_H20_CPU_PASS")
+          PY
+          git rev-parse HEAD > "$RUNNER_TEMP/pr67/source_head.txt"
+          python -m pip freeze > "$RUNNER_TEMP/pr67/pip-freeze.txt"
+          (cd "$RUNNER_TEMP/pr67" && sha256sum tests.log admission.json admission.log source_head.txt pip-freeze.txt > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr67-neural-conditioned-public-rule-world-cpu-${{ github.run_id }}
+          path: ${{ runner.temp }}/pr67/
+          retention-days: 90
+          if-no-files-found: warn
