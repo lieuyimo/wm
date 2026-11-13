@@ -37,7 +37,7 @@ TRAIN keyed jitter0–2 记录 **1,260** 个合法公开服务会话及其下一
 
 ## 4. 扩展样本与研究门禁
 
-同一已冻结机制正在原 PR64 **全部 24 TRAIN + 12 DEV** 场景上执行，CI 产物有源校验、完整合法轨迹、各相位样本分布、Rule 与 TRAIN-only hazard Brier、按 DEV 场景配对 bootstrap CI，以及完整公开 48d TRAIN/DEV 事件记录。最终判读以该轮真实输出为准，不能根据 DEV 指标改变抖动、分桶或训练参数。
+同一已冻结机制已经在原 PR64 **全部 24 TRAIN + 12 DEV** 场景上完成 CPU 验证。CI 产物含源校验、完整合法轨迹、各相位样本分布、Rule 与 TRAIN-only hazard Brier、按 DEV 场景配对 bootstrap CI，以及完整公开 48d TRAIN/DEV 事件记录。完整数值见第 5 节。
 
 **可科学主张**：原确定性合成服务机制不足以检验“学习世界模型能否预测不可确定服务事件”；启用已有服务 jitter 后，事实事件出现条件性不确定性，公开服务时长/有效进度能够提供预测信息。
 
@@ -45,4 +45,38 @@ TRAIN keyed jitter0–2 记录 **1,260** 个合法公开服务会话及其下一
 
 下一模型阶段应优先在原 PR59/61 架构外添加已公开验证的 48d `service-query-v2` 条件输入或复用现有 `SessionRuleDynamics` 事件编码路径，明确检查所有输入 known mask、训练按场景独立划分，并分别评估取样/交付事件 Brier、校准、合法递推及选择差异。原 16d PR61 检查点与新输入维度不兼容，不能直接当成“续训”。
 
-PR73 保持 Draft，0 GPU、0 新神经训练、0 BLIND/TEST 访问。
+PR73 保持 Draft，0 GPU、0 新神经训练、0 BLIND/TEST 访问。\n
+## 5. 全部预注册 PR64 TRAIN/DEV 场景的 CPU 实测结果（正式数据质量门禁）
+
+**最终成功运行**：[GitHub Actions #43450302135](https://github.com/lieuyimo/wm/actions/runs/43450302135)，含原 PR64 全部 24 TRAIN / 12 DEV 场景的配对两臂、SHA 锁源、每个活动服务的 48d 公开输入以及下一状态标签；[Artifact #14050126388](https://github.com/lieuyimo/wm/actions/runs/43450302135/artifacts/14050126388) 内含 `pilot.json`、完整原始 CPU 日志、10/10 测试、source HEAD、pip freeze、SHA256SUMS。**36 个场景都按原三个业务 regime 等量覆盖，未选择 DEV 高收益样本。**
+
+| 原 PR64 全量 DEV (12 independent scenarios) | J0 固定服务 | J2 原生 keyed 随机服务 0–2 步 |
+|---|---:|---:|
+| 有效活动服务观察 (n) | 751 | **1,409** |
+| 下一步真实事件 | 508 | **594** |
+| 原 ProgressAwareRule Brier | **0.00000** | **0.28886** |
+| TRAIN phase constant（Laplace）Brier | 0.21518 | 0.24199 |
+| TRAIN station+phase+active elapsed hazard Brier | 0.03187 | **0.17665** |
+
+TRAIN J2 共 **2,593 条**有质量和可见性约束的 public 48d 事件样本（其中下一步事件 1,106）；DEV J2 **1,409 条**（事件 594）。所有场景的源 train/validation 任务 seed 不重叠；数据分割严格按原 scene，不将一个场景的时间步分散到两组。
+
+**相位计数：**
+
+- J2 DEV pickup：**831** 条活动服务，**320** 个下一步事件；Rule Brier **0.28279**；TRAIN-public-hazard Brier **0.15795**。
+- J2 DEV delivery：**578** 条活动服务，**274** 个下一步事件；Rule Brier **0.29758**；TRAIN-public-hazard Brier **0.20355**。
+- 同机制 TRAIN pickup 1,553 条、601 事件；TRAIN delivery 1,040 条、505 事件。
+- J2 DEV 统计有 **20** 组按当前公开 station/phase/effective active elapsed 分桶同时出现事件与非事件，表明随机服务时长在当前公开信息下不能由固定 0/1 规则精确预测。这个 coarse risk 混合是事件随机性诊断，**不等于可预测信息量精确数值**。
+
+**独立场景配对统计**：与原 Rule 相比，TRAIN-fitted station+phase+public-progress hazard 在 DEV 的 **12/12 场景**具有更低的服务事件 Brier；按 12 个**场景**均等的模型−Rule Brier 均值 **−0.11852**，2,000 次独立场景 bootstrap 95% CI **[−0.14003, −0.09553]**。这个结果与逐活动服务样本加权的整体 Brier **0.17665 vs 0.28886** 是两个不同汇总权重，不应混用。
+
+**对照解释**：当 J0 服务时长固定且先验可见时，Rule Brier=0，传统概率估计会稍差；当 J2 由既有 `_service_duration` 的 task/phase/station keyed jitter 引入条件服务不确定性时，原 Rule 不再完美。此时可观测 active progress 具有统计预测价值，TRAIN-only 风险估计的优势在本批 12 DEV 场景内一致。**这不是 neural model 提升证据**；这里只验证新的合成过程与公开事件监督确实产生了可利用的预测任务。
+
+### 本阶段最终裁决
+
+- **GO，数据质量与条件预测价值**：原内置 jitter 机制足够构成第一批有监督的服务事件随机动态；CPU 实测与概率风险 baseline 支持使用其生成有针对性的训练数据。
+- **GO，训练接口前置**：既有 `service-query-v2` 48d 是可执行公开输入合同，已对原 24 TRAIN+12 DEV 逐会话抽取；可复用现有 `session_events.encode_query`，无需造新模型算法或修改原 PR61 旧 checkpoint。
+- **NO-GO，立即扩大量或改 PR61 权重**：当前只完成数据与基线验证；尚无新模型参数、loss head、phase-specific 训练/校准或完整 H5/H20 评价。原 PR61 16d 图节点模型与新的服务事件输入不兼容；不能将其当作已支持这些字段。
+- **NO-GO，BLIND 与调度收益**：开发验证没有对应真实外部测试、没有生成 BLIND、没有证明模型泛化到企业服务时间分布或多机器人部署。
+
+PR73 CPU 验证通过；保持 Draft；后续训练应先冻结服务事件 head 与明确的公开信息/标签划分，执行 CPU 梯度 smoke 后再按用户既定工作流交付真实 GPU 训练。不将测试集用于挑选模型。
+
