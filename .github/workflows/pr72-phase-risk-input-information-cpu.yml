@@ -1,0 +1,101 @@
+name: PR72 source-only service phase risk and neural input identifiability
+on:
+  push:
+    branches: [research/pr72-phase-specific-service-risk-and-head-target-audit-20261113]
+    paths:
+      - .github/workflows/pr72-phase-risk-input-information-cpu.yml
+      - experiments/world_model_integration/identifiability_pr72/**
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  phase-and-input-audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install original CPU world model dependencies only
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -m pip install 'torch-geometric==2.6.1'
+          python - <<'PY'
+          import torch
+          assert torch.version.cuda is None
+          print("PR72_CPU_ONLY",torch.__version__)
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-real-random-outage-43264954353-train
+          path: ${{ runner.temp }}/original-train
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-real-random-outage-43264954353-validation
+          path: ${{ runner.temp }}/original-dev
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-shifted-outage-true-risk-set-audit-43264954353
+          path: ${{ runner.temp }}/original-quality
+      - name: Check exact frozen public sources and code tests
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr72"
+          (cd "$RUNNER_TEMP/original-train" && sha256sum -c SHA256SUMS)
+          (cd "$RUNNER_TEMP/original-dev" && sha256sum -c SHA256SUMS)
+          (cd "$RUNNER_TEMP/original-quality" && sha256sum -c SHA256SUMS)
+          python -m compileall -q experiments/world_model_integration/identifiability_pr72
+          python -m unittest \
+            experiments.world_model_integration.identifiability_pr72.test_pr72 \
+            experiments.world_model_integration.audit_pr71.test_pr71 -v \
+            2>&1 | tee "$RUNNER_TEMP/pr72/tests.log"
+      - name: Execute actual source factual CP-SAT replay and PR61 input alias witness
+        run: |
+          set -euo pipefail
+          python -m experiments.world_model_integration.identifiability_pr72.pr72_risk_and_alias \
+            --pr64-train "$RUNNER_TEMP/original-train/data.json" \
+            --pr64-dev "$RUNNER_TEMP/original-dev/data.json" \
+            --pr64-quality "$RUNNER_TEMP/original-quality/quality.json" \
+            --output "$RUNNER_TEMP/pr72/phase_risk_alias.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr72/phase_risk_alias.log"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          f=Path(os.environ["RUNNER_TEMP"])/"pr72/phase_risk_alias.json"
+          r=json.loads(f.read_text())
+          p=r["phase_specific_actual_public_service_risks"]
+          assert all(p[x]["n"]>0 for x in ("to_pickup","to_dropoff"))
+          assert sum(p[x]["n"] for x in p)==751
+          assert sum(p[x]["events"] for x in p)==508
+          assert all(p[x]["rule_errors"]==0 for x in p)
+          assert r["public_input_collision_witness"]["PR61_full_current_graph_equal"]
+          assert r["public_input_collision_witness"]["rule_next_status_A"] != r["public_input_collision_witness"]["rule_next_status_B"]
+          assert not r["train_fit_or_new_network_inference"] and not r["BLIND_TEST_read"]
+          print("PR72_PHASE_RISK_SOURCE_AND_PUBLIC_FEATURE_ALIAS_CPU_PASS")
+          PY
+          git rev-parse HEAD > "$RUNNER_TEMP/pr72/source_head.txt"
+          python -m pip freeze > "$RUNNER_TEMP/pr72/pip-freeze.txt"
+          (cd "$RUNNER_TEMP/pr72" && sha256sum *.json *.log *.txt > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr72-actual-public-phase-input-alias-cpu-${{ github.run_id }}
+          path: ${{ runner.temp }}/pr72/
+          retention-days: 90
+          if-no-files-found: warn
