@@ -285,12 +285,12 @@ def main():
     ap.add_argument("--dev", type=Path, required=True)
     ap.add_argument("--quality", type=Path, required=True)
     ap.add_argument("--output", type=Path, required=True)
-    ap.add_argument("--train-scenes", type=int, default=4)
+    ap.add_argument("--train-scenes", type=int, default=12)
     ap.add_argument("--dev-scenes", type=int, default=4)
     a = ap.parse_args()
-    if (not 2 <= a.train_scenes <= 24 or a.train_scenes % 2
-        or not 2 <= a.dev_scenes <= 12 or a.dev_scenes % 2):
-        raise ValueError("original two-regime cohort requires 2..24 even TRAIN and 2..12 even DEV")
+    if (not 3 <= a.train_scenes <= 24 or a.train_scenes % 3
+        or not 3 <= a.dev_scenes <= 12 or a.dev_scenes % 3):
+        raise ValueError("original three-regime cohort requires 3..24 TRAIN and 3..12 DEV in multiples of 3")
     if a.output.exists():
         raise FileExistsError("PR73 output immutable once written")
     result = run(a.train, a.dev, a.quality, a.train_scenes, a.dev_scenes)
