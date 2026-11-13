@@ -1,0 +1,119 @@
+name: PR73 existing BusinessSimulator service jitter and public event-query CPU gate
+on:
+  push:
+    branches: [research/pr73-service-feature-alignment-jitter-synthesis-20261113]
+    paths:
+      - .github/workflows/pr73-original-keyed-service-jitter-cpu.yml
+      - experiments/world_model_integration/synthesis_pr73/**
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  original-public-jitter-pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install original pinned CPU business simulation and PyG dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install 'uv==0.13.5'
+          uv pip install --system --python "$(command -v python)" --index-strategy unsafe-best-match -r requirements-paper-reuse.lock
+          python -m pip install 'torch-geometric==2.6.1'
+          python - <<'PY'
+          import torch
+          assert torch.version.cuda is None
+          print("PR73_NO_GPU",torch.__version__)
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-real-random-outage-43264954353-train
+          path: ${{ runner.temp }}/original-train
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-real-random-outage-43264954353-validation
+          path: ${{ runner.temp }}/original-dev
+      - uses: actions/download-artifact@v4
+        with:
+          run-id: 43264954353
+          github-token: ${{ github.token }}
+          name: pr64-shifted-outage-true-risk-set-audit-43264954353
+          path: ${{ runner.temp }}/original-quality
+      - name: Lock PR64 original physical TRAIN/DEV source and test unchanged simulator API
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/pr73"
+          (cd "$RUNNER_TEMP/original-train" && sha256sum -c SHA256SUMS)
+          (cd "$RUNNER_TEMP/original-dev" && sha256sum -c SHA256SUMS)
+          (cd "$RUNNER_TEMP/original-quality" && sha256sum -c SHA256SUMS)
+          python -m compileall -q experiments/world_model_integration/synthesis_pr73
+          python -m unittest \
+            experiments.world_model_integration.synthesis_pr73.test_pr73 \
+            experiments.world_model_integration.identifiability_pr72.test_pr72 -v \
+            2>&1 | tee "$RUNNER_TEMP/pr73/tests.log"
+      - name: Execute actual keyed-jitter synthetic service pilot on original legal business worlds
+        run: |
+          set -euo pipefail
+          python -m experiments.world_model_integration.synthesis_pr73.pr73_pilot \
+            --train "$RUNNER_TEMP/original-train/data.json" \
+            --dev "$RUNNER_TEMP/original-dev/data.json" \
+            --quality "$RUNNER_TEMP/original-quality/quality.json" \
+            --train-scenes 24 --dev-scenes 12 \
+            --output "$RUNNER_TEMP/pr73/pilot.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr73/pilot.log"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path(os.environ["RUNNER_TEMP"])/"pr73/pilot.json"
+          r=json.loads(p.read_text())
+          assert r["train_cases"]==24 and r["dev_cases"]==12
+          assert not r["new_network_training_or_inference"] and not r["BLIND_TEST_read"]
+          assert r["data_generator_modified"] is False
+          for key in ("train","developer_validation"):
+            assert len(r["report"][key])==(48 if key=="train" else 24)
+            assert all(s["used_original_keyed_service_jitter"] and s["private_jitter_draws_NOT_part_of_public_features"]
+                       for s in r["report"][key])
+            assert all(r["aggregates"][key][str(j)]["all_query_widths_original_48"] for j in (0,2))
+          assert r["all_phase_hazard_fit_from_TRAIN_only"]
+          assert r["train_only_discrete_hazard_dev_controls"]["2"]["train_risk_rows"]>0
+          assert r["train_only_discrete_hazard_dev_controls"]["2"]["paired_scene_uncertainty"]["scenes"]==12
+          assert r["train_only_discrete_hazard_dev_controls"]["2"]["paired_scene_uncertainty"]["unit_of_resampling"].startswith("original developer scenario")
+          train=r["event_risk_dataset"]["train"]
+          dev=r["event_risk_dataset"]["developer_validation"]
+          assert len(train)==r["aggregates"]["train"]["2"]["eligible"]
+          assert len(dev)==r["aggregates"]["developer_validation"]["2"]["eligible"]
+          assert {x["scene"] for x in train}.isdisjoint({x["scene"] for x in dev})
+          for row in train+dev:
+              assert len(row["public_query_48"])==48
+              assert row["label_next_public_tick"]==row["public_tick"]+1
+              assert row["next_step_event_label"] in (0,1)
+              assert set(row)=={"scene","public_tick","label_next_public_tick",
+                                "phase","station_for_analysis_only","public_query_48",
+                                "next_step_event_label"}
+          print("PR73_REAL_PUBLIC_48D_TARGETED_TRAIN_DEV_DATASETS_VERIFIED",len(train),len(dev))
+          print("PR73_ORIGINAL_KEYED_JITTER_AND_PUBLIC_QUERY_CPU_PASS")
+          PY
+          git rev-parse HEAD > "$RUNNER_TEMP/pr73/source_head.txt"
+          python -m pip freeze > "$RUNNER_TEMP/pr73/pip-freeze.txt"
+          (cd "$RUNNER_TEMP/pr73" && sha256sum *.json *.log *.txt > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr73-original-business-service-jitter-cpu-${{ github.run_id }}
+          path: ${{ runner.temp }}/pr73/
+          retention-days: 90
+          if-no-files-found: warn
