@@ -1,0 +1,7 @@
+test_existing_stage1_not_duplicated (experiments.world_model_integration.lifecycle_pr70.test_pr70.PR70ArrivalTests.test_existing_stage1_not_duplicated) ... ok
+test_only_missing_stage1_is_injected (experiments.world_model_integration.lifecycle_pr70.test_pr70.PR70ArrivalTests.test_only_missing_stage1_is_injected) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+OK
