@@ -99,6 +99,7 @@ def execute(train, validation, quality, report):
     protocol, old = read_protocol()
     stress = json.loads(PR48_PROTOCOL.read_text())
     cohorts = []
+    particle_panels = []
     for split, source in (("train", tr), ("validation", va)):
         initial, public_input, geometry, rules, factual_status = one_actual_public_world(
             source, split, protocol, old, stress)
@@ -129,6 +130,53 @@ def execute(train, validation, quality, report):
                     "end_completed_stages": records[-1].completed_stages_after,
                     "end_service_in_progress": records[-1].active_services_after,
                 })
+                if horizon == 20:
+                    # Prespecified contiguous 24-particle panel, no
+                    # cherry-picking a seed that happens to trigger a fault.
+                    # This is a sampler/legality stress test, NOT true-world
+                    # forecast calibration or a statistical effectiveness test.
+                    particles = []
+                    for particle in range(24):
+                        particle_seed = 6606600 + particle
+                        states, events = rollout.rollout(
+                            initial, planner, horizon=20, seed=particle_seed,
+                            **kwargs)
+                        changes = sum(len(e.changed_stations) for e in events)
+                        onsets = 0
+                        recoveries = 0
+                        state_before = {st.id: bool(st.device_available)
+                                        for st in initial.stations}
+                        for event in events:
+                            state_after = dict(event.next_devices)
+                            for sid in state_after:
+                                if state_before[sid] and not state_after[sid]:
+                                    onsets += 1
+                                if not state_before[sid] and state_after[sid]:
+                                    recoveries += 1
+                            state_before = state_after
+                        particles.append({
+                            "seed": particle_seed,
+                            "H": 20,
+                            "legal_steps": len(states),
+                            "device_changes": changes,
+                            "onsets": onsets,
+                            "recoveries": recoveries,
+                            "end_completed_stages": events[-1].completed_stages_after,
+                        })
+                    particle_panels.append({
+                        "source_split": split, "method": method,
+                        "fixed_particles": 24, "H": 20,
+                        "legal_steps": sum(v["legal_steps"] for v in particles),
+                        "total_onsets": sum(v["onsets"] for v in particles),
+                        "total_recoveries": sum(v["recoveries"] for v in particles),
+                        "particles_with_device_change": sum(
+                            v["device_changes"] > 0 for v in particles),
+                        "terminal_completed_stages_min": min(
+                            v["end_completed_stages"] for v in particles),
+                        "terminal_completed_stages_max": max(
+                            v["end_completed_stages"] for v in particles),
+                        "per_particle": particles,
+                    })
     out = {
         "schema": "pr66-rule-constrained-stochastic-public-world-cpu-pilot-v1",
         "original_train_sha256": sha(train),
@@ -137,6 +185,8 @@ def execute(train, validation, quality, report):
         "original_worlds_replayed": 2,
         "real_source_public_t0_t1_input_and_label_identical": True,
         "traces": cohorts,
+        "stochastic_particle_panels": particle_panels,
+        "original_world_device_changes_are_model_samples_not_truth": True,
         "new_neural_training": False,
         "PR61_checkpoint_loaded": False,
         "gpu_used": False,
