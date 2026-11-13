@@ -1,0 +1,9 @@
+CUDA_VISIBLE_DEVICES= \
+PYTHONPATH=/data/wm-a100-pr69-multistep-20261113/wm:/data/wm-pr68-cpu-20261113:/data/wm-pr68-cpu-20261113/pydeps \
+/data/wm-a100-20261109/venv/bin/python -m experiments.world_model_integration.multistep_pr69.pr69_multistep_eval \
+  --archive /data/wm-a100-pr60-gpu-20261112/pr60-gpu-checkpoints-20261112.tar.gz \
+  --manifest examples/evidence/pr60-gpu-training-20261112/checkpoint_manifest.csv \
+  --original-validation /data/wm-pr68-cpu-input/pr59-validation/data.json \
+  --pr64-dev /data/wm-pr68-cpu-input/pr64-dev/data.json \
+  --pr64-quality /data/wm-pr68-cpu-input/pr64-quality/quality.json \
+  --output /data/wm-pr69-multistep-20261113/evaluation.json --max-scenes 12

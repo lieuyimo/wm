@@ -1,0 +1,12 @@
+{
+  "schema": "pr69-factual-multistep-environment-v1",
+  "pr69_source_head": "f95c16e",
+  "archive_sha256": "919a0b625659e492811a74bc5cdf76a60ccbf639acb32c33a420b7db30a74e14",
+  "original_validation_sha256": "c7a0a0081e0c901faea23b37816eb54b560efb9c8b66118387c3fbb0a9509712",
+  "pr64_dev_sha256": "31a36e0940db7afe015fe35689cb629102dea45e8d61123ed89250abc01d0b86",
+  "pr64_quality_sha256": "f2e69dc6e29b6b4eb37be4fd9b89f73789b298cd259422be02dbacf4a18af877",
+  "device_policy": "CUDA_VISIBLE_DEVICES=''; CPU inference only",
+  "base_environment_evidence": "examples/evidence/pr68-original-pr61-cpu-evaluation-20261113/environment.json",
+  "base_environment_sha256": "e9556eaa5eab4d1c45c2838a2d29d26b957a042c4ce62bde598b9bf968453026",
+  "note": "Same verified PR61 archive, PR59 validation, PR64 DEV/quality, CPU torch/PyG/OR-Tools stack as PR68. No GPU training or fine-tuning."
+}
