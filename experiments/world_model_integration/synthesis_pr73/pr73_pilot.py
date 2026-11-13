@@ -29,6 +29,7 @@ from experiments.world_model_integration.stochastic_pr66.pr66_cpu_admission impo
 from experiments.world_model_integration.stress_pr48.pr48_scenarios import PROTOCOL as PR48_PROTOCOL
 from experiments.world_model_integration.topology_pr56.pr56_public_map import build_topology_business
 from lab_transport.torch_structured_adapter import ProgressAwareRule
+from experiments.world_model_integration.synthesis_pr73.pr73_hazard_probe import evaluate_train_dev
 
 EXPECTED_TRAIN = "4c1157777117f82f7deb44f98e1d8255e95611dfcb41c6dfff9e14dd23aee183"
 EXPECTED_DEV = "31a36e0940db7afe015fe35689cb629102dea45e8d61123ed89250abc01d0b86"
@@ -200,6 +201,24 @@ def one(scene, protocol, old, stress, jitter):
     return info, rows
 
 
+def balanced_scenes(source_scenes, n):
+    # Choose scene ids in each original PR64 public regime. Fixed first-k
+    # per regime, not chosen by observed service-event or model performance.
+    regimes = sorted({s["case"]["regime"] for s in source_scenes})
+    if n % len(regimes) != 0:
+        raise ValueError("balance requires equal scenes in every original regime")
+    each = n // len(regimes)
+    subset = []
+    for regime in regimes:
+        group = [s for s in source_scenes if s["case"]["regime"] == regime]
+        if len(group) < each:
+            raise ValueError("original split insufficient for requested regime balance")
+        subset.extend(group[:each])
+    if len({s["id"] for s in subset}) != n:
+        raise AssertionError("duplicate original scenario selected")
+    return subset
+
+
 def run(train, dev, quality, ntrain, ndev):
     if sha256_file(train) != EXPECTED_TRAIN or sha256_file(dev) != EXPECTED_DEV:
         raise ValueError("not immutable original PR64 TRAIN and developer VAL sources")
@@ -215,7 +234,7 @@ def run(train, dev, quality, ntrain, ndev):
         ("train", tr, ntrain, train_rows),
         ("developer_validation", va, ndev, dev_rows),
     ):
-        for scene in data["scenes"][:n]:
+        for scene in balanced_scenes(data["scenes"], n):
             for jitter in (0, 2):
                 report, rows = one(scene, protocol, old, stress, jitter)
                 results[split].append(report)
@@ -241,6 +260,11 @@ def run(train, dev, quality, ntrain, ndev):
         "jitter_private_draw_exposed_to_input": False,
         "original_query_encoder": "business_transport.session_events.encode_query 48d",
         "report": results,
+        "train_only_discrete_hazard_dev_controls": {
+            str(j): evaluate_train_dev(train_rows[j], dev_rows[j]) for j in (0, 2)
+        },
+        "all_phase_hazard_fit_from_TRAIN_only": True,
+        "balanced_selection": "fixed first k/each original PR64 regime, without peeking at risk outcomes",
         "aggregates": {
             split: {str(j): aggregate(bundle[j]) for j in (0, 2)}
             for split, bundle in (("train", train_rows),
@@ -264,8 +288,9 @@ def main():
     ap.add_argument("--train-scenes", type=int, default=4)
     ap.add_argument("--dev-scenes", type=int, default=4)
     a = ap.parse_args()
-    if not 1 <= a.train_scenes <= 24 or not 1 <= a.dev_scenes <= 12:
-        raise ValueError("scene count must fit pre-existing original split")
+    if (not 2 <= a.train_scenes <= 24 or a.train_scenes % 2
+        or not 2 <= a.dev_scenes <= 12 or a.dev_scenes % 2):
+        raise ValueError("original two-regime cohort requires 2..24 even TRAIN and 2..12 even DEV")
     if a.output.exists():
         raise FileExistsError("PR73 output immutable once written")
     result = run(a.train, a.dev, a.quality, a.train_scenes, a.dev_scenes)
