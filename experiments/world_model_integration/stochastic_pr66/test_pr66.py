@@ -34,8 +34,9 @@ def fake_current_public(state):
     nodes = []
     histories = []
     masks = []
-    for s in state.stations:
-        nodes.append({"kind": "station", "id": s.id,
+    for i, s in enumerate(sorted(state.stations, key=lambda st: st.id)):
+        nodes.append({"kind": "station", "id": f"station:{i}",
+                      "pos": list(s.position),
                       "device_available": bool(s.device_available)})
         row = [0.0] * 16
         row[6] = float(s.device_available)
