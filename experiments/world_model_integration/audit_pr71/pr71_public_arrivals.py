@@ -28,7 +28,8 @@ def apply_current_public_stage1(predicted, actual_current, public_previous, rule
     if public_previous is not None and public_previous.tick + 1 != actual_current.tick:
         raise ValueError("public arrival observation stream is not chronological")
     known = {s.id: s for s in predicted.samples}
-    previous_ids = ({s.id for s in public_previous.samples}
+    previous_ids = ({s.id for s in public_previous.samples
+                     if getattr(s, 'stage_index', None) == 0}
                     if public_previous is not None else set())
     if previous_ids - set(known):
         raise ValueError("already public entity disappeared from predicted world")
