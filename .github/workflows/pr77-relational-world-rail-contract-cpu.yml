@@ -1,4 +1,4 @@
-name: PR77 actual relational world model and rail-domain public contract CPU
+name: PR77 actual relational world model with AGV and laboratory sample conveyor public graph CPU
 on:
   push:
     branches: [research/pr77-relational-world-model-multidomain-contract-20261114]
@@ -37,7 +37,7 @@ jobs:
           assert torch.version.cuda is None
           print("PR77_ORIGINAL_GNN_CPU_ONLY",torch.__version__)
           PY
-      - name: Compile and test actual old PR61 GNN, original legal PR67 dynamics, and new lab/rail world graph interface
+      - name: Compile and test actual old PR61 GNN, original legal PR67 dynamics, and joint AGV/conveyor graph interface
         run: |
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/pr77"
@@ -51,22 +51,22 @@ jobs:
             2>&1 | tee "$RUNNER_TEMP/pr77/tests.log"
           python - <<'PY' | tee "$RUNNER_TEMP/pr77/contract.json"
           import json
-          from world_model_core.contracts import LAB_READINESS, RAIL_READINESS
+          from world_model_core.contracts import LAB_READINESS, CONVEYOR_READINESS
           from experiments.world_model_integration.sealed_pr59.pr59_dual_model import (
               PublicMapTemporalRelationalWorld,parameter_count)
           model=PublicMapTemporalRelationalWorld(hidden=48,history_enabled=True,map_enabled=True)
           assert parameter_count(model)==52953
           assert LAB_READINESS.supports_trained_one_step_forecasting
           assert not LAB_READINESS.supports_verified_decision_rollout
-          assert RAIL_READINESS.public_graph_contract
-          assert not RAIL_READINESS.supports_trained_one_step_forecasting
+          assert CONVEYOR_READINESS.public_graph_contract
+          assert not CONVEYOR_READINESS.supports_trained_one_step_forecasting
           print(json.dumps({
               "pr61_original_GNN_parameters":parameter_count(model),
               "lab_pr61_one_step_research_only":True,
               "lab_factually_verified_H20_decision_value":False,
-              "rail_graph_contract_valid":True,
-              "rail_trained_inference_supported":False,
-              "rail_interlocking_safe_rollout_supported":False,
+              "lab_sample_conveyor_public_graph_contract_valid":True,
+              "conveyor_trained_inference_supported":False,
+              "conveyor_physical_legality_verified":False,
               "actual_pr61_checkpoint_loaded":False,
               "test_only_untrained_graph_predictor_not_a_model_result":True,
               "GPU":False,
