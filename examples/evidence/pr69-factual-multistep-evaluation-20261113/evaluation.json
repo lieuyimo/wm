@@ -1270,6 +1270,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -1449,6 +1479,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -1939,6 +1999,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -2118,6 +2208,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -2608,6 +2728,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -2787,6 +2937,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -4051,6 +4231,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 16,
@@ -4230,6 +4440,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 16,
@@ -4720,6 +4960,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 16,
@@ -4899,6 +5169,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 16,
@@ -5389,6 +5689,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 16,
@@ -5568,6 +5898,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 16,
@@ -7143,6 +7503,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 17,
+        "predicted_tick": 17,
+        "actual_next_tick": 18,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -7723,6 +8113,36 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J1::stage2"
+        ],
+        "predicted_samples": {
+          "J1::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J1::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J1::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -7902,6 +8322,36 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J1::stage2"
+        ],
+        "predicted_samples": {
+          "J1::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J1::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J1::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -10099,6 +10549,36 @@
       "missing_action_samples": [
         "J6::stage2"
       ],
+      "failure": {
+        "step": 12,
+        "predicted_tick": 12,
+        "actual_next_tick": 13,
+        "action": [
+          "J6::stage2"
+        ],
+        "predicted_samples": {
+          "J6::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J6::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          },
+          "J6::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -10293,6 +10773,36 @@
       "missing_action_samples": [
         "J6::stage2"
       ],
+      "failure": {
+        "step": 12,
+        "predicted_tick": 12,
+        "actual_next_tick": 13,
+        "action": [
+          "J6::stage2"
+        ],
+        "predicted_samples": {
+          "J6::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J6::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          },
+          "J6::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -10798,6 +11308,36 @@
       "missing_action_samples": [
         "J7::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J7::stage2"
+        ],
+        "predicted_samples": {
+          "J7::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J7::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J7::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -10977,6 +11517,36 @@
       "missing_action_samples": [
         "J7::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J7::stage2"
+        ],
+        "predicted_samples": {
+          "J7::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J7::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J7::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -14107,6 +14677,36 @@
       "missing_action_samples": [
         "J4::stage2"
       ],
+      "failure": {
+        "step": 9,
+        "predicted_tick": 9,
+        "actual_next_tick": 10,
+        "action": [
+          "J4::stage2"
+        ],
+        "predicted_samples": {
+          "J4::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J4::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          },
+          "J4::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 12,
@@ -14256,6 +14856,36 @@
       "missing_action_samples": [
         "J4::stage2"
       ],
+      "failure": {
+        "step": 9,
+        "predicted_tick": 9,
+        "actual_next_tick": 10,
+        "action": [
+          "J4::stage2"
+        ],
+        "predicted_samples": {
+          "J4::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J4::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          },
+          "J4::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 12,
@@ -14714,6 +15344,30 @@
       "full_horizon": false,
       "error": "ValueError",
       "error_message": "assignment must select a distinct idle robot and currently waiting sample",
+      "failure": {
+        "step": 17,
+        "predicted_tick": 17,
+        "actual_next_tick": 18,
+        "action": [
+          "J2::stage1"
+        ],
+        "predicted_samples": {
+          "J2::stage1": {
+            "status": "waiting",
+            "robot_id": null,
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J2::stage1": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 12,
@@ -14981,6 +15635,30 @@
       "full_horizon": false,
       "error": "ValueError",
       "error_message": "assignment must select a distinct idle robot and currently waiting sample",
+      "failure": {
+        "step": 17,
+        "predicted_tick": 17,
+        "actual_next_tick": 18,
+        "action": [
+          "J2::stage1"
+        ],
+        "predicted_samples": {
+          "J2::stage1": {
+            "status": "waiting",
+            "robot_id": null,
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J2::stage1": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 12,
@@ -16646,6 +17324,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 17,
+        "predicted_tick": 17,
+        "actual_next_tick": 18,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -17226,6 +17934,36 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J1::stage2"
+        ],
+        "predicted_samples": {
+          "J1::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J1::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J1::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -17405,6 +18143,36 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J1::stage2"
+        ],
+        "predicted_samples": {
+          "J1::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J1::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J1::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -17895,6 +18663,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 17,
+        "predicted_tick": 17,
+        "actual_next_tick": 18,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -20493,6 +21291,36 @@
       "missing_action_samples": [
         "J7::stage2"
       ],
+      "failure": {
+        "step": 9,
+        "predicted_tick": 9,
+        "actual_next_tick": 10,
+        "action": [
+          "J7::stage2"
+        ],
+        "predicted_samples": {
+          "J7::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J7::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J7::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 12,
@@ -20642,6 +21470,36 @@
       "missing_action_samples": [
         "J7::stage2"
       ],
+      "failure": {
+        "step": 9,
+        "predicted_tick": 9,
+        "actual_next_tick": 10,
+        "action": [
+          "J7::stage2"
+        ],
+        "predicted_samples": {
+          "J7::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J7::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J7::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 12,
@@ -21102,6 +21960,37 @@
       "missing_action_samples": [
         "J9::stage2"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J5::stage1",
+          "J9::stage2"
+        ],
+        "predicted_samples": {
+          "J9::stage1": {
+            "status": "in_transit",
+            "robot_id": "R3",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J9::stage1": {
+            "status": "completed",
+            "robot_id": "R3",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J9::stage2": {
+            "status": "assigned",
+            "robot_id": "R3",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 12,
@@ -21341,6 +22230,37 @@
       "missing_action_samples": [
         "J9::stage2"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J5::stage1",
+          "J9::stage2"
+        ],
+        "predicted_samples": {
+          "J9::stage1": {
+            "status": "in_transit",
+            "robot_id": "R3",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J9::stage1": {
+            "status": "completed",
+            "robot_id": "R3",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J9::stage2": {
+            "status": "assigned",
+            "robot_id": "R3",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 12,
@@ -22354,6 +23274,24 @@
       "missing_action_samples": [
         "J7::stage1"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J7::stage1",
+          "J9::stage2"
+        ],
+        "predicted_samples": {},
+        "actual_next_samples": {
+          "J7::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -22593,6 +23531,24 @@
       "missing_action_samples": [
         "J7::stage1"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J7::stage1",
+          "J9::stage2"
+        ],
+        "predicted_samples": {},
+        "actual_next_samples": {
+          "J7::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -22832,6 +23788,24 @@
       "missing_action_samples": [
         "J7::stage1"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J7::stage1",
+          "J9::stage2"
+        ],
+        "predicted_samples": {},
+        "actual_next_samples": {
+          "J7::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -23071,6 +24045,24 @@
       "missing_action_samples": [
         "J7::stage1"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J7::stage1",
+          "J9::stage2"
+        ],
+        "predicted_samples": {},
+        "actual_next_samples": {
+          "J7::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -23310,6 +24302,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 9,
+        "predicted_tick": 9,
+        "actual_next_tick": 10,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -23459,6 +24481,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 9,
+        "predicted_tick": 9,
+        "actual_next_tick": 10,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -23608,6 +24660,24 @@
       "missing_action_samples": [
         "J7::stage1"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J7::stage1",
+          "J9::stage2"
+        ],
+        "predicted_samples": {},
+        "actual_next_samples": {
+          "J7::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -23847,6 +24917,24 @@
       "missing_action_samples": [
         "J7::stage1"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J7::stage1",
+          "J9::stage2"
+        ],
+        "predicted_samples": {},
+        "actual_next_samples": {
+          "J7::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -24086,6 +25174,36 @@
       "missing_action_samples": [
         "J5::stage2"
       ],
+      "failure": {
+        "step": 9,
+        "predicted_tick": 9,
+        "actual_next_tick": 10,
+        "action": [
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -26253,6 +27371,36 @@
       "missing_action_samples": [
         "J4::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J4::stage2"
+        ],
+        "predicted_samples": {
+          "J4::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J4::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          },
+          "J4::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -26432,6 +27580,36 @@
       "missing_action_samples": [
         "J4::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J4::stage2"
+        ],
+        "predicted_samples": {
+          "J4::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J4::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          },
+          "J4::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -26920,6 +28098,30 @@
       "full_horizon": false,
       "error": "ValueError",
       "error_message": "assignment must select a distinct idle robot and currently waiting sample",
+      "failure": {
+        "step": 19,
+        "predicted_tick": 19,
+        "actual_next_tick": 20,
+        "action": [
+          "J2::stage1"
+        ],
+        "predicted_samples": {
+          "J2::stage1": {
+            "status": "waiting",
+            "robot_id": null,
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J2::stage1": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -27217,6 +28419,30 @@
       "full_horizon": false,
       "error": "ValueError",
       "error_message": "assignment must select a distinct idle robot and currently waiting sample",
+      "failure": {
+        "step": 19,
+        "predicted_tick": 19,
+        "actual_next_tick": 20,
+        "action": [
+          "J2::stage1"
+        ],
+        "predicted_samples": {
+          "J2::stage1": {
+            "status": "waiting",
+            "robot_id": null,
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J2::stage1": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 14,
@@ -28601,6 +29827,36 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "failure": {
+        "step": 12,
+        "predicted_tick": 12,
+        "actual_next_tick": 13,
+        "action": [
+          "J1::stage2"
+        ],
+        "predicted_samples": {
+          "J1::stage1": {
+            "status": "in_transit",
+            "robot_id": "R3",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J1::stage1": {
+            "status": "completed",
+            "robot_id": "R3",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J1::stage2": {
+            "status": "assigned",
+            "robot_id": "R3",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 4,
@@ -29417,6 +30673,36 @@
       "missing_action_samples": [
         "J4::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J4::stage2"
+        ],
+        "predicted_samples": {
+          "J4::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J4::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          },
+          "J4::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 4,
@@ -29596,6 +30882,36 @@
       "missing_action_samples": [
         "J4::stage2"
       ],
+      "failure": {
+        "step": 11,
+        "predicted_tick": 11,
+        "actual_next_tick": 12,
+        "action": [
+          "J4::stage2"
+        ],
+        "predicted_samples": {
+          "J4::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J4::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 0
+          },
+          "J4::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w1",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 4,
@@ -30086,6 +31402,36 @@
       "missing_action_samples": [
         "J10::stage2"
       ],
+      "failure": {
+        "step": 17,
+        "predicted_tick": 17,
+        "actual_next_tick": 18,
+        "action": [
+          "J10::stage2"
+        ],
+        "predicted_samples": {
+          "J10::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J10::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w1",
+            "stage_index": 0
+          },
+          "J10::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w1",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 4,
@@ -30355,6 +31701,36 @@
       "missing_action_samples": [
         "J10::stage2"
       ],
+      "failure": {
+        "step": 17,
+        "predicted_tick": 17,
+        "actual_next_tick": 18,
+        "action": [
+          "J10::stage2"
+        ],
+        "predicted_samples": {
+          "J10::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w1",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J10::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w1",
+            "stage_index": 0
+          },
+          "J10::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w1",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 4,
@@ -31398,6 +32774,24 @@
       "missing_action_samples": [
         "J11::stage1"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J11::stage1",
+          "J5::stage2"
+        ],
+        "predicted_samples": {},
+        "actual_next_samples": {
+          "J11::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -31638,6 +33032,43 @@
         "J11::stage1",
         "J5::stage2"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J11::stage1",
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J11::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -31878,6 +33309,43 @@
         "J11::stage1",
         "J5::stage2"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J11::stage1",
+          "J5::stage2"
+        ],
+        "predicted_samples": {
+          "J5::stage1": {
+            "status": "in_transit",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J11::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage1": {
+            "status": "completed",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J5::stage2": {
+            "status": "assigned",
+            "robot_id": "R2",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -32117,6 +33585,24 @@
       "missing_action_samples": [
         "J11::stage1"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J11::stage1",
+          "J5::stage2"
+        ],
+        "predicted_samples": {},
+        "actual_next_samples": {
+          "J11::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -32356,6 +33842,36 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "failure": {
+        "step": 9,
+        "predicted_tick": 9,
+        "actual_next_tick": 10,
+        "action": [
+          "J1::stage2"
+        ],
+        "predicted_samples": {
+          "J1::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J1::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J1::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -32505,6 +34021,36 @@
       "missing_action_samples": [
         "J1::stage2"
       ],
+      "failure": {
+        "step": 9,
+        "predicted_tick": 9,
+        "actual_next_tick": 10,
+        "action": [
+          "J1::stage2"
+        ],
+        "predicted_samples": {
+          "J1::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J1::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J1::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -32654,6 +34200,24 @@
       "missing_action_samples": [
         "J11::stage1"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J11::stage1",
+          "J5::stage2"
+        ],
+        "predicted_samples": {},
+        "actual_next_samples": {
+          "J11::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -32893,6 +34457,24 @@
       "missing_action_samples": [
         "J11::stage1"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J11::stage1",
+          "J5::stage2"
+        ],
+        "predicted_samples": {},
+        "actual_next_samples": {
+          "J11::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -33132,6 +34714,24 @@
       "missing_action_samples": [
         "J11::stage1"
       ],
+      "failure": {
+        "step": 15,
+        "predicted_tick": 15,
+        "actual_next_tick": 16,
+        "action": [
+          "J11::stage1",
+          "J5::stage2"
+        ],
+        "predicted_samples": {},
+        "actual_next_samples": {
+          "J11::stage1": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        }
+      },
       "steps": [
         {
           "samples": 3,
@@ -35389,6 +36989,36 @@
       "missing_action_samples": [
         "J7::stage2"
       ],
+      "failure": {
+        "step": 9,
+        "predicted_tick": 9,
+        "actual_next_tick": 10,
+        "action": [
+          "J7::stage2"
+        ],
+        "predicted_samples": {
+          "J7::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J7::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J7::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 18,
@@ -35538,6 +37168,36 @@
       "missing_action_samples": [
         "J7::stage2"
       ],
+      "failure": {
+        "step": 9,
+        "predicted_tick": 9,
+        "actual_next_tick": 10,
+        "action": [
+          "J7::stage2"
+        ],
+        "predicted_samples": {
+          "J7::stage1": {
+            "status": "in_transit",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          }
+        },
+        "actual_next_samples": {
+          "J7::stage1": {
+            "status": "completed",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 0
+          },
+          "J7::stage2": {
+            "status": "assigned",
+            "robot_id": "R1",
+            "workflow": "w0",
+            "stage_index": 1
+          }
+        }
+      },
       "steps": [
         {
           "samples": 18,

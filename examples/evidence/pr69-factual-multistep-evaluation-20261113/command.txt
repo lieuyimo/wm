@@ -6,4 +6,4 @@ PYTHONPATH=/data/wm-a100-pr69-multistep-20261113/wm:/data/wm-pr68-cpu-20261113:/
   --original-validation /data/wm-pr68-cpu-input/pr59-validation/data.json \
   --pr64-dev /data/wm-pr68-cpu-input/pr64-dev/data.json \
   --pr64-quality /data/wm-pr68-cpu-input/pr64-quality/quality.json \
-  --output /data/wm-pr69-multistep-20261113/evaluation.json --max-scenes 12
+  --output /data/wm-pr69-multistep-20261113/evaluation_v2.json --max-scenes 12

@@ -1,7 +1,7 @@
 # PR69：事实动作/设备条件下的多步预测评估
 
 日期：2026-11-13  
-PR69 head：`f95c16e`  
+PR69 head：`1f9a9e6`  
 来源：PR68 已验证的原始 PR61 `best.pt`、PR59 validation、PR64 developer validation。**CPU inference only；无训练/微调/参数更新；无 BLIND/TEST。**
 
 ## 1. 评估设计
@@ -41,6 +41,27 @@ PR69 head：`f95c16e`
 - map_off 与 map_on 在 coverage、误差和失败模式上几乎相同；没有 map-side 多步优势。
 - 在已走通的 prefix 上，模型 status accuracy 与 rule 接近；没有证据支持神经模型改善多步状态预测。
 
+### 3.1 已定位的 H20 停止原因
+
+对 216 个 run 的失败状态做了快照分析（`failure_causes.json`）：
+
+| arm | full 20 | missing stage1 | missing stage2 | illegal assignment |
+|---|---:|---:|---:|---:|
+| rule | 30/36 | 6 | 0 | 0 |
+| map_off | 9/36 | 4 | 22 | 2 |
+| map_on | 9/36 | 3 | 23 | 2 |
+
+两类直接原因：
+
+1. **新任务/新阶段实体未在递推状态中生成。**  
+   - Rule 的 6 个失败都是事实动作引用了新发布的 `J7::stage1` 或 `J11::stage1`；事实 next state 中它已被分配给 R1，但 rule 的递归状态中完全没有这个 sample。  
+   - 这是公开任务 release/新阶段生命周期没有被当前 rule/NeuralTaskServiceRule 递推生成，不是训练不足。
+2. **前序阶段完成时序不同，导致 successor stage 不存在。**  
+   - 典型：`PR64_VALIDATION_0_0` step 11，事实动作引用 `J5::stage2`；事实状态中 `J5::stage1=completed`、`J5::stage2=assigned`，但 map_off 的递归状态仍是 `J5::stage1=in_transit`。  
+   - 因而事实 action 在预测状态中非法/不可执行；后续 2 个 `ValueError`（assignment 不再 idle/waiting）是同一状态分叉的下游。
+
+结论：**H20 跑不满首先卡在实体生命周期/新任务 release 和动作-状态对齐，而不是“模型不会做 20 步”这么简单。** Rule 也失败 6/36，证明评测 harness 本身不能把事实 action 序列无条件套到较短递归状态上。当前结果不能用于判断模型的真实 H20 预测精度。
+
 ## 3. 判读
 
 1. **H5 条件多步 rollout 可执行**：36/36 三臂都完成 5 步，机器人和完成计数完全对齐；但神经模型与 rule 完全一致，没有增量。
@@ -53,7 +74,8 @@ PR69 head：`f95c16e`
 
 `examples/evidence/pr69-factual-multistep-evaluation-20261113/`
 
-- `evaluation.json`：216 个 run（12 场景 × 3 seeds × 2 horizons × 3 arms）及逐步指标。
+- `evaluation.json`：216 个 run（12 场景 × 3 seeds × 2 horizons × 3 arms）及逐步指标、失败状态快照。
+- `failure_causes.json`：H20 停止原因统计与两个代表性快照。
 - `environment.json`：PR69 head、archive/PR59/PR64 SHA、CPU policy；引用 PR68 已验证环境。
 - `command.txt`、`source_head.txt`、`SHA256SUMS`。
 
