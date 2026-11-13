@@ -73,6 +73,7 @@ def compare(control, dev_rows):
                                 for p, r in zip(preds, dev_rows)
                                 if r["phase"] == phase)
                             / sum(r["phase"] == phase for r in dev_rows)
+                            if any(r["phase"] == phase for r in dev_rows) else None
                         ),
                     }
                     for phase in PHASES
