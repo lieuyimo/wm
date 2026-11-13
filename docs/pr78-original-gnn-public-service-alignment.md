@@ -59,3 +59,20 @@
 **GO（CPU 验证与工程修复）**：原 GNN 已拥有针对当前公开服务状态的完整 48d 数据入口、下一步真实活动服务事件标签、梯度可达路径，保留原关系/地图模型与权重身份。下一阶段进入原 PR61 **真权重**的目标 head 训练（GPU 由另一个环境执行）。
 
 **NO-GO（尚无证据的主张）**：本轮没有完成新 GNN 训练、没有训练后 map_on/off 性能结论、没有证明 H20 事实分布预测准确或调度收益，亦没有样本传送带任何实现。本分支刻意继承 PR76、**不继承 PR77** 的传送带代码，全部历史 PR 继续 Draft。
+
+## 6. 真实 CPU 最终结果（2026-11-14）
+
+**最终本地源代码与原 PR64 TRAIN/DEV 数据验证**：[GitHub Actions #43475007800](https://github.com/lieuyimo/wm/actions/runs/43475007800) **SUCCESS，21/21 原新测试通过**；[artifact #14062059066](https://github.com/lieuyimo/wm/actions/runs/43475007800/artifacts/14062059066) 含真实事件源审计 JSON、随机模型 CPU 烟测、测试日志、SHA256SUMS、pip freeze 与 git HEAD。
+
+**完整原 PR64 J2 真值数据的图节点＋48d 公开服务监督**：
+
+| 物理来源 | 独立场景 | 活动服务事件风险 | 下一步服务完成标签 | 原图状态输入图实例 |
+|---|---:|---:|---:|---:|
+| TRAIN | 24（3 个 regime 各 8） | **2,593** | **1,106** | 2,067 |
+| DEV | 12（各 4） | **1,409** | **594** | 1,082 |
+
+TRAIN pickup 1,553/601 事件、delivery 1,040/505；DEV pickup 831/320、delivery 578/274。所有数据与 PR73/74 完全一致，不涉及真实物理/合成规则改动，**没有任何 BLIND**。
+
+新的 `PublicRelationalServiceRule` 则把新模型对当前服务阶段的下一步完成概率投影回原 `NeuralTaskServiceRule` 的既有 `predict_next` 语义：原业务 `ProgressAwareRule`、`WorkflowDynamics`、任务后继、机器人/站点容量检查全部保留。新模型真实训练权重必须从 `from_pretrained_output(original_archive, original_manifest, new_head_checkpoint, expected_new_head_sha256)` 入口双重严格验证后才能加载；无权重的测试 fixture 输出仍标记 **UNTRAINED**。实际 21/21 CPU 测试包含此完整合法调用链、公开条件信息碰撞与原图/地图 BCE 梯度。
+
+**训练门禁**：正式 GPU 命令、原 SHA、源环境、6 个 arms/seeds、Brier 与模型/数据 provenance 完整见 [PR78 原始训练权重 GPU Handoff](pr78-original-pr61-gnn-gpu-handoff.md)。新训练未执行，所以不能把随机初始化 GNN smoke 的 Brier 或 map_on/off 差异冒称训练结果。
