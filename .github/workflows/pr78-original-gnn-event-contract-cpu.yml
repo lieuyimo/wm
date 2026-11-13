@@ -111,9 +111,24 @@ jobs:
           assert all(z["optimizer_updates"]>0 for z in v["arm"].values())
           print("PR78_REAL_FROZEN_PR64_J2_PUBLIC_GNN_EVENT_TARGET_GRADIENT_GATE_PASS")
           PY
+          python -m experiments.world_model_integration.gnn_pr78.pr78_data_gate \
+            --train "$RUNNER_TEMP/original-train/data.json" \
+            --dev "$RUNNER_TEMP/original-dev/data.json" \
+            --quality "$RUNNER_TEMP/original-quality/quality.json" \
+            --out "$RUNNER_TEMP/pr78/all_j2_original_graph_service_labels.json" \
+            2>&1 | tee "$RUNNER_TEMP/pr78/all_j2_original_graph_service_labels.log"
+          python - <<'PY'
+          import os,json
+          from pathlib import Path
+          r=json.loads((Path(os.environ["RUNNER_TEMP"])/"pr78/all_j2_original_graph_service_labels.json").read_text())
+          assert r["full_original_source"]["train"]["by_phase_and_event"]["eligible_risks"]==2593
+          assert r["full_original_source"]["developer_validation"]["by_phase_and_event"]["eligible_risks"]==1409
+          assert not r["model_training_or_Brier_claim"] and not r["BLIND_TEST_read"]
+          print("PR78_ALL_24_TRAIN_12_DEV_GRAPH_SOURCE_REAL_EVENT_LABELS_PASS")
+          PY
           git rev-parse HEAD > "$RUNNER_TEMP/pr78/source_head.txt"
           python -m pip freeze > "$RUNNER_TEMP/pr78/pip-freeze.txt"
-          (cd "$RUNNER_TEMP/pr78" && sha256sum tests.log architecture.json real_j2_graph_event_smoke.json real_j2_graph_event_smoke.log source_head.txt pip-freeze.txt > SHA256SUMS)
+          (cd "$RUNNER_TEMP/pr78" && sha256sum tests.log architecture.json real_j2_graph_event_smoke.json real_j2_graph_event_smoke.log all_j2_original_graph_service_labels.json all_j2_original_graph_service_labels.log source_head.txt pip-freeze.txt > SHA256SUMS)
       - uses: actions/upload-artifact@v4
         if: always()
         with:
