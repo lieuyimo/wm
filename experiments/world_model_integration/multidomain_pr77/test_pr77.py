@@ -122,7 +122,7 @@ class DomainContractTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "topology edge"):
             replace(world,topology=(
                 RelationalEdge("track:S1","track:S2","robot_grid_step"),))
-        with self.assertRaisesRegex(ValueError, "unseen entities"):
+        with self.assertRaisesRegex(ValueError, "unobserved entities"):
             replace(q,action=PublicAction(
                 "rail_transit",4,"route_train","train:T1",("track:MISSING",)))
         with self.assertRaisesRegex(ValueError, "not registered"):
