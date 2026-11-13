@@ -1,0 +1,34 @@
+{
+  "schema": "pr69-h5-equality-cause-v1",
+  "h5_end_tick": 5,
+  "first_completed_observation_ticks": {
+    "PR64_VALIDATION_0_0": 11,
+    "PR64_VALIDATION_0_1": 11,
+    "PR64_VALIDATION_0_2": 11,
+    "PR64_VALIDATION_0_3": 11,
+    "PR64_VALIDATION_0_4": 9,
+    "PR64_VALIDATION_0_5": 11,
+    "PR64_VALIDATION_1_0": 9,
+    "PR64_VALIDATION_1_1": 9,
+    "PR64_VALIDATION_1_2": 11,
+    "PR64_VALIDATION_1_3": 11,
+    "PR64_VALIDATION_1_4": 9,
+    "PR64_VALIDATION_1_5": 9
+  },
+  "all_scenes_first_completion_after_h5": true,
+  "h5_observed_completed_samples": 0,
+  "h5_rule": {
+    "neural_active_service_queries": 0,
+    "neural_sampled_complete": 0
+  },
+  "h5_map_off": {
+    "neural_active_service_queries": 93,
+    "neural_sampled_complete": 39
+  },
+  "h5_map_on": {
+    "neural_active_service_queries": 93,
+    "neural_sampled_complete": 39
+  },
+  "h5_missing_sample_steps": 153,
+  "conclusion": "All 12 factual trajectories first complete a sample at observation tick 9 or 11, after the H5 end at tick 5. The 36 H5 runs therefore have zero completed samples. The neural task head is queried (93 service queries, 39 sampled completions across 36 runs), but status remains waiting/assigned/in_transit; robot positions/phase come from the rule transition, devices are factual, and completed count is 0 for every arm. The H5 public metrics are therefore insensitive to the neural service head, not evidence that the model and rule are behaviorally equivalent. The 51 missing sample-steps are new entities absent from both rule and model states."
+}
