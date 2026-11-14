@@ -1,3 +1,14 @@
 __pycache__/
 *.py[cod]
 runs/
+
+# Training checkpoints and model weights are private. Do NOT commit them.
+# Git ignore is a convenience guard; PR78 also rejects in-repo output paths.
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*gpu-checkpoints*.tar.gz
+*pr61*checkpoint*.tar.gz
+**/training-outputs/
+**/private-checkpoints/
