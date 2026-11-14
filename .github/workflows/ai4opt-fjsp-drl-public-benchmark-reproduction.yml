@@ -1,12 +1,7 @@
 name: AI4Opt published FJSP-DRL HGNN PPO public 10x5 reproduction (no checkpoints)
 on:
-  push:
-    branches:
-      - research/ai4opt-fjsp-drl-reproduction-20261115
-    paths:
-      - 'experiments/ai4opt_reproduction/**'
-      - '.github/workflows/ai4opt-fjsp-drl-public-benchmark-reproduction.yml'
   workflow_dispatch:
+
 permissions:
   contents: read
 jobs:
