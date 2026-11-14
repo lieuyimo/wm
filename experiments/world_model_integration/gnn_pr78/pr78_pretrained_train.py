@@ -259,7 +259,7 @@ def main():
     p.add_argument("--dev",type=Path,required=True)
     p.add_argument("--quality",type=Path,required=True)
     p.add_argument("--output-dir",type=Path,required=True)
-    p.add_argument("--device",choices=("cpu","cuda"),default="cpu")
+    p.add_argument("--device",choices=("cpu","cuda"),default="cuda")
     args=p.parse_args()
     if args.output_dir.exists():
         raise FileExistsError("PR78 original-pretrained weights and training output cannot be overwritten")
