@@ -238,11 +238,12 @@ def main():
     parser.add_argument("--upstream-root", type=Path, required=True)
     parser.add_argument("--iterations", type=int, default=8)
     parser.add_argument("--eval-count", type=int, default=12)
+    parser.add_argument("--train-batch-size", type=int, default=2)
     parser.add_argument("--seed", type=int, default=1810)
     parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()
     root = args.upstream_root.resolve()
-    if args.iterations < 1 or args.eval_count < 4:
+    if args.iterations < 1 or args.eval_count < 4 or not 2 <= args.train_batch_size <= 32:
         raise ValueError("reproduction needs positive real training and >=4 held-out cases")
     assert_no_weights(root)
     os.chdir(root)
@@ -254,7 +255,7 @@ def main():
         original_cfg = json.load(stream)
     pars = original_cfg["env_paras"].copy()
     pars.update({
-        "batch_size": 2, "num_jobs": 10, "num_mas": 5,
+        "batch_size": args.train_batch_size, "num_jobs": 10, "num_mas": 5,
         "valid_batch_size": args.eval_count,
         "device": torch.device("cpu"),
     })
