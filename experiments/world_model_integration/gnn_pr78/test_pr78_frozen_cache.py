@@ -15,6 +15,7 @@ from experiments.workflow_prediction.tests.test_workflow import case,factual
 from business_transport.session_events import eligible_sessions
 from experiments.world_model_integration.gnn_pr78.pr78_model import (
     PublicMapRelationalServiceWorld,PublicServiceGraphHistory,
+    original_gnn_state_sha256,
 )
 from experiments.world_model_integration.gnn_pr78.pr78_frozen_cache import (
     frozen_public_service_rows,cached_dev_metrics,
@@ -86,6 +87,22 @@ class PR78FrozenGraphCacheContract(unittest.TestCase):
             self.assertAlmostEqual(summary["risk_weighted_brier"],
                                    original["risk_weighted_brier"],places=6)
             self.assertEqual(summary["real_original_eligible_service_risks"],2)
+
+    def test_head_only_provenance_digest_is_stable_and_detects_trunk_change(self):
+        net=PublicMapRelationalServiceWorld(hidden=48,map_enabled=True)
+        original=net.graph_world.state_dict()
+        before=original_gnn_state_sha256(original)
+        copied={k:v.detach().cpu().clone() for k,v in original.items()}
+        self.assertEqual(before,original_gnn_state_sha256(copied))
+        reverse=dict(reversed(list(copied.items())))
+        self.assertEqual(before,original_gnn_state_sha256(reverse))
+        self.assertEqual(len(before),64)
+        first=next(iter(copied))
+        mutated={k:v.clone() for k,v in copied.items()}
+        mutated[first].view(-1)[0]+=0.125
+        self.assertNotEqual(before,original_gnn_state_sha256(mutated))
+        with self.assertRaisesRegex(ValueError,"empty"):
+            original_gnn_state_sha256({})
 
     def test_frozen_cache_refuses_a_live_trainable_original_backbone(self):
         net=PublicMapRelationalServiceWorld(hidden=48,map_enabled=True)
