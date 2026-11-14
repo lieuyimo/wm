@@ -13,13 +13,14 @@ import argparse
 import importlib
 import json
 import os
+import subprocess
 from pathlib import Path
 import sys
 import time
 
 import torch
 
-from experiments.ai4opt_reproduction.fjsp_drl_repro import (
+from fjsp_drl_repro import (
     UPSTREAM_SHA,
     seed_everything,
     sha256_file,
@@ -42,9 +43,10 @@ def main() -> int:
     if found != [checkpoint]:
         raise PermissionError("only the exact single already-public author reference may be loaded")
     original_sha = sha256_file(checkpoint)
-    original_code_commit = os.popen(
-        "git -C " + str(root) + " rev-parse HEAD"
-    ).read().strip()
+    original_code_commit = subprocess.check_output(
+        ["git", "-C", str(root), "rev-parse", "HEAD"],
+        text=True,
+    ).strip()
     if original_code_commit != UPSTREAM_SHA:
         raise ValueError("paper checkpoint is not paired with pinned upstream code")
     os.chdir(root)
@@ -82,7 +84,7 @@ def main() -> int:
     report = {
         "kind": "original_author_published_pretrained_HGNN_PPO_inference",
         "not_our_model_weights": True,
-        "original_public_model_in_memory_only": True,
+        "original_public_model_loaded_only_in_ephemeral_runner": True,
         "no_user_model_checkpoints_loaded_or_written": True,
         "no_checkpoint_output_or_artifact": True,
         "source_commit": UPSTREAM_SHA,
