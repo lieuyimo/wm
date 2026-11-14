@@ -60,6 +60,7 @@ jobs:
           python -m compileall -q experiments/world_model_integration/gnn_pr78
           python -m unittest \
             experiments.world_model_integration.gnn_pr78.test_pr78 \
+            experiments.world_model_integration.gnn_pr78.test_pr78_frozen_cache \
             experiments.world_model_integration.identifiability_pr72.test_pr72 \
             experiments.world_model_integration.sealed_pr59.test_pr59 \
             experiments.world_model_integration.neural_pr67.test_pr67 -v \
