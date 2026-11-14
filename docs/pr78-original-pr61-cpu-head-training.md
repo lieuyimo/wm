@@ -5,6 +5,8 @@
 
 ## 研究状态
 
+> **隐私与权重管理：** PR61 原始权重、PR78 新 head 权重、包含优化器状态的可恢复训练文件均为**私有资产**，不得提交至公开 Git 仓库、PR、Issue、Release、Actions Artifact 或缓存。必须在仓库工作区之外的受控私有存储中使用。公开只展示审核后的模型指标及 SHA 摘要，参见 [权重保密规程](pr78-private-checkpoint-policy.md)。
+
 **训练尚未实际执行**。我们已经通过 PR78 的完整原 PR64 J2 TRAIN/DEV 标签数据、原 GNN map_on/off 结构及梯度单元测试，且冻结主干的**公共节点预测 6d + 当前公开服务查询 48d**可以只在 CPU 前向提取一次、在后续 20 个 epoch 中仅使用普通小型 MLP 训练。代码已将 `--device` 默认值改为 `cpu`。
 
 **硬阻塞不是 GPU，而是原 PR61 训练权重当前不在 GitHub Actions/本会话工作目录。**
