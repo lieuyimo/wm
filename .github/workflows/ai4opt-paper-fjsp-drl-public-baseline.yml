@@ -1,0 +1,85 @@
+name: AI4Opt paper reproduction - public FJSP-DRL pretrained model vs SPT/LPT
+on:
+  push:
+    branches:
+      - research/ai4opt-fjsp-drl-paper-reproduction-20261115
+    paths:
+      - 'experiments/ai4opt_reproduction/**'
+      - '.github/workflows/ai4opt-paper-fjsp-drl-public-baseline.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  paper-pretrained-evaluation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      CUDA_VISIBLE_DEVICES: ''
+      OMP_NUM_THREADS: '1'
+      MKL_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      PYTHONHASHSEED: '0'
+      MPLBACKEND: 'Agg'
+    steps:
+      - name: Checkout own reproduction script; never use private PR61 or PR78 model files
+        uses: actions/checkout@v4
+      - name: Python 3.10 for publicly released 2023 author code
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install CPU-only paper inference dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install 'numpy==1.26.4' 'gym==0.26.2' 'matplotlib==3.9.4' 'pandas==2.2.3' 'ortools==9.11.4210'
+          python -m pip install 'torch==2.5.1' --index-url https://download.pytorch.org/whl/cpu
+          python - <<'PY'
+          import numpy,torch,gym
+          print('FJSP_PAPER_ENV',torch.__version__,numpy.__version__,gym.__version__)
+          assert torch.version.cuda is None
+          PY
+      - name: Clone and pin author Song FJSP-DRL code and already PUBLIC checkpoint
+        run: |
+          set -euo pipefail
+          git clone --depth 10 https://github.com/songwenas12/fjsp-drl.git "$RUNNER_TEMP/paper-fjsp-drl"
+          git -C "$RUNNER_TEMP/paper-fjsp-drl" checkout --detach d7637b70029be6cb8fe78e450dcb07767876daea
+          test "$(git -C "$RUNNER_TEMP/paper-fjsp-drl" rev-parse HEAD)" = d7637b70029be6cb8fe78e450dcb07767876daea
+          test -f "$RUNNER_TEMP/paper-fjsp-drl/model/save_10_5.pt"
+          test -f "$RUNNER_TEMP/paper-fjsp-drl/data_test/1005/3128_10j_5m.fjs"
+          echo 'AUTHOR_PUBLIC_FJSP_CODE_AND_PUBLISHED_CHECKPOINT_PINNED'
+      - name: Author original HGNN PPO greedy inference plus simple SPT and LPT, same instances
+        run: |
+          set -euo pipefail
+          python experiments/ai4opt_reproduction/fjsp_drl_pretrained_eval.py \
+            --upstream "$RUNNER_TEMP/paper-fjsp-drl" \
+            --count 100 \
+            --seed 1810 \
+            --output "$RUNNER_TEMP/fjsp-paper-statistics.json"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          d=json.loads((Path(os.environ['RUNNER_TEMP'])/'fjsp-paper-statistics.json').read_text())
+          assert set(d['rows']) == {'HGNN-PPO-pretrained','SPT','LPT'}
+          for key,stats in d['summaries'].items():
+              assert stats['instances']==100 and stats['feasible']==100
+          assert set(d['source_files']) == set(x['instance'] for x in d['rows']['HGNN-PPO-pretrained'])
+          print('FJSP_PAPER_PUBLIC_STATS_ONLY',json.dumps({
+              'commit':d['commit'],'seed':d['seed'],
+              'summaries':d['summaries'],'paired_vs_spt':d['paired_vs_spt']}))
+          print('FJSP_PAPER_REPRO_SUCCESS: 100/100 legal schedules per method, original author source and public weights.')
+          PY
+      - name: Reproduce published FJSP benchmark's CP-SAT method on same first 10 official instances
+        run: |
+          set -euo pipefail
+          python experiments/ai4opt_reproduction/fjsp_cp_sat_baseline.py \
+            --upstream "$RUNNER_TEMP/paper-fjsp-drl" \
+            --count 10 \
+            --seconds 2 \
+            --seed 1810
+          echo 'CP_SAT_BENCHMARK_REPRODUCTION_FINISHED'
+      - name: Do not upload any model weights, private logs, or checkpoints
+        if: always()
+        run: |
+          rm -f "$RUNNER_TEMP/fjsp-paper-statistics.json" || true
+          # Action job VM is ephemeral and there is intentionally NO upload-artifact step.
+          echo 'NO_WEIGHTS_PUBLISHED_NO_CHECKPOINTS_UPLOADED'
