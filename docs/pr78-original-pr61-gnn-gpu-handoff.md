@@ -1,54 +1,53 @@
-# PR78 GPU 移交：仅使用原 PR61 真权重训练条件服务事件头（历史方案，已改 CPU）
+# PR78 GPU 训练任务：关系图世界模型原训练主干 + 条件服务事件头
 
-> **2026-11-14 更新：此文档已由 [PR78 CPU 冻结主干训练方案](pr78-original-pr61-cpu-head-training.md) 取代。** 原 A100 权重必须继续使用 SHA/manifest admission，但训练事件头**不需要 GPU**；代码已默认 `--device cpu` 并将冻结原图特征一次性缓存。以下 CUDA 命令是原计划的历史记录，不是当前推荐执行方案。原权重在本 GitHub CI 不可用，真权重实验仍未执行。
+**最新执行决策（2026-11-14）**：用户选择 **GPU 为正式训练执行环境**，以缩短试验周转；CPU 保留代码回归、数据准入和可复现备选方案。GPU 不代表模型在数学上必须 GPU，也不改变已冻结的研究条件。
 
+本文件为 **[研究 Project 入口 #79](https://github.com/lieuyimo/wm/issues/79) / [GPU 训练 Issue #81](https://github.com/lieuyimo/wm/issues/81)** 的执行规程，GPU Agent 应直接按 Issue 更新进度。**本文件是任务说明，不表示已完成 GPU 训练。**
 
-## 执行边界
+## 前置门禁与职责
 
-**项目**：<https://github.com/lieuyimo/wm>  
-**目标分支**：`research/pr78-original-gnn-public-service-event-alignment-20261114`  
-**上游起点**：PR76 SHA `e79205e3441eee43dba3142189042d47a47d9a76`。**不要合并 PR77 传送带扩展**；该功能已暂停。  
-**现有源码**：`experiments/world_model_integration/gnn_pr78/{pr78_model,pr78_pretrained_train,pr78_data_gate}.py`。  
-**研究目标**：不修改现有 52,953 参数 PR61 GRU/RGCN/SAGEConv 主干，只在 SHA admission 后，用原有 48d 当前公开服务查询监督一个 2,689 参数的二分类下一步服务事件头。等价 map_on/map_off × 原 3 seeds，使用真实 PR73 J2 的 TRAIN/DEV（24/12 场景）。
+- **任务 #80：权重来源与 SHA 校验**。原 PR61 归档 `pr60-gpu-checkpoints-20261112.tar.gz`，期望大小 **6,661,520 bytes**，SHA256 `919a0b625659e492811a74bc5cdf76a60ccbf639acb32c33a420b7db30a74e14`。验证原 [PR68](https://github.com/lieuyimo/wm/pull/68) 的六组 model best.pt manifest；用户表示原始权重已在 PR78 关联位置上传，GPU 执行方优先核对附件或受控服务器位置，不得凭文件名替代哈希。
+- **任务 #81：原 GNN 真权重 GPU 训练**。冻结原 52,953 个参数 GRU/RGCN/SAGEConv 主干；仅对现有 48d public service query + 6d original task logits 的标准 BCE 事件预测头（新增 2,689 参数）训练。原模型不会被覆盖，旧权重不复制进新 head-only checkpoints。
+- **任务 #82：条件事件 H1 比较**。全部 6 arms/seeds 在同一独立 DEV 12 场景、1,409 风险/594 下一步完成事件上评估；不以开发验证当 BLIND 独立泛化证据。H5/H20 和决策收益属于后续 #83/#84，未经评估不提前宣称。
 
-原始数据不允许替换：PR64 TRAIN 文件 SHA256 `4c1157777117f82f7deb44f98e1d8255e95611dfcb41c6dfff9e14dd23aee183`，DEV `31a36e0940db7afe015fe35689cb629102dea45e8d61123ed89250abc01d0b86`，quality 原 artifact 从 [Actions #43264954353](https://github.com/lieuyimo/wm/actions/runs/43264954353) 下载。全部样本来自原 `BusinessSimulator`，已有 `jitter_ticks=2`，无需改数据合成规则。事前 CPU 门禁需要核对 **TRAIN 2,593 风险/1,106 完成事件；DEV 1,409/594**，且三类业务 regime 完整，标签严格 t→t+1。
+## 不可改动数据与训练配置
 
-原始 PR61 A100 6 个 best.pt archive：必须使用 PR68 的实际原始归档以及 manifest，**expected archive SHA256 `919a0b625659e492811a74bc5cdf76a60ccbf639acb32c33a420b7db30a74e14`**。任何缺少归档、SHA mismatch、缺 CUDA 的情况都应直接停止，不允许以随机权重代替或用 PR74 Deep Sets 权重冒充 PR61 图网络。
+- 原 PR64 TRAIN：24 场景、2,593 active service rows、1,106 真实下一步事件；SHA256 `4c1157777117f82f7deb44f98e1d8255e95611dfcb41c6dfff9e14dd23aee183`。
+- 原 PR64 DEV：12 场景、1,409 risks、594 events；SHA256 `31a36e0940db7afe015fe35689cb629102dea45e8d61123ed89250abc01d0b86`。TRAIN/DEV 来自 [原始 GitHub Actions #43264954353](https://github.com/lieuyimo/wm/actions/runs/43264954353)，quality 与源 SHA256SUMS 一并校验。
+- 使用原 PR73 已有 `jitter_ticks=2` 实际仿真生成机制，保持原 CP-SAT 行动、合法实验室业务规则和任务阶段，**不改随机物理机制**。
+- `map_off` / `map_on` × `1810/1811/1812`，共六组；**20 epochs、batch16、Adam lr=1e−3**，按 DEV 12 独立场景宏平均 Brier 选择最佳 epoch；原 PR61 主干必须逐张量冻结不变。
+- 已有 `pr78_frozen_cache.py` 会一次性提取原冻结 GNN 6d task 表征 + 48d 公开服务特征。GPU 优先运行，仍沿用完整端到端评分与缓存评分一致性校验。禁止随机权重回退、打开 PR59 BLIND/TEST 或混入暂停的 PR77 传送带实验。
 
-## 执行命令
+## GPU Agent 执行步骤
 
-在具备 CUDA 的环境内安装并保留原项目冻结的 `requirements-paper-reuse.lock` 依赖与 `torch-geometric`；先运行本分支的 PR78 CPU 数据标签与梯度测试，然后执行：
+在拥有受控 PR61 原 A100 归档的 CUDA 环境，checkout **PR78 当前最新 HEAD**，安装并保存 `requirements-paper-reuse.lock` 环境与所需 PyG，检查 `torch.cuda.is_available()` 和 `nvidia-smi`。先在 #80 留下经过校验的原 SHA 与来源，再执行：
 
 ```bash
 python -m experiments.world_model_integration.gnn_pr78.pr78_pretrained_train \
-  --original-pr61-archive /path/to/original-pr61-six-best-archive.tar.gz \
-  --original-pr61-manifest /path/to/checkpoint_manifest.csv \
-  --original-pr59-validation /path/to/original-pr59-validation.json \
-  --train /path/to/original-pr64-train/data.json \
-  --dev /path/to/original-pr64-validation/data.json \
-  --quality /path/to/original-pr64-quality/quality.json \
+  --original-pr61-archive "$PR61_ARCHIVE" \
+  --original-pr61-manifest examples/evidence/pr60-gpu-training-20261112/checkpoint_manifest.csv \
+  --train "$PR64_TRAIN" \
+  --dev "$PR64_DEV" \
+  --quality "$PR64_QUALITY" \
   --device cuda \
-  --output-dir /path/to/NEW_UNTOUCHED_PR78_RESULTS
+  --output-dir "$NEW_UNTOUCHED_PR78_GPU_RESULT_DIR"
 ```
 
-`--original-pr59-validation` 可选，但若存在原始 PR59 验证文件，应传入，由 PR68 再校验其原 SHA；不能用 PR64 DEV 伪装成 PR59 VAL。运行前务必 `sha256sum` 校验文件并记录 HEAD。正式训练入口不接受无 SHA 权重。
+**可选** `--original-pr59-validation "$VERIFIED_ORIGINAL_PR59_VAL"` 仅供原 PR68 再校验历史同源数据；**不得用 PR64 DEV 代替 PR59 VAL**。启动前确认输出目录尚不存在，任何缺 CUDA/原权重 SHA mismatch/数据风险集错误立即停止。
 
-**冻结的实验条件**：map_off/map_on × seeds `1810/1811/1812`，20 epochs，batch16，Adam lr1e−3；图主干参数冻结并验证前后逐张量完全一致。仅训练公开 48d + 原 GNN task next-state 6d 的标准服务事件 BCE head。按 DEV 12 场景 macro Brier 选最佳 epoch，检查 pickup/delivery 各自 Brier、事件数、置信区间。不能看 TEST/BLIND 再改种子、epoch、标签或数据机制。
+## 产物和审查
 
-**必须保存**：6 个新 best.pt（包含原主干 state、已训练新 head、优化器状态、Torch/CUDA 随机状态、best epoch、history、源 SHA、`online_verified=False`）；`report.json` 全量每场景/分相位结果；`runtime_environment.json`，`pip-freeze.txt`，Git HEAD、GPU型号、原 manifest+archive 哈希；所有输出 SHA256SUMS。不要覆盖原 PR61 A100 ckpt 或合并任何旧 PR。
+每个 map/seed 必须保存新的 **head-only** `best.pt`、优化器和 CPU/CUDA RNG 状态、best epoch、原 GNN 权重的内容 SHA 与已验证原归档哈希。完整保存 `report.json` 每场景/相位 Brier、`runtime_environment.json`（GPU/驱动/Python/torch/CUDA）、`pip-freeze.txt`、源文件 SHA256、Git HEAD、日志、输出 SHA256SUMS；旧 PR61 权重原归档不覆盖、不未经许可公开上传。
 
-## 结果判据与后续评估
+同一批原 DEV active service 风险下的先验基线：
 
-在**完全相同**原 PR64 DEV J2 风险集上比较：
-- Rule Brier **0.28886**，由原 PR73 确认。
-- PR74 Deep Sets Brier **0.18894**，在相同条件事件任务上真实 CPU 训练。
-- PR73 TRAIN-only 公开服务风险频率 Brier **0.17665**，最重要的简易基线。
-- PR78 六种原训练图主干+新 head 的同一 scene-level 配对指标。报告 map_on 和 map_off 各三个种子，不能只展示最好一个。
+| 方法 | Brier |
+|---|---:|
+| 原 Rule | 0.288857 |
+| 已训练 PR74 Deep Sets | 0.188937 |
+| TRAIN-only public conditional hazard | **0.176655** |
+| PR78 六组真 GNN + 新事件头 | **等待 GPU 实际结果，禁止预填** |
 
-**决策规则**：先检验公开信息修复和目标对齐之后，原关系图表示是否超越传统条件概率和 Deep Sets，或在有地图关系/拥堵条件的业务场景具有分层收益；若没有，先诊断输入、校准和是否需要有依据的有条件解冻 GNN，而非盲目加参数。首次 head 训练不等于证实 H5/H20 准确、粒子分布校准或 CP-SAT 调度收益。
+以 12 独立场景为统计单位报告配对效应与 CI、pickup/delivery 分层、三种业务 regime 分层。结果必须先上传 [GPU 训练 Issue #81](https://github.com/lieuyimo/wm/issues/81) 并在 [PR78 Draft](https://github.com/lieuyimo/wm/pull/78) 评论中给出 Artifact / SHA / 日志 / 指标；研究方依 [#82](https://github.com/lieuyimo/wm/issues/82) 判定是否进入多粒子 H5/H20 或是否需要针对性解冻。
 
-正式模型与合法状态推演的接线已有 `PublicRelationalServiceRule.from_pretrained_output`：只有新 head SHA 和原 PR61 archive 双重校验才能使用原 PR67 状态合法化。新权重真正到达后才能运行**相同公开策略/外生条件的粒子预测分布**评测，不能以单粒子事实动作不合法的幸存 H20 样本评判准确性。
-
-**禁止** GPU 盲目训练 PR61 整网、自动修改场景/种子、修改原校验 hash、打开 PR59 BLIND TEST、改变机器人调度策略、重新研究传送带、宣称本轮已有线上决策改善。
-
-执行者应把完整事实结果、现有训练脚本问题和必要修复提交到 PR78 的评论，并保持 PR78 Draft，等研究端复核后再决定下一步。
+**GPU 执行方负责实际提交结果**，本文件和 Issue 是任务委托与验收合同，不代表已远程启动 A100 训练。
