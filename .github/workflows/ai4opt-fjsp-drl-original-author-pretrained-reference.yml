@@ -1,0 +1,60 @@
+name: AI4Opt published FJSP-DRL author-pretrained 10x5 reference, ephemeral only
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+jobs:
+  author-pretrained-public-reference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pinned upstream public FJSP CPU evaluation dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.5.1'
+          python -m pip install 'gym==0.26.2' 'numpy==1.26.4' 'matplotlib==3.9.2'
+      - name: Sparse checkout exact ORIGINAL AUTHOR-PUBLISHED public source, 100 instances and 10x5 model
+        run: |
+          set -euo pipefail
+          upstream="$RUNNER_TEMP/song-fjsp-drl-original"
+          mkdir -p "$upstream"
+          git -C "$upstream" init -q
+          git -C "$upstream" remote add origin https://github.com/songwenas12/fjsp-drl.git
+          git -C "$upstream" sparse-checkout init --cone
+          git -C "$upstream" sparse-checkout set env graph utils data_test/1005 model
+          git -C "$upstream" fetch -q --no-tags --depth=1 origin d7637b70029be6cb8fe78e450dcb07767876daea
+          git -C "$upstream" checkout --detach -q FETCH_HEAD
+          test "$(git -C "$upstream" rev-parse HEAD)" = d7637b70029be6cb8fe78e450dcb07767876daea
+          test "$(stat -c%s "$upstream/model/save_10_5.pt")" = 849961
+          test "$(find "$upstream" -type f -name '*.pt' | wc -l)" -eq 1
+          test "$(find "$upstream/data_test/1005" -type f -name '*.fjs' | wc -l)" -ge 100
+          echo "ONLY_PREEXISTING_PUBLIC_THIRD_PARTY_AUTHOR_MODEL_DOWNLOADED_TO_EPHEMERAL_RUNNER"
+          echo "UPSTREAM_DIR=$upstream" >> "$GITHUB_ENV"
+      - name: Strictly evaluate original author published HGNN PPO versus SPT; NO uploads
+        run: |
+          set -euo pipefail
+          python experiments/ai4opt_reproduction/fjsp_drl_author_reference.py \
+            --upstream-root "$UPSTREAM_DIR" \
+            --eval-count 100 \
+            --seed 1810
+          # Remove third-party preexisting public checkpoint after in-memory
+          # evaluation. This user's repository never contains ANY new weight.
+          rm -f "$UPSTREAM_DIR/model/save_10_5.pt"
+          test "$(find "$UPSTREAM_DIR" -type f \( -name '*.pt' -o -name '*.pth' \) | wc -l)" -eq 0
+          test "$(find "$GITHUB_WORKSPACE/experiments/ai4opt_reproduction" -type f \( -name '*.pt' -o -name '*.pth' \) | wc -l)" -eq 0
+          echo "AI4OPT_AUTHOR_MODEL_NEVER_PUBLISHED_IN_USER_REPO"
+      # NO Actions upload-artifact / cache / weight publication by design.

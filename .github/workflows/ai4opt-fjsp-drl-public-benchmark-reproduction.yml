@@ -1,0 +1,74 @@
+name: AI4Opt published FJSP-DRL HGNN PPO public 10x5 reproduction (no checkpoints)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+jobs:
+  fjsp-drl-no-weights:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [1810, 1811, 1812]
+    timeout-minutes: 50
+    env:
+      CUDA_VISIBLE_DEVICES: ""
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install source-compatible public CPU packages
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.5.1'
+          python -m pip install 'gym==0.26.2' 'numpy==1.26.4' 'matplotlib==3.9.2'
+          python - <<'PY'
+          import torch,numpy,gym,matplotlib
+          assert not torch.cuda.is_available()
+          print("AI4OPT_ENV", {"torch":torch.__version__,"numpy":numpy.__version__,"gym":gym.__version__,"matplotlib":matplotlib.__version__})
+          PY
+      - name: Fetch only exact official public code and standard FJSP instances, NEVER weight files
+        run: |
+          set -euo pipefail
+          upstream="$RUNNER_TEMP/song-fjsp-drl"
+          mkdir -p "$upstream"
+          git -C "$upstream" init -q
+          git -C "$upstream" remote add origin https://github.com/songwenas12/fjsp-drl.git
+          git -C "$upstream" sparse-checkout init --cone
+          git -C "$upstream" sparse-checkout set env graph utils data_test/1005
+          git -C "$upstream" fetch -q --no-tags --depth=1 origin d7637b70029be6cb8fe78e450dcb07767876daea
+          git -C "$upstream" checkout --detach -q FETCH_HEAD
+          test "$(git -C "$upstream" rev-parse HEAD)" = d7637b70029be6cb8fe78e450dcb07767876daea
+          test "$(find "$upstream/data_test/1005" -maxdepth 1 -name '*.fjs' | wc -l)" -ge 100
+          if find "$upstream" -type f \( -name '*.pt' -o -name '*.pth' -o -name '*.ckpt' -o -name '*.safetensors' \) | grep .; then
+            echo "MODEL_WEIGHTS_MUST_NOT_EXIST_IN_PUBLIC_REPRODUCTION" >&2
+            exit 1
+          fi
+          echo "AI4OPT_PINNED_OFFICIAL_SOURCE" "$(git -C "$upstream" rev-parse HEAD)"
+          echo "UPSTREAM_DIR=$upstream" >> "$GITHUB_ENV"
+      - name: Train original published HGNN + PPO in RAM, validate Gantt and compare original 10x5 held-out vs SPT
+        run: |
+          set -euo pipefail
+          python experiments/ai4opt_reproduction/fjsp_drl_repro.py \
+            --upstream-root "$UPSTREAM_DIR" \
+            --iterations 120 \
+            --eval-count 100 \
+            --train-batch-size 8 \
+            --seed ${{ matrix.seed }}
+          test "$(find "$UPSTREAM_DIR" -type f \( -name '*.pt' -o -name '*.pth' \) | wc -l)" -eq 0
+          # Historical unrelated repository evidence already includes .pt files.
+          # This experiment must create NONE, while leaving legacy data untouched.
+          test "$(find "$GITHUB_WORKSPACE/experiments/ai4opt_reproduction" -type f \( -name '*.pt' -o -name '*.pth' \) | wc -l)" -eq 0
+          echo "AI4OPT_NO_MODEL_CHECKPOINTS_CREATED"
+      # Deliberately NO upload-artifact step, NO trained weights, NO optimizer
+      # states. Public CI only emits stdout/stderr aggregate synthetic metrics.
