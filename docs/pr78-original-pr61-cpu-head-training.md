@@ -11,10 +11,10 @@
 
 **硬阻塞不是 GPU，而是原 PR61 训练权重当前不在 GitHub Actions/本会话工作目录。**
 
-原 [PR60 GPU 记录](pr60-gpu-training-results.md) 与 PR62、PR68 审计确认，受控 A100 服务器上的归档原路径为
+原 [PR60 GPU 记录](pr60-gpu-training-results.md) 与 PR62、PR68 审计确认，受控 A100 环境中的归档**内部具体路径不在公开文档披露**。以下仅为本地环境变量示例，实际由授权 GPU 执行者配置：
 
 ```text
-/data/wm-a100-pr60-gpu-20261112/pr60-gpu-checkpoints-20261112.tar.gz
+/PRIVATE_CONTROLLED_STORAGE/PR61_ORIGINAL_ARCHIVE.tar.gz
 ```
 
 原归档应为 **6,661,520 bytes**，SHA256：
@@ -42,14 +42,14 @@
 运行前在**具备原归档访问权限的机器**上确认：
 
 ```bash
-sha256sum /data/wm-a100-pr60-gpu-20261112/pr60-gpu-checkpoints-20261112.tar.gz
+sha256sum /PRIVATE_CONTROLLED_STORAGE/PR61_ORIGINAL_ARCHIVE.tar.gz
 ```
 
 然后在仓库 PR78 分支上准备原始 PR64 的 TRAIN、DEV、quality 文件（数据原来源 [Actions #43264954353](https://github.com/lieuyimo/wm/actions/runs/43264954353)，分别校验原 SHA256SUMS），执行：
 
 ```bash
 python -m experiments.world_model_integration.gnn_pr78.pr78_pretrained_train \
-  --original-pr61-archive /data/wm-a100-pr60-gpu-20261112/pr60-gpu-checkpoints-20261112.tar.gz \
+  --original-pr61-archive /PRIVATE_CONTROLLED_STORAGE/PR61_ORIGINAL_ARCHIVE.tar.gz \
   --original-pr61-manifest examples/evidence/pr60-gpu-training-20261112/checkpoint_manifest.csv \
   --train /path/to/verified-pr64-train/data.json \
   --dev /path/to/verified-pr64-developer-validation/data.json \
