@@ -273,19 +273,27 @@ def main():
     seed_everything(args.seed)
     model = ppo_module.PPO(mp, train_pars, num_envs=int(pars["batch_size"]))
     parameter_count = sum(p.numel() for p in model.policy.parameters())
+    started = time.perf_counter()
     before = evaluate(
         model, test_files, fjsp_env.FJSPEnv, pars, ppo_module, "HGNN_PPO_BEFORE"
     )
+    seconds_before = time.perf_counter() - started
+    started = time.perf_counter()
     spt = evaluate(
         model, test_files, fjsp_env.FJSPEnv, pars, ppo_module, "SPT"
     )
+    seconds_spt = time.perf_counter() - started
+    started = time.perf_counter()
     training, transitions = rollouts_for_ppo(
         model, case_generator, fjsp_env.FJSPEnv, pars, train_pars,
         ppo_module, args.iterations, args.seed,
     )
+    seconds_training = time.perf_counter() - started
+    started = time.perf_counter()
     after = evaluate(
         model, test_files, fjsp_env.FJSPEnv, pars, ppo_module, "HGNN_PPO_AFTER"
     )
+    seconds_after = time.perf_counter() - started
     assert_no_weights(root)
     report = {
         "kind": "bounded_original_HGNN_PPO_implementation_reproduction",
@@ -316,6 +324,12 @@ def main():
         "numpy": np.__version__,
         "device": "cpu",
         "network_parameters": parameter_count,
+        "cpu_wall_seconds": {
+            "before_eval": seconds_before,
+            "spt_eval": seconds_spt,
+            "training": seconds_training,
+            "after_eval": seconds_after,
+        },
         "spt": summarize(test_files, spt),
         "hgnn_ppo_before": summarize(test_files, before),
         "hgnn_ppo_after": summarize(test_files, after),
