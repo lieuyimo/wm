@@ -23,6 +23,9 @@ import sys
 
 import torch
 from torch_geometric.loader import DataLoader
+from experiments.world_model_integration.gnn_pr78.pr78_frozen_cache import (
+    frozen_public_service_rows, cached_dev_metrics,
+)
 
 from experiments.world_model_integration.gnn_pr78.pr78_model import (
     PublicMapRelationalServiceWorld, service_event_loss, SOURCE_SCHEMA,
@@ -144,31 +147,41 @@ def train_one(arm,seed,original_pretrained,sources,device,output_dir):
     original_state={k:v.detach().cpu().clone() for k,v in model.graph_world.state_dict().items()}
     for parameter in model.graph_world.parameters():
         parameter.requires_grad_(False)
-    head_params=list(model.service_event_head.parameters())
-    optim=torch.optim.Adam(head_params,lr=LR)
-    train_graphs=[g for scene in sources["train"] for g in scene["graphs"]]
-    if len(train_graphs)<100:
-        raise AssertionError("original J2 real active service data unexpectedly sparse")
+    # A frozen 52,953-param PR61 backbone has no reason to recompute the
+    # unchanged graph history and 3d public map every training epoch.
+    # Cache EXACT original 6d next-task representations + 48d current public
+    # service query; never cache the factual next-tick outcome in x.
+    model.graph_world.eval()
+    train_cache=frozen_public_service_rows(
+        model.graph_world,sources["train"],device,batch_size=BATCH_SIZE)
+    dev_cache=frozen_public_service_rows(
+        model.graph_world,sources["developer_validation"],device,batch_size=BATCH_SIZE)
+    if (len(train_cache["labels"]),len(dev_cache["labels"]))!=(2593,1409):
+        raise AssertionError("real frozen public-service risk set changed")
+    features=train_cache["features"].to(device)
+    targets=train_cache["labels"].to(device)
+    head=model.service_event_head
+    optim=torch.optim.Adam(head.parameters(),lr=LR)
     best=None
     history=[]
     for epoch in range(MAX_EPOCHS):
-        model.train()
+        head.train()
         gen=torch.Generator().manual_seed(780000+epoch+seed)
-        loader=DataLoader(train_graphs,batch_size=BATCH_SIZE,
-                          shuffle=True,generator=gen)
-        loss_sum=0.;updates=0
-        for bb in loader:
-            batch=bb.to(device)
+        perm=torch.randperm(len(targets),generator=gen).to(device)
+        loss_sum=0.
+        updates=0
+        for ix in perm.split(BATCH_SIZE):
             optim.zero_grad(set_to_none=True)
-            _,_,logits=model(batch)
-            loss=service_event_loss(logits,batch)
+            logits=head(features[ix]).flatten()
+            loss=torch.nn.functional.binary_cross_entropy_with_logits(
+                logits,targets[ix])
             if not torch.isfinite(loss):
-                raise ValueError("nonfinite trained conditional service event BCE")
+                raise ValueError("nonfinite TRAIN-fitted conditional service risk BCE")
             loss.backward()
             optim.step()
             updates+=1
             loss_sum+=float(loss.detach())
-        score=eval_dev(model,sources["developer_validation"],device)
+        score=cached_dev_metrics(head,dev_cache,device)
         history.append({
             "epoch":epoch+1,"train_mean_bce":loss_sum/updates,
             "train_optimizer_steps":updates,
@@ -180,21 +193,28 @@ def train_one(arm,seed,original_pretrained,sources,device,output_dir):
                 "epoch":epoch+1,"selection_score":score["scene_macro_brier"],
                 "score":score,
                 "head":{k:v.detach().cpu().clone()
-                        for k,v in model.service_event_head.state_dict().items()},
+                        for k,v in head.state_dict().items()},
                 "optimizer":copy.deepcopy(optim.state_dict()),
                 "torch_rng":torch.get_rng_state().clone(),
             }
-        print("PR78_REAL_PRETRAINED_GNN_HEAD_TRAIN",json.dumps({
+        print("PR78_REAL_PRETRAINED_GNN_CACHED_HEAD_TRAIN",json.dumps({
             "arm":arm,"seed":seed,"epoch":epoch+1,
             "dev_scene_macro_brier":score["scene_macro_brier"],
             "dev_risk_brier":score["risk_weighted_brier"],
+            "original_GNN_frozen":True,
+            "frozen_features_extracted_once":True,
         }),flush=True)
     for name,v in model.graph_world.state_dict().items():
         if not torch.equal(v.detach().cpu(),original_state[name]):
             raise AssertionError("original PR61 pretrained GNN weights altered in frozen-head stage")
     model.service_event_head.load_state_dict(best["head"],strict=True)
-    check=eval_dev(model,sources["developer_validation"],device)
-    if abs(check["scene_macro_brier"]-best["selection_score"])>1e-9:
+    check=cached_dev_metrics(model.service_event_head,dev_cache,device)
+    # Re-run the original END-TO-END graph forward once for final assurance:
+    # caching must be exact, not a silent replacement of PR61 predictions.
+    full_graph_check=eval_dev(model,sources["developer_validation"],device)
+    if abs(full_graph_check["risk_weighted_brier"]-check["risk_weighted_brier"])>1e-5:
+        raise AssertionError("frozen original GNN cache and full model disagree")
+    if abs(check["scene_macro_brier"]-best["selection_score"])>1e-7:
         raise AssertionError("best checkpoint selection not reproducible")
     name=f"{arm}_seed{seed}_best_PR78_public_service_event_head.pt"
     checkpoint=output_dir/name
@@ -213,11 +233,17 @@ def train_one(arm,seed,original_pretrained,sources,device,output_dir):
         "source":"existing original PR64 keyed J2 generator, PR73 active risk set",
         "online_verified":False,
         "BLIND_TEST_read":False,
+        "frozen_original_graph_forward_cache":True,
+        "cached_graph_risk_samples":len(train_cache["labels"]),
+        "new_head_optimizer_batch_is_service_risk_rows":True,
     },checkpoint)
     return {"arm":arm,"seed":seed,"best_epoch":best["epoch"],
             "original_PR61_backbone_frozen":True,
             "new_service_head_trained":True,
             "dev":check,
+            "full_original_GNN_DEV_brier_for_cache_check":full_graph_check["risk_weighted_brier"],
+            "cached_train_public_risks":len(train_cache["labels"]),
+            "optimizer_step_unit":"active_service_risk_row",
             "checkpoint":name,"checkpoint_sha256":sha256_file(checkpoint),
             "history":history}
 
@@ -231,10 +257,11 @@ def main():
     p.add_argument("--dev",type=Path,required=True)
     p.add_argument("--quality",type=Path,required=True)
     p.add_argument("--output-dir",type=Path,required=True)
-    p.add_argument("--device",choices=("cpu","cuda"),default="cuda")
+    p.add_argument("--device",choices=("cpu","cuda"),default="cpu")
     args=p.parse_args()
     if args.output_dir.exists():
         raise FileExistsError("PR78 original-pretrained weights and training output cannot be overwritten")
+    torch.set_num_threads(1)
     if args.device=="cuda" and not torch.cuda.is_available():
         raise RuntimeError("GPU train requested but CUDA is unavailable; no CPU substitution")
     device=torch.device(args.device)
@@ -264,6 +291,9 @@ def main():
             "original_dev_source_sha256":sha256_file(args.dev),
             "original_quality_source_sha256":sha256_file(args.quality),
             "model_dataset_schema":SOURCE_SCHEMA,
+            "frozen_graph_cache":True,
+            "device_request":args.device,
+            "cpu_threads":torch.get_num_threads(),
         },indent=2,default=str)+"\n")
     results=[]
     for arm in ARMS:
@@ -285,7 +315,7 @@ def main():
         "dev_service_risk_count":sum(x["n_risk_rows"] for x in data["developer_validation"]),
         "model_seed_arms":results,"BLIND_TEST_read":False,
         "online_verified":False,"scheduling_gain_claim":False,
-        "history_training_policy":"frozen old PR61 trunk / new 48d current public service event BCE",
+        "history_training_policy":"original PR61 frozen 6d graph-task + public 48d session cached once, then BCE head-only optimization",
         "next_gate":"paired 12-scene Brier versus PR74 Deep Sets and PR73 TRAIN hazard, then lawful particle distribution H5/H20",
     }
     (args.output_dir/"report.json").write_text(json.dumps(report,indent=2,ensure_ascii=False)+"\n")
