@@ -29,6 +29,7 @@ from experiments.world_model_integration.gnn_pr78.pr78_frozen_cache import (
 
 from experiments.world_model_integration.gnn_pr78.pr78_model import (
     PublicMapRelationalServiceWorld, service_event_loss, SOURCE_SCHEMA,
+    original_gnn_state_sha256,
 )
 from experiments.world_model_integration.gnn_pr78.pr78_smoke import scene_graphs
 from experiments.world_model_integration.synthesis_pr73.pr73_pilot import (
@@ -223,7 +224,8 @@ def train_one(arm,seed,original_pretrained,sources,device,output_dir):
         "original_PR61_archive_sha256":ARCHIVE_SHA256,
         "original_PR61_arm":arm,"original_PR61_seed":seed,
         "original_pretrained_backbone_unchanged":True,
-        "original_pretrained_graph_state":original_state,
+        "original_pretrained_graph_state_sha256":original_gnn_state_sha256(original_state),
+        "checkpoint_contains_original_GNN_tensors":False,
         "trained_new_public_service_head_state":best["head"],
         "optimizer_state":best["optimizer"],
         "torch_rng_state":best["torch_rng"],
