@@ -14,6 +14,7 @@ factual test stay unclaimed until separate pretrained evaluation.
 from __future__ import annotations
 
 import argparse
+import os
 import copy
 import json
 from pathlib import Path
@@ -250,6 +251,38 @@ def train_one(arm,seed,original_pretrained,sources,device,output_dir):
             "history":history}
 
 
+
+def require_private_training_output(output_dir: Path) -> None:
+    """Protect original and newly trained weights from public GitHub outputs.
+
+    GitHub Actions associated with this public repo must never run a job
+    saving model weights, even as supposedly temporary workflow artifacts.
+    Paths in the repo's worktree are also forbidden because *.pt .gitignore
+    patterns alone do not protect against `git add -f` or releases.
+    """
+    if os.environ.get("GITHUB_ACTIONS", "").lower() == "true":
+        raise PermissionError(
+            "PRIVATE_CHECKPOINT_POLICY: train on an authorized external "
+            "GPU machine, never within public GitHub Actions"
+        )
+    try:
+        root = subprocess.check_output(
+            ["git", "rev-parse", "--show-toplevel"],
+            stderr=subprocess.DEVNULL, text=True,
+        ).strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        raise PermissionError(
+            "PRIVATE_CHECKPOINT_POLICY: cannot verify public repository "
+            "worktree; refuse to write model checkpoints"
+        )
+    public_root = Path(root).resolve()
+    destination = output_dir.expanduser().resolve()
+    if destination == public_root or destination.is_relative_to(public_root):
+        raise PermissionError(
+            "PRIVATE_CHECKPOINT_POLICY: training output must be outside "
+            "the public Git checkout; use a controlled private GPU path"
+        )
+
 def main():
     p=argparse.ArgumentParser()
     p.add_argument("--original-pr61-archive",type=Path,required=True)
@@ -261,6 +294,7 @@ def main():
     p.add_argument("--output-dir",type=Path,required=True)
     p.add_argument("--device",choices=("cpu","cuda"),default="cuda")
     args=p.parse_args()
+    require_private_training_output(args.output_dir)
     if args.output_dir.exists():
         raise FileExistsError("PR78 original-pretrained weights and training output cannot be overwritten")
     torch.set_num_threads(1)
