@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from collections import Counter
 from pathlib import Path
+import hashlib
 
 import torch
 from torch_geometric.data import Batch
@@ -37,6 +38,26 @@ from experiments.world_model_integration.sealed_pr59.pr59_dual_model import (
 
 SOURCE_SCHEMA="pr78-original-pr61-gnn-plus-public-service-query-v1"
 SERVICE_TARGETS={"to_pickup":"in_transit","to_dropoff":"completed"}
+
+
+def original_gnn_state_sha256(state_dict) -> str:
+    """Canonical hash of the actual trained PR61 tensors, not file compression.
+
+    Used to bind a new event-head-only checkpoint to the exact immutable
+    PR68-admitted original graph weights without redistributing those weights.
+    """
+    h=hashlib.sha256()
+    if not state_dict:
+        raise ValueError("empty original graph state")
+    for name,tensor in sorted(state_dict.items()):
+        if not isinstance(tensor,torch.Tensor):
+            raise TypeError("original PR61 state entries must be tensors")
+        value=tensor.detach().cpu().contiguous()
+        h.update(name.encode("utf-8")+b"\0")
+        h.update(str(value.dtype).encode()+b"\0")
+        h.update(str(tuple(value.shape)).encode()+b"\0")
+        h.update(value.numpy().tobytes(order="C"))
+    return h.hexdigest()
 
 
 class PublicServiceGraphHistory:
@@ -291,10 +312,10 @@ class PublicRelationalServiceRule(NeuralTaskServiceRule):
         admission=admit_original_pr61_backbone(
             model,archive,manifest,arm=arm,seed=original_seed,
             original_validation=original_validation)
-        stored=checkpoint["original_pretrained_graph_state"]
-        if any(not torch.equal(v,stored[k])
-               for k,v in model.graph_world.state_dict().items()):
-            raise ValueError("PR78 claimed original PR61 frozen weights do not match archive")
+        claimed=checkpoint.get("original_pretrained_graph_state_sha256")
+        if (not isinstance(claimed,str) or len(claimed)!=64 or
+            original_gnn_state_sha256(model.graph_world.state_dict())!=claimed):
+            raise ValueError("PR78 frozen GNN state digest does not match original archive")
         model.service_event_head.load_state_dict(
             checkpoint["trained_new_public_service_head_state"],strict=True)
         obj=cls(geometry,rules,model,seed=seed,_fixture=True)
