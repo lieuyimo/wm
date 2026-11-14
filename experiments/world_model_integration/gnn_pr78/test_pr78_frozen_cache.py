@@ -6,6 +6,8 @@ never as original pretrained PR61 checkpoint evidence or scored results.
 from __future__ import annotations
 
 from dataclasses import replace
+from pathlib import Path
+from unittest.mock import patch
 import unittest
 
 import torch
@@ -20,7 +22,9 @@ from experiments.world_model_integration.gnn_pr78.pr78_model import (
 from experiments.world_model_integration.gnn_pr78.pr78_frozen_cache import (
     frozen_public_service_rows,cached_dev_metrics,
 )
-from experiments.world_model_integration.gnn_pr78.pr78_pretrained_train import eval_dev
+from experiments.world_model_integration.gnn_pr78.pr78_pretrained_train import (
+    eval_dev, require_private_training_output,
+)
 
 
 class PR78FrozenGraphCacheContract(unittest.TestCase):
@@ -103,6 +107,16 @@ class PR78FrozenGraphCacheContract(unittest.TestCase):
         self.assertNotEqual(before,original_gnn_state_sha256(mutated))
         with self.assertRaisesRegex(ValueError,"empty"):
             original_gnn_state_sha256({})
+
+    def test_private_checkpoint_policy_rejects_public_github_actions(self):
+        with patch.dict("os.environ",{"GITHUB_ACTIONS":"true"}):
+            with self.assertRaisesRegex(PermissionError,"PRIVATE_CHECKPOINT_POLICY"):
+                require_private_training_output(Path("/tmp/private-gpu-results"))
+
+    def test_private_checkpoint_policy_rejects_any_repository_output(self):
+        with patch.dict("os.environ",{"GITHUB_ACTIONS":"false"}):
+            with self.assertRaisesRegex(PermissionError,"outside"):
+                require_private_training_output(Path.cwd()/"runs"/"private-model.pt")
 
     def test_frozen_cache_refuses_a_live_trainable_original_backbone(self):
         net=PublicMapRelationalServiceWorld(hidden=48,map_enabled=True)
