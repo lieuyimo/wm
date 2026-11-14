@@ -1,12 +1,7 @@
 name: AI4Opt published FJSP-DRL author-pretrained 10x5 reference, ephemeral only
 on:
-  push:
-    branches:
-      - research/ai4opt-fjsp-drl-reproduction-20261115
-    paths:
-      - 'experiments/ai4opt_reproduction/fjsp_drl_author_reference.py'
-      - '.github/workflows/ai4opt-fjsp-drl-original-author-pretrained-reference.yml'
   workflow_dispatch:
+
 permissions:
   contents: read
 jobs:
