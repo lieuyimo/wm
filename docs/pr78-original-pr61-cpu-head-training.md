@@ -1,4 +1,7 @@
-# PR78：原 PR61 预训练关系图世界模型的 CPU 冻结主干训练
+# PR78：原 PR61 预训练关系图世界模型的 CPU 冻结主干训练（复现与备用方案）
+
+> **2026-11-14 训练安排更新：GPU 优先，CPU 为已验证备选。** 用户已决定由 GPU Agent 执行 PR78 正式六组训练；本页仍保留 CPU 算法等价性与无 GPU 时的复现说明。正式任务与验收请以 [Project 入口 #79](https://github.com/lieuyimo/wm/issues/79)、[GPU 训练 Issue #81](https://github.com/lieuyimo/wm/issues/81) 和 [GPU 执行规程](pr78-original-pr61-gnn-gpu-handoff.md) 为准。
+
 
 ## 研究状态
 
