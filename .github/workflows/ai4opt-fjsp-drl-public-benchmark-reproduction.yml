@@ -12,6 +12,10 @@ permissions:
 jobs:
   fjsp-drl-no-weights:
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [1810, 1811, 1812]
     timeout-minutes: 50
     env:
       CUDA_VISIBLE_DEVICES: ""
@@ -50,7 +54,7 @@ jobs:
           git -C "$upstream" fetch -q --no-tags --depth=1 origin d7637b70029be6cb8fe78e450dcb07767876daea
           git -C "$upstream" checkout --detach -q FETCH_HEAD
           test "$(git -C "$upstream" rev-parse HEAD)" = d7637b70029be6cb8fe78e450dcb07767876daea
-          test "$(find "$upstream/data_test/1005" -maxdepth 1 -name '*.fjs' | wc -l)" -ge 12
+          test "$(find "$upstream/data_test/1005" -maxdepth 1 -name '*.fjs' | wc -l)" -ge 100
           if find "$upstream" -type f \( -name '*.pt' -o -name '*.pth' -o -name '*.ckpt' -o -name '*.safetensors' \) | grep .; then
             echo "MODEL_WEIGHTS_MUST_NOT_EXIST_IN_PUBLIC_REPRODUCTION" >&2
             exit 1
@@ -62,11 +66,14 @@ jobs:
           set -euo pipefail
           python experiments/ai4opt_reproduction/fjsp_drl_repro.py \
             --upstream-root "$UPSTREAM_DIR" \
-            --iterations 8 \
-            --eval-count 12 \
-            --seed 1810
+            --iterations 120 \
+            --eval-count 100 \
+            --train-batch-size 8 \
+            --seed ${{ matrix.seed }}
           test "$(find "$UPSTREAM_DIR" -type f \( -name '*.pt' -o -name '*.pth' \) | wc -l)" -eq 0
-          test "$(find "$GITHUB_WORKSPACE" -type f \( -name '*.pt' -o -name '*.pth' \) | wc -l)" -eq 0
+          # Historical unrelated repository evidence already includes .pt files.
+          # This experiment must create NONE, while leaving legacy data untouched.
+          test "$(find "$GITHUB_WORKSPACE/experiments/ai4opt_reproduction" -type f \( -name '*.pt' -o -name '*.pth' \) | wc -l)" -eq 0
           echo "AI4OPT_NO_MODEL_CHECKPOINTS_CREATED"
       # Deliberately NO upload-artifact step, NO trained weights, NO optimizer
       # states. Public CI only emits stdout/stderr aggregate synthetic metrics.
