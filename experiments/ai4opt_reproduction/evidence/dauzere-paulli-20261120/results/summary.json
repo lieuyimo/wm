@@ -1,0 +1,168 @@
+{
+  "overall": {
+    "cp-sat": {
+      "requests": 54,
+      "hits": {
+        "1": 0,
+        "5": 0,
+        "10": 2
+      },
+      "invocations": 0,
+      "completed_inferences": 0,
+      "fallbacks": 0,
+      "missed_deadlines": 0,
+      "deferred_cleanups": 18
+    },
+    "hgnn": {
+      "requests": 54,
+      "hits": {
+        "1": 0,
+        "5": 12,
+        "10": 26
+      },
+      "invocations": 54,
+      "completed_inferences": 54,
+      "fallbacks": 0,
+      "missed_deadlines": 0,
+      "deferred_cleanups": 0
+    },
+    "auto": {
+      "requests": 54,
+      "hits": {
+        "1": 0,
+        "5": 12,
+        "10": 27
+      },
+      "invocations": 30,
+      "completed_inferences": 30,
+      "fallbacks": 0,
+      "missed_deadlines": 0,
+      "deferred_cleanups": 0
+    }
+  },
+  "by_seed": {
+    "1": {
+      "cp-sat": {
+        "requests": 18,
+        "hits": {
+          "1": 0,
+          "5": 0,
+          "10": 0
+        },
+        "invocations": 0,
+        "completed_inferences": 0,
+        "fallbacks": 0,
+        "missed_deadlines": 0,
+        "deferred_cleanups": 6
+      },
+      "hgnn": {
+        "requests": 18,
+        "hits": {
+          "1": 0,
+          "5": 4,
+          "10": 8
+        },
+        "invocations": 18,
+        "completed_inferences": 18,
+        "fallbacks": 0,
+        "missed_deadlines": 0,
+        "deferred_cleanups": 0
+      },
+      "auto": {
+        "requests": 18,
+        "hits": {
+          "1": 0,
+          "5": 4,
+          "10": 8
+        },
+        "invocations": 10,
+        "completed_inferences": 10,
+        "fallbacks": 0,
+        "missed_deadlines": 0,
+        "deferred_cleanups": 0
+      }
+    },
+    "2": {
+      "cp-sat": {
+        "requests": 18,
+        "hits": {
+          "1": 0,
+          "5": 0,
+          "10": 1
+        },
+        "invocations": 0,
+        "completed_inferences": 0,
+        "fallbacks": 0,
+        "missed_deadlines": 0,
+        "deferred_cleanups": 6
+      },
+      "hgnn": {
+        "requests": 18,
+        "hits": {
+          "1": 0,
+          "5": 4,
+          "10": 9
+        },
+        "invocations": 18,
+        "completed_inferences": 18,
+        "fallbacks": 0,
+        "missed_deadlines": 0,
+        "deferred_cleanups": 0
+      },
+      "auto": {
+        "requests": 18,
+        "hits": {
+          "1": 0,
+          "5": 4,
+          "10": 9
+        },
+        "invocations": 10,
+        "completed_inferences": 10,
+        "fallbacks": 0,
+        "missed_deadlines": 0,
+        "deferred_cleanups": 0
+      }
+    },
+    "3": {
+      "cp-sat": {
+        "requests": 18,
+        "hits": {
+          "1": 0,
+          "5": 0,
+          "10": 1
+        },
+        "invocations": 0,
+        "completed_inferences": 0,
+        "fallbacks": 0,
+        "missed_deadlines": 0,
+        "deferred_cleanups": 6
+      },
+      "hgnn": {
+        "requests": 18,
+        "hits": {
+          "1": 0,
+          "5": 4,
+          "10": 9
+        },
+        "invocations": 18,
+        "completed_inferences": 18,
+        "fallbacks": 0,
+        "missed_deadlines": 0,
+        "deferred_cleanups": 0
+      },
+      "auto": {
+        "requests": 18,
+        "hits": {
+          "1": 0,
+          "5": 4,
+          "10": 10
+        },
+        "invocations": 10,
+        "completed_inferences": 10,
+        "fallbacks": 0,
+        "missed_deadlines": 0,
+        "deferred_cleanups": 0
+      }
+    }
+  }
+}

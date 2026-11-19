@@ -1,0 +1,7 @@
+{
+  "cli_export_without_target": 40,
+  "forced_timeout_seconds": 0.02698611281812191,
+  "load_failure_recovered_seconds": 0.23266920447349548,
+  "inference_timeout_recovered_seconds": 3.4376740008592606,
+  "real_hgnn_seconds": 0.5655111148953438
+}
