@@ -1,0 +1,190 @@
+{
+  "benchmark_commit": "d088a26582f5cb79c6b4f2ad94f68ac7c50878cb",
+  "test_cases": {
+    "edata/la07.fjs": {
+      "sha256": "55da245becca5793f968235c4993bc687ec4e202674841ade7833a78d8ccd9c3",
+      "features": [
+        75,
+        22
+      ],
+      "size_band": "small"
+    },
+    "rdata/abz5.fjs": {
+      "sha256": "49823a2b6ac2a10fa1531d5ca3a3b6b7b657d10248c20560e579f04ec3e2a987",
+      "features": [
+        100,
+        165
+      ],
+      "size_band": "small"
+    },
+    "vdata/la03.fjs": {
+      "sha256": "6882df9c2296179d324ac369952b8a894fdea73c93904461b0611cbe3bb42d2a",
+      "features": [
+        50,
+        122
+      ],
+      "size_band": "small"
+    },
+    "edata/car3.fjs": {
+      "sha256": "cc18f57a252b9c40220c87b8d62506dde3e2053c8ec3f9370e4f0bb44429198a",
+      "features": [
+        60,
+        22
+      ],
+      "size_band": "small"
+    },
+    "rdata/car2.fjs": {
+      "sha256": "8deb30d896061ae920d2494482c240e8c8fa77e66ecf6485d011ec9c2911c105",
+      "features": [
+        52,
+        82
+      ],
+      "size_band": "small"
+    },
+    "vdata/la02.fjs": {
+      "sha256": "d02d7e01ddc42d82e570be1ef3c7edb9bfaf4dd6697094e68692bbd640310d06",
+      "features": [
+        50,
+        127
+      ],
+      "size_band": "small"
+    },
+    "edata/mt10.fjs": {
+      "sha256": "36e7457dae763029cdcfa662a9c8891c02d8970e107657603418cbe18cebe190",
+      "features": [
+        100,
+        26
+      ],
+      "size_band": "middle"
+    },
+    "rdata/orb4.fjs": {
+      "sha256": "03367aeb27e520b8e87a9563c1ed6e1bcdcd8ba49b3e037f7e0d09c84552b719",
+      "features": [
+        100,
+        159
+      ],
+      "size_band": "middle"
+    },
+    "vdata/orb1.fjs": {
+      "sha256": "52db93c97aa543760bc51ce4c319e6153cc97056905581b90eeb2fe536acce9d",
+      "features": [
+        100,
+        443
+      ],
+      "size_band": "middle"
+    },
+    "edata/orb2.fjs": {
+      "sha256": "6aa221e695e4243e2b7b63c2a710a85ba690ab771e0dc4cff86a2efafe15f326",
+      "features": [
+        100,
+        26
+      ],
+      "size_band": "middle"
+    },
+    "rdata/la18.fjs": {
+      "sha256": "50308c950c3aaefef92a37c9445ac2cc3ef3c375fb5e7e5917ddf7414223b200",
+      "features": [
+        100,
+        168
+      ],
+      "size_band": "middle"
+    },
+    "vdata/orb3.fjs": {
+      "sha256": "744081822a12af88693cb4b6ce58240e4cb2434a2a5296f16aa85787dffc47ad",
+      "features": [
+        100,
+        465
+      ],
+      "size_band": "middle"
+    },
+    "edata/la28.fjs": {
+      "sha256": "2d5149b73861e9149e4642389b40c05ab6371094580208dad454c7a0ac726329",
+      "features": [
+        200,
+        51
+      ],
+      "size_band": "large"
+    },
+    "rdata/la35.fjs": {
+      "sha256": "0afda1e47f4105ffc2965708fa863d20a64e476241f4d4b4602e932f8bc9279b",
+      "features": [
+        300,
+        494
+      ],
+      "size_band": "large"
+    },
+    "vdata/la29.fjs": {
+      "sha256": "d95dd77d525317d14de3d47e61f9084d5d2809173fdb07dd7a4054a909530fcd",
+      "features": [
+        200,
+        876
+      ],
+      "size_band": "large"
+    },
+    "edata/la30.fjs": {
+      "sha256": "431a87cafededb1258d753833510e7893ac19863645b5fe8a3f782628d54d339",
+      "features": [
+        200,
+        53
+      ],
+      "size_band": "large"
+    },
+    "rdata/la32.fjs": {
+      "sha256": "e3a60381dd1a9c808bb9788daf8d29fdd4e70d4a3db7065cd70131116b8dcb90",
+      "features": [
+        300,
+        483
+      ],
+      "size_band": "large"
+    },
+    "vdata/abz8.fjs": {
+      "sha256": "6cd81d46548b2bb3fe21733a348c4e0f131049fa5937c88eb3a4359c42d312aa",
+      "features": [
+        300,
+        1973
+      ],
+      "size_band": "large"
+    }
+  },
+  "exclude_stems": [
+    "Mk01",
+    "Mk02",
+    "Mk03",
+    "Mk04",
+    "Mk05",
+    "Mk06",
+    "Mk07",
+    "Mk08",
+    "Mk09",
+    "Mk10",
+    "abz7",
+    "la01",
+    "la06",
+    "la11",
+    "la16",
+    "la21",
+    "la26",
+    "la31",
+    "la36",
+    "mt06"
+  ],
+  "solver_seeds": [
+    1,
+    2,
+    3
+  ],
+  "solver_workers": 0,
+  "ortools": "9.11.4210",
+  "budget_seconds": 10.0,
+  "reference_search_seconds": 60,
+  "reference_seed": 11,
+  "development_sha256": "5be5760419a56eccca90eb51dc21978bcd652223e5fec469b08470d01a5f9776",
+  "probe_threshold": 0.1,
+  "excluded_zero_duration_variants": {
+    "orb7": [
+      "edata",
+      "rdata",
+      "vdata"
+    ]
+  }
+}

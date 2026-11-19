@@ -1,0 +1,41 @@
+{
+  "gap_threshold": 0.1,
+  "calibration": {
+    "0.1": {
+      "requests": 20,
+      "hits_by_deadline_seconds": {
+        "1": 5,
+        "5": 7,
+        "10": 12
+      },
+      "median_hit_seconds": 3.2336585232988,
+      "hgnn_calls": 15,
+      "past_budget": 8,
+      "reached_quality_past_budget": 0
+    },
+    "0.2": {
+      "requests": 20,
+      "hits_by_deadline_seconds": {
+        "1": 5,
+        "5": 8,
+        "10": 11
+      },
+      "median_hit_seconds": 2.5976551715284586,
+      "hgnn_calls": 12,
+      "past_budget": 9,
+      "reached_quality_past_budget": 1
+    },
+    "0.35": {
+      "requests": 20,
+      "hits_by_deadline_seconds": {
+        "1": 5,
+        "5": 8,
+        "10": 10
+      },
+      "median_hit_seconds": 1.230298912152648,
+      "hgnn_calls": 7,
+      "past_budget": 10,
+      "reached_quality_past_budget": 0
+    }
+  }
+}

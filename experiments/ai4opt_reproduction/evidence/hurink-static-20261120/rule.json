@@ -1,0 +1,249 @@
+{
+  "chosen": {
+    "rule": [
+      150,
+      267
+    ],
+    "hits_at_1": 16,
+    "hits_at_10": 38,
+    "hgnn_calls": 15
+  },
+  "cp_sat_hits": {
+    "1": 16,
+    "10": 32
+  },
+  "development_features": {
+    "brandimarte/Mk01.fjs": [
+      55,
+      99
+    ],
+    "brandimarte/Mk04.fjs": [
+      90,
+      146
+    ],
+    "brandimarte/Mk06.fjs": [
+      150,
+      490
+    ],
+    "brandimarte/Mk07.fjs": [
+      100,
+      267
+    ],
+    "brandimarte/Mk10.fjs": [
+      240,
+      697
+    ],
+    "edata/la01.fjs": [
+      50,
+      20
+    ],
+    "edata/la06.fjs": [
+      75,
+      22
+    ],
+    "edata/la11.fjs": [
+      100,
+      26
+    ],
+    "edata/la21.fjs": [
+      150,
+      45
+    ],
+    "edata/abz7.fjs": [
+      300,
+      77
+    ],
+    "rdata/la01.fjs": [
+      50,
+      79
+    ],
+    "rdata/la06.fjs": [
+      75,
+      115
+    ],
+    "rdata/la11.fjs": [
+      100,
+      172
+    ],
+    "rdata/la21.fjs": [
+      150,
+      254
+    ],
+    "rdata/abz7.fjs": [
+      300,
+      485
+    ],
+    "vdata/la01.fjs": [
+      50,
+      135
+    ],
+    "vdata/la06.fjs": [
+      75,
+      170
+    ],
+    "vdata/la11.fjs": [
+      100,
+      240
+    ],
+    "vdata/la21.fjs": [
+      150,
+      715
+    ],
+    "vdata/abz7.fjs": [
+      300,
+      1951
+    ]
+  },
+  "candidates": [
+    {
+      "rule": null,
+      "hits_at_1": 16,
+      "hits_at_10": 32,
+      "hgnn_calls": 0
+    },
+    {
+      "rule": [
+        0,
+        0
+      ],
+      "hits_at_1": 11,
+      "hits_at_10": 36,
+      "hgnn_calls": 60
+    },
+    {
+      "rule": [
+        0,
+        77
+      ],
+      "hits_at_1": 14,
+      "hits_at_10": 35,
+      "hgnn_calls": 48
+    },
+    {
+      "rule": [
+        0,
+        146
+      ],
+      "hits_at_1": 15,
+      "hits_at_10": 38,
+      "hgnn_calls": 33
+    },
+    {
+      "rule": [
+        0,
+        267
+      ],
+      "hits_at_1": 16,
+      "hits_at_10": 38,
+      "hgnn_calls": 18
+    },
+    {
+      "rule": [
+        75,
+        0
+      ],
+      "hits_at_1": 11,
+      "hits_at_10": 38,
+      "hgnn_calls": 48
+    },
+    {
+      "rule": [
+        75,
+        77
+      ],
+      "hits_at_1": 14,
+      "hits_at_10": 37,
+      "hgnn_calls": 39
+    },
+    {
+      "rule": [
+        75,
+        146
+      ],
+      "hits_at_1": 15,
+      "hits_at_10": 38,
+      "hgnn_calls": 33
+    },
+    {
+      "rule": [
+        75,
+        267
+      ],
+      "hits_at_1": 16,
+      "hits_at_10": 38,
+      "hgnn_calls": 18
+    },
+    {
+      "rule": [
+        100,
+        0
+      ],
+      "hits_at_1": 13,
+      "hits_at_10": 38,
+      "hgnn_calls": 36
+    },
+    {
+      "rule": [
+        100,
+        77
+      ],
+      "hits_at_1": 16,
+      "hits_at_10": 37,
+      "hgnn_calls": 30
+    },
+    {
+      "rule": [
+        100,
+        146
+      ],
+      "hits_at_1": 16,
+      "hits_at_10": 38,
+      "hgnn_calls": 27
+    },
+    {
+      "rule": [
+        100,
+        267
+      ],
+      "hits_at_1": 16,
+      "hits_at_10": 38,
+      "hgnn_calls": 18
+    },
+    {
+      "rule": [
+        150,
+        0
+      ],
+      "hits_at_1": 16,
+      "hits_at_10": 38,
+      "hgnn_calls": 24
+    },
+    {
+      "rule": [
+        150,
+        77
+      ],
+      "hits_at_1": 16,
+      "hits_at_10": 37,
+      "hgnn_calls": 21
+    },
+    {
+      "rule": [
+        150,
+        146
+      ],
+      "hits_at_1": 16,
+      "hits_at_10": 38,
+      "hgnn_calls": 18
+    },
+    {
+      "rule": [
+        150,
+        267
+      ],
+      "hits_at_1": 16,
+      "hits_at_10": 38,
+      "hgnn_calls": 15
+    }
+  ]
+}
