@@ -1,0 +1,92 @@
+{
+  "01a.fjs": {
+    "sha256": "d417f996a28d55d4691a99dffda106744832839f438f1197a59a1022ccd06596",
+    "jobs": 10,
+    "operations": 196
+  },
+  "02a.fjs": {
+    "sha256": "9765fc545ed7ddf70eebad0ccf740df8356d0c873e2ded4b8a0c0a6e77b21999",
+    "jobs": 10,
+    "operations": 196
+  },
+  "03a.fjs": {
+    "sha256": "d88c484a97a07b43f8535f4953f4201c34f8a345c17fbef26372afb48048f20c",
+    "jobs": 10,
+    "operations": 196
+  },
+  "04a.fjs": {
+    "sha256": "285a76e099d0a0aa85b0a628f06f565cd017c5aa631dd9b58923c3d10cd93ca5",
+    "jobs": 10,
+    "operations": 196
+  },
+  "05a.fjs": {
+    "sha256": "426c43cda175aaef8d04305a95da3e50f751f9492f3343e9baa13fa40897a12c",
+    "jobs": 10,
+    "operations": 196
+  },
+  "06a.fjs": {
+    "sha256": "b231ec29f740fe8fc376e14a95cb2c789e67dd4a72ae89160a809a743f5d1d0e",
+    "jobs": 10,
+    "operations": 196
+  },
+  "07a.fjs": {
+    "sha256": "10fedc040f1256f919daf0a33679f23d437cb5f926338ac965b03899537e9828",
+    "jobs": 15,
+    "operations": 293
+  },
+  "08a.fjs": {
+    "sha256": "2544f2082c7cbb4d4d95fd875f1b21f02c2ec45668f2087e3deebc8957ca18b7",
+    "jobs": 15,
+    "operations": 293
+  },
+  "09a.fjs": {
+    "sha256": "7e22ca34e2da071d2586aba87fb8571496e9dd9f151b8a4c6f1bdfc77ba0dada",
+    "jobs": 15,
+    "operations": 293
+  },
+  "10a.fjs": {
+    "sha256": "dcef0e52ef9cdc4b67979fd12d1db917e956bcdc0dbe5f83764cae2a9706a7fc",
+    "jobs": 15,
+    "operations": 293
+  },
+  "11a.fjs": {
+    "sha256": "d1316c3c5e6de4025d4409cdede7cfee36c2339c5671aa8662bd0ae193eaa4c3",
+    "jobs": 15,
+    "operations": 293
+  },
+  "12a.fjs": {
+    "sha256": "27a6ef5c6821f72f4c6505705cc5132ae7db7ab1bcd3bad39a5deb2c3fa9c742",
+    "jobs": 15,
+    "operations": 293
+  },
+  "13a.fjs": {
+    "sha256": "9066d573e4b765e1ff35f341330268c38699f7e4511daee7b9f871d162c92d19",
+    "jobs": 20,
+    "operations": 387
+  },
+  "14a.fjs": {
+    "sha256": "6bb6867f101d9ce3f2f127831c020fb0261d59211cce38a35087d7ec072ecc22",
+    "jobs": 20,
+    "operations": 387
+  },
+  "15a.fjs": {
+    "sha256": "f811aea517174d4da1a0b4d4fab9d4ff2b7fc46e2c64daffab34f745c4507340",
+    "jobs": 20,
+    "operations": 387
+  },
+  "16a.fjs": {
+    "sha256": "16aa17e48f46da6a01ddaa1e5f81b54984e9574fe95a19a28da6c79a644e68bf",
+    "jobs": 20,
+    "operations": 387
+  },
+  "17a.fjs": {
+    "sha256": "c3c472e5fc43492d8059c5ac6e85e063fb8f709f84ecdff4950180434823a444",
+    "jobs": 20,
+    "operations": 387
+  },
+  "18a.fjs": {
+    "sha256": "e7a1904a2a9191e694a2f2b608f9b5fe5d40c9daeda2c6483a777071e0c01450",
+    "jobs": 20,
+    "operations": 387
+  }
+}
