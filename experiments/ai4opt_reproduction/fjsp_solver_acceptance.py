@@ -47,12 +47,15 @@ def smoke(args, new_cases, model, solver):
         (args.output / "example-schedule.json").write_bytes(exported.read_bytes())
 
         expired = solver.solve(new_cases[-1], 0.035, "cp-sat", 1)
+        solver.reap_search()
         check_result(new_cases[-1], expired)
         assert expired["solver_status"] in {"DEADLINE", "UNKNOWN"} and not expired["hit"]
         assert expired["end_to_end_seconds"] < 0.15
 
         absent = InferenceWorker(args.inference_python, args.upstream, temp / "missing.pt", args.checkpoint_sha256)
-        recovered = FjspSolver(args.benchmarks, absent, args.solver_workers).solve(mk01, 3, "hgnn", 40)
+        fallback_solver = FjspSolver(args.benchmarks, absent, args.solver_workers)
+        recovered = fallback_solver.solve(mk01, 3, "hgnn", 40)
+        fallback_solver.reap_search()
         check_result(mk01, recovered)
         assert recovered["fallback_reason"] == "model_load_failed" and recovered["strategy_used"] == "cp-sat" and recovered["hit"]
 
@@ -62,15 +65,18 @@ def smoke(args, new_cases, model, solver):
                            "sys.stdin.readline()\ntime.sleep(60)\n")
         hanging.chmod(0o700)
         stalled = InferenceWorker(hanging, args.upstream, args.checkpoint, args.checkpoint_sha256)
+        stalled_solver = FjspSolver(args.benchmarks, stalled, args.solver_workers)
         try:
-            timed = FjspSolver(args.benchmarks, stalled, args.solver_workers).solve(mk01, 4, "hgnn", 40)
+            timed = stalled_solver.solve(mk01, 4, "hgnn", 40)
             check_result(mk01, timed)
             assert timed["fallback_reason"] == "inference_timeout" and timed["strategy_used"] == "cp-sat" and timed["hit"]
         finally:
             stalled.close()
+            stalled_solver.reap_search()
 
     model.start(perf_counter() + 25)
     neural = solver.solve(mk01, 4, "hgnn", 40)
+    solver.reap_search()
     check_result(mk01, neural)
     assert neural["hit"] and neural["inference_completed"] and neural["fallback_reason"] is None
     return {"cli_export_without_target": result["makespan"], "forced_timeout_seconds": expired["end_to_end_seconds"],
@@ -90,6 +96,7 @@ def summarize(rows):
             "completed_inferences": sum(row["inference_completed"] for row in group),
             "fallbacks": sum(row["fallback_reason"] is not None for row in group),
             "missed_deadlines": sum(not row["within_budget"] for row in group),
+            "deferred_cleanups": sum(row["cleanup_deferred"] for row in group),
         }
     return result
 
@@ -137,6 +144,9 @@ def run(args):
         with log.open("a" if args.resume else "x") as stream:
             for case, seed, arm in planned[len(rows):]:
                 result = solver.solve(paths[case], BUDGET, arm, targets[case], seed)
+                cleanup_started = perf_counter()
+                solver.reap_search()
+                result["post_response_cleanup_seconds"] = perf_counter() - cleanup_started
                 check_result(paths[case], result)
                 del result["operations"]
                 result["seed"] = seed
@@ -146,6 +156,7 @@ def run(args):
                       "hit": result["hit"], "seconds": round(result["end_to_end_seconds"], 3)})
     finally:
         model.close()
+        solver.reap_search()
     summary = {"overall": summarize(rows), "by_seed": {seed: summarize([r for r in rows if r["seed"] == seed]) for seed in SEEDS}}
     (args.output / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
 

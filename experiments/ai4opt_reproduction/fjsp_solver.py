@@ -157,10 +157,21 @@ class FjspSolver:
         self.inference = inference
         self.workers = workers
         self.context = multiprocessing.get_context("fork")
+        self.pending_search = None
 
-    def search(self, path, deadline, jobs, seed, best, target):
+    def reap_search(self, timeout=None):
+        if self.pending_search is None:
+            return
+        self.pending_search.join(timeout)
+        if self.pending_search.exitcode is not None:
+            self.pending_search.close()
+            self.pending_search = None
+
+    def search(self, path, cutoff, deadline, jobs, seed, best, target):
+        self.reap_search(max(0.0, cutoff - perf_counter()))
+        if self.pending_search is not None or perf_counter() >= cutoff:
+            return best, "DEADLINE"
         receiver, sender = self.context.Pipe(duplex=False)
-        cutoff = deadline - 0.015
         process = self.context.Process(target=cp_search, args=(sender, path, self.benchmarks, cutoff,
                                                                seed, self.workers, best, target))
         status = "DEADLINE"
@@ -190,8 +201,8 @@ class FjspSolver:
             if process.is_alive():
                 process.kill()
             receiver.close()
-            process.join()
-            process.close()
+            self.pending_search = process
+            self.reap_search(max(0.0, deadline - perf_counter() - 0.005))
         return best, status
 
     def solve(self, path, seconds, strategy="auto", target=None, seed=1):
@@ -199,6 +210,7 @@ class FjspSolver:
         if not math.isfinite(seconds) or seconds <= 0 or strategy not in STRATEGIES or (target is not None and target <= 0):
             raise ValueError("Expected a positive finite time limit, a supported strategy and a positive target")
         deadline = started + seconds
+        cutoff = deadline - min(0.25, seconds * 0.4)
         path = path.resolve()
         machines, jobs = read_case(path)
         if not jobs or machines <= 0:
@@ -213,21 +225,22 @@ class FjspSolver:
             before = perf_counter()
             try:
                 # Reserve one fifth of the request for a CP-SAT fallback.
-                schedule = self.inference.generate(path, started + seconds * 0.8)
+                inference_deadline = min(started + seconds * 0.8, cutoff - min(0.02, seconds * 0.1))
+                schedule = self.inference.generate(path, inference_deadline)
                 cost = validate(jobs, schedule)
                 if perf_counter() >= deadline:
                     raise InferenceError("inference_timeout")
                 best = cost, schedule
             except InferenceError as error:
                 fallback = str(error)
-            except ValueError:
+            except (TypeError, ValueError):
                 fallback = "invalid_neural_schedule"
             inference_seconds = perf_counter() - before
 
         inference_completed = best is not None
         status = "TARGET" if best is not None and target is not None and best[0] <= target else "DEADLINE"
-        if status != "TARGET" and perf_counter() < deadline - 0.015:
-            best, status = self.search(path, deadline, jobs, seed, best, target)
+        if status != "TARGET" and perf_counter() < cutoff:
+            best, status = self.search(path, cutoff, deadline, jobs, seed, best, target)
         cost, schedule = best if best is not None else (None, {})
         operations = [{"job": job, "operation": op, "machine": machine, "start": start, "end": end}
                       for (job, op), (machine, start, end) in sorted(schedule.items())]
@@ -239,6 +252,7 @@ class FjspSolver:
                 "target_makespan": target, "quality_reached": reached, "hit": reached and elapsed <= seconds,
                 "end_to_end_seconds": elapsed, "inference_seconds": inference_seconds, "solver_status": status,
                 "inference_completed": inference_completed, "within_budget": elapsed <= seconds,
+                "cleanup_deferred": self.pending_search is not None,
                 "makespan": cost, "operations": operations}
 
 
@@ -258,12 +272,13 @@ def main():
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     worker = InferenceWorker(args.inference_python, args.upstream, args.checkpoint, args.checkpoint_sha256)
+    solver = None
     try:
         solver = FjspSolver(args.benchmarks, worker, args.solver_workers)
         result = solver.solve(args.instance, args.seconds, args.strategy, args.target, args.seed)
         text = json.dumps(result, indent=2) + "\n"
         if args.output is None:
-            print(text, end="")
+            print(text, end="", flush=True)
         else:
             with args.output.open("x") as out:
                 out.write(text)
@@ -271,6 +286,8 @@ def main():
         parser.error(str(error))
     finally:
         worker.close()
+        if solver is not None:
+            solver.reap_search()
 
 
 if __name__ == "__main__":

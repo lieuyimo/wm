@@ -47,6 +47,15 @@ Linux 上由 OR-Tools 环境运行。给定一个标准 `.fjs` 实例和正数�
 
 默认策略为 `auto`。可用 `--strategy cp-sat` 或 `--strategy hgnn` 做固定策略对照。`--target` 可指定 makespan 目标，达到目标后提前结束。启用 HGNN 时配置 `--upstream "$FJSP_DRL" --checkpoint "$CHECKPOINT" --checkpoint-sha256 "$CHECKPOINT_SHA256" --inference-python "$TORCH_PYTHON"`。模型缺失、校验失败或推理超时会记录原因，并将剩余时间交给 CP-SAT。为回退保留总时限的 20%。到期时返回已经校验的最好可行解，未找到可行解时 `makespan` 为 `null`，排程为空。
 
-JSON 含 `decision_reason`、`fallback_reason`、`makespan`、`solver_status`、`within_budget` 和完整工序排程。作业、工序和机器下标从 0 开始。`end_to_end_seconds` 从读取实例前开始，包含特征计算、按需模型加载、推理、搜索和排程校验，结束于构造返回对象。进程启动与输出文件写入发生在求解请求之外。`--output` 创建新文件，省略时写到标准输出。
+JSON 含 `decision_reason`、`fallback_reason`、`makespan`、`solver_status`、`within_budget` 和完整工序排程。作业、工序和机器下标从 0 开始。`end_to_end_seconds` 从读取实例前开始，包含特征计算、按需模型加载、推理、搜索、排程校验和响应前清理，结束于构造返回对象。求解为终止搜索保留至多 250 毫秒，响应后仍需回收子进程时会标记 `cleanup_deferred`。批量验收会在发出下一请求前独立记录并完成这段回收。命令行启动与输出文件写入发生在求解请求之外。`--output` 创建新文件，省略时写到标准输出。
 
 求解入口的验收脚本为 `fjsp_solver_acceptance.py`。它使用固定版本的 `data/fjsp/dauzere_paulli` 全部 18 例，先检查 CLI 导出、短时限、加载失败、推理超时与真实 HGNN 推理，然后使用同一求解入口比较三种策略。跨基准比较使用常驻推理进程和统一的 10 秒请求预算。
+
+```bash
+DP_EVIDENCE=experiments/ai4opt_reproduction/evidence/dauzere-paulli-20261120
+"$CP_PYTHON" experiments/ai4opt_reproduction/fjsp_solver_acceptance.py \
+  --benchmarks "$TUE" --cases-dir "$TUE/data/fjsp/dauzere_paulli" \
+  --manifest "$DP_EVIDENCE/dp-manifest.json" --reference "$DP_EVIDENCE/reference.jsonl" \
+  --upstream "$FJSP_DRL" --checkpoint "$CHECKPOINT" --checkpoint-sha256 "$CHECKPOINT_SHA256" \
+  --inference-python "$TORCH_PYTHON" --output ./fjsp-acceptance
+```
